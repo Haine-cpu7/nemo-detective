@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.17</title>
+<title>ねも探偵局 v0.18</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1456,6 +1456,25 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+/* v0.18: hidden must always beat desktop layout rules */
+#gameLayout.hidden,
+.layout.hidden,
+.panel.hidden,
+section.hidden{
+  display:none !important;
+}
+
+/* Initial screen = case selection only */
+body:not(.case-active) #gameLayout{
+  display:none !important;
+}
+
+body:not(.case-active) .fileToggle,
+body:not(.case-active) .topFileBtn{
+  display:none !important;
+}
+
 </style>
 </head>
 <body>
@@ -1469,7 +1488,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.17 CLEAN START</span>
+    <span class="badge">v0.18 CLEAN START FIX</span>
     <h1>ねも探偵局</h1>
   </section>
 
@@ -1637,7 +1656,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.17 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.18 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2553,6 +2572,17 @@ document.querySelectorAll(".tabbtn").forEach(b=>{
       },50);
     }
   });
+});
+
+
+// v0.18 initial-state guard:
+// Never allow investigation UI to leak onto the case-selection screen.
+document.addEventListener("DOMContentLoaded",()=>{
+  document.body.classList.remove("case-active");
+  document.body.classList.remove("file-open");
+  showOnly("caseSelectPanel");
+  const layout=document.getElementById("gameLayout");
+  if(layout) layout.classList.add("hidden");
 });
 
 </script>
