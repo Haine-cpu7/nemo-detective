@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.8</title>
+<title>ねも探偵局 v0.9</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -356,6 +356,152 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+.partnerStrip{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+  padding:9px 12px;
+  border:1px solid #5a527a;
+  border-radius:12px;
+  background:#24223a;
+  color:#ddd7ff;
+  font-size:13px;
+  font-weight:900;
+}
+.partnerStrip .partnerType{
+  color:var(--muted);
+  font-weight:700;
+}
+.nemoNudge{
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#332a52,#29243f);
+  border:1px solid #7665ad;
+  line-height:1.7;
+}
+.nemoNudge strong{
+  color:#e2d9ff;
+}
+.pressDetail{
+  line-height:1.75;
+}
+@media(max-width:860px){
+  .topbar{
+    padding:9px 10px;
+  }
+  .brand{font-size:15px}
+  .caseNo{font-size:11px;max-width:205px}
+  .phase{font-size:10px;padding:6px 8px}
+  .topFileBtn{
+    font-size:12px;
+    min-width:48px;
+  }
+
+  /* 3人が画面内に収まる人物タブ */
+  .witnessChooser{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:6px;
+    overflow:visible;
+    padding:0;
+    margin-bottom:9px;
+  }
+  .witnessBtn{
+    min-width:0;
+    width:100%;
+    padding:9px 7px;
+    border-radius:11px;
+    text-align:center;
+  }
+  .witnessBtn strong{
+    display:block;
+    font-size:14px;
+    white-space:nowrap;
+  }
+  .witnessBtn .muted{
+    display:block;
+    margin-top:3px;
+    font-size:10px;
+    line-height:1.25;
+    white-space:normal;
+  }
+  .witnessBtn.active{
+    background:#3d334a;
+    box-shadow:inset 0 0 0 1px var(--accent2);
+  }
+
+  /* 上の人物タブと内容が重複していたため非表示 */
+  .witnessHead{
+    display:none;
+  }
+
+  .partnerStrip{
+    margin-bottom:9px;
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  /* 事件ファイルは補助ナビ。stickyにしない */
+  .mobileFileQuick{
+    position:static;
+    margin:0 0 12px;
+    padding:6px;
+    gap:5px;
+    border-radius:12px;
+  }
+  .mobileFileQuick button{
+    min-height:40px;
+    padding:7px 5px;
+    font-size:13px;
+  }
+
+  #testimonyPanel > h2{
+    font-size:25px;
+    margin:12px 0 10px;
+  }
+  .dialogueBox{
+    min-height:0;
+    padding:16px;
+    border-radius:15px;
+  }
+  .speaker{
+    font-size:14px;
+    margin-bottom:8px;
+  }
+  .statement{
+    font-size:20px;
+    line-height:1.65;
+  }
+  .statementNav{
+    margin-top:9px;
+  }
+  .statementNav .secondary{
+    min-height:42px;
+    font-size:12px;
+    padding:8px 9px;
+  }
+
+  /* Safariで下部に張り付かず、普通に流れる */
+  .actionbar{
+    position:static;
+    margin-top:9px;
+    padding:7px;
+    border-radius:13px;
+  }
+  .actionbar button{
+    min-height:48px;
+    font-size:15px;
+  }
+  .callout{
+    margin-top:9px;
+    padding:12px;
+    font-size:14px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -369,7 +515,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.8 MOBILE SCROLL FIX</span>
+    <span class="badge">v0.9 NEMO PARTNER</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -439,6 +585,7 @@ body.file-open{overflow:hidden}
       </section>
 
       <section class="panel hidden" id="testimonyPanel">
+        <div class="partnerStrip" id="partnerStrip"></div>
         <div class="witnessChooser" id="witnessChooser"></div>
         <div class="mobileFileQuick">
           <button type="button" data-open-file="evidence">🔎 証拠</button>
@@ -463,7 +610,7 @@ body.file-open{overflow:hidden}
           <button class="primary press" id="pressBtn">🔍 詳しく聞く</button>
           <button class="primary present" id="presentBtn">📁 証拠を出す</button>
         </div>
-        <div id="testimonyMsg" class="callout special">怪しい証言に証拠を出してみよう。</div>
+        <div id="testimonyMsg" class="callout special">「詳しく聞く」で担当ねもの反応も確認できます。怪しい証言なら、事件ファイルの証拠をぶつけてみよう。</div>
       </section>
 
       <section class="panel hidden" id="deductionPanel">
@@ -528,7 +675,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.8 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.9 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -737,7 +884,7 @@ document.getElementById("startBtn").onclick=()=>{
   document.getElementById("scene").classList.toggle("case2",currentCase===cases[2]);
   renderFile();
   renderProgress();
-  document.getElementById("phaseLabel").textContent="事件概要";
+  document.getElementById("phaseLabel").textContent="概要";
 };
 
 document.getElementById("beginInvestigationBtn").onclick=()=>{
@@ -745,7 +892,7 @@ document.getElementById("beginInvestigationBtn").onclick=()=>{
   document.getElementById("briefingPanel").classList.add("hidden");
   document.getElementById("investigationPanel").classList.remove("hidden");
   buildScene();
-  document.getElementById("phaseLabel").textContent="現場捜査";
+  document.getElementById("phaseLabel").textContent="捜査";
 };
 
 
@@ -789,8 +936,12 @@ function collectEvidence(id,btn){
 document.getElementById("toWitnessBtn").onclick=()=>{
   document.getElementById("investigationPanel").classList.add("hidden");
   document.getElementById("testimonyPanel").classList.remove("hidden");
-  document.getElementById("phaseLabel").textContent="証言パート";
+  document.getElementById("phaseLabel").textContent="証言";
   buildWitnessChooser();
+  const partner=document.getElementById("partnerStrip");
+  if(partner && selected){
+    partner.innerHTML=`<span>${selected.icon}</span><span>担当探偵：${selected.name}</span><span class="partnerType">${selected.type}</span>`;
+  }
   currentWitness=Object.keys(currentCase.witnesses)[0];stmtIndex=0;renderStatement();
 };
 
@@ -815,11 +966,47 @@ function renderStatement(){
 document.getElementById("prevStmt").onclick=()=>{if(stmtIndex>0){stmtIndex--;renderStatement()}};
 document.getElementById("nextStmt").onclick=()=>{const a=currentCase.witnesses[currentWitness].statements;if(stmtIndex<a.length-1){stmtIndex++;renderStatement()}};
 
+function nemoNudgeFor(statement){
+  if(!selected || !statement.contradiction) return "";
+
+  let line="……この証言、ちょっと引っかかる。流さない方がいいと思う。";
+
+  if(selected.type==="推理型"){
+    line="……この証言、どこか噛み合ってない。事件ファイルと照らしてみよう。";
+  }else if(selected.type==="観察型"){
+    line="……言ってることと、現場で見たものが合ってない気がする。";
+  }else if(selected.type==="会話型"){
+    line="……今の言い方、妙に断定的だね。もう少し疑っていいと思う。";
+  }else if(selected.type==="直感型"){
+    line="……なんか変。ここ、絶対そのまま流さない方がいい。";
+  }
+
+  let extra="";
+  if(statement.contradiction==="photo" && selected.rea>=85){
+    extra=" 『どこにいたか』を確認できる記録、なかったっけ。";
+  }else if(statement.contradiction==="frame" && selected.obs>=85){
+    extra=" 現場で見つけた『動かされた跡』を思い出して。";
+  }else if(selected.talk>=85){
+    extra=" 言葉の選び方にも注意してみて。";
+  }else if(selected.luck>=85){
+    extra=" 理屈はまだ言えないけど、この一文は怪しい。";
+  }
+
+  return `<div class="nemoNudge"><strong>${selected.icon} ${selected.name}</strong><br>${line}${extra}</div>`;
+}
+
 document.getElementById("pressBtn").onclick=()=>{
   const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
-  let msg=s.press;
-  if(selected.talk>=85) msg+=`<br><br><strong>${selected.name}</strong> がさらに聞くと、相手の言い方に少し迷いがあることに気づいた。`;
-  if(selected.rea>=85 && s.contradiction) msg+=`<br><br><strong>${selected.name}</strong>：この証言、事件ファイルのどれかと噛み合っていない。`;
+  let msg=`<div class="pressDetail">${s.press}</div>`;
+
+  // 全Nemoが相棒として仕事をする。
+  // 能力値は「ヒントを出す/出さない」ではなく、ヒントの具体性に使う。
+  if(s.contradiction){
+    msg+=nemoNudgeFor(s);
+  }else if(selected && selected.talk>=85){
+    msg+=`<div class="nemoNudge"><strong>${selected.icon} ${selected.name}</strong><br>もう少し話を聞けそう。相手の言い回しも覚えておこう。</div>`;
+  }
+
   document.getElementById("testimonyMsg").className="callout special";
   document.getElementById("testimonyMsg").innerHTML=msg;
 };
@@ -879,7 +1066,7 @@ function presentEvidence(id){
       setTimeout(()=>{
         document.getElementById("testimonyPanel").classList.add("hidden");
         document.getElementById("deductionPanel").classList.remove("hidden");
-        document.getElementById("phaseLabel").textContent="最終推理";
+        document.getElementById("phaseLabel").textContent="推理";
         renderProgress();
       },900);
       return;
