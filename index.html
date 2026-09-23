@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.18</title>
+<title>ねも探偵局 v0.19</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1475,6 +1475,32 @@ body:not(.case-active) .topFileBtn{
   display:none !important;
 }
 
+
+/* v0.19: align case-selection panel with top header width */
+.caseOnly{
+  width:100%;
+  max-width:none !important;
+  margin:10px 0 0 !important;
+}
+
+@media(min-width:861px){
+  .caseOnly{
+    width:100%;
+    max-width:none !important;
+    margin:10px 0 0 !important;
+  }
+
+  .caseOnly .caseGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .caseOnly .caseCard{
+    height:150px;
+    min-height:150px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1488,7 +1514,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.18 CLEAN START FIX</span>
+    <span class="badge">v0.19 WIDTH ALIGN</span>
     <h1>ねも探偵局</h1>
   </section>
 
@@ -1656,7 +1682,7 @@ body:not(.case-active) .topFileBtn{
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.18 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.19 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
