@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.16</title>
+<title>ねも探偵局 v0.17</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1400,6 +1400,62 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+.caseOnly{
+  max-width:1000px;
+  margin:16px auto 0;
+  padding:22px;
+}
+.caseSelectHeading{
+  margin-bottom:16px;
+}
+.caseSelectHeading h1{
+  margin:8px 0 5px;
+  font-size:30px;
+}
+.caseSelectHeading p{
+  margin:0;
+}
+.caseLabel{
+  color:var(--accent2);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.08em;
+  margin-bottom:6px;
+}
+.caseOnly .caseGrid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.caseOnly .caseCard{
+  min-height:150px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.caseOnly .caseTitle{
+  font-size:21px;
+  margin-bottom:7px;
+}
+.caseOnly .caseDesc{
+  line-height:1.6;
+}
+@media(max-width:860px){
+  .caseOnly{
+    margin:10px 10px 0;
+    padding:16px;
+  }
+  .caseSelectHeading h1{
+    font-size:27px;
+  }
+  .caseOnly .caseGrid{
+    grid-template-columns:1fr;
+  }
+  .caseOnly .caseCard{
+    min-height:125px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1412,22 +1468,27 @@ body.file-open{overflow:hidden}
     </div>
   </div>
 
-  <section class="hero" id="hero">
-    <span class="badge">v0.16 MOBILE NAV FIX</span>
+  <section class="hero hidden" id="hero">
+    <span class="badge">v0.17 CLEAN START</span>
     <h1>ねも探偵局</h1>
-    <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
 
-  <section class="panel" id="caseSelectPanel">
-    <h2>事件を選ぶ</h2>
+  <section class="panel caseOnly" id="caseSelectPanel">
+    <div class="caseSelectHeading">
+      <div class="badge">NEMO DETECTIVE</div>
+      <h1>事件を選ぶ</h1>
+      <p class="muted">捜査する事件を選択してください。</p>
+    </div>
     <div class="grid caseGrid">
       <button class="caseCard" data-case="1">
-        <div class="caseTitle">CASE 01　消えた青い封筒</div>
-        <div class="caseDesc">20分後に発表予定の審査結果が消えた。3人の関係者から、犯人・隠し場所・動機まで突き止める。</div>
+        <div class="caseLabel">CASE 01</div>
+        <div class="caseTitle">消えた青い封筒</div>
+        <div class="caseDesc">月見堂ギャラリーで消えた審査結果を追う。</div>
       </button>
       <button class="caseCard" data-case="2">
-        <div class="caseTitle">CASE 02　消えた鍵と濡れた紙片</div>
-        <div class="caseDesc">容疑者3人。序盤では意味不明だった証拠が、後半で決定打になる。</div>
+        <div class="caseLabel">CASE 02</div>
+        <div class="caseTitle">消えた鍵と濡れた紙片</div>
+        <div class="caseDesc">星見図書館で消えた鍵の行方を追う。</div>
       </button>
     </div>
   </section>
@@ -1576,7 +1637,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.16 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.17 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1820,28 +1881,23 @@ document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
   document.body.classList.remove("file-open");
   document.body.classList.remove("case-active");
   currentCase=cases[btn.dataset.case];
-  document.getElementById("caseSelectPanel").classList.add("hidden");
-  document.getElementById("selectPanel").classList.remove("hidden");
-  resetView("selectPanel");
+  showOnly("selectPanel");
   document.getElementById("caseNo").textContent=currentCase.title;
   document.getElementById("phaseLabel").textContent="探偵選択";
+  resetView("selectPanel");
 });
 
 document.getElementById("startBtn").onclick=()=>{
-  document.getElementById("hero").classList.add("hidden");
-  document.getElementById("selectPanel").classList.add("hidden");
-  document.getElementById("gameLayout").classList.remove("hidden");
   document.body.classList.add("case-active");
   document.body.classList.remove("file-open");
-  document.getElementById("briefingPanel").classList.remove("hidden");
-  document.getElementById("investigationPanel").classList.add("hidden");
-  resetView("gameLayout");
+  showOnly("briefingPanel");
 
   const b=currentCase.briefing || {
     lead:"事件の概要を確認して捜査を始めよう。",
     incident:currentCase.intro,
     objectives:["現場の証拠を集める","関係者の証言を確認する","矛盾から真相を突き止める"]
   };
+
   document.getElementById("briefingTitle").textContent=currentCase.title;
   document.getElementById("briefingLead").textContent=b.lead;
   document.getElementById("briefingIncident").textContent=b.incident;
@@ -1852,21 +1908,52 @@ document.getElementById("startBtn").onclick=()=>{
   document.getElementById("caseIntro").textContent=currentCase.intro;
   document.getElementById("scene").dataset.place=currentCase.place;
   document.getElementById("scene").classList.toggle("case2",currentCase===cases[2]);
+
   renderFile();
   renderProgress();
   document.getElementById("phaseLabel").textContent="概要";
+  resetView("briefingPanel");
 };
 
 document.getElementById("beginInvestigationBtn").onclick=()=>{
   document.body.classList.remove("file-open");
-  document.getElementById("briefingPanel").classList.add("hidden");
-  document.getElementById("investigationPanel").classList.remove("hidden");
+  showOnly("investigationPanel");
   resetView("investigationPanel");
   buildScene();
   document.getElementById("phaseLabel").textContent="捜査";
 };
 
 
+
+
+function showOnly(stage){
+  const ids=[
+    "caseSelectPanel",
+    "selectPanel",
+    "briefingPanel",
+    "investigationPanel",
+    "testimonyPanel",
+    "deductionPanel",
+    "finalPanel"
+  ];
+  ids.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.classList.toggle("hidden", id!==stage);
+  });
+
+  const layout=document.getElementById("gameLayout");
+  const inGame=["briefingPanel","investigationPanel","testimonyPanel","deductionPanel","finalPanel"].includes(stage);
+  if(layout){
+    layout.classList.toggle("hidden", !inGame);
+  }
+
+  // case select / Nemo select live outside the game layout
+  const select=document.getElementById("selectPanel");
+  if(select) select.classList.toggle("hidden", stage!=="selectPanel");
+  const caseSel=document.getElementById("caseSelectPanel");
+  if(caseSel) caseSel.classList.toggle("hidden", stage!=="caseSelectPanel");
+}
 
 function resetView(targetId=null){
   // 画面遷移時、前の画面のスクロール位置を引き継がない。
@@ -1999,8 +2086,7 @@ function collectEvidence(id,btn){
 }
 
 document.getElementById("toWitnessBtn").onclick=()=>{
-  document.getElementById("investigationPanel").classList.add("hidden");
-  document.getElementById("testimonyPanel").classList.remove("hidden");
+  showOnly("testimonyPanel");
   resetView("testimonyPanel");
   document.getElementById("phaseLabel").textContent="証言";
   buildWitnessChooser();
@@ -2223,8 +2309,7 @@ function goToNextContradiction(){
   const next=findNextContradiction();
   if(!next){
     if(currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))){
-      document.getElementById("testimonyPanel").classList.add("hidden");
-      document.getElementById("deductionPanel").classList.remove("hidden");
+      showOnly("deductionPanel");
       document.getElementById("phaseLabel").textContent="推理";
       renderProgress();
       resetView("deductionPanel");
@@ -2358,9 +2443,7 @@ document.getElementById("finalDeduceBtn").onclick=()=>{
 };
 
 function finalReveal(){
-  document.getElementById("testimonyPanel").classList.add("hidden");
-  document.getElementById("deductionPanel").classList.add("hidden");
-  document.getElementById("finalPanel").classList.remove("hidden");
+  showOnly("finalPanel");
   document.getElementById("phaseLabel").textContent="事件解決";
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
