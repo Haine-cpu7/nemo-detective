@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.12</title>
+<title>ねも探偵局 v0.13</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -675,6 +675,387 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+/* ==================================================
+   v0.13 Desktop compact mode
+   PCではページ全体を伸ばさず、左右パネル内で完結させる
+   ================================================== */
+@media(min-width:861px){
+  html,body{
+    height:100%;
+    overflow:hidden;
+  }
+
+  body{
+    min-height:100vh;
+  }
+
+  .wrap{
+    height:100vh;
+    max-width:1240px;
+    padding:10px 12px 12px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  .topbar{
+    position:relative;
+    top:auto;
+    flex:0 0 auto;
+    min-height:62px;
+    padding:10px 14px;
+    border-radius:15px;
+  }
+
+  .hero{
+    flex:0 0 auto;
+    margin-top:10px;
+    padding:16px 20px;
+  }
+
+  .hero h1{
+    font-size:36px;
+    margin:.1rem 0 .25rem;
+  }
+
+  .hero p{
+    margin:.35rem 0;
+    line-height:1.55;
+  }
+
+  #caseSelectPanel,
+  #selectPanel{
+    margin-top:10px;
+    overflow:auto;
+    min-height:0;
+  }
+
+  .layout{
+    flex:1 1 auto;
+    min-height:0;
+    margin-top:10px;
+    grid-template-columns:minmax(0,1.3fr) minmax(320px,.85fr);
+    gap:10px;
+    overflow:hidden;
+  }
+
+  .layout > div{
+    min-height:0;
+    overflow:hidden;
+  }
+
+  .layout > div > .panel:not(.hidden){
+    height:100%;
+    min-height:0;
+    overflow:auto;
+    overscroll-behavior:contain;
+    scrollbar-gutter:stable;
+  }
+
+  .layout > aside.panel{
+    height:100%;
+    min-height:0;
+    overflow:auto;
+    overscroll-behavior:contain;
+    scrollbar-gutter:stable;
+  }
+
+  .panel{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .panel h2{
+    font-size:22px;
+    margin-bottom:9px;
+  }
+
+  .progressStrip{
+    margin-bottom:8px;
+  }
+
+  .progressChip{
+    padding:5px 8px;
+    font-size:11px;
+  }
+
+  .missionBanner{
+    padding:8px 10px;
+    line-height:1.5;
+    margin-bottom:8px;
+  }
+
+  .scene{
+    min-height:0;
+    height:270px;
+    border-radius:14px;
+  }
+
+  .scene:before{
+    font-size:22px;
+  }
+
+  #investigationMsg{
+    margin-top:8px;
+    padding:10px 11px;
+    font-size:13px;
+    line-height:1.5;
+  }
+
+  #investigationMsg .partnerEvent{
+    margin-top:7px;
+    padding:7px 9px;
+  }
+
+  .witnessChooser{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
+    margin-bottom:8px;
+  }
+
+  .witnessBtn{
+    padding:8px 10px;
+    min-width:0;
+  }
+
+  .witnessBtn strong{
+    font-size:14px;
+  }
+
+  .witnessBtn .muted{
+    font-size:11px;
+  }
+
+  .partnerStrip{
+    margin-bottom:8px;
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .witnessHead{
+    margin-bottom:7px;
+  }
+
+  .wface{
+    width:50px;
+    height:50px;
+    font-size:28px;
+  }
+
+  #testimonyPanel > h2{
+    margin:6px 0 8px;
+    font-size:22px;
+  }
+
+  .dialogueBox{
+    min-height:118px;
+    padding:14px 16px;
+    border-radius:14px;
+  }
+
+  .speaker{
+    font-size:13px;
+    margin-bottom:6px;
+  }
+
+  .statement{
+    font-size:20px;
+    line-height:1.5;
+  }
+
+  .statementNav{
+    margin-top:7px;
+  }
+
+  .statementNav .secondary{
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  .actionbar{
+    position:static;
+    margin-top:7px;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actionbar button{
+    min-height:42px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+
+  #testimonyMsg{
+    margin-top:7px;
+    padding:10px 11px;
+    font-size:13px;
+    line-height:1.5;
+    max-height:150px;
+    overflow:auto;
+    overscroll-behavior:contain;
+  }
+
+  #testimonyMsg .partnerEvent,
+  #testimonyMsg .nemoNudge{
+    margin-top:7px;
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .nextMove{
+    margin-top:8px;
+    padding:9px 10px;
+    gap:6px;
+  }
+
+  .nextContradictionBtn{
+    min-height:40px;
+  }
+
+  .notebookTabs{
+    margin-bottom:8px;
+    position:sticky;
+    top:0;
+    z-index:2;
+    background:rgba(28,32,48,.98);
+    padding:0 0 8px;
+  }
+
+  .tabbtn{
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .cardlist{
+    gap:7px;
+  }
+
+  .infoCard,
+  .contradictionCard{
+    padding:10px;
+    font-size:12px;
+    line-height:1.5;
+  }
+
+  .evidenceIcon{
+    font-size:18px;
+  }
+
+  .timeline{
+    gap:8px;
+    font-size:12px;
+  }
+
+  .briefing{
+    gap:9px;
+  }
+
+  .briefingHero{
+    padding:13px;
+  }
+
+  .briefingHero .incident{
+    font-size:25px;
+    margin:3px 0 5px;
+  }
+
+  .briefingGrid{
+    gap:8px;
+  }
+
+  .briefCard{
+    padding:10px;
+    line-height:1.5;
+    font-size:13px;
+  }
+
+  .objectiveList{
+    gap:5px;
+  }
+
+  .objective{
+    padding:7px;
+  }
+
+  .deductionGrid{
+    margin:10px 0;
+    gap:8px;
+  }
+
+  .bigReveal{
+    padding:16px 10px;
+  }
+
+  .bigReveal .word{
+    font-size:54px;
+  }
+
+  .footer{
+    display:none;
+  }
+
+  /* PCではスマホ専用UIを完全に消す */
+  .fileToggle,
+  .mobileFileQuick{
+    display:none !important;
+  }
+}
+
+/* 低いノートPC画面ではさらに圧縮 */
+@media(min-width:861px) and (max-height:760px){
+  .topbar{
+    min-height:54px;
+    padding:8px 12px;
+  }
+
+  .layout{
+    margin-top:7px;
+  }
+
+  .panel{
+    padding:11px;
+  }
+
+  .scene{
+    height:220px;
+  }
+
+  .dialogueBox{
+    min-height:92px;
+    padding:11px 13px;
+  }
+
+  .statement{
+    font-size:18px;
+    line-height:1.4;
+  }
+
+  #testimonyMsg{
+    max-height:118px;
+  }
+
+  .witnessHead{
+    display:none;
+  }
+
+  #testimonyPanel > h2{
+    font-size:19px;
+    margin:4px 0 6px;
+  }
+
+  .partnerStrip{
+    margin-bottom:6px;
+  }
+
+  .witnessChooser{
+    margin-bottom:6px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -688,7 +1069,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.12 NEMO TONE</span>
+    <span class="badge">v0.13 DESKTOP COMPACT</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -851,7 +1232,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.12 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.13 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1280,8 +1661,25 @@ function renderStatement(){
   document.getElementById("stmtPos").textContent=`${stmtIndex+1} / ${w.statements.length}`;
   document.getElementById("prevStmt").disabled=stmtIndex===0;document.getElementById("nextStmt").disabled=stmtIndex===w.statements.length-1;
 }
-document.getElementById("prevStmt").onclick=()=>{if(stmtIndex>0){stmtIndex--;renderStatement()}};
-document.getElementById("nextStmt").onclick=()=>{const a=currentCase.witnesses[currentWitness].statements;if(stmtIndex<a.length-1){stmtIndex++;renderStatement()}};
+document.getElementById("prevStmt").onclick=()=>{
+  if(stmtIndex>0){
+    stmtIndex--;
+    renderStatement();
+    if(window.innerWidth>=861){
+      document.getElementById("testimonyMsg").scrollTop=0;
+    }
+  }
+};
+document.getElementById("nextStmt").onclick=()=>{
+  const a=currentCase.witnesses[currentWitness].statements;
+  if(stmtIndex<a.length-1){
+    stmtIndex++;
+    renderStatement();
+    if(window.innerWidth>=861){
+      document.getElementById("testimonyMsg").scrollTop=0;
+    }
+  }
+};
 
 function nemoNudgeFor(statement){
   if(!selected || !statement.contradiction) return "";
@@ -1372,8 +1770,17 @@ document.getElementById("pressBtn").onclick=()=>{
     }
   }
 
-  document.getElementById("testimonyMsg").className="callout special";
-  document.getElementById("testimonyMsg").innerHTML=msg;
+  const testimonyMsg=document.getElementById("testimonyMsg");
+  testimonyMsg.className="callout special";
+  testimonyMsg.innerHTML=msg;
+
+  // PCではスクロールせず、その場で結果を視認できるよう
+  // 反応ボックス内部を先頭へ戻す。
+  if(window.innerWidth>=861){
+    testimonyMsg.scrollTop=0;
+  }else{
+    testimonyMsg.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
 };
 
 document.getElementById("presentBtn").onclick=()=>{
