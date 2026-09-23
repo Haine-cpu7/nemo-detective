@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.11</title>
+<title>ねも探偵局 v0.12</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -636,6 +636,45 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+.partnerEvent,
+.nemoNudge{
+  margin-top:10px;
+  padding:9px 11px;
+  border-radius:11px;
+  background:#252334;
+  border:1px solid #514a6d;
+  line-height:1.65;
+  font-size:13px;
+}
+.partnerEvent.baka,
+.partnerEvent.genius,
+.partnerEvent.luck{
+  background:#252334;
+  border-color:#514a6d;
+}
+.partnerEvent strong,
+.nemoNudge strong{
+  color:#ded7ff;
+  font-size:12px;
+}
+.partnerEvent small{
+  display:none;
+}
+.nemoQuiet{
+  margin-top:8px;
+  color:#8e93a8;
+  font-size:12px;
+  font-style:italic;
+}
+@media(max-width:860px){
+  .partnerEvent,
+  .nemoNudge{
+    font-size:12px;
+    padding:8px 10px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -649,7 +688,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.11 CONTRADICTION LOG</span>
+    <span class="badge">v0.12 NEMO TONE</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -745,7 +784,7 @@ body.file-open{overflow:hidden}
           <button class="primary press" id="pressBtn">🔍 詳しく聞く</button>
           <button class="primary present" id="presentBtn">📁 証拠を出す</button>
         </div>
-        <div id="testimonyMsg" class="callout special">担当ねもは得意分野では頼れます。苦手分野では、普通に役に立たないことがあります。怪しい証言を見つけたら証拠をぶつけてみよう。</div>
+        <div id="testimonyMsg" class="callout special">「詳しく聞く」で証言を掘れます。ねもは、気づいたことがある時だけ反応します。</div>
       </section>
 
       <section class="panel hidden" id="deductionPanel">
@@ -812,7 +851,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.11 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.12 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -891,12 +930,12 @@ function buildDetective(id){
   stats[raw[3][0]]=8 + (id % 15);
 
   const typeMap={obs:"観察型",rea:"推理型",talk:"会話型",luck:"直感型"};
-  const traitMap={obs:"違和感収集",rea:"静かな推理",talk:"聞き上手",luck:"妙な勘"};
+  const traitMap={obs:"よく見ている",rea:"静かに考える",talk:"声をよく聞く",luck:"なんとなく分かる"};
   const quirkMap={
-    obs:"人と話すより現場を見ていたい。",
-    rea:"理屈は強いが雑談は苦手。",
-    talk:"聞き込みは得意だが現場では脱線しがち。",
-    luck:"根拠はない。でも妙に当たる。"
+    obs:"小さな違いを見ている。人と話すのは少し苦手。",
+    rea:"ことばは少なめ。情報を静かにつなげる。",
+    talk:"人の声にはよく気づく。現場では寄り道しがち。",
+    luck:"理由はうまく言えない。でも気になる場所は当たりやすい。"
   };
   const best=raw[0][0];
 
@@ -1126,69 +1165,64 @@ function buildScene(){
 function investigationPartnerReaction(id){
   if(!selected) return "";
 
-  // #66：観察99。現場ではほぼ無双。
   if(selected.id===66){
     const map={
-      desk:"机の角。封筒を急いで引き抜いたような擦れ方だね。",
-      reception:"受付の空白時間、ここが犯人の動ける窓だと思う。",
-      frame:"右だけ2cmずれてる。これ、触ったばかり。",
-      star:"同じ形の飾り、誰かの持ち物で見たよね。",
-      photo:"反射まで見る。カナは展示壁側にいる。",
-      tube:"封が生きてる。これは外していい。",
-      wet:"紙の表面、掲示物に使うコート紙っぽい。",
-      camera:"この影、出口じゃなく裏口方向へ向かってる。"
+      desk:"……机の角。少しだけ、擦れた跡がある。",
+      reception:"……この三分だけ、誰も見ていない。",
+      frame:"……右側だけ、ずれてる。",
+      star:"……これ、どこかで見た形。",
+      photo:"……ガラスのところ。人が映ってる。",
+      tube:"……ここは、たぶん違う。",
+      wet:"……紙の手ざわり、掲示物に近い。",
+      camera:"……この影、裏口の方へ行ってる。"
     };
-    return `<div class="partnerEvent genius"><strong>🐱 ${selected.name}</strong><br>${map[id] || "……ここ、もう少し見たい。"}</div>`;
+    return `<div class="partnerEvent"><strong>🐱 ${selected.name}</strong><br>${map[id] || "……少し、気になる。"}</div>`;
   }
 
-  // #96：推理100。物を見るより意味を整理する。
   if(selected.id===96){
     const map={
-      desk:"これ単独では弱い。『誰がいつ近づけたか』と組み合わせる。",
-      reception:"17:15〜17:18。この3分が重要だ。",
-      frame:"額縁が動いた事実は、誰かの証言とぶつける材料になる。",
-      star:"所有者と現場をつなぐ物証候補。ただし、これだけで犯人扱いはできない。",
-      photo:"位置関係の証明になる。証言との矛盾用に保存。",
-      tube:"ユウを除外する材料として使える。",
-      wet:"濡れた理由を説明できる場所が別にあるはず。",
-      camera:"時刻と進行方向を時系列に入れる。"
+      desk:"……これだけだと、まだ弱い。時間と一緒に見たい。",
+      reception:"……空白は三分。ここを基準にしたい。",
+      frame:"……動いた事実だけ覚えておこう。あとで効くかもしれない。",
+      star:"……持ち主と場所がつながる。でも、まだ決めつけない。",
+      photo:"……位置を証明できる。これは残しておきたい。",
+      tube:"……中身は合ってる。いったん外してよさそう。",
+      wet:"……濡れた理由を説明できる場所が、どこかにある。",
+      camera:"……時刻と向き。あとで並べる。"
     };
-    return `<div class="partnerEvent genius"><strong>🌙 ${selected.name}</strong><br>${map[id] || "情報として整理しておく。"}</div>`;
+    return `<div class="partnerEvent"><strong>🌙 ${selected.name}</strong><br>${map[id] || "……あとで、つながるかも。"}</div>`;
   }
 
-  // #31：観察11。現場ではだいたい遊んでいる。
   if(selected.id===31){
-    const funny={
-      desk:"机より窓辺のお花を見ています。🌼<br><small>※証拠はプレイヤーが見つけました。</small>",
-      reception:"受付横の観葉植物に水をあげています。事件は進んでいます。",
-      frame:"額縁ではなく、絵の感想を言っています。『これかわいい』",
-      star:"星飾りを見つけたと思ったら、花びらを拾っていました。",
-      photo:"写真の端に写った花瓶が気になっています。",
-      tube:"ポスター筒を望遠鏡にしています。何も見えていません。",
-      wet:"濡れた紙より外のお花を見ています。お花つんでます。🌼",
-      camera:"防犯カメラに手を振っています。"
+    const map={
+      desk:"ねもは、机より窓ぎわを見ている。……小さな花が咲いてる。",
+      reception:"受付の横の植物を見ている。……元気そう。",
+      frame:"絵の方を見ている。……かわいい。",
+      star:"星飾りの横に落ちた花びらを拾っている。事件には、たぶん関係ない。",
+      photo:"写真のすみの花瓶を見ている。……きれい。",
+      tube:"ポスター筒をのぞいている。……暗い。",
+      wet:"外の花壇が気になっている。紙は、まだ見ていない。",
+      camera:"カメラを見上げている。……見られてる。"
     };
-    return `<div class="partnerEvent baka"><strong>🌼 ${selected.name}</strong><br>${funny[id] || "お花を見ています。"}</div>`;
+    return `<div class="partnerEvent"><strong>🌼 ${selected.name}</strong><br>${map[id] || "少し、別のところを見ている。"}</div>`;
   }
 
-  // #12：勘100。説明はできない。
   if(selected.id===12){
-    const feel={
-      desk:"……ここは犯人そのものより、『触れたタイミング』が大事な気がする。",
-      reception:"この3分、なんかイヤな感じする。",
-      frame:"これ怪しい。理由？　わかんない。",
-      star:"これ、捨てちゃダメ。たぶん。",
-      photo:"この写真、あとで絶対使う。",
-      tube:"これは違う気がする。たぶん違う。",
-      wet:"この紙、事件の中心に近い気がする。",
-      camera:"この影、追った方がいい。"
+    const map={
+      desk:"……ここは、物より時間が気になる。",
+      reception:"……この三分、なんとなく嫌。",
+      frame:"……これ、あとで見る気がする。",
+      star:"……捨てないで。たぶん。",
+      photo:"……この写真、残しておきたい。",
+      tube:"……これは違う気がする。",
+      wet:"……この紙、近い。",
+      camera:"……この影、追った方がいい。"
     };
-    return `<div class="partnerEvent luck"><strong>✨ ${selected.name}</strong><br>${feel[id] || "……なんかある。"}</div>`;
+    return `<div class="partnerEvent"><strong>✨ ${selected.name}</strong><br>${map[id] || "……なんとなく、気になる。"}</div>`;
   }
 
   return "";
 }
-
 function collectEvidence(id,btn){
   if(evidence.has(id)) return;
   evidence.add(id);btn.classList.add("done");
@@ -1252,59 +1286,79 @@ document.getElementById("nextStmt").onclick=()=>{const a=currentCase.witnesses[c
 function nemoNudgeFor(statement){
   if(!selected || !statement.contradiction) return "";
 
-  let line="……この証言、ちょっと引っかかる。";
+  let line="……ここ、少し気になる。";
 
   if(selected.id===66){
-    line="……現場で見たものと合ってない。そこ、証拠を確認して。";
-    if(statement.contradiction==="frame") line+=" 額縁。右端。";
-    if(statement.contradiction==="photo") line+=" 写真の反射、見たよね。";
+    if(statement.contradiction==="photo"){
+      line="……写真で見た場所と、言ってることが違う。";
+    }else if(statement.contradiction==="frame"){
+      line="……現場で見た跡と、合ってない。";
+    }
   }else if(selected.id===96){
-    line="論理が破綻してる。証言と客観記録を照合して。";
-    if(statement.contradiction==="photo") line+=" 『行っていない』は位置情報で崩せる。";
-    if(statement.contradiction==="frame") line+=" 『触っていない』なら、動いた痕跡との説明が必要。";
+    if(statement.contradiction==="photo"){
+      line="……『行っていない』なら、この写真は説明できない。";
+    }else if(statement.contradiction==="frame"){
+      line="……『触っていない』と、動いた跡。両方は成立しない。";
+    }
   }else if(selected.id===31){
-    line="今の言い方、ちょっと変。本人、そこだけ急に固くなったよ。";
-    if(statement.contradiction==="photo") line+=" もう一回『どこにいたか』聞いてみたい。";
-    if(statement.contradiction==="frame") line+=" ポスターの話をした瞬間、反応した。";
+    if(statement.contradiction==="photo"){
+      line="……いまの言い方だけ、少し固かった。場所の話、もう一度見たい。";
+    }else if(statement.contradiction==="frame"){
+      line="……ポスターの話になった時だけ、ちょっと反応した。";
+    }
   }else if(selected.id===12){
-    line="……これ嘘っぽい。";
-    if(statement.contradiction==="photo") line+=" 写真。たぶん写真。";
-    if(statement.contradiction==="frame") line+=" 額縁。理由は知らんけど額縁。";
+    if(statement.contradiction==="photo"){
+      line="……写真。たぶん、写真。";
+    }else if(statement.contradiction==="frame"){
+      line="……額縁。うまく言えないけど、そこ。";
+    }
   }else if(selected.type==="推理型"){
-    line="……この証言、どこか噛み合ってない。事件ファイルと照らしてみよう。";
+    line="……つながらないところがある。";
   }else if(selected.type==="観察型"){
-    line="……言ってることと、現場で見たものが合ってない気がする。";
+    line="……見たものと、少し違う。";
   }else if(selected.type==="会話型"){
-    line="……今の言い方、妙に断定的だね。";
+    line="……いまの言い方、少しだけ変だった。";
   }else if(selected.type==="直感型"){
-    line="……なんか変。ここ流さない方がいい。";
+    line="……ここ、なんとなく気になる。";
   }
 
   return `<div class="nemoNudge"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
 }
-
-function nemoNormalPressReaction(){
+function nemoPressReaction(witnessId, statementIndex){
   if(!selected) return "";
 
-  if(selected.id===66){
-    return `<div class="partnerEvent baka"><strong>🐱 ${selected.name}</strong><br>「……人と話すの、そっちに任せていい？」<br><small>会話力 14</small></div>`;
-  }
-  if(selected.id===96){
-    return `<div class="partnerEvent baka"><strong>🌙 ${selected.name}</strong><br>「話しかけるのは任せた。僕は考える。」<br><small>会話力 9</small></div>`;
-  }
-  if(selected.id===31){
-    return `<div class="partnerEvent genius"><strong>🌼 ${selected.name}</strong><br>「今のところ、もう少し聞けそう。言い方を変えてもう一回聞いてみるね。」<br><small>会話力 99</small></div>`;
-  }
-  if(selected.id===12){
-    return `<div class="partnerEvent luck"><strong>✨ ${selected.name}</strong><br>「この人、今はそんなに怪しくない気がする。たぶん。」<br><small>勘 100 / 根拠 0</small></div>`;
-  }
+  const key=`${witnessId}:${statementIndex}`;
 
-  if(selected.talk>=90){
-    return `<div class="partnerEvent genius"><strong>${selected.icon} ${selected.name}</strong><br>もう少し話を引き出せそう。</div>`;
-  }
-  return "";
+  const reactions={
+    66:{
+      "misaki:1":"……三分。そこだけ、覚えておきたい。",
+      "yuu:1":"……入ってないなら、ここは一度置いていいかも。",
+      "kana:0":"……トイレの場所、現場でもう一度見たい。"
+    },
+    96:{
+      "misaki:1":"……17:15から17:18。時系列の中心になりそう。",
+      "yuu:2":"……退出記録がある。ここは矛盾してない。",
+      "kana:0":"……『すぐ戻った』。時間が分かれば確かめられる。"
+    },
+    31:{
+      "misaki:2":"……『どの展示かは覚えてない』ってところ、自然な言い方だった。",
+      "yuu:0":"……納品の話は迷わず答えてる。",
+      "kana:0":"……結果の話になった時、少しだけ声が変わった。"
+    },
+    12:{
+      "misaki:1":"……この三分、あとで戻ってきそう。",
+      "yuu:2":"……ここは、たぶん大丈夫。",
+      "kana:0":"……この話、まだ終わってない気がする。"
+    }
+  };
+
+  const line=(reactions[selected.id] || {})[key];
+
+  // 何も意味のある反応がなければ、ねもはしゃべらない。
+  if(!line) return "";
+
+  return `<div class="partnerEvent"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
 }
-
 document.getElementById("pressBtn").onclick=()=>{
   const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
   let msg=`<div class="pressDetail">${s.press}</div>`;
@@ -1312,7 +1366,10 @@ document.getElementById("pressBtn").onclick=()=>{
   if(s.contradiction){
     msg+=nemoNudgeFor(s);
   }else{
-    msg+=nemoNormalPressReaction();
+    const reaction=nemoPressReaction(currentWitness,stmtIndex);
+    if(reaction){
+      msg+=reaction;
+    }
   }
 
   document.getElementById("testimonyMsg").className="callout special";
@@ -1484,13 +1541,13 @@ function presentEvidence(id){
   let partnerMiss="";
   if(selected){
     if(selected.id===66){
-      partnerMiss=`<div class="partnerEvent"><strong>🐱 ${selected.name}</strong><br>「それ、現場の痕跡と繋がってない。」</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>🐱 ${selected.name}</strong><br>……それとは、少し違う気がする。</div>`;
     }else if(selected.id===96){
-      partnerMiss=`<div class="partnerEvent genius"><strong>🌙 ${selected.name}</strong><br>「論理が一段飛んでる。その証拠では証言を否定できない。」</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>🌙 ${selected.name}</strong><br>……まだ、そこまでは言えない。</div>`;
     }else if(selected.id===31){
-      partnerMiss=`<div class="partnerEvent baka"><strong>🌼 ${selected.name}</strong><br>「あっ、相手ちょっと安心した顔した。たぶん違うやつ出したね。」</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>🌼 ${selected.name}</strong><br>……いま、少し安心した顔した。</div>`;
     }else if(selected.id===12){
-      partnerMiss=`<div class="partnerEvent luck"><strong>✨ ${selected.name}</strong><br>「それじゃない。……気がする。」</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>✨ ${selected.name}</strong><br>……それじゃない気がする。</div>`;
     }
   }
   msg.innerHTML=`その証拠では、この証言は崩せなさそうだ。<br><span class="muted">事件ファイルの「証拠」「人物」「時系列」を見比べてみよう。</span>${partnerMiss}`;
