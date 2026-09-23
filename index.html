@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.14</title>
+<title>ねも探偵局 v0.15</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1056,6 +1056,350 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+/* ==================================================
+   v0.15 Desktop: single-scroll layout
+   PCはページ全体のスクロール1本だけにする
+   ================================================== */
+@media(min-width:861px){
+  html, body{
+    height:auto !important;
+    min-height:100%;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+  }
+
+  body{
+    min-height:100vh;
+  }
+
+  .wrap{
+    height:auto !important;
+    min-height:100vh;
+    max-width:1240px;
+    padding:12px 14px 28px;
+    display:block !important;
+    overflow:visible !important;
+  }
+
+  .topbar{
+    position:sticky;
+    top:8px;
+    z-index:30;
+    min-height:58px;
+    padding:10px 14px;
+    border-radius:15px;
+  }
+
+  .hero{
+    margin-top:10px;
+    padding:16px 20px;
+  }
+
+  .hero h1{
+    font-size:34px;
+    margin:.1rem 0 .25rem;
+  }
+
+  .hero p{
+    margin:.3rem 0;
+    line-height:1.55;
+  }
+
+  #caseSelectPanel,
+  #selectPanel{
+    margin-top:10px;
+    overflow:visible !important;
+    max-height:none !important;
+    height:auto !important;
+  }
+
+  .layout{
+    display:grid !important;
+    grid-template-columns:minmax(0,1.28fr) minmax(340px,.82fr);
+    gap:12px;
+    margin-top:10px;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    align-items:start;
+  }
+
+  .layout > div{
+    min-height:0 !important;
+    height:auto !important;
+    overflow:visible !important;
+  }
+
+  .layout > div > .panel:not(.hidden),
+  .layout > aside.panel{
+    height:auto !important;
+    max-height:none !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    scrollbar-gutter:auto !important;
+  }
+
+  .layout > aside.panel{
+    position:static !important;
+    align-self:start;
+  }
+
+  .panel{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .panel h2{
+    font-size:22px;
+    margin-bottom:9px;
+  }
+
+  .progressStrip{
+    margin-bottom:8px;
+  }
+
+  .progressChip{
+    padding:5px 8px;
+    font-size:11px;
+  }
+
+  .missionBanner{
+    padding:8px 10px;
+    line-height:1.5;
+    margin-bottom:8px;
+  }
+
+  .scene{
+    height:250px !important;
+    min-height:250px !important;
+    border-radius:14px;
+  }
+
+  .scene:before{
+    font-size:22px;
+  }
+
+  #investigationMsg{
+    margin-top:8px;
+    padding:10px 11px;
+    font-size:13px;
+    line-height:1.5;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  .witnessChooser{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:7px;
+    margin-bottom:8px;
+  }
+
+  .witnessBtn{
+    padding:8px 10px;
+    min-width:0;
+  }
+
+  .witnessBtn strong{
+    font-size:14px;
+  }
+
+  .witnessBtn .muted{
+    font-size:11px;
+  }
+
+  .partnerStrip{
+    margin-bottom:8px;
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .witnessHead{
+    display:none;
+  }
+
+  #testimonyPanel > h2{
+    margin:6px 0 8px;
+    font-size:22px;
+  }
+
+  .dialogueBox{
+    min-height:110px;
+    padding:14px 16px;
+    border-radius:14px;
+  }
+
+  .speaker{
+    font-size:13px;
+    margin-bottom:6px;
+  }
+
+  .statement{
+    font-size:20px;
+    line-height:1.5;
+  }
+
+  .statementNav{
+    margin-top:7px;
+  }
+
+  .statementNav .secondary{
+    padding:8px 10px;
+    font-size:12px;
+  }
+
+  .actionbar{
+    position:static !important;
+    margin-top:7px;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actionbar button{
+    min-height:42px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+
+  #testimonyMsg{
+    margin-top:8px;
+    padding:10px 11px;
+    font-size:13px;
+    line-height:1.5;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  #testimonyMsg .partnerEvent,
+  #testimonyMsg .nemoNudge{
+    margin-top:7px;
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .nextMove{
+    margin-top:8px;
+    padding:9px 10px;
+    gap:6px;
+  }
+
+  .nextContradictionBtn{
+    min-height:40px;
+  }
+
+  .notebookTabs{
+    position:static !important;
+    margin-bottom:8px;
+    padding:0;
+    background:transparent;
+  }
+
+  .tabbtn{
+    padding:7px 9px;
+    font-size:12px;
+  }
+
+  .cardlist{
+    gap:7px;
+  }
+
+  .infoCard,
+  .contradictionCard{
+    padding:10px;
+    font-size:12px;
+    line-height:1.5;
+  }
+
+  .evidenceIcon{
+    font-size:18px;
+  }
+
+  .timeline{
+    gap:8px;
+    font-size:12px;
+  }
+
+  .briefing{
+    gap:9px;
+  }
+
+  .briefingHero{
+    padding:13px;
+  }
+
+  .briefingHero .incident{
+    font-size:25px;
+    margin:3px 0 5px;
+  }
+
+  .briefingGrid{
+    gap:8px;
+  }
+
+  .briefCard{
+    padding:10px;
+    line-height:1.5;
+    font-size:13px;
+  }
+
+  .objectiveList{
+    gap:5px;
+  }
+
+  .objective{
+    padding:7px;
+  }
+
+  .deductionGrid{
+    margin:10px 0;
+    gap:8px;
+  }
+
+  .bigReveal{
+    padding:16px 10px;
+  }
+
+  .bigReveal .word{
+    font-size:54px;
+  }
+
+  .footer{
+    display:block;
+    margin-top:14px;
+  }
+
+  .fileToggle,
+  .mobileFileQuick{
+    display:none !important;
+  }
+}
+
+/* 小さめPCでも内部スクロールは作らない */
+@media(min-width:861px) and (max-height:760px){
+  .scene{
+    height:220px !important;
+    min-height:220px !important;
+  }
+
+  .dialogueBox{
+    min-height:92px;
+    padding:11px 13px;
+  }
+
+  .statement{
+    font-size:18px;
+    line-height:1.4;
+  }
+
+  #testimonyMsg{
+    max-height:none !important;
+    overflow:visible !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1069,7 +1413,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.14 WORDING UPDATE</span>
+    <span class="badge">v0.15 SINGLE SCROLL</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -1232,7 +1576,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.14 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.15 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
