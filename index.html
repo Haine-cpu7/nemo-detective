@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.19</title>
+<title>ねも探偵局 v0.20</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1501,6 +1501,41 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
+
+.nemoInsight{
+  margin-top:9px;
+  padding:9px 11px;
+  border:1px solid #5b5678;
+  border-radius:11px;
+  background:#242338;
+  line-height:1.6;
+  font-size:13px;
+}
+.nemoInsight strong{
+  color:#e2dcff;
+}
+.nemoInsightMeta{
+  display:inline-block;
+  margin-left:7px;
+  color:#9fa5bf;
+  font-size:10px;
+  font-weight:700;
+}
+.evidenceInsight{
+  margin-top:8px;
+  padding:8px 9px;
+  border-left:3px solid #9180e8;
+  border-radius:8px;
+  background:#222238;
+  color:#dcd7f6;
+  font-size:11px;
+  line-height:1.55;
+}
+@media(max-width:860px){
+  .nemoInsight{font-size:12px}
+  .evidenceInsight{font-size:11px}
+}
+
 </style>
 </head>
 <body>
@@ -1514,7 +1549,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.19 WIDTH ALIGN</span>
+    <span class="badge">v0.20 NEMO CHARACTER</span>
     <h1>ねも探偵局</h1>
   </section>
 
@@ -1682,7 +1717,7 @@ body:not(.case-active) .topFileBtn{
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.19 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.20 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1700,30 +1735,30 @@ const NEMO_ICONS=["🐱","🌙","🌼","✨","🔎","📚","🗝️","🪶"];
 const TEST_NEMO_PROFILES={
   66:{
     icon:"🐱",
-    trait:"現場の鬼",
+    trait:"よく見てる",
     type:"観察型",
-    quirk:"人見知り。聞き込みになると急に帰りたがる。",
+    quirk:"小さな違いにすぐ気づく。人と話すより、まず周りを見ている。",
     obs:99, rea:61, talk:14, luck:82
   },
   96:{
     icon:"🌙",
-    trait:"理詰めの天才",
+    trait:"考えごとが好き",
     type:"推理型",
-    quirk:"会話が苦手。『話しかけるのは任せた』が口癖。",
+    quirk:"ことばは少なめ。見つけたものを、頭の中でゆっくりつなげる。",
     obs:58, rea:100, talk:9, luck:21
   },
   31:{
     icon:"🌼",
-    trait:"聞き込み無双",
+    trait:"声をよく聞く",
     type:"会話型",
-    quirk:"現場捜査中、かなりの確率でお花を見ています。",
+    quirk:"人の言い方や表情によく気づく。たまに花や小物に気を取られる。",
     obs:11, rea:34, talk:99, luck:63
   },
   12:{
     icon:"✨",
-    trait:"根拠なき確信",
+    trait:"なんとなく気づく",
     type:"直感型",
-    quirk:"理屈は弱いのに勘だけ異常に当たる。",
+    quirk:"理由はうまく言えない。でも『なんか変』にはよく気づく。",
     obs:46, rea:17, talk:42, luck:100
   }
 };
@@ -1899,7 +1934,7 @@ const cases={
 }
 };
 
-let currentCase=null, selected=null, evidence=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[];
+let currentCase=null, selected=null, evidence=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={};
 
 const detectiveGrid=document.getElementById("detectiveGrid");
 function stat(label,val){
@@ -1926,6 +1961,11 @@ document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
   document.body.classList.remove("file-open");
   document.body.classList.remove("case-active");
   currentCase=cases[btn.dataset.case];
+  evidence=new Set();
+  flags=new Set();
+  contradictionLog=[];
+  nemoInsights={};
+  tab="evidence";
   showOnly("selectPanel");
   document.getElementById("caseNo").textContent=currentCase.title;
   document.getElementById("phaseLabel").textContent="探偵選択";
@@ -2045,89 +2085,152 @@ function buildScene(){
 function investigationPartnerReaction(id){
   if(!selected) return "";
 
-  if(selected.id===66){
-    const map={
-      desk:"……机の角。少しだけ、擦れた跡がある。",
-      reception:"……この三分だけ、誰も見ていない。",
-      frame:"……右側だけ、ずれてる。",
-      star:"……これ、どこかで見た形。",
-      photo:"……ガラスのところ。人が映ってる。",
-      tube:"……ここは、たぶん違う。",
-      wet:"……紙の手ざわり、掲示物に近い。",
-      camera:"……この影、裏口の方へ行ってる。"
-    };
-    return `<div class="partnerEvent"><strong>🐱 ${selected.name}</strong><br>${map[id] || "……少し、気になる。"}</div>`;
-  }
+  const maps={
+    66:{
+      desk:"あれ？ 机の角、ちょっと擦れてる。",
+      reception:"3分だけ、誰も見てなかったんだね。",
+      frame:"あ。右だけ、ちょっとずれてる。",
+      star:"これ、カナちゃんのバッグにもついてなかった？",
+      photo:"あ。ガラスに誰か映ってる。……カナちゃん？",
+      tube:"中身、ちゃんと入ってるみたい。これは違うかな。",
+      wet:"この紙、ちょっと手ざわりが変。",
+      poster:"こっちの紙も、さっきのと似てる気がする。",
+      camera:"あ。人がいる。裏口の方に歩いてる。"
+    },
+    96:{
+      desk:"これだけだと、まだわかんないね。ほかも見よ。",
+      reception:"17:15から17:18。……この3分、覚えておこ。",
+      frame:"これ、あとで誰かのお話とつながるかも。",
+      star:"同じ飾り。でも、落としただけかもしれないね。",
+      photo:"写真なら、いた場所はわかるね。",
+      tube:"伝票と同じなら、ここは大丈夫そう。",
+      wet:"どうして濡れたんだろ。晴れてるのにね。",
+      receipt:"17:42。……この時間、覚えておこ。",
+      poster:"水がかかったのは、ここなんだね。",
+      camera:"17:39。こっちも時間を覚えておこ。"
+    },
+    31:{
+      desk:"机の横に、小さい花がある。……かわいい。",
+      reception:"受付の植物、元気そう。……あ、捜査だった。",
+      frame:"この絵、かわいいね。……額縁？",
+      star:"あ、星。かわいい。……これ、カナちゃんもつけてた？",
+      photo:"写真の花瓶が気になる。……でも、ガラスにも何か映ってるね。",
+      tube:"筒の中、暗い。……何も見えない。",
+      wet:"外の花壇、ちょっと見たい。……紙も見よ。",
+      poster:"ポスター、びしょびしょだね。",
+      camera:"カメラ、こっち見てる。"
+    },
+    12:{
+      desk:"うーん。ここ、あとで気になるかも。",
+      reception:"この3分、なんか気になる。",
+      frame:"これ、あとで使いそう。",
+      star:"これ、捨てない方がいい気がする。",
+      photo:"この写真、たぶん大事。",
+      tube:"これは……違う気がする。",
+      wet:"この紙、なんか近い。",
+      receipt:"この時間、気になる。",
+      poster:"あ。これ、さっきの紙と関係あるかも。",
+      camera:"この影、なんか気になる。"
+    }
+  };
 
-  if(selected.id===96){
-    const map={
-      desk:"……これだけだと、まだ弱い。時間と一緒に見たい。",
-      reception:"……空白は三分。ここを基準にしたい。",
-      frame:"……動いた事実だけ覚えておこう。あとで効くかもしれない。",
-      star:"……持ち主と場所がつながる。でも、まだ決めつけない。",
-      photo:"……位置を証明できる。これは残しておきたい。",
-      tube:"……中身は合ってる。いったん外してよさそう。",
-      wet:"……濡れた理由を説明できる場所が、どこかにある。",
-      camera:"……時刻と向き。あとで並べる。"
-    };
-    return `<div class="partnerEvent"><strong>🌙 ${selected.name}</strong><br>${map[id] || "……あとで、つながるかも。"}</div>`;
-  }
-
-  if(selected.id===31){
-    const map={
-      desk:"ねもは、机より窓ぎわを見ている。……小さな花が咲いてる。",
-      reception:"受付の横の植物を見ている。……元気そう。",
-      frame:"絵の方を見ている。……かわいい。",
-      star:"星飾りの横に落ちた花びらを拾っている。事件には、たぶん関係ない。",
-      photo:"写真のすみの花瓶を見ている。……きれい。",
-      tube:"ポスター筒をのぞいている。……暗い。",
-      wet:"外の花壇が気になっている。紙は、まだ見ていない。",
-      camera:"カメラを見上げている。……見られてる。"
-    };
-    return `<div class="partnerEvent"><strong>🌼 ${selected.name}</strong><br>${map[id] || "少し、別のところを見ている。"}</div>`;
-  }
-
-  if(selected.id===12){
-    const map={
-      desk:"……ここは、物より時間が気になる。",
-      reception:"……この三分、なんとなく嫌。",
-      frame:"……これ、あとで見る気がする。",
-      star:"……捨てないで。たぶん。",
-      photo:"……この写真、残しておきたい。",
-      tube:"……これは違う気がする。",
-      wet:"……この紙、近い。",
-      camera:"……この影、追った方がいい。"
-    };
-    return `<div class="partnerEvent"><strong>✨ ${selected.name}</strong><br>${map[id] || "……なんとなく、気になる。"}</div>`;
-  }
-
-  return "";
+  const line=(maps[selected.id] || {})[id];
+  if(!line) return "";
+  return `<div class="partnerEvent"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
 }
+
+function getNemoInsight(id){
+  if(!selected) return null;
+
+  if(selected.obs>=90){
+    const obs={
+      frame:{
+        kind:"観察",
+        note:"額縁の右端に、まだ新しい指の跡も残っている。",
+        speech:"あれ？ 右のところ、さわった跡がまだ新しいよ。"
+      },
+      star:{
+        kind:"観察",
+        note:"星飾りの留め具が少し曲がっている。急いで動いた時に外れたように見える。",
+        speech:"留め具、ちょっと曲がってる。急いだ時に外れたのかな。"
+      },
+      wet:{
+        kind:"観察",
+        note:"紙の表面に薄いコート加工がある。普通のメモ用紙とは違う。",
+        speech:"この紙、つるっとしてる。ふつうの紙じゃないかも。"
+      },
+      poster:{
+        kind:"観察",
+        note:"濡れたポスターの紙質と青いインクが、濡れた紙片によく似ている。",
+        speech:"あ。こっちの紙、さっきの濡れた紙と似てるよ。"
+      }
+    };
+    if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
+  }
+
+  if(selected.rea>=95){
+    const rea={
+      photo:{
+        kind:"推理",
+        note:"写真に写った位置から、カナがトイレとは逆方向の展示壁側にいたと確認できる。",
+        speech:"この写真なら、カナちゃんがいた場所、ちゃんとわかるね。"
+      },
+      receipt:{
+        kind:"推理",
+        note:"17:42の購入時刻は、レンの『17:38には退館した』という証言と時間が合わない。",
+        speech:"17:42……レンくん、17:38には帰ったって言ってたよね？"
+      },
+      camera:{
+        kind:"推理",
+        note:"17:39の人影は、レンの退館時刻の証言と並べて確認する価値がある。",
+        speech:"17:39。さっきの『17:38』と、ちょっと合わないね。"
+      }
+    };
+    if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
+  }
+
+  return null;
+}
+
+function insightHtml(insight){
+  if(!insight) return "";
+  return `<div class="nemoInsight">
+    <strong>🐱 ねもの気づき</strong>
+    <span class="nemoInsightMeta">${insight.stat}</span><br>
+    ${insight.speech}
+  </div>`;
+}
+
 function collectEvidence(id,btn){
   if(evidence.has(id)) return;
-  evidence.add(id);btn.classList.add("done");
+  evidence.add(id);
+  btn.classList.add("done");
   const e=currentCase.evidence[id];
 
-  let skillExtra="";
-  if(selected && selected.obs>=90){
-    if(id==="frame") skillExtra=`<br><br><strong>観察ボーナス：</strong>額縁の右端には新しい指の跡も残っている。`;
-    if(id==="star") skillExtra=`<br><br><strong>観察ボーナス：</strong>留め具が曲がっている。急いで動いた拍子に外れたようだ。`;
-    if(id==="wet") skillExtra=`<br><br><strong>観察ボーナス：</strong>紙の表面に薄いコート加工がある。`;
+  const insight=getNemoInsight(id);
+  if(insight){
+    nemoInsights[id]=insight;
   }
-  if(selected && selected.rea>=95){
-    if(id==="photo") skillExtra+=`<br><br><strong>推理ボーナス：</strong>写真の位置情報は証言の『行っていない』を直接検証できる。`;
-    if(id==="camera") skillExtra+=`<br><br><strong>推理ボーナス：</strong>17:39という時刻を、退館証言と比較できる。`;
-  }
+
+  // 高能力で専用の気づきが出た時は、それを主役にする。
+  // それ以外の時だけ通常のNemo反応を表示。
+  const nemoPart=insight
+    ? insightHtml(insight)
+    : investigationPartnerReaction(id);
 
   document.getElementById("investigationMsg").innerHTML=
-    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${skillExtra}${investigationPartnerReaction(id)}`;
+    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${nemoPart}`;
 
-  document.getElementById("evidenceCount").textContent=`証拠 ${evidence.size} / ${Object.keys(currentCase.evidence).length}`;
+  document.getElementById("evidenceCount").textContent=
+    `証拠 ${evidence.size} / ${Object.keys(currentCase.evidence).length}`;
+
   renderFile();
   renderProgress();
 
-  // コア進行はプレイヤー側で担保。ポンコツNemoでも詰まない。
-  if(evidence.size>=4) document.getElementById("toWitnessBtn").disabled=false;
+  // 能力差で詰まない。必須証拠はプレイヤー側で取得できる。
+  if(evidence.size>=4){
+    document.getElementById("toWitnessBtn").disabled=false;
+  }
 }
 
 document.getElementById("toWitnessBtn").onclick=()=>{
@@ -2183,43 +2286,48 @@ document.getElementById("nextStmt").onclick=()=>{
 function nemoNudgeFor(statement){
   if(!selected || !statement.contradiction) return "";
 
-  let line="……ここ、少し気になる。";
+  const evidenceId=statement.contradiction;
+  const saved=nemoInsights[evidenceId];
 
-  if(selected.id===66){
-    if(statement.contradiction==="photo"){
-      line="……写真で見た場所と、言ってることが違う。";
-    }else if(statement.contradiction==="frame"){
-      line="……現場で見た跡と、合ってない。";
+  if(saved){
+    let line=saved.speech;
+
+    if(evidenceId==="photo"){
+      line="あ。さっきの写真と、お話がちがうかも。写真だと展示壁の方にいたよ。";
+    }else if(evidenceId==="frame"){
+      line="あれ？ 額縁、さわった跡がまだ新しかったよ。『触ってない』なら変かも。";
+    }else if(evidenceId==="receipt"){
+      line="17:42のレシート。……17:38には帰ったって言ってたよね？";
     }
-  }else if(selected.id===96){
-    if(statement.contradiction==="photo"){
-      line="……『行っていない』なら、この写真は説明できない。";
-    }else if(statement.contradiction==="frame"){
-      line="……『触っていない』と、動いた跡。両方は成立しない。";
-    }
-  }else if(selected.id===31){
-    if(statement.contradiction==="photo"){
-      line="……いまの言い方だけ、少し固かった。場所の話、もう一度見たい。";
-    }else if(statement.contradiction==="frame"){
-      line="……ポスターの話になった時だけ、ちょっと反応した。";
-    }
-  }else if(selected.id===12){
-    if(statement.contradiction==="photo"){
-      line="……写真。たぶん、写真。";
-    }else if(statement.contradiction==="frame"){
-      line="……額縁。うまく言えないけど、そこ。";
-    }
-  }else if(selected.type==="推理型"){
-    line="……つながらないところがある。";
-  }else if(selected.type==="観察型"){
-    line="……見たものと、少し違う。";
-  }else if(selected.type==="会話型"){
-    line="……いまの言い方、少しだけ変だった。";
-  }else if(selected.type==="直感型"){
-    line="……ここ、なんとなく気になる。";
+
+    return `<div class="nemoNudge">
+      <strong>${selected.icon} ${selected.name}</strong><br>${line}
+    </div>`;
   }
 
-  return `<div class="nemoNudge"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
+  let line="……あれ？ ここ、ちょっと変かも。";
+
+  if(selected.id===66){
+    if(evidenceId==="photo") line="あれ？ 写真と、お話が合ってない気がする。";
+    else if(evidenceId==="frame") line="さっき見た額縁と、ちょっと合わないね。";
+    else if(evidenceId==="receipt") line="この時間、さっきのお話と違わない？";
+  }else if(selected.id===96){
+    if(evidenceId==="photo") line="写真と一緒に見ると、ちょっと変だね。";
+    else if(evidenceId==="frame") line="『触ってない』と、動いた跡。どっちも本当はむずかしいかも。";
+    else if(evidenceId==="receipt") line="時間を並べると、合わないところがあるね。";
+  }else if(selected.id===31){
+    if(evidenceId==="photo") line="いまの言い方、ちょっとだけ気になった。写真も見てみよ。";
+    else if(evidenceId==="frame") line="ポスターの話になった時、ちょっとだけ言いにくそうだった？";
+    else if(evidenceId==="receipt") line="時間の話、もう一回見たいかも。";
+  }else if(selected.id===12){
+    if(evidenceId==="photo") line="うーん……写真。たぶん写真。";
+    else if(evidenceId==="frame") line="なんか額縁が気になる。";
+    else if(evidenceId==="receipt") line="このレシート、なんか引っかかる。";
+  }
+
+  return `<div class="nemoNudge">
+    <strong>${selected.icon} ${selected.name}</strong><br>${line}
+  </div>`;
 }
 function nemoPressReaction(witnessId, statementIndex){
   if(!selected) return "";
@@ -2228,33 +2336,33 @@ function nemoPressReaction(witnessId, statementIndex){
 
   const reactions={
     66:{
-      "misaki:1":"……三分。そこだけ、覚えておきたい。",
-      "yuu:1":"……入ってないなら、ここは一度置いていいかも。",
-      "kana:0":"……『すぐ戻った』ってところ、少しだけ覚えておきたい。"
+      "misaki:1":"3分だけ、受付にいなかったんだね。",
+      "yuu:1":"スタッフルームには入ってないんだ。",
+      "kana:0":"『すぐ戻った』ってところ、覚えておこ。"
     },
     96:{
-      "misaki:1":"……17:15から17:18。時系列の中心になりそう。",
-      "yuu:2":"……退出記録がある。ここは矛盾してない。",
-      "kana:0":"……『すぐ戻った』。時間が分かれば確かめられる。"
+      "misaki:1":"17:15から17:18。……ここ、覚えておこ。",
+      "yuu:2":"17:13。入口のカメラにも映ってるんだね。",
+      "kana:0":"『すぐ戻った』。時間がわかるといいね。"
     },
     31:{
-      "misaki:2":"……『どの展示かは覚えてない』ってところ、自然な言い方だった。",
-      "yuu:0":"……納品の話は迷わず答えてる。",
-      "kana:0":"……結果の話になった時、少しだけ声が変わった。"
+      "misaki:2":"ふつうに答えてる感じだったね。",
+      "yuu:0":"この話は、すらすら出てきたね。",
+      "kana:0":"結果の話をした時、ちょっとだけ声が小さくなった？"
     },
     12:{
-      "misaki:1":"……この三分、あとで戻ってきそう。",
-      "yuu:2":"……ここは、たぶん大丈夫。",
-      "kana:0":"……この話、まだ終わってない気がする。"
+      "misaki:1":"この3分、なんかあとで出てきそう。",
+      "yuu:2":"ここは、そんなに変じゃない気がする。",
+      "kana:0":"うーん。この話、まだ何かありそう。"
     }
   };
 
   const line=(reactions[selected.id] || {})[key];
-
-  // 何も意味のある反応がなければ、ねもはしゃべらない。
   if(!line) return "";
 
-  return `<div class="partnerEvent"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
+  return `<div class="partnerEvent">
+    <strong>${selected.icon} ${selected.name}</strong><br>${line}
+  </div>`;
 }
 document.getElementById("pressBtn").onclick=()=>{
   const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
@@ -2429,7 +2537,18 @@ function presentEvidence(id){
       msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。`;
     }
 
-    msg.innerHTML += `<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
+    let linkedInsight="";
+    if(rule.flag==="kana_photo" && nemoInsights.photo){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。さっきの写真、ここでつながったね。」</div>`;
+    }else if(rule.flag==="kana_frame" && nemoInsights.frame){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「額縁の跡、やっぱり関係あったんだ。」</div>`;
+    }else if((rule.flag==="ren_exit" || rule.flag==="ren_water") && nemoInsights.receipt){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:42。さっき覚えた時間、ここで合わなくなったね。」</div>`;
+    }else if(rule.flag==="wet_link" && (nemoInsights.wet || nemoInsights.poster)){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。紙、やっぱり同じところから来たのかも。」</div>`;
+    }
+
+    msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
     renderProgress();
 
     if(currentCase===cases[1] && currentCase.finalReady.every(f=>flags.has(f))){
@@ -2447,11 +2566,11 @@ function presentEvidence(id){
   let partnerMiss="";
   if(selected){
     if(selected.id===66){
-      partnerMiss=`<div class="partnerEvent"><strong>🐱 ${selected.name}</strong><br>……それとは、少し違う気がする。</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>🐱 ${selected.name}</strong><br>うーんうーん……たぶん、これじゃない。</div>`;
     }else if(selected.id===96){
-      partnerMiss=`<div class="partnerEvent"><strong>🌙 ${selected.name}</strong><br>……まだ、そこまでは言えない。</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>🌙 ${selected.name}</strong><br>うーん。これだけだと、まだわかんないね。</div>`;
     }else if(selected.id===31){
-      partnerMiss=`<div class="partnerEvent"><strong>🌼 ${selected.name}</strong><br>……いま、少し安心した顔した。</div>`;
+      partnerMiss=`<div class="partnerEvent"><strong>🌼 ${selected.name}</strong><br>あ。いま、ちょっとほっとした顔した？</div>`;
     }else if(selected.id===12){
       partnerMiss=`<div class="partnerEvent"><strong>✨ ${selected.name}</strong><br>……それじゃない気がする。</div>`;
     }
@@ -2507,7 +2626,15 @@ function renderFile(){
     fc.innerHTML=`<div class="cardlist">${
       [...evidence].map(id=>{
         const e=currentCase.evidence[id];
-        return `<div class="infoCard"><strong><span class="evidenceIcon">${e.icon}</span>${e.name}</strong><div class="muted">${e.desc}</div></div>`;
+        const insight=nemoInsights[id];
+        const insightPart=insight
+          ? `<div class="evidenceInsight">🐱 ねもの気づき：${insight.note}</div>`
+          : "";
+        return `<div class="infoCard">
+          <strong><span class="evidenceIcon">${e.icon}</span>${e.name}</strong>
+          <div class="muted">${e.desc}</div>
+          ${insightPart}
+        </div>`;
       }).join("")
     }</div>`;
     return;
