@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.10</title>
+<title>ねも探偵局 v0.11</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -547,6 +547,95 @@ body.file-open{overflow:hidden}
   }
 }
 
+
+.contradictionHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.contradictionCount{
+  padding:5px 9px;
+  border-radius:999px;
+  background:#3b2630;
+  border:1px solid #8b5667;
+  color:#ffd3dd;
+  font-size:12px;
+  font-weight:1000;
+}
+.contradictionCard{
+  border:1px solid #81566f;
+  background:linear-gradient(135deg,#30212a,#24202d);
+  border-radius:14px;
+  padding:13px;
+  line-height:1.65;
+}
+.contradictionCard strong{
+  color:#ffd3df;
+}
+.contradictionCard .vs{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:8px;
+  align-items:center;
+  margin-top:9px;
+  font-size:12px;
+}
+.contradictionCard .side{
+  background:#201d29;
+  border:1px solid #4d465e;
+  border-radius:10px;
+  padding:9px;
+}
+.contradictionCard .arrow{
+  color:#ff9db2;
+  font-weight:1000;
+}
+.nextMove{
+  margin-top:13px;
+  display:grid;
+  gap:8px;
+  padding:13px;
+  border:1px solid #557c91;
+  border-radius:14px;
+  background:linear-gradient(135deg,#1d2b35,#202536);
+}
+.nextMoveTitle{
+  font-weight:1000;
+  color:#bcecff;
+}
+.nextContradictionBtn{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  min-height:48px;
+  background:#7bdcf2;
+  color:#142027;
+  font-weight:1000;
+}
+.savedContradiction{
+  font-size:12px;
+  color:#ffccd7;
+  font-weight:900;
+}
+@media(max-width:860px){
+  .contradictionCard .vs{
+    grid-template-columns:1fr;
+  }
+  .contradictionCard .arrow{
+    text-align:center;
+    transform:rotate(90deg);
+  }
+  .mobileFileQuick{
+    grid-template-columns:repeat(4,1fr);
+  }
+  .mobileFileQuick button{
+    font-size:11px;
+    padding:6px 3px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -560,7 +649,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.10 CHAOS PARTNER</span>
+    <span class="badge">v0.11 CONTRADICTION LOG</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -634,6 +723,7 @@ body.file-open{overflow:hidden}
         <div class="witnessChooser" id="witnessChooser"></div>
         <div class="mobileFileQuick">
           <button type="button" data-open-file="evidence">🔎 証拠</button>
+          <button type="button" data-open-file="contradictions">⚡ 矛盾</button>
           <button type="button" data-open-file="people">👥 人物</button>
           <button type="button" class="timelineQuick" data-open-file="timeline">🕒 時系列</button>
         </div>
@@ -665,6 +755,7 @@ body.file-open{overflow:hidden}
         <p class="muted">ここからは証拠を突きつけるだけでは終わりません。事件ファイルを見ながら、あなた自身で真相を組み立ててください。</p>
         <div class="mobileFileQuick">
           <button type="button" data-open-file="evidence">🔎 証拠</button>
+          <button type="button" data-open-file="contradictions">⚡ 矛盾</button>
           <button type="button" data-open-file="people">👥 人物</button>
           <button type="button" class="timelineQuick" data-open-file="timeline">🕒 時系列</button>
         </div>
@@ -714,13 +805,14 @@ body.file-open{overflow:hidden}
       <div class="mobileHint">証言を覚えなくてOK。ここを開いて見比べながら推理できます。</div>
       <div class="notebookTabs">
         <button class="tabbtn active" data-tab="evidence">証拠</button>
+        <button class="tabbtn" data-tab="contradictions">⚡ 矛盾</button>
         <button class="tabbtn" data-tab="people">人物</button>
         <button class="tabbtn" data-tab="timeline">時系列</button>
       </div>
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.10 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.11 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -937,7 +1029,7 @@ const cases={
 }
 };
 
-let currentCase=null, selected=null, evidence=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set();
+let currentCase=null, selected=null, evidence=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[];
 
 const detectiveGrid=document.getElementById("detectiveGrid");
 function stat(label,val){
@@ -1011,7 +1103,7 @@ document.getElementById("beginInvestigationBtn").onclick=()=>{
 function renderProgress(){
   const chips=[
     ["現場を調べる", evidence.size>=4],
-    ["証言の矛盾を崩す", flags.size>=1],
+    [`矛盾を見つける ${flags.size}/${(currentCase?.multiClear||[]).length}`, flags.size>=1],
     ["真相を組み立てる", currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))]
   ];
   const markup=chips.map(c=>`<span class="progressChip ${c[1]?"done":""}">${c[1]?"✓ ":""}${c[0]}</span>`).join("");
@@ -1238,6 +1330,103 @@ document.getElementById("presentBtn").onclick=()=>{
 };
 document.getElementById("closeModal").onclick=()=>document.getElementById("evidenceModal").classList.add("hidden");
 
+
+function contradictionMeta(flag){
+  const map={
+    kana_photo:{
+      title:"カナの居場所が証言と違う",
+      statement:"「展示室の奥には行ってません」",
+      evidence:"17:17の来館写真",
+      summary:"写真には、トイレとは逆方向の展示壁へ向かうカナが写っている。"
+    },
+    kana_frame:{
+      title:"『触っていない』のに額縁を知っている",
+      statement:"「大きなポスターには触ってません」",
+      evidence:"ずれた展示額縁",
+      summary:"額縁には事件直後に動かされた痕跡があり、カナの説明と噛み合わない。"
+    },
+    ren_exit:{
+      title:"レンの退館時刻が合わない",
+      statement:"「17時38分には、もう図書館を出てました」",
+      evidence:"17:42の自販機レシート",
+      summary:"17:42に図書館裏口横の自販機を利用した記録が残っている。"
+    },
+    ren_water:{
+      title:"『水を買っていない』は嘘",
+      statement:"「水も買ってません」",
+      evidence:"自販機レシート",
+      summary:"17:42の水の購入記録と証言が矛盾している。"
+    },
+    wet_link:{
+      title:"濡れた紙片が裏口につながった",
+      statement:"レンの行動経路",
+      evidence:"濡れた紙片＋掲示ポスター",
+      summary:"紙質と青インクが一致し、裏口付近を通った人物が紙片を持ち込んだ可能性が高い。"
+    }
+  };
+  return map[flag] || {
+    title:"新しい矛盾を発見",
+    statement:"証言",
+    evidence:"証拠",
+    summary:"証言と証拠が食い違っている。"
+  };
+}
+
+function saveContradiction(flag){
+  if(contradictionLog.some(x=>x.flag===flag)) return;
+  contradictionLog.push({flag,...contradictionMeta(flag)});
+  renderFile();
+}
+
+function findNextContradiction(){
+  const rules=(currentCase.multiClear || []);
+  return rules.find(r=>{
+    if(flags.has(r.flag)) return false;
+    if(r.requires && !r.requires.every(f=>flags.has(f))) return false;
+    return true;
+  }) || null;
+}
+
+function goToNextContradiction(){
+  const next=findNextContradiction();
+  if(!next){
+    if(currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))){
+      document.getElementById("testimonyPanel").classList.add("hidden");
+      document.getElementById("deductionPanel").classList.remove("hidden");
+      document.getElementById("phaseLabel").textContent="推理";
+      renderProgress();
+    }
+    return;
+  }
+  currentWitness=next.witness;
+  stmtIndex=next.statement;
+  renderStatement();
+  document.getElementById("testimonyMsg").className="callout special";
+  document.getElementById("testimonyMsg").innerHTML=
+    `<strong>次の矛盾を探そう。</strong><br>別の証言にも、まだ事件ファイルと噛み合わない部分がありそうだ。`;
+  document.getElementById("testimonyPanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function nextMoveHtml(){
+  const next=findNextContradiction();
+  if(next){
+    const w=currentCase.witnesses[next.witness];
+    return `<div class="nextMove">
+      <div class="nextMoveTitle">🔎 次の動き</div>
+      <div>${w.name}の証言に、まだ確認すべき違和感があります。</div>
+      <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">次の矛盾を探す →</button>
+    </div>`;
+  }
+  if(currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))){
+    return `<div class="nextMove">
+      <div class="nextMoveTitle">🧩 矛盾はそろった</div>
+      <div>見つけた矛盾を使って、事件の真相を組み立てよう。</div>
+      <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">最終推理へ →</button>
+    </div>`;
+  }
+  return "";
+}
+
 function presentEvidence(id){
   document.getElementById("evidenceModal").classList.add("hidden");
   const msg=document.getElementById("testimonyMsg");
@@ -1256,6 +1445,7 @@ function presentEvidence(id){
     }
 
     flags.add(rule.flag);
+    saveContradiction(rule.flag);
     msg.className="callout good";
 
     if(rule.flag==="kana_photo"){
@@ -1276,15 +1466,10 @@ function presentEvidence(id){
       msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。`;
     }
 
+    msg.innerHTML += `<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
     renderProgress();
 
     if(currentCase===cases[1] && currentCase.finalReady.every(f=>flags.has(f))){
-      setTimeout(()=>{
-        document.getElementById("testimonyPanel").classList.add("hidden");
-        document.getElementById("deductionPanel").classList.remove("hidden");
-        document.getElementById("phaseLabel").textContent="推理";
-        renderProgress();
-      },900);
       return;
     }
 
@@ -1351,14 +1536,62 @@ function finalReveal(){
 function renderFile(){
   document.querySelectorAll(".tabbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
   const fc=document.getElementById("fileContent");
+
   if(tab==="evidence"){
-    if(!evidence.size){fc.innerHTML=`<p class="muted">まだ証拠はありません。</p>`;return;}
-    fc.innerHTML=`<div class="cardlist">${[...evidence].map(id=>{const e=currentCase.evidence[id];return `<div class="infoCard"><strong><span class="evidenceIcon">${e.icon}</span>${e.name}</strong><div class="muted">${e.desc}</div></div>`}).join("")}</div>`;
-  }else if(tab==="people"){
-    fc.innerHTML=`<div class="cardlist">${currentCase.people.map(p=>`<div class="infoCard"><strong>${p.name}</strong><div>${p.role}</div><div class="muted">${p.note}</div></div>`).join("")}</div>`;
-  }else{
-    fc.innerHTML=`<div class="timeline">${currentCase.timeline.map(t=>`<div class="timeItem"><b>${t[0]}</b><div>${t[1]}</div></div>`).join("")}</div>`;
+    if(!evidence.size){
+      fc.innerHTML=`<p class="muted">まだ証拠はありません。</p>`;
+      return;
+    }
+    fc.innerHTML=`<div class="cardlist">${
+      [...evidence].map(id=>{
+        const e=currentCase.evidence[id];
+        return `<div class="infoCard"><strong><span class="evidenceIcon">${e.icon}</span>${e.name}</strong><div class="muted">${e.desc}</div></div>`;
+      }).join("")
+    }</div>`;
+    return;
   }
+
+  if(tab==="contradictions"){
+    if(!contradictionLog.length){
+      fc.innerHTML=`
+        <div class="contradictionHeader">
+          <strong>⚡ 矛盾ファイル</strong>
+          <span class="contradictionCount">0件</span>
+        </div>
+        <p class="muted">まだ矛盾は見つかっていません。証言と証拠の食い違いを見つけると、ここに自動保存されます。</p>`;
+      return;
+    }
+    fc.innerHTML=`
+      <div class="contradictionHeader">
+        <strong>⚡ 矛盾ファイル</strong>
+        <span class="contradictionCount">${contradictionLog.length}件</span>
+      </div>
+      <div class="cardlist">
+        ${contradictionLog.map((c,i)=>`
+          <div class="contradictionCard">
+            <strong>矛盾 ${i+1}：${c.title}</strong>
+            <div class="vs">
+              <div class="side">🗣️ ${c.statement}</div>
+              <div class="arrow">×</div>
+              <div class="side">📁 ${c.evidence}</div>
+            </div>
+            <div class="muted" style="margin-top:9px">${c.summary}</div>
+          </div>
+        `).join("")}
+      </div>`;
+    return;
+  }
+
+  if(tab==="people"){
+    fc.innerHTML=`<div class="cardlist">${
+      currentCase.people.map(p=>`<div class="infoCard"><strong>${p.name}</strong><div>${p.role}</div><div class="muted">${p.note}</div></div>`).join("")
+    }</div>`;
+    return;
+  }
+
+  fc.innerHTML=`<div class="timeline">${
+    currentCase.timeline.map(t=>`<div class="timeItem"><b>${t[0]}</b><div>${t[1]}</div></div>`).join("")
+  }</div>`;
 }
 document.querySelectorAll(".tabbtn").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;renderFile()});
 
