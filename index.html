@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.4</title>
+<title>ねも探偵局 v0.5</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -37,7 +37,12 @@ button,select{font:inherit} button{cursor:pointer}
 .caseCard,.detective{border:1px solid var(--line);border-radius:16px;background:var(--panel2);padding:14px;transition:.15s ease;color:var(--text);text-align:left}
 .caseCard:hover,.detective:hover{transform:translateY(-2px)} .detective.selected,.caseCard.selected{outline:3px solid var(--accent);background:#302b4c}
 .caseTitle{font-weight:1000;font-size:18px}.caseDesc{font-size:13px;color:var(--muted);line-height:1.6}
-.face{height:105px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#343a51,#26283a);font-size:50px;margin-bottom:10px}
+.face{height:150px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#343a51,#26283a);font-size:50px;margin-bottom:10px;overflow:hidden;position:relative}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.face .fallback{display:grid;place-items:center;width:100%;height:100%;font-size:54px;background:linear-gradient(135deg,#343a51,#26283a)}
+.nftTag{position:absolute;left:8px;bottom:8px;background:rgba(15,17,26,.82);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:1000;letter-spacing:.04em}
+.nftNo{font-size:11px;color:var(--accent2);font-weight:1000;margin-top:3px}
+.rosterNote{margin:0 0 14px;padding:10px 12px;border:1px dashed #5a627f;border-radius:12px;background:#202537;color:var(--muted);font-size:13px;line-height:1.65}
 .dname{font-weight:1000}.trait{font-size:12px;color:var(--muted);margin:4px 0 8px}
 .stat{display:grid;grid-template-columns:42px 1fr 28px;gap:7px;align-items:center;font-size:11px;margin:5px 0}
 .track{height:6px;border-radius:99px;background:#171a24;overflow:hidden}.track i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan))}
@@ -99,6 +104,7 @@ body.file-open{overflow:hidden}
   .hero{padding:20px 16px}
   .layout{grid-template-columns:1fr;gap:10px;margin-top:10px}
   .panel{padding:14px;border-radius:17px}
+  .face{height:180px}
   .scene{min-height:330px}
   .hotspot{
     padding:12px 13px;
@@ -208,9 +214,9 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.4 MOBILE TEST</span>
+    <span class="badge">v0.5 NFT ROSTER</span>
     <h1>ねも探偵局</h1>
-    <p>証拠を集め、証言を聞き、矛盾を突く。v0.4ではスマホ操作を重点調整。事件ファイルをいつでも開いて、証言と証拠を見比べやすくしました。</p>
+    <p>証拠を集め、証言を聞き、矛盾を突く。v0.5ではNemo NFTを探偵として扱う土台を追加。NFT番号から能力値を固定生成し、画像ファイルを置くだけで探偵カードに反映できます。</p>
   </section>
 
   <section class="panel" id="caseSelectPanel">
@@ -229,7 +235,8 @@ body.file-open{overflow:hidden}
 
   <section class="panel hidden" id="selectPanel">
     <h2>担当ねもを選ぶ</h2>
-    <p class="muted">能力によって、追加情報の出方が少し変わります。</p>
+    <p class="muted">Nemo NFTごとに能力値が固定されます。同じ番号のねもは、いつ遊んでも同じ探偵タイプです。</p>
+    <div class="rosterNote">🧩 v0.5ではテスト用のNemo番号を表示しています。<br>画像は <strong>assets/nemos/66.png</strong> のように置くだけで自動反映される設計です。NFT保有判定は次の段階で接続します。</div>
     <div class="grid detectives" id="detectiveGrid"></div>
     <div class="row" style="margin-top:14px">
       <button class="primary" id="startBtn" disabled>このねもで捜査開始</button>
@@ -295,7 +302,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.4 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.5 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -307,12 +314,30 @@ body.file-open{overflow:hidden}
 </div>
 
 <script>
-const detectives=[
-{id:66,icon:"🐱",name:"Nemo #66",trait:"違和感収集",obs:88,rea:72,talk:46,luck:28},
-{id:96,icon:"🌙",name:"Nemo #96",trait:"静かな推理",obs:61,rea:91,talk:58,luck:71},
-{id:31,icon:"🌼",name:"Nemo #31",trait:"聞き上手",obs:52,rea:62,talk:92,luck:54},
-{id:12,icon:"✨",name:"Nemo #12",trait:"妙な勘",obs:66,rea:64,talk:57,luck:95},
-];
+const TEST_NEMO_IDS=[66,96,31,12];
+const NEMO_ICONS=["🐱","🌙","🌼","✨","🔎","📚","🗝️","🪶"];
+
+function seededValue(id,salt,min=38,max=96){
+  let x=(Number(id)*1103515245 + salt*12345) >>> 0;
+  x ^= x << 13; x ^= x >>> 17; x ^= x << 5;
+  const span=max-min+1;
+  return min + (Math.abs(x) % span);
+}
+function buildDetective(id){
+  const obs=seededValue(id,11), rea=seededValue(id,23), talk=seededValue(id,37), luck=seededValue(id,53);
+  const stats=[['観察型',obs],['推理型',rea],['会話型',talk],['直感型',luck]].sort((a,b)=>b[1]-a[1]);
+  const traitMap={'観察型':'違和感収集','推理型':'静かな推理','会話型':'聞き上手','直感型':'妙な勘'};
+  return {
+    id,
+    icon:NEMO_ICONS[id % NEMO_ICONS.length],
+    name:`Nemo #${id}`,
+    trait:traitMap[stats[0][0]],
+    type:stats[0][0],
+    obs,rea,talk,luck,
+    image:`assets/nemos/${id}.png`
+  };
+}
+const detectives=TEST_NEMO_IDS.map(buildDetective);
 
 const cases={
 1:{
@@ -397,7 +422,16 @@ const detectiveGrid=document.getElementById("detectiveGrid");
 function stat(label,val){return `<div class="stat"><span>${label}</span><div class="track"><i style="width:${val}%"></i></div><b>${val}</b></div>`}
 detectives.forEach(d=>{
   const el=document.createElement("button");el.className="detective";
-  el.innerHTML=`<div class="face">${d.icon}</div><div class="dname">${d.name}</div><div class="trait">特性：${d.trait}</div>${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
+  el.innerHTML=`
+    <div class="face">
+      <img src="${d.image}" alt="${d.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+      <div class="fallback" style="display:none">${d.icon}</div>
+      <div class="nftTag">NEMO NFT</div>
+    </div>
+    <div class="dname">${d.name}</div>
+    <div class="nftNo">Token character ID: ${d.id}</div>
+    <div class="trait">タイプ：${d.type} / 特性：${d.trait}</div>
+    ${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
   el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;};
   detectiveGrid.appendChild(el);
 });
