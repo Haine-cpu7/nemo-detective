@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.15</title>
+<title>ねも探偵局 v0.16</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1413,7 +1413,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.15 SINGLE SCROLL</span>
+    <span class="badge">v0.16 MOBILE NAV FIX</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -1509,7 +1509,7 @@ body.file-open{overflow:hidden}
           <button class="primary press" id="pressBtn">🔍 詳しく聞く</button>
           <button class="primary present" id="presentBtn">📁 証拠を出す</button>
         </div>
-        <div id="testimonyMsg" class="callout special">「詳しく聞く」で証言を掘れます。ねもは、気づいたことがある時だけ反応します。</div>
+        <div id="testimonyMsg" class="callout special">「詳しく聞く」で証言を掘れます。ねもは、今ある証拠や証言から気づいたことがある時だけ反応します。</div>
       </section>
 
       <section class="panel hidden" id="deductionPanel">
@@ -1576,7 +1576,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.15 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.16 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1822,6 +1822,7 @@ document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
   currentCase=cases[btn.dataset.case];
   document.getElementById("caseSelectPanel").classList.add("hidden");
   document.getElementById("selectPanel").classList.remove("hidden");
+  resetView("selectPanel");
   document.getElementById("caseNo").textContent=currentCase.title;
   document.getElementById("phaseLabel").textContent="探偵選択";
 });
@@ -1834,6 +1835,7 @@ document.getElementById("startBtn").onclick=()=>{
   document.body.classList.remove("file-open");
   document.getElementById("briefingPanel").classList.remove("hidden");
   document.getElementById("investigationPanel").classList.add("hidden");
+  resetView("gameLayout");
 
   const b=currentCase.briefing || {
     lead:"事件の概要を確認して捜査を始めよう。",
@@ -1859,10 +1861,31 @@ document.getElementById("beginInvestigationBtn").onclick=()=>{
   document.body.classList.remove("file-open");
   document.getElementById("briefingPanel").classList.add("hidden");
   document.getElementById("investigationPanel").classList.remove("hidden");
+  resetView("investigationPanel");
   buildScene();
   document.getElementById("phaseLabel").textContent="捜査";
 };
 
+
+
+function resetView(targetId=null){
+  // 画面遷移時、前の画面のスクロール位置を引き継がない。
+  // 特にiPhone Safariでは、非表示パネル切替後に以前のY座標が残ることがある。
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      if(targetId){
+        const target=document.getElementById(targetId);
+        if(target && !target.classList.contains("hidden")){
+          target.scrollIntoView({behavior:"auto",block:"start"});
+          return;
+        }
+      }
+      window.scrollTo({top:0,left:0,behavior:"auto"});
+      document.documentElement.scrollTop=0;
+      document.body.scrollTop=0;
+    });
+  });
+}
 
 function renderProgress(){
   const chips=[
@@ -1978,6 +2001,7 @@ function collectEvidence(id,btn){
 document.getElementById("toWitnessBtn").onclick=()=>{
   document.getElementById("investigationPanel").classList.add("hidden");
   document.getElementById("testimonyPanel").classList.remove("hidden");
+  resetView("testimonyPanel");
   document.getElementById("phaseLabel").textContent="証言";
   buildWitnessChooser();
   const partner=document.getElementById("partnerStrip");
@@ -2075,7 +2099,7 @@ function nemoPressReaction(witnessId, statementIndex){
     66:{
       "misaki:1":"……三分。そこだけ、覚えておきたい。",
       "yuu:1":"……入ってないなら、ここは一度置いていいかも。",
-      "kana:0":"……トイレの場所、現場でもう一度見たい。"
+      "kana:0":"……『すぐ戻った』ってところ、少しだけ覚えておきたい。"
     },
     96:{
       "misaki:1":"……17:15から17:18。時系列の中心になりそう。",
@@ -2203,6 +2227,7 @@ function goToNextContradiction(){
       document.getElementById("deductionPanel").classList.remove("hidden");
       document.getElementById("phaseLabel").textContent="推理";
       renderProgress();
+      resetView("deductionPanel");
     }
     return;
   }
@@ -2337,6 +2362,7 @@ function finalReveal(){
   document.getElementById("deductionPanel").classList.add("hidden");
   document.getElementById("finalPanel").classList.remove("hidden");
   document.getElementById("phaseLabel").textContent="事件解決";
+  resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
   document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br><strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${currentCase===cases[2]?"紙片をつなぐ者":"はじめての矛盾"}</strong>`;
 }
