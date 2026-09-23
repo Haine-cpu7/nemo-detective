@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ねも探偵局 v0.4</title>
+<style>
+:root{
+  --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
+  --text:#f5f1ff;--muted:#b7b9c8;--line:#444b66;--accent:#9f8cff;--accent2:#f4c96b;
+  --danger:#ff7d88;--good:#7dd8a4;--cyan:#77d7eb;--shadow:0 18px 40px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%}
+body{
+  background:
+    radial-gradient(circle at 15% 0%, #2a2441 0, transparent 32%),
+    radial-gradient(circle at 90% 10%, #193847 0, transparent 25%),
+    var(--bg);
+  color:var(--text);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",system-ui,sans-serif
+}
+button,select{font:inherit} button{cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 14px 70px}
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;
+  background:rgba(28,32,48,.94);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);position:sticky;top:10px;z-index:20;backdrop-filter:blur(10px)
+}
+.brand{font-weight:1000;letter-spacing:.08em}.caseNo{font-size:12px;color:var(--muted)}
+.phase{padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:900;color:var(--accent2)}
+.hero{margin-top:14px;padding:28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(40,45,65,.96),rgba(24,27,40,.96));box-shadow:var(--shadow)}
+.hero h1{font-size:clamp(34px,6vw,64px);margin:.2rem 0 .5rem}.hero p{color:var(--muted);line-height:1.8;max-width:850px}
+.badge{display:inline-block;border:1px solid #665b91;background:#292540;color:#dcd4ff;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900}
+.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px}
+.panel{background:rgba(28,32,48,.96);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.panel h2,.panel h3{margin-top:0}.muted{color:var(--muted)}.hidden{display:none!important}.grid{display:grid;gap:12px}
+.caseGrid,.detectives{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.caseCard,.detective{border:1px solid var(--line);border-radius:16px;background:var(--panel2);padding:14px;transition:.15s ease;color:var(--text);text-align:left}
+.caseCard:hover,.detective:hover{transform:translateY(-2px)} .detective.selected,.caseCard.selected{outline:3px solid var(--accent);background:#302b4c}
+.caseTitle{font-weight:1000;font-size:18px}.caseDesc{font-size:13px;color:var(--muted);line-height:1.6}
+.face{height:105px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#343a51,#26283a);font-size:50px;margin-bottom:10px}
+.dname{font-weight:1000}.trait{font-size:12px;color:var(--muted);margin:4px 0 8px}
+.stat{display:grid;grid-template-columns:42px 1fr 28px;gap:7px;align-items:center;font-size:11px;margin:5px 0}
+.track{height:6px;border-radius:99px;background:#171a24;overflow:hidden}.track i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan))}
+.primary,.secondary,.ghost{border-radius:12px;padding:11px 14px;font-weight:1000;border:1px solid transparent}
+.primary{background:var(--accent);color:#16131e}.secondary{background:#353a50;color:var(--text);border-color:var(--line)}
+.ghost{background:transparent;color:var(--text);border-color:var(--line)} button:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.scene{
+  min-height:390px;border-radius:18px;border:1px solid var(--line);position:relative;overflow:hidden;padding:18px;
+  background:linear-gradient(rgba(10,12,18,.15),rgba(10,12,18,.48)),linear-gradient(140deg,#786c62 0 22%,#33404d 22% 58%,#5f5546 58% 100%)
+}
+.scene.case2{background:linear-gradient(rgba(10,12,18,.12),rgba(10,12,18,.5)),linear-gradient(145deg,#635c50 0 20%,#37414c 20% 54%,#3e5660 54% 100%)}
+.scene:before{content:attr(data-place);position:absolute;left:18px;bottom:15px;color:rgba(255,255,255,.24);font-weight:1000;font-size:28px;letter-spacing:.08em}
+.hotspot{position:absolute;border:1px solid rgba(255,255,255,.25);background:rgba(20,24,34,.7);color:white;border-radius:14px;padding:11px 12px;font-weight:900;box-shadow:0 7px 20px rgba(0,0,0,.28)}
+.hotspot:hover{background:rgba(91,80,134,.88)} .hotspot.done{opacity:.5}
+.notebookTabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:11px}
+.tabbtn{border:1px solid var(--line);background:#2a2f42;color:var(--text);border-radius:10px;padding:8px 10px;font-weight:900}
+.tabbtn.active{background:var(--accent);color:#17141e;border-color:var(--accent)}
+.cardlist{display:grid;gap:9px}.infoCard{background:#252a3b;border:1px solid var(--line);border-radius:14px;padding:12px}
+.infoCard strong{display:block;margin-bottom:4px}.evidenceIcon{font-size:24px;margin-right:8px}
+.timeline{border-left:3px solid #515875;margin-left:8px;padding-left:15px;display:grid;gap:12px}
+.timeItem{position:relative}.timeItem:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent2);position:absolute;left:-21px;top:5px}.timeItem b{color:var(--accent2)}
+.dialogueBox{min-height:190px;background:var(--paper);color:var(--ink);border-radius:17px;padding:19px;position:relative;box-shadow:inset 0 0 0 2px #ded8cb}
+.speaker{font-weight:1000;color:#6b5a92;margin-bottom:8px}.statement{font-size:clamp(18px,2.6vw,27px);line-height:1.65;font-weight:800}
+.statementNav{display:flex;justify-content:space-between;gap:9px;margin-top:12px}.witnessHead{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.wface{width:70px;height:70px;border-radius:14px;background:#33394e;display:grid;place-items:center;font-size:36px}.wmeta small{display:block;color:var(--muted)}
+.actionbar{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.press{background:var(--cyan);color:#102127;border:0}.present{background:var(--accent2);color:#28200e;border:0}
+.callout{border-radius:16px;padding:14px;margin-top:12px;border:1px solid var(--line);background:#24293a;line-height:1.7}
+.callout.good{border-color:#438460;background:#183327}.callout.bad{border-color:#884750;background:#3a2026}.callout.special{border-color:#6e5fab;background:#2c2546}
+.witnessChooser{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.witnessBtn{background:#2a2f42;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:left}
+.witnessBtn.active{border-color:var(--accent2);background:#3a334a}
+.modal{position:fixed;inset:0;background:rgba(5,7,11,.82);display:grid;place-items:center;padding:18px;z-index:50}
+.modalCard{width:min(760px,100%);max-height:86vh;overflow:auto;background:#202537;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.evidencePick{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
+.pick{background:#2b3042;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left}.pick:hover{border-color:var(--accent2)}
+.bigReveal{text-align:center;padding:30px 12px}.bigReveal .word{font-size:clamp(36px,9vw,88px);font-weight:1000;letter-spacing:.06em;color:var(--accent2);text-shadow:0 5px 0 #493c18}
+.bigReveal p{color:var(--muted);line-height:1.8}.footer{text-align:center;color:#777f9b;font-size:12px;margin-top:18px}
+
+.fileToggle{
+  display:none;
+  border:1px solid var(--line);
+  background:#2b3042;color:var(--text);
+  border-radius:12px;padding:9px 11px;font-weight:1000
+}
+.fileClose{display:none}
+.mobileHint{display:none}
+body.file-open{overflow:hidden}
+
+@media(max-width:860px){
+  body{padding-bottom:84px}
+  .wrap{padding:10px 10px calc(100px + env(safe-area-inset-bottom))}
+  .topbar{
+    top:6px;padding:10px 11px;border-radius:15px
+  }
+  .brand{font-size:14px}
+  .caseNo{max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .phase{font-size:10px;padding:6px 8px}
+  .hero{padding:20px 16px}
+  .layout{grid-template-columns:1fr;gap:10px;margin-top:10px}
+  .panel{padding:14px;border-radius:17px}
+  .scene{min-height:330px}
+  .hotspot{
+    padding:12px 13px;
+    min-height:44px;
+    font-size:14px
+  }
+  .statement{
+    font-size:21px;
+    line-height:1.7
+  }
+  .dialogueBox{min-height:210px;padding:16px}
+  .statementNav{align-items:center}
+  .statementNav .secondary{padding:10px 9px;font-size:13px}
+  .actionbar{
+    position:sticky;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+    z-index:15;
+    background:rgba(28,32,48,.95);
+    border:1px solid var(--line);
+    padding:8px;
+    border-radius:15px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(10px)
+  }
+  .actionbar button{min-height:52px}
+  .witnessChooser{
+    display:flex;
+    overflow-x:auto;
+    grid-template-columns:none;
+    padding-bottom:4px;
+    scrollbar-width:none
+  }
+  .witnessChooser::-webkit-scrollbar{display:none}
+  .witnessBtn{min-width:150px;flex:0 0 auto}
+  .fileToggle{
+    display:block;
+    position:fixed;
+    right:12px;
+    bottom:calc(14px + env(safe-area-inset-bottom));
+    z-index:45;
+    background:var(--accent2);
+    color:#241e0f;
+    box-shadow:var(--shadow);
+    border:0;
+    min-height:48px
+  }
+  aside.panel{
+    position:fixed;
+    inset:0;
+    z-index:60;
+    border-radius:0;
+    transform:translateY(105%);
+    transition:transform .22s ease;
+    overflow:auto;
+    padding:18px 14px calc(40px + env(safe-area-inset-bottom));
+    background:#171b28;
+  }
+  body.file-open aside.panel{transform:translateY(0)}
+  .fileClose{
+    display:block;
+    position:sticky;
+    top:0;
+    margin-left:auto;
+    z-index:2;
+    background:#353a50;color:var(--text);
+    border:1px solid var(--line);
+    border-radius:12px;padding:9px 12px;font-weight:1000
+  }
+  .notebookTabs{
+    position:sticky;
+    top:52px;
+    z-index:1;
+    background:#171b28;
+    padding:8px 0
+  }
+  .tabbtn{
+    flex:1;
+    min-height:42px
+  }
+  .cardlist{gap:10px}
+  .infoCard{font-size:14px;line-height:1.65}
+  .timeline{font-size:14px;line-height:1.6}
+  .mobileHint{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:8px
+  }
+  .modal{padding:8px}
+  .modalCard{
+    width:100%;
+    max-height:92vh;
+    border-radius:18px;
+    padding:14px
+  }
+  .evidencePick{grid-template-columns:1fr}
+  .pick{min-height:72px}
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div><div class="brand">ねも探偵局</div><div class="caseNo" id="caseNo">CASE SELECT</div></div>
+    <div class="phase" id="phaseLabel">事件選択</div>
+  </div>
+
+  <section class="hero" id="hero">
+    <span class="badge">v0.4 MOBILE TEST</span>
+    <h1>ねも探偵局</h1>
+    <p>証拠を集め、証言を聞き、矛盾を突く。v0.4ではスマホ操作を重点調整。事件ファイルをいつでも開いて、証言と証拠を見比べやすくしました。</p>
+  </section>
+
+  <section class="panel" id="caseSelectPanel">
+    <h2>事件を選ぶ</h2>
+    <div class="grid caseGrid">
+      <button class="caseCard" data-case="1">
+        <div class="caseTitle">CASE 01　消えた青い封筒</div>
+        <div class="caseDesc">チュートリアル向け。証言と写真の矛盾を崩す事件。</div>
+      </button>
+      <button class="caseCard" data-case="2">
+        <div class="caseTitle">CASE 02　消えた鍵と濡れた紙片</div>
+        <div class="caseDesc">容疑者3人。序盤では意味不明だった証拠が、後半で決定打になる。</div>
+      </button>
+    </div>
+  </section>
+
+  <section class="panel hidden" id="selectPanel">
+    <h2>担当ねもを選ぶ</h2>
+    <p class="muted">能力によって、追加情報の出方が少し変わります。</p>
+    <div class="grid detectives" id="detectiveGrid"></div>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="startBtn" disabled>このねもで捜査開始</button>
+      <span class="muted" id="selectedText">1体選んでください。</span>
+    </div>
+  </section>
+
+  <section class="layout hidden" id="gameLayout">
+    <div>
+      <section class="panel" id="investigationPanel">
+        <h2 id="caseTitle"></h2>
+        <p class="muted" id="caseIntro"></p>
+        <div class="scene" id="scene" data-place=""></div>
+        <div id="investigationMsg" class="callout special">気になる場所をクリックしてください。</div>
+        <div class="row" style="margin-top:12px">
+          <button class="primary" id="toWitnessBtn" disabled>証言を聞きに行く →</button>
+          <span class="muted" id="evidenceCount"></span>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="testimonyPanel">
+        <div class="witnessChooser" id="witnessChooser"></div>
+        <div class="witnessHead">
+          <div class="wface" id="wface">🌼</div>
+          <div class="wmeta"><strong id="wname"></strong><small id="wrole"></small></div>
+        </div>
+        <h2>証言</h2>
+        <div class="dialogueBox">
+          <div class="speaker" id="speaker"></div>
+          <div class="statement" id="statementText"></div>
+        </div>
+        <div class="statementNav">
+          <button class="secondary" id="prevStmt">← 前の証言</button>
+          <span class="muted" id="stmtPos"></span>
+          <button class="secondary" id="nextStmt">次の証言 →</button>
+        </div>
+        <div class="actionbar">
+          <button class="primary press" id="pressBtn">🔍 詳しく聞く</button>
+          <button class="primary present" id="presentBtn">📁 証拠を出す</button>
+        </div>
+        <div id="testimonyMsg" class="callout special">怪しい証言に証拠を出してみよう。</div>
+      </section>
+
+      <section class="panel hidden" id="finalPanel">
+        <div class="bigReveal">
+          <div class="word">CASE CLEAR</div>
+          <h2 id="finalTitle"></h2>
+          <p id="endingText"></p>
+          <button class="primary" onclick="location.reload()">事件一覧へ戻る</button>
+        </div>
+      </section>
+    </div>
+
+    <aside class="panel">
+      <button class="fileClose" id="fileClose">✕ 閉じる</button>
+      <h2>事件ファイル</h2>
+      <div class="mobileHint">証言を覚えなくてOK。ここを開いて見比べながら推理できます。</div>
+      <div class="notebookTabs">
+        <button class="tabbtn active" data-tab="evidence">証拠</button>
+        <button class="tabbtn" data-tab="people">人物</button>
+        <button class="tabbtn" data-tab="timeline">時系列</button>
+      </div>
+      <div id="fileContent"></div>
+    </aside>
+  </section>
+  <div class="footer">ねも探偵局 v0.4 — browser prototype / NFT連携は未実装</div>
+</div>
+
+<div class="modal hidden" id="evidenceModal">
+  <div class="modalCard">
+    <h2>どの証拠を出す？</h2>
+    <div class="evidencePick" id="evidencePick"></div>
+    <div class="row" style="margin-top:14px"><button class="ghost" id="closeModal">閉じる</button></div>
+  </div>
+</div>
+
+<script>
+const detectives=[
+{id:66,icon:"🐱",name:"Nemo #66",trait:"違和感収集",obs:88,rea:72,talk:46,luck:28},
+{id:96,icon:"🌙",name:"Nemo #96",trait:"静かな推理",obs:61,rea:91,talk:58,luck:71},
+{id:31,icon:"🌼",name:"Nemo #31",trait:"聞き上手",obs:52,rea:62,talk:92,luck:54},
+{id:12,icon:"✨",name:"Nemo #12",trait:"妙な勘",obs:66,rea:64,talk:57,luck:95},
+];
+
+const cases={
+1:{
+  title:"CASE 01　消えた青い封筒",
+  place:"月見堂ギャラリー",
+  intro:"17:25、イラストコンテストの最終結果が入った青い封筒が消えた。建物にいたのは3人だけ。",
+  evidence:{
+    desk:{icon:"🗂",name:"机の記録",desc:"17:05、ミサキが青い封筒を机の上で確認。"},
+    frame:{icon:"🖼",name:"ずれた額縁",desc:"展示ポスターの額縁は右端だけほこり跡がずれている。"},
+    floor:{icon:"✨",name:"銀色の星飾り",desc:"展示壁の近くで見つかった。カナのバッグと同じ飾り。"},
+    photo:{icon:"📷",name:"17:17の来館写真",desc:"展示壁へ向かうカナがガラスに反射して写っている。"}
+  },
+  hotspots:[
+    ["desk","🗂 机","8%","14%"],["frame","🖼 額縁","auto","18%","8%"],["floor","✨ 床","34%","auto",null,"18%"],["photo","📷 来館写真","auto","auto","10%","18%"]
+  ],
+  people:[
+    {name:"ミサキ",role:"ギャラリースタッフ",note:"17:05に封筒を確認。"},
+    {name:"ユウ",role:"配達員",note:"17:10納品、17:13退出。"},
+    {name:"カナ",role:"参加者",note:"17:15来館。トイレを借りただけと証言。"}
+  ],
+  timeline:[["17:05","封筒を確認"],["17:10","ユウ来館"],["17:13","ユウ退出"],["17:15","カナ来館"],["17:17","来館写真"],["17:25","紛失発覚"]],
+  witnesses:{
+    kana:{icon:"🌼",name:"カナ",role:"参加者",statements:[
+      {text:"「17時15分くらいに来ました。」",press:"来館時刻は受付記録と一致。"},
+      {text:"「トイレを借りただけです。」",press:"展示はほとんど見ていないという。"},
+      {text:"「展示室の奥には行ってません。」",press:"少し間を置いて言い直した。",contradiction:"photo"},
+      {text:"「青い封筒なんて見てません。」",press:"まだ封筒の色は伝えていない。"}
+    ]}
+  },
+  clearAfter:{witness:"kana",evidence:"photo"},
+  ending:"カナは受付が空いた隙に封筒を持ち出し、展示壁の前で中身を確認した。写真と証言の矛盾が決め手となった。"
+},
+2:{
+  title:"CASE 02　消えた鍵と濡れた紙片",
+  place:"星見図書館",
+  intro:"閉館前、資料室の鍵が消えた。机の下には、なぜか濡れた小さな紙片が落ちている。今日は雨も降っていない。",
+  evidence:{
+    wet:{icon:"💧",name:"濡れた紙片",desc:"机の下に落ちていた。片面に『17:40』、端に青いインク。今日は晴れ。"},
+    keyhook:{icon:"🔑",name:"空の鍵フック",desc:"資料室の鍵が掛かっていた。17:30までは鍵があった。"},
+    receipt:{icon:"🧾",name:"自販機レシート",desc:"17:42。図書館裏口横の自販機で水を購入。"},
+    poster:{icon:"📌",name:"濡れた掲示ポスター",desc:"裏口近くの掲示板。清掃用ホースの水が一部だけかかっている。"},
+    camera:{icon:"📹",name:"廊下カメラ",desc:"17:39、青い封筒を持った人物が裏口方向へ歩く影。顔は映っていない。"}
+  },
+  hotspots:[
+    ["wet","💧 紙片","7%","14%"],["keyhook","🔑 鍵フック","auto","15%","8%"],["receipt","🧾 レシート","10%","auto",null,"18%"],["poster","📌 掲示板","auto","auto","9%","19%"],["camera","📹 カメラ","42%","20%"]
+  ],
+  people:[
+    {name:"アオイ",role:"図書館スタッフ",note:"17:30に鍵の存在を確認。17:35から受付。"},
+    {name:"レン",role:"高校生利用者",note:"17:38ごろ退館したと証言。"},
+    {name:"ミナ",role:"ボランティア",note:"17:40ごろ裏口で段ボールを片付けたと証言。"}
+  ],
+  timeline:[["17:30","鍵あり"],["17:35","アオイが受付へ"],["17:38","レンが退館したと証言"],["17:39","裏口方向へ人影"],["17:40","紙片の時刻"],["17:42","自販機レシート"],["17:50","鍵紛失発覚"]],
+  witnesses:{
+    ren:{icon:"🎒",name:"レン",role:"高校生利用者",statements:[
+      {text:"「17時38分には、もう図書館を出てました。」",press:"本人は時刻をかなりはっきり覚えている。"},
+      {text:"「裏口には行ってません。」",press:"正面玄関から帰ったという。",contradiction:"receipt"},
+      {text:"「水も買ってません。」",press:"財布を忘れていた、と付け加えた。",contradiction:"receipt"}
+    ]},
+    mina:{icon:"📦",name:"ミナ",role:"ボランティア",statements:[
+      {text:"「17時40分ごろ、裏口で段ボールを片付けていました。」",press:"清掃用ホースも使ったという。"},
+      {text:"「掲示板にも少し水がかかっちゃって。」",press:"濡れたポスターの説明とは一致する。"},
+      {text:"「誰かが自販機の前にいた気はします。」",press:"制服っぽい人影だったが顔は見ていない。"}
+    ]},
+    aoi:{icon:"📚",name:"アオイ",role:"図書館スタッフ",statements:[
+      {text:"「17時30分には鍵はありました。」",press:"鍵フックを見たという。"},
+      {text:"「その後は受付にいたので、裏口には行ってません。」",press:"受付記録と一致している。"},
+      {text:"「鍵を持ち出す理由もありません。」",press:"資料室は翌朝開ける予定だった。"}
+    ]}
+  },
+  multiClear:[
+    {witness:"ren", evidence:"receipt", statement:1, flag:"ren_exit"},
+    {witness:"ren", evidence:"receipt", statement:2, flag:"ren_water"},
+    {witness:"ren", evidence:"wet", statement:0, flag:"wet_link", requires:["ren_exit","ren_water"]}
+  ],
+  ending:"レンは17:38に退館したと嘘をつき、裏口の自販機で水を買っていた。そこで落としたレシートの時刻は17:42。さらに、机の下の濡れた紙片は裏口の濡れた掲示ポスターからちぎれたものと一致した。レンは資料室に忘れ物を取りに入りたくて鍵を持ち出し、戻そうとして発覚を恐れて隠していた。"
+}
+};
+
+let currentCase=null, selected=null, evidence=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set();
+
+const detectiveGrid=document.getElementById("detectiveGrid");
+function stat(label,val){return `<div class="stat"><span>${label}</span><div class="track"><i style="width:${val}%"></i></div><b>${val}</b></div>`}
+detectives.forEach(d=>{
+  const el=document.createElement("button");el.className="detective";
+  el.innerHTML=`<div class="face">${d.icon}</div><div class="dname">${d.name}</div><div class="trait">特性：${d.trait}</div>${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
+  el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;};
+  detectiveGrid.appendChild(el);
+});
+
+document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
+  currentCase=cases[btn.dataset.case];
+  document.getElementById("caseSelectPanel").classList.add("hidden");
+  document.getElementById("selectPanel").classList.remove("hidden");
+  document.getElementById("caseNo").textContent=currentCase.title;
+  document.getElementById("phaseLabel").textContent="探偵選択";
+});
+
+document.getElementById("startBtn").onclick=()=>{
+  document.getElementById("hero").classList.add("hidden");
+  document.getElementById("selectPanel").classList.add("hidden");
+  document.getElementById("gameLayout").classList.remove("hidden");
+  document.getElementById("caseTitle").textContent=currentCase.title;
+  document.getElementById("caseIntro").textContent=currentCase.intro;
+  document.getElementById("scene").dataset.place=currentCase.place;
+  if(currentCase===cases[2]) document.getElementById("scene").classList.add("case2");
+  buildScene();
+  renderFile();
+  document.getElementById("phaseLabel").textContent="調査パート";
+};
+
+function buildScene(){
+  const s=document.getElementById("scene"); s.innerHTML="";
+  currentCase.hotspots.forEach(h=>{
+    const b=document.createElement("button"); b.className="hotspot";b.dataset.id=h[0];b.textContent=h[1];
+    if(h[2]!=="auto") b.style.left=h[2]; if(h[3]!=="auto") b.style.top=h[3];
+    if(h[4]) b.style.right=h[4]; if(h[5]) b.style.bottom=h[5];
+    b.onclick=()=>collectEvidence(h[0],b); s.appendChild(b);
+  });
+  document.getElementById("evidenceCount").textContent=`証拠 0 / ${Object.keys(currentCase.evidence).length}`;
+}
+function collectEvidence(id,btn){
+  if(evidence.has(id)) return;
+  evidence.add(id);btn.classList.add("done");
+  const e=currentCase.evidence[id];
+  let extra="";
+  if(id==="wet" && selected.obs>=80) extra=`<br><br><strong>${selected.name}</strong>：紙の表面に、掲示物によく使う薄いコート加工がある。`;
+  if(id==="camera" && selected.rea>=85) extra=`<br><br><strong>${selected.name}</strong>：人影は正面玄関ではなく、明らかに裏口方向へ向かっている。`;
+  document.getElementById("investigationMsg").innerHTML=`<strong>${e.icon} ${e.name}</strong><br>${e.desc}${extra}`;
+  document.getElementById("evidenceCount").textContent=`証拠 ${evidence.size} / ${Object.keys(currentCase.evidence).length}`;
+  renderFile();
+  if(evidence.size>=3) document.getElementById("toWitnessBtn").disabled=false;
+}
+
+document.getElementById("toWitnessBtn").onclick=()=>{
+  document.getElementById("investigationPanel").classList.add("hidden");
+  document.getElementById("testimonyPanel").classList.remove("hidden");
+  document.getElementById("phaseLabel").textContent="証言パート";
+  buildWitnessChooser();
+  currentWitness=Object.keys(currentCase.witnesses)[0];stmtIndex=0;renderStatement();
+};
+
+function buildWitnessChooser(){
+  const box=document.getElementById("witnessChooser");box.innerHTML="";
+  Object.entries(currentCase.witnesses).forEach(([id,w])=>{
+    const b=document.createElement("button");b.className="witnessBtn";b.dataset.w=id;
+    b.innerHTML=`<strong>${w.name}</strong><div class="muted">${w.role}</div>`;
+    b.onclick=()=>{currentWitness=id;stmtIndex=0;renderStatement();};
+    box.appendChild(b);
+  });
+}
+function renderStatement(){
+  const w=currentCase.witnesses[currentWitness];
+  const s=w.statements[stmtIndex];
+  document.querySelectorAll(".witnessBtn").forEach(b=>b.classList.toggle("active",b.dataset.w===currentWitness));
+  document.getElementById("wface").textContent=w.icon;document.getElementById("wname").textContent=w.name;document.getElementById("wrole").textContent=w.role;
+  document.getElementById("speaker").textContent=`${w.name}の証言`;document.getElementById("statementText").textContent=s.text;
+  document.getElementById("stmtPos").textContent=`${stmtIndex+1} / ${w.statements.length}`;
+  document.getElementById("prevStmt").disabled=stmtIndex===0;document.getElementById("nextStmt").disabled=stmtIndex===w.statements.length-1;
+}
+document.getElementById("prevStmt").onclick=()=>{if(stmtIndex>0){stmtIndex--;renderStatement()}};
+document.getElementById("nextStmt").onclick=()=>{const a=currentCase.witnesses[currentWitness].statements;if(stmtIndex<a.length-1){stmtIndex++;renderStatement()}};
+
+document.getElementById("pressBtn").onclick=()=>{
+  const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
+  let msg=s.press;
+  if(selected.talk>=85) msg+=`<br><br><strong>${selected.name}</strong> がさらに聞くと、相手の言い方に少し迷いがあることに気づいた。`;
+  if(selected.rea>=85 && s.contradiction) msg+=`<br><br><strong>${selected.name}</strong>：この証言、事件ファイルのどれかと噛み合っていない。`;
+  document.getElementById("testimonyMsg").className="callout special";
+  document.getElementById("testimonyMsg").innerHTML=msg;
+};
+
+document.getElementById("presentBtn").onclick=()=>{
+  const pick=document.getElementById("evidencePick");pick.innerHTML="";
+  [...evidence].forEach(id=>{
+    const e=currentCase.evidence[id];const b=document.createElement("button");b.className="pick";
+    b.innerHTML=`<strong>${e.icon} ${e.name}</strong><div class="muted">${e.desc}</div>`;
+    b.onclick=()=>presentEvidence(id);pick.appendChild(b);
+  });
+  document.getElementById("evidenceModal").classList.remove("hidden");
+};
+document.getElementById("closeModal").onclick=()=>document.getElementById("evidenceModal").classList.add("hidden");
+
+function presentEvidence(id){
+  document.getElementById("evidenceModal").classList.add("hidden");
+  const msg=document.getElementById("testimonyMsg");
+  if(currentCase===cases[1]){
+    const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
+    if(currentWitness==="kana" && stmtIndex===2 && id==="photo"){
+      msg.className="callout good";msg.innerHTML=`<strong>矛盾！</strong><br>「展示室の奥には行っていない」なら、17:17の写真に展示壁へ向かう姿は写らない。`;
+      setTimeout(()=>finalReveal(),900);return;
+    }
+  } else {
+    const rule=currentCase.multiClear.find(r=>r.witness===currentWitness && r.statement===stmtIndex && r.evidence===id);
+    if(rule){
+      if(rule.requires && !rule.requires.every(f=>flags.has(f))){
+        msg.className="callout bad";msg.innerHTML=`その証拠は気になる。でも、まだ先に崩すべき証言がありそうだ。`;return;
+      }
+      flags.add(rule.flag);
+      msg.className="callout good";
+      if(rule.flag==="ren_exit") msg.innerHTML=`<strong>矛盾！</strong><br>17:42の自販機レシートがある。17:38に図書館を出たという証言と合わない。`;
+      if(rule.flag==="ren_water") msg.innerHTML=`<strong>矛盾！</strong><br>「水も買っていない」と言ったが、17:42のレシートが残っている。`;
+      if(rule.flag==="wet_link"){
+        msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。<br><br>つまり、紙片を机の下へ持ち込んだ人物は、裏口周辺にいた。`;
+        setTimeout(()=>finalReveal(),1000);return;
+      }
+      return;
+    }
+  }
+  msg.className="callout bad";msg.innerHTML=`その証拠では、この証言は崩せなさそうだ。事件ファイルを見比べてみよう。`;
+}
+
+function finalReveal(){
+  document.getElementById("testimonyPanel").classList.add("hidden");
+  document.getElementById("finalPanel").classList.remove("hidden");
+  document.getElementById("phaseLabel").textContent="事件解決";
+  document.getElementById("finalTitle").textContent=currentCase.title;
+  document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br><strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${currentCase===cases[2]?"紙片をつなぐ者":"はじめての矛盾"}</strong>`;
+}
+
+function renderFile(){
+  document.querySelectorAll(".tabbtn").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+  const fc=document.getElementById("fileContent");
+  if(tab==="evidence"){
+    if(!evidence.size){fc.innerHTML=`<p class="muted">まだ証拠はありません。</p>`;return;}
+    fc.innerHTML=`<div class="cardlist">${[...evidence].map(id=>{const e=currentCase.evidence[id];return `<div class="infoCard"><strong><span class="evidenceIcon">${e.icon}</span>${e.name}</strong><div class="muted">${e.desc}</div></div>`}).join("")}</div>`;
+  }else if(tab==="people"){
+    fc.innerHTML=`<div class="cardlist">${currentCase.people.map(p=>`<div class="infoCard"><strong>${p.name}</strong><div>${p.role}</div><div class="muted">${p.note}</div></div>`).join("")}</div>`;
+  }else{
+    fc.innerHTML=`<div class="timeline">${currentCase.timeline.map(t=>`<div class="timeItem"><b>${t[0]}</b><div>${t[1]}</div></div>`).join("")}</div>`;
+  }
+}
+document.querySelectorAll(".tabbtn").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;renderFile()});
+
+const fileToggle=document.getElementById("fileToggle");
+const fileClose=document.getElementById("fileClose");
+if(fileToggle){
+  fileToggle.onclick=()=>document.body.classList.add("file-open");
+}
+if(fileClose){
+  fileClose.onclick=()=>document.body.classList.remove("file-open");
+}
+document.querySelectorAll(".tabbtn").forEach(b=>{
+  b.addEventListener("click",()=>{
+    if(window.innerWidth<=860){
+      setTimeout(()=>document.getElementById("fileContent").scrollIntoView({behavior:"smooth",block:"start"}),50);
+    }
+  });
+});
+
+</script>
+</body>
+</html>
