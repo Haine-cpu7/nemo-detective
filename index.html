@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.5</title>
+<title>ねも探偵局 v0.6</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -204,6 +204,99 @@ body.file-open{overflow:hidden}
   .pick{min-height:72px}
 }
 
+
+.briefing{
+  display:grid;gap:14px
+}
+.briefingHero{
+  border:1px solid #665b91;
+  border-radius:18px;
+  padding:18px;
+  background:linear-gradient(135deg,#302a49,#202535)
+}
+.briefingHero .incident{
+  font-size:clamp(21px,4vw,34px);
+  font-weight:1000;
+  margin:5px 0 8px
+}
+.briefingGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+.briefCard{
+  background:#252a3b;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  line-height:1.75
+}
+.objectiveList{
+  display:grid;
+  gap:8px;
+  margin-top:8px
+}
+.objective{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  background:#202536;
+  border-radius:12px;
+  padding:10px
+}
+.progressStrip{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:0 0 12px
+}
+.progressChip{
+  padding:6px 9px;
+  border-radius:999px;
+  background:#282d40;
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900
+}
+.progressChip.done{
+  background:#183327;
+  border-color:#438460;
+  color:#aaf0c5
+}
+.deductionGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:14px 0
+}
+.deductionGrid label{
+  display:grid;
+  gap:6px;
+  font-size:12px;
+  color:var(--muted);
+  font-weight:900
+}
+.deductionGrid select{
+  width:100%;
+  background:#24293a;
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px
+}
+.missionBanner{
+  border-left:4px solid var(--accent2);
+  padding:10px 12px;
+  background:#292c3d;
+  border-radius:10px;
+  line-height:1.7
+}
+@media(max-width:860px){
+  .briefingGrid{grid-template-columns:1fr}
+  .deductionGrid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -214,9 +307,9 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.5 NFT ROSTER</span>
+    <span class="badge">v0.6 CASE REBUILD</span>
     <h1>ねも探偵局</h1>
-    <p>証拠を集め、証言を聞き、矛盾を突く。v0.5ではNemo NFTを探偵として扱う土台を追加。NFT番号から能力値を固定生成し、画像ファイルを置くだけで探偵カードに反映できます。</p>
+    <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
 
   <section class="panel" id="caseSelectPanel">
@@ -224,7 +317,7 @@ body.file-open{overflow:hidden}
     <div class="grid caseGrid">
       <button class="caseCard" data-case="1">
         <div class="caseTitle">CASE 01　消えた青い封筒</div>
-        <div class="caseDesc">チュートリアル向け。証言と写真の矛盾を崩す事件。</div>
+        <div class="caseDesc">20分後に発表予定の審査結果が消えた。3人の関係者から、犯人・隠し場所・動機まで突き止める。</div>
       </button>
       <button class="caseCard" data-case="2">
         <div class="caseTitle">CASE 02　消えた鍵と濡れた紙片</div>
@@ -246,9 +339,35 @@ body.file-open{overflow:hidden}
 
   <section class="layout hidden" id="gameLayout">
     <div>
-      <section class="panel" id="investigationPanel">
+      <section class="panel" id="briefingPanel">
+        <div class="briefing">
+          <div class="briefingHero">
+            <div class="badge">INVESTIGATION REQUEST</div>
+            <div class="incident" id="briefingTitle"></div>
+            <div id="briefingLead" class="muted"></div>
+          </div>
+          <div class="briefingGrid">
+            <div class="briefCard">
+              <strong>📣 何が起きた？</strong>
+              <div id="briefingIncident" class="muted" style="margin-top:6px"></div>
+            </div>
+            <div class="briefCard">
+              <strong>🎯 今回の任務</strong>
+              <div class="objectiveList" id="briefingObjectives"></div>
+            </div>
+          </div>
+          <div class="briefCard">
+            <strong>👥 現場にいた人物</strong>
+            <div id="briefingPeople" class="muted" style="margin-top:7px;line-height:1.9"></div>
+          </div>
+          <button class="primary" id="beginInvestigationBtn">現場捜査を始める →</button>
+        </div>
+      </section>
+
+      <section class="panel hidden" id="investigationPanel">
+        <div class="progressStrip" id="progressStrip"></div>
         <h2 id="caseTitle"></h2>
-        <p class="muted" id="caseIntro"></p>
+        <div class="missionBanner" id="caseIntro"></div>
         <div class="scene" id="scene" data-place=""></div>
         <div id="investigationMsg" class="callout special">気になる場所をクリックしてください。</div>
         <div class="row" style="margin-top:12px">
@@ -280,6 +399,41 @@ body.file-open{overflow:hidden}
         <div id="testimonyMsg" class="callout special">怪しい証言に証拠を出してみよう。</div>
       </section>
 
+      <section class="panel hidden" id="deductionPanel">
+        <div class="progressStrip" id="deductionProgress"></div>
+        <div class="badge">FINAL DEDUCTION</div>
+        <h2>最後の推理</h2>
+        <p class="muted">ここからは証拠を突きつけるだけでは終わりません。事件ファイルを見ながら、あなた自身で真相を組み立ててください。</p>
+        <div class="deductionGrid">
+          <label>犯人
+            <select id="finalCulprit">
+              <option value="">選択してください</option>
+              <option value="misaki">ミサキ</option>
+              <option value="yuu">ユウ</option>
+              <option value="kana">カナ</option>
+            </select>
+          </label>
+          <label>封筒を隠した場所
+            <select id="finalPlace">
+              <option value="">選択してください</option>
+              <option value="locker">スタッフロッカー</option>
+              <option value="frame">展示ポスターの額縁裏</option>
+              <option value="tube">配達用ポスター筒</option>
+            </select>
+          </label>
+          <label>動機
+            <select id="finalMotive">
+              <option value="">選択してください</option>
+              <option value="sell">結果を外部へ売るため</option>
+              <option value="early">発表前に自分の結果を知るため</option>
+              <option value="revenge">ギャラリーへの嫌がらせ</option>
+            </select>
+          </label>
+        </div>
+        <button class="primary" id="finalDeduceBtn">この推理で決着をつける</button>
+        <div id="deductionMsg" class="callout special">3つの答えを、集めた証拠と証言から選んでください。</div>
+      </section>
+
       <section class="panel hidden" id="finalPanel">
         <div class="bigReveal">
           <div class="word">CASE CLEAR</div>
@@ -302,7 +456,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.5 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.6 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -343,32 +497,71 @@ const cases={
 1:{
   title:"CASE 01　消えた青い封筒",
   place:"月見堂ギャラリー",
-  intro:"17:25、イラストコンテストの最終結果が入った青い封筒が消えた。建物にいたのは3人だけ。",
+  briefing:{
+    lead:"発表まで、あと20分。審査結果を取り戻せ。",
+    incident:"月見堂ギャラリーで開催中のイラストコンテスト。18:00の結果発表を前に、最終審査結果が入った『青い封筒』がスタッフルームから消えた。封筒の中身を知っているのは審査責任者だけ。紛失が公になれば発表は延期になる。",
+    objectives:[
+      "青い封筒を持ち出した人物を特定する",
+      "封筒が現在どこに隠されているか突き止める",
+      "なぜ持ち出したのか、動機まで説明する"
+    ]
+  },
+  intro:"依頼：18:00の発表までに『犯人・隠し場所・動機』の3点を明らかにする。",
   evidence:{
-    desk:{icon:"🗂",name:"机の記録",desc:"17:05、ミサキが青い封筒を机の上で確認。"},
-    frame:{icon:"🖼",name:"ずれた額縁",desc:"展示ポスターの額縁は右端だけほこり跡がずれている。"},
-    floor:{icon:"✨",name:"銀色の星飾り",desc:"展示壁の近くで見つかった。カナのバッグと同じ飾り。"},
-    photo:{icon:"📷",name:"17:17の来館写真",desc:"展示壁へ向かうカナがガラスに反射して写っている。"}
+    desk:{icon:"🗂",name:"スタッフルームの机",desc:"17:05、ミサキが青い封筒を机の中央に置いた。引き出しや机に荒らされた形跡はない。"},
+    reception:{icon:"🛎️",name:"受付記録",desc:"17:15〜17:18、ミサキは来客案内のため受付を離れている。スタッフルーム側を見られる人はいなかった。"},
+    frame:{icon:"🖼",name:"ずれた展示額縁",desc:"大型ポスターの額縁だけ、右端のほこり跡が約2cmずれている。最近動かされた。"},
+    star:{icon:"✨",name:"銀色の星飾り",desc:"展示壁の足元に落ちていた小さな星形パーツ。カナのバッグには同型の飾りが付いている。"},
+    photo:{icon:"📷",name:"17:17の来館写真",desc:"客が撮った写真のガラス反射に、展示壁へ向かうカナが写っている。トイレとは逆方向。"},
+    tube:{icon:"📦",name:"配達用ポスター筒",desc:"ユウが納品した筒。封は切られておらず、中身の枚数も伝票と一致する。"}
   },
   hotspots:[
-    ["desk","🗂 机","8%","14%"],["frame","🖼 額縁","auto","18%","8%"],["floor","✨ 床","34%","auto",null,"18%"],["photo","📷 来館写真","auto","auto","10%","18%"]
+    ["desk","🗂 机","7%","12%"],
+    ["reception","🛎️ 受付記録","auto","13%","7%"],
+    ["frame","🖼 額縁","37%","24%"],
+    ["star","✨ 床の飾り","8%","auto",null,"17%"],
+    ["photo","📷 来館写真","auto","auto","8%","17%"],
+    ["tube","📦 ポスター筒","43%","auto",null,"8%"]
   ],
   people:[
-    {name:"ミサキ",role:"ギャラリースタッフ",note:"17:05に封筒を確認。"},
-    {name:"ユウ",role:"配達員",note:"17:10納品、17:13退出。"},
-    {name:"カナ",role:"参加者",note:"17:15来館。トイレを借りただけと証言。"}
+    {name:"ミサキ",role:"ギャラリースタッフ",note:"17:05に封筒を机へ置いた。17:15〜17:18は受付を離れていた。"},
+    {name:"ユウ",role:"配達員",note:"17:10にポスターを納品。17:13に正面玄関から退出。"},
+    {name:"カナ",role:"コンテスト参加者",note:"17:15来館。『トイレを借りただけ』と話している。バッグに銀色の星飾り。"}
   ],
-  timeline:[["17:05","封筒を確認"],["17:10","ユウ来館"],["17:13","ユウ退出"],["17:15","カナ来館"],["17:17","来館写真"],["17:25","紛失発覚"]],
+  timeline:[
+    ["17:05","ミサキが青い封筒をスタッフルームの机に置く"],
+    ["17:10","ユウがポスターを納品"],
+    ["17:13","ユウが退出"],
+    ["17:15","カナ来館。ほぼ同時にミサキが受付を離れる"],
+    ["17:17","来館者の写真が撮影される"],
+    ["17:18","ミサキが受付へ戻る"],
+    ["17:25","青い封筒の紛失が発覚"],
+    ["18:00","コンテスト結果発表予定"]
+  ],
   witnesses:{
-    kana:{icon:"🌼",name:"カナ",role:"参加者",statements:[
-      {text:"「17時15分くらいに来ました。」",press:"来館時刻は受付記録と一致。"},
-      {text:"「トイレを借りただけです。」",press:"展示はほとんど見ていないという。"},
-      {text:"「展示室の奥には行ってません。」",press:"少し間を置いて言い直した。",contradiction:"photo"},
-      {text:"「青い封筒なんて見てません。」",press:"まだ封筒の色は伝えていない。"}
+    misaki:{icon:"🧑‍💼",name:"ミサキ",role:"ギャラリースタッフ",statements:[
+      {text:"「17時05分、封筒をスタッフルームの机に置きました。」",press:"審査責任者から預かり、そのまま机の中央へ置いたという。"},
+      {text:"「17時15分ごろ、入口の来客対応で3分ほど受付を離れました。」",press:"受付記録にも17:15〜17:18の離席が残っている。"},
+      {text:"「戻った時には、カナさんは展示室にいました。」",press:"ただし、どの展示を見ていたかまでは覚えていない。"}
+    ]},
+    yuu:{icon:"🚚",name:"ユウ",role:"配達員",statements:[
+      {text:"「17時10分にポスターを受付で渡しました。」",press:"伝票の受領時刻と一致する。"},
+      {text:"「スタッフルームには入ってません。」",press:"納品は受付カウンターだけで完了したという。"},
+      {text:"「17時13分には正面玄関から出ました。」",press:"入口カメラにも17:13の退出が写っている。"}
+    ]},
+    kana:{icon:"🌼",name:"カナ",role:"コンテスト参加者",statements:[
+      {text:"「結果が気になって来たけど、トイレを借りただけです。」",press:"トイレはスタッフルームの隣。カナは『すぐ戻った』と話す。"},
+      {text:"「展示室の奥には行ってません。」",press:"言い切ったあと、カナは一度だけ展示壁の方を見た。",contradiction:"photo"},
+      {text:"「あの大きなポスターにも触ってません。」",press:"こちらはまだ『額縁が動いていた』とは伝えていない。",contradiction:"frame",requires:["kana_photo"]},
+      {text:"「封筒の中身なんて知りません。まだ発表前ですから。」",press:"カナ自身もコンテスト参加者。結果を気にして来館したことは認めている。"}
     ]}
   },
-  clearAfter:{witness:"kana",evidence:"photo"},
-  ending:"カナは受付が空いた隙に封筒を持ち出し、展示壁の前で中身を確認した。写真と証言の矛盾が決め手となった。"
+  multiClear:[
+    {witness:"kana", evidence:"photo", statement:1, flag:"kana_photo"},
+    {witness:"kana", evidence:"frame", statement:2, flag:"kana_frame", requires:["kana_photo"]}
+  ],
+  finalReady:["kana_photo","kana_frame"],
+  ending:"カナは発表前に自分の結果を知りたくなり、ミサキが受付を離れた短い隙に青い封筒を持ち出した。展示壁の前で中身を確認したあと、怖くなって大型ポスターの額縁裏へ封筒を隠した。額縁を急いで動かした際、バッグの銀色の星飾りが落ちた。"
 },
 2:{
   title:"CASE 02　消えた鍵と濡れた紙片",
@@ -448,14 +641,49 @@ document.getElementById("startBtn").onclick=()=>{
   document.getElementById("hero").classList.add("hidden");
   document.getElementById("selectPanel").classList.add("hidden");
   document.getElementById("gameLayout").classList.remove("hidden");
+  document.getElementById("briefingPanel").classList.remove("hidden");
+  document.getElementById("investigationPanel").classList.add("hidden");
+
+  const b=currentCase.briefing || {
+    lead:"事件の概要を確認して捜査を始めよう。",
+    incident:currentCase.intro,
+    objectives:["現場の証拠を集める","関係者の証言を確認する","矛盾から真相を突き止める"]
+  };
+  document.getElementById("briefingTitle").textContent=currentCase.title;
+  document.getElementById("briefingLead").textContent=b.lead;
+  document.getElementById("briefingIncident").textContent=b.incident;
+  document.getElementById("briefingObjectives").innerHTML=b.objectives.map((x,i)=>`<div class="objective"><b>${i+1}</b><span>${x}</span></div>`).join("");
+  document.getElementById("briefingPeople").innerHTML=currentCase.people.map(p=>`<strong>${p.name}</strong> — ${p.role}<br><span>${p.note}</span>`).join("<br>");
+
   document.getElementById("caseTitle").textContent=currentCase.title;
   document.getElementById("caseIntro").textContent=currentCase.intro;
   document.getElementById("scene").dataset.place=currentCase.place;
-  if(currentCase===cases[2]) document.getElementById("scene").classList.add("case2");
-  buildScene();
+  document.getElementById("scene").classList.toggle("case2",currentCase===cases[2]);
   renderFile();
-  document.getElementById("phaseLabel").textContent="調査パート";
+  renderProgress();
+  document.getElementById("phaseLabel").textContent="事件概要";
 };
+
+document.getElementById("beginInvestigationBtn").onclick=()=>{
+  document.getElementById("briefingPanel").classList.add("hidden");
+  document.getElementById("investigationPanel").classList.remove("hidden");
+  buildScene();
+  document.getElementById("phaseLabel").textContent="現場捜査";
+};
+
+
+function renderProgress(){
+  const chips=[
+    ["現場を調べる", evidence.size>=4],
+    ["証言の矛盾を崩す", flags.size>=1],
+    ["真相を組み立てる", currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))]
+  ];
+  const markup=chips.map(c=>`<span class="progressChip ${c[1]?"done":""}">${c[1]?"✓ ":""}${c[0]}</span>`).join("");
+  const a=document.getElementById("progressStrip");
+  const b=document.getElementById("deductionProgress");
+  if(a) a.innerHTML=markup;
+  if(b) b.innerHTML=markup;
+}
 
 function buildScene(){
   const s=document.getElementById("scene"); s.innerHTML="";
@@ -477,7 +705,8 @@ function collectEvidence(id,btn){
   document.getElementById("investigationMsg").innerHTML=`<strong>${e.icon} ${e.name}</strong><br>${e.desc}${extra}`;
   document.getElementById("evidenceCount").textContent=`証拠 ${evidence.size} / ${Object.keys(currentCase.evidence).length}`;
   renderFile();
-  if(evidence.size>=3) document.getElementById("toWitnessBtn").disabled=false;
+  renderProgress();
+  if(evidence.size>=4) document.getElementById("toWitnessBtn").disabled=false;
 }
 
 document.getElementById("toWitnessBtn").onclick=()=>{
@@ -532,34 +761,95 @@ document.getElementById("closeModal").onclick=()=>document.getElementById("evide
 function presentEvidence(id){
   document.getElementById("evidenceModal").classList.add("hidden");
   const msg=document.getElementById("testimonyMsg");
-  if(currentCase===cases[1]){
-    const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
-    if(currentWitness==="kana" && stmtIndex===2 && id==="photo"){
-      msg.className="callout good";msg.innerHTML=`<strong>矛盾！</strong><br>「展示室の奥には行っていない」なら、17:17の写真に展示壁へ向かう姿は写らない。`;
-      setTimeout(()=>finalReveal(),900);return;
-    }
-  } else {
-    const rule=currentCase.multiClear.find(r=>r.witness===currentWitness && r.statement===stmtIndex && r.evidence===id);
-    if(rule){
-      if(rule.requires && !rule.requires.every(f=>flags.has(f))){
-        msg.className="callout bad";msg.innerHTML=`その証拠は気になる。でも、まだ先に崩すべき証言がありそうだ。`;return;
-      }
-      flags.add(rule.flag);
-      msg.className="callout good";
-      if(rule.flag==="ren_exit") msg.innerHTML=`<strong>矛盾！</strong><br>17:42の自販機レシートがある。17:38に図書館を出たという証言と合わない。`;
-      if(rule.flag==="ren_water") msg.innerHTML=`<strong>矛盾！</strong><br>「水も買っていない」と言ったが、17:42のレシートが残っている。`;
-      if(rule.flag==="wet_link"){
-        msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。<br><br>つまり、紙片を机の下へ持ち込んだ人物は、裏口周辺にいた。`;
-        setTimeout(()=>finalReveal(),1000);return;
-      }
+
+  const rule=(currentCase.multiClear || []).find(r=>
+    r.witness===currentWitness &&
+    r.statement===stmtIndex &&
+    r.evidence===id
+  );
+
+  if(rule){
+    if(rule.requires && !rule.requires.every(f=>flags.has(f))){
+      msg.className="callout bad";
+      msg.innerHTML=`その証拠は気になる。でも、この証言を崩すには先に確認すべき矛盾がありそうだ。`;
       return;
     }
+
+    flags.add(rule.flag);
+    msg.className="callout good";
+
+    if(rule.flag==="kana_photo"){
+      msg.innerHTML=`<strong>矛盾！</strong><br><br>
+      カナは「展示室の奥には行っていない」と証言した。<br>
+      しかし <strong>17:17の来館写真</strong> には、トイレとは逆方向の展示壁へ向かうカナが写っている。<br><br>
+      カナ「……少しだけ、展示を見ました」`;
+    } else if(rule.flag==="kana_frame"){
+      msg.innerHTML=`<strong>二つ目の矛盾！</strong><br><br>
+      カナは「大きなポスターには触っていない」と言った。<br>
+      だが額縁は事件直後に動かされた形跡がある。さらにカナは、こちらが額縁について説明する前から“大きなポスター”に触れている。<br><br>
+      ここまでで、カナの証言は二度崩れた。`;
+    } else if(rule.flag==="ren_exit"){
+      msg.innerHTML=`<strong>矛盾！</strong><br>17:42の自販機レシートがある。17:38に図書館を出たという証言と合わない。`;
+    } else if(rule.flag==="ren_water"){
+      msg.innerHTML=`<strong>矛盾！</strong><br>「水も買っていない」と言ったが、17:42のレシートが残っている。`;
+    } else if(rule.flag==="wet_link"){
+      msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。`;
+    }
+
+    renderProgress();
+
+    if(currentCase===cases[1] && currentCase.finalReady.every(f=>flags.has(f))){
+      setTimeout(()=>{
+        document.getElementById("testimonyPanel").classList.add("hidden");
+        document.getElementById("deductionPanel").classList.remove("hidden");
+        document.getElementById("phaseLabel").textContent="最終推理";
+        renderProgress();
+      },900);
+      return;
+    }
+
+    if(currentCase===cases[2] && rule.flag==="wet_link"){
+      setTimeout(()=>finalReveal(),1000);
+      return;
+    }
+    return;
   }
-  msg.className="callout bad";msg.innerHTML=`その証拠では、この証言は崩せなさそうだ。事件ファイルを見比べてみよう。`;
+
+  msg.className="callout bad";
+  msg.innerHTML=`その証拠では、この証言は崩せなさそうだ。<br><span class="muted">事件ファイルの「証拠」「人物」「時系列」を見比べてみよう。</span>`;
 }
+
+document.getElementById("finalDeduceBtn").onclick=()=>{
+  const culprit=document.getElementById("finalCulprit").value;
+  const place=document.getElementById("finalPlace").value;
+  const motive=document.getElementById("finalMotive").value;
+  const msg=document.getElementById("deductionMsg");
+
+  if(!culprit || !place || !motive){
+    msg.className="callout bad";
+    msg.innerHTML="3項目すべて選んでください。";
+    return;
+  }
+
+  const ok=culprit==="kana" && place==="frame" && motive==="early";
+  if(ok){
+    msg.className="callout good";
+    msg.innerHTML=`<strong>推理成立。</strong><br>犯人・隠し場所・動機が、集めた証拠とすべて矛盾なくつながった。`;
+    setTimeout(()=>finalReveal(),800);
+    return;
+  }
+
+  const hints=[];
+  if(culprit!=="kana") hints.push("犯人：二度、証言が崩れた人物は誰だった？");
+  if(place!=="frame") hints.push("隠し場所：事件直後に『動かされた痕跡』があったものを確認しよう。");
+  if(motive!=="early") hints.push("動機：容疑者のうち、審査結果そのものに直接利害がある人物は誰？");
+  msg.className="callout bad";
+  msg.innerHTML=`推理のどこかが証拠と噛み合っていない。<br><br>${hints.join("<br>")}`;
+};
 
 function finalReveal(){
   document.getElementById("testimonyPanel").classList.add("hidden");
+  document.getElementById("deductionPanel").classList.add("hidden");
   document.getElementById("finalPanel").classList.remove("hidden");
   document.getElementById("phaseLabel").textContent="事件解決";
   document.getElementById("finalTitle").textContent=currentCase.title;
