@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.13</title>
+<title>ねも探偵局 v0.14</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1069,7 +1069,7 @@ body.file-open{overflow:hidden}
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.13 DESKTOP COMPACT</span>
+    <span class="badge">v0.14 WORDING UPDATE</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -1232,7 +1232,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.13 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.14 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1913,19 +1913,19 @@ function presentEvidence(id){
     msg.className="callout good";
 
     if(rule.flag==="kana_photo"){
-      msg.innerHTML=`<strong>矛盾！</strong><br><br>
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
       カナは「展示室の奥には行っていない」と証言した。<br>
       しかし <strong>17:17の来館写真</strong> には、トイレとは逆方向の展示壁へ向かうカナが写っている。<br><br>
       カナ「……少しだけ、展示を見ました」`;
     } else if(rule.flag==="kana_frame"){
-      msg.innerHTML=`<strong>二つ目の矛盾！</strong><br><br>
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
       カナは「大きなポスターには触っていない」と言った。<br>
       だが額縁は事件直後に動かされた形跡がある。さらにカナは、こちらが額縁について説明する前から“大きなポスター”に触れている。<br><br>
       ここまでで、カナの証言は二度崩れた。`;
     } else if(rule.flag==="ren_exit"){
-      msg.innerHTML=`<strong>矛盾！</strong><br>17:42の自販機レシートがある。17:38に図書館を出たという証言と合わない。`;
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br>17:42の自販機レシートがある。17:38に図書館を出たという証言と合わない。`;
     } else if(rule.flag==="ren_water"){
-      msg.innerHTML=`<strong>矛盾！</strong><br>「水も買っていない」と言ったが、17:42のレシートが残っている。`;
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br>「水も買っていない」と言ったが、17:42のレシートが残っている。`;
     } else if(rule.flag==="wet_link"){
       msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。`;
     }
