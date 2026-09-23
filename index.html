@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.6</title>
+<title>ねも探偵局 v0.7</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -297,17 +297,73 @@ body.file-open{overflow:hidden}
   .deductionGrid{grid-template-columns:1fr}
 }
 
+
+.topActions{
+  display:flex;
+  gap:8px;
+  align-items:center
+}
+.topFileBtn{
+  display:none;
+  border:1px solid var(--line);
+  background:#2b3042;
+  color:var(--text);
+  border-radius:12px;
+  padding:7px 10px;
+  font-weight:1000;
+  min-height:38px
+}
+.mobileFileQuick{
+  display:none;
+}
+@media(max-width:860px){
+  .topActions{gap:6px}
+  .topFileBtn{
+    display:block;
+    min-width:44px;
+    padding:7px 9px
+  }
+  .mobileFileQuick{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    margin:0 0 14px;
+    padding:8px;
+    background:#171b28;
+    border:1px solid var(--line);
+    border-radius:14px;
+    position:sticky;
+    top:76px;
+    z-index:12;
+  }
+  .mobileFileQuick button{
+    min-height:44px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#2b3042;
+    color:var(--text);
+    font-weight:1000
+  }
+  .mobileFileQuick button.timelineQuick{
+    border-color:#8b76d8;
+    background:#332b52
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
     <div><div class="brand">ねも探偵局</div><div class="caseNo" id="caseNo">CASE SELECT</div></div>
-    <div class="phase" id="phaseLabel">事件選択</div>
+    <div class="topActions">
+      <div class="phase" id="phaseLabel">事件選択</div>
+      <button class="topFileBtn" id="topFileBtn" type="button" aria-label="事件ファイルを開く">📁</button>
+    </div>
   </div>
 
   <section class="hero" id="hero">
-    <span class="badge">v0.6 CASE REBUILD</span>
+    <span class="badge">v0.7 MOBILE FILE FIX</span>
     <h1>ねも探偵局</h1>
     <p>事件を理解し、現場を調べ、証言を崩し、最後は自分の推理で真相を確定する。CASE 01を“ちゃんと事件として遊べる”構成に作り直しました。</p>
   </section>
@@ -378,6 +434,11 @@ body.file-open{overflow:hidden}
 
       <section class="panel hidden" id="testimonyPanel">
         <div class="witnessChooser" id="witnessChooser"></div>
+        <div class="mobileFileQuick">
+          <button type="button" data-open-file="evidence">🔎 証拠</button>
+          <button type="button" data-open-file="people">👥 人物</button>
+          <button type="button" class="timelineQuick" data-open-file="timeline">🕒 時系列</button>
+        </div>
         <div class="witnessHead">
           <div class="wface" id="wface">🌼</div>
           <div class="wmeta"><strong id="wname"></strong><small id="wrole"></small></div>
@@ -404,6 +465,11 @@ body.file-open{overflow:hidden}
         <div class="badge">FINAL DEDUCTION</div>
         <h2>最後の推理</h2>
         <p class="muted">ここからは証拠を突きつけるだけでは終わりません。事件ファイルを見ながら、あなた自身で真相を組み立ててください。</p>
+        <div class="mobileFileQuick">
+          <button type="button" data-open-file="evidence">🔎 証拠</button>
+          <button type="button" data-open-file="people">👥 人物</button>
+          <button type="button" class="timelineQuick" data-open-file="timeline">🕒 時系列</button>
+        </div>
         <div class="deductionGrid">
           <label>犯人
             <select id="finalCulprit">
@@ -456,7 +522,7 @@ body.file-open{overflow:hidden}
       <div id="fileContent"></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.6 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.7 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -641,6 +707,7 @@ document.getElementById("startBtn").onclick=()=>{
   document.getElementById("hero").classList.add("hidden");
   document.getElementById("selectPanel").classList.add("hidden");
   document.getElementById("gameLayout").classList.remove("hidden");
+  document.getElementById("topFileBtn").style.display="block";
   document.getElementById("briefingPanel").classList.remove("hidden");
   document.getElementById("investigationPanel").classList.add("hidden");
 
@@ -871,17 +938,39 @@ function renderFile(){
 document.querySelectorAll(".tabbtn").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;renderFile()});
 
 const fileToggle=document.getElementById("fileToggle");
+const topFileBtn=document.getElementById("topFileBtn");
 const fileClose=document.getElementById("fileClose");
-if(fileToggle){
-  fileToggle.onclick=()=>document.body.classList.add("file-open");
+
+function openCaseFile(tabName){
+  if(tabName){
+    tab=tabName;
+  }
+  renderFile();
+  document.body.classList.add("file-open");
+  setTimeout(()=>{
+    const content=document.getElementById("fileContent");
+    if(content) content.scrollTop=0;
+  },30);
 }
-if(fileClose){
-  fileClose.onclick=()=>document.body.classList.remove("file-open");
+function closeCaseFile(){
+  document.body.classList.remove("file-open");
 }
+
+if(fileToggle) fileToggle.onclick=()=>openCaseFile(tab || "evidence");
+if(topFileBtn) topFileBtn.onclick=()=>openCaseFile(tab || "evidence");
+if(fileClose) fileClose.onclick=closeCaseFile;
+
+document.querySelectorAll("[data-open-file]").forEach(b=>{
+  b.addEventListener("click",()=>openCaseFile(b.dataset.openFile));
+});
+
 document.querySelectorAll(".tabbtn").forEach(b=>{
   b.addEventListener("click",()=>{
     if(window.innerWidth<=860){
-      setTimeout(()=>document.getElementById("fileContent").scrollIntoView({behavior:"smooth",block:"start"}),50);
+      setTimeout(()=>{
+        const content=document.getElementById("fileContent");
+        if(content) content.scrollIntoView({behavior:"smooth",block:"start"});
+      },50);
     }
   });
 });
