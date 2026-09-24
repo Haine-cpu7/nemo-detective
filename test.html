@@ -2020,6 +2020,36 @@ body:not(.case-active) .topFileBtn{
     padding-right:16px;
   }
 }
+
+/* v0.52 story progression */
+.caseCard{position:relative;overflow:hidden}
+.caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
+.caseCard.locked:hover{transform:none}
+.caseCard.cleared{border-color:#4d8065;background:linear-gradient(145deg,#28384a,#253040)}
+.caseCard.available:not(.cleared){border-color:#6d6297}
+.caseCard.newCase{box-shadow:inset 0 0 0 1px rgba(244,201,107,.22),0 0 24px rgba(159,140,255,.08)}
+.caseStatus{margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,.08);font-size:11px;font-weight:900;color:#cbc7dd;line-height:1.45}
+.caseCard.cleared .caseStatus{color:#8fe0b4}
+.caseCard.available:not(.cleared) .caseStatus{color:#f4c96b}
+.caseCard.locked .caseStatus{color:#9297aa}
+.originBadge{display:inline-block;margin-left:7px;padding:2px 6px;border:1px solid #7c6bc0;border-radius:999px;color:#d9d0ff;font-size:9px;letter-spacing:.06em;vertical-align:2px}
+.caseProgressNote{margin-top:12px;padding:10px 12px;border:1px dashed #565e7c;border-radius:12px;background:#202537;color:var(--muted);font-size:12px;line-height:1.65}
+.unlockNotice{margin:20px auto 0;max-width:620px;padding:14px 16px;border:1px solid #7364b5;border-radius:15px;background:linear-gradient(135deg,#30284c,#252b40);color:#e9e4ff;line-height:1.7;text-align:left}
+.unlockNotice strong{color:#f4c96b}
+.originMeet{margin-top:12px;padding:13px 14px;border:1px solid #8f7bd6;border-radius:14px;background:linear-gradient(135deg,#30284d,#252941);line-height:1.7;color:#e8e1ff}
+.originMeet strong{color:#f4c96b}
+.originMeet .originLine{font-size:15px;font-weight:900;color:#f7f2ff;margin:4px 0}
+.originCompanion{border-color:#74689d;background:linear-gradient(135deg,#2a2741,#23283b)}
+.originCompanion .partnerLabel{color:#d5c9ff}
+.originSolo{border-style:dashed;opacity:.88}
+.originSolo .partnerName{color:#d9dce8}
+.scene.case4{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.40)),linear-gradient(145deg,#738367 0 22%,#6e886f 22% 54%,#8d785c 54% 100%)}
+@media(max-width:860px){
+  .caseStatus{font-size:10px}
+  .unlockNotice{margin-top:14px;padding:12px 13px}
+  .originMeet{padding:11px 12px}
+}
+
 </style>
 </head>
 <body>
@@ -2033,7 +2063,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.51</span>
+    <span class="badge">v0.52</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2081,18 +2111,28 @@ body:not(.case-active) .topFileBtn{
         <div class="caseLabel">CASE 01</div>
         <div class="caseTitle">消えた青い封筒</div>
         <div class="caseDesc">月見堂ギャラリーで消えた審査結果を追う。</div>
+        <div class="caseStatus"></div>
       </button>
       <button class="caseCard" data-case="2">
         <div class="caseLabel">CASE 02</div>
         <div class="caseTitle">消えた鍵と濡れた紙片</div>
         <div class="caseDesc">星見図書館で消えた鍵の行方を追う。</div>
+        <div class="caseStatus"></div>
       </button>
       <button class="caseCard" data-case="3">
         <div class="caseLabel">CASE 03</div>
         <div class="caseTitle">止まった時計と消えたオルゴール</div>
         <div class="caseDesc">アンティーク喫茶で、止まった時間の向こうにある真相を追う。</div>
+        <div class="caseStatus"></div>
+      </button>
+      <button class="caseCard" data-case="4">
+        <div class="caseLabel">CASE 04 <span class="originBadge">ORIGIN EPISODE</span></div>
+        <div class="caseTitle">はじめての依頼 ― 消えた小さな手紙 ―</div>
+        <div class="caseDesc">少しだけ時間を巻き戻そう。あなたがまだ一人だった頃の、最初の事件。</div>
+        <div class="caseStatus"></div>
       </button>
     </div>
+    <div class="caseProgressNote" id="caseProgressHint">事件を解決すると、次の事件が届きます。解決済みの事件はいつでも再捜査できます。</div>
   </section>
 
   <section class="panel hidden" id="selectPanel">
@@ -2223,6 +2263,7 @@ body:not(.case-active) .topFileBtn{
           <h2 id="finalTitle"></h2>
           <p id="endingText"></p>
           <div class="culpritComment hidden" id="culpritComment"></div>
+          <div class="unlockNotice hidden" id="unlockNotice"></div>
           <button class="primary" onclick="location.reload()">事件一覧へ戻る</button>
         </div>
       </section>
@@ -2241,7 +2282,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.51 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.52 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2788,9 +2829,192 @@ const cases={
     line:"ごめんなさい……。お母さんに、どうしても喜んでほしくて。でも、こんなことしちゃだめでした。"
   }
 }
+,
+4:{
+  origin:true,
+  title:"CASE 04　はじめての依頼 ― 消えた小さな手紙 ―",
+  place:"春風公園",
+  briefing:{
+    lead:"少しだけ、時間を巻き戻そう。これは、あなたがまだ一人だった頃の話。",
+    incident:"春。探偵になったばかりのあなたの事務所へ、最初の依頼人ヒナがやってきた。お母さんへ渡すために書いた手紙を、学校からの帰り道でなくしてしまったという。金品でも大事件でもない。でも、あなたにとっては初めて受ける正式な依頼だった。",
+    objectives:[
+      "手紙を最後に持っていた場所を絞り込む",
+      "手紙がなくなった理由を確かめる",
+      "今、手紙がどこにあるのか突き止める"
+    ]
+  },
+  intro:"初めての依頼：ヒナがなくした一枚の手紙を探す。誰かが盗んだとは限らない。帰り道を一つずつたどろう。",
+  evidence:{
+    stationery:{
+      icon:"✏️",
+      name:"15:32の文房具店レシート",
+      desc:"ヒナが白い封筒とピンクの花シールを買った記録。店員マリは、ヒナがその場で手紙を封筒へ入れたのを見ている。"
+    },
+    routeMap:{
+      icon:"🗺️",
+      name:"ヒナの帰り道メモ",
+      desc:"文房具店→春風公園→パン屋→バス停の順で帰ったと書かれている。公園ではベンチで少し休んだ。"
+    },
+    bench:{
+      icon:"🪑",
+      name:"公園の古いベンチ",
+      desc:"座面と背もたれの隙間が少し広い。奥に、ピンク色の花シールの小さな欠片が引っかかっている。"
+    },
+    breadReceipt:{
+      icon:"🥐",
+      name:"15:48のパン屋レシート",
+      desc:"ヒナがクリームパンを一つ買った記録。公園を出たあと、ここへ立ち寄ったことが分かる。"
+    },
+    lostbox:{
+      icon:"📮",
+      name:"公園の落とし物箱",
+      desc:"管理事務所の前にある小さな落とし物箱。投入口の縁に、ピンクの花シールと同じ色の小さな紙片が付いている。"
+    }
+  },
+  requiredEvidence:["stationery","bench","breadReceipt","lostbox"],
+  hotspots:[
+    ["stationery","✏️ レシート","7%","12%"],
+    ["routeMap","🗺️ 帰り道","auto","13%","7%"],
+    ["bench","🪑 ベンチ","36%","24%"],
+    ["breadReceipt","🥐 パン屋","8%","auto",null,"16%"],
+    ["lostbox","📮 落とし物箱","auto","auto","8%","16%"]
+  ],
+  people:[
+    {name:"ヒナ",role:"最初の依頼人",note:"お母さんへ渡す手紙をなくした。文房具店で封筒へ入れ、公園とパン屋を通って帰った。"},
+    {name:"マリ",role:"文房具店の店員",note:"ヒナが白い封筒を買い、ピンクの花シールを貼るところを見ていた。"},
+    {name:"シン",role:"パン屋の店員",note:"15:48にヒナへクリームパンを販売。会計時に白い封筒は見ていない。"},
+    {name:"ユウト",role:"公園にいた男の子",note:"ヒナが帰ったあと、公園のベンチ付近で何かを拾ったらしい。"}
+  ],
+  timeline:[
+    ["15:32","ヒナが文房具店で封筒を買い、手紙を入れる"],
+    ["15:39ごろ","ヒナが春風公園のベンチで休憩"],
+    ["15:44ごろ","ヒナが公園を出る"],
+    ["15:48","パン屋でクリームパンを購入"],
+    ["16:00ごろ","帰宅後、手紙がないことに気づく"],
+    ["16:10","あなたの探偵事務所へ初めての依頼が届く"]
+  ],
+  witnesses:{
+    hina:{
+      icon:"🎒",
+      name:"ヒナ",
+      role:"依頼人",
+      statements:[
+        {text:"「文房具屋さんで、手紙を白い封筒に入れました。」",press:"封筒には自分で選んだピンクの花シールを貼ったという。"},
+        {text:"「公園では、ベンチに座って少しだけ休みました。」",press:"風が少し強く、バッグの中身を一度膝の上へ出したらしい。"},
+        {text:"「パン屋さんに着くまでは、手紙はバッグに入ってたと思います。」",press:"『ちゃんと確認したわけじゃないけど、そう思ってた』と少し不安そうに話す。",contradictionTestimony:"yuto:0"}
+      ]
+    },
+    mari:{
+      icon:"✏️",
+      name:"マリ",
+      role:"文房具店の店員",
+      statements:[
+        {text:"「ヒナちゃん、ここで手紙を封筒に入れてましたよ。」",press:"白い封筒にピンクの花シールを貼っていたことまで覚えている。"},
+        {text:"「お店を出る時には、封筒をバッグに入れていました。」",press:"文房具店を出る時点では、手紙は確かにヒナの手元にあった。"}
+      ]
+    },
+    shin:{
+      icon:"🥐",
+      name:"シン",
+      role:"パン屋の店員",
+      statements:[
+        {text:"「15時48分ごろ、ヒナちゃんがパンを買いに来ました。」",press:"レシートの時刻とも一致する。"},
+        {text:"「会計の時、白い封筒は見なかったですね。」",press:"ヒナは財布と小さなエコバッグだけをカウンターへ出していたという。"}
+      ]
+    },
+    yuto:{
+      icon:"⚽",
+      name:"ユウト",
+      role:"公園にいた男の子",
+      statements:[
+        {text:"「ベンチのすき間に、白い封筒が落ちてたよ。」",press:"ピンクの花みたいなシールが付いていたので、よく覚えている。"},
+        {text:"「中は見てないよ。落とし物箱に入れた。」",press:"人の手紙を勝手に読むのはよくないと思い、そのまま管理事務所前の箱へ入れたという。"}
+      ]
+    }
+  },
+  multiClear:[
+    {witness:"hina",testimony:"yuto:0",statement:2,flag:"hina_memory"}
+  ],
+  finalReady:["hina_memory"],
+  deduction:{
+    culpritLabel:"手紙を最後に持っていた場所",
+    culpritOptions:[["stationery","文房具店"],["park","春風公園"],["bakery","パン屋"]],
+    placeLabel:"手紙はどうなった？",
+    placeOptions:[["gap","ベンチの隙間へ落ちた"],["stolen","誰かに盗まれた"],["street","道に落として風で飛んだ"]],
+    motiveLabel:"今、手紙がある場所",
+    motiveOptions:[["lostbox","公園の落とし物箱"],["bakery","パン屋のカウンター"],["office","探偵事務所の郵便受け"]],
+    answer:{culprit:"park",place:"gap",motive:"lostbox"},
+    hints:{
+      culprit:"文房具店を出た時点では手紙があり、パン屋では封筒を見られていない。間に立ち寄った場所は？",
+      place:"ベンチの隙間に残った花シールの欠片と、ユウトの証言をつなげよう。",
+      motive:"ユウトは拾った封筒をどうしたと話していた？"
+    }
+  },
+  ending:"ヒナの手紙は盗まれていなかった。公園のベンチでバッグの中身を広げた時、風にあおられて封筒が座面の隙間へ落ちていた。あとからユウトが見つけ、中を読まずに公園の落とし物箱へ届けていた。",
+  originEpilogue:"手紙を取り戻し、ヒナが笑って帰ったあと。まだ何も飾られていない探偵事務所で、さっき公園にいた猫耳の子が椅子に座っていた。<br><br><strong>ねも</strong>「……見つかって、よかったね。」<br><br>あなた「ねも、帰らないの？」<br><br><strong>ねも</strong>「ここ、なんか好き。」<br><br>翌朝、事務所へ来ると、机の横に小さな椅子がひとつ増えていた。<br><br><strong>この日から、あなたとねもの探偵の日々が始まりました。</strong>"
+}
+
 };
 
-let currentCase=null, selected=null, evidence=new Set(), heardTestimony=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={};
+const SAVE_KEY="nemoMysteryDaysProgress_v1";
+const CASE_COUNT=4;
+function loadGameProgress(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(!raw) return {cleared:[]};
+    const parsed=JSON.parse(raw);
+    return {cleared:Array.isArray(parsed.cleared)?parsed.cleared.map(Number).filter(n=>n>=1&&n<=CASE_COUNT):[]};
+  }catch(e){ return {cleared:[]}; }
+}
+function saveGameProgress(){
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(gameProgress));}catch(e){}
+}
+function isCaseCleared(id){return gameProgress.cleared.includes(Number(id));}
+function isCaseUnlocked(id){
+  id=Number(id);
+  return id===1 || isCaseCleared(id) || isCaseCleared(id-1);
+}
+function markCaseCleared(id){
+  id=Number(id);
+  const first=!isCaseCleared(id);
+  if(first){
+    gameProgress.cleared.push(id);
+    gameProgress.cleared=[...new Set(gameProgress.cleared)].sort((a,b)=>a-b);
+    saveGameProgress();
+  }
+  return first;
+}
+let gameProgress=loadGameProgress();
+let currentCase=null, currentCaseId=null, selected=null, evidence=new Set(), heardTestimony=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={}, originNemoMet=false;
+
+
+function renderCaseProgress(){
+  const cards=[...document.querySelectorAll(".caseCard")];
+  cards.forEach(card=>{
+    const id=Number(card.dataset.case);
+    const cleared=isCaseCleared(id);
+    const unlocked=isCaseUnlocked(id);
+    card.classList.toggle("cleared",cleared);
+    card.classList.toggle("locked",!unlocked);
+    card.classList.toggle("available",unlocked);
+    card.classList.toggle("newCase",unlocked&&!cleared&&id>1);
+    card.setAttribute("aria-disabled",unlocked?"false":"true");
+    const status=card.querySelector(".caseStatus");
+    if(!status) return;
+    if(cleared){
+      status.textContent="✅ 解決済み · もう一度捜査する";
+    }else if(unlocked){
+      status.textContent=id===1?"▶ 捜査可能":"✨ NEW · 捜査可能";
+    }else{
+      status.textContent=`🔒 CASE ${String(id-1).padStart(2,"0")}を解決すると解放`;
+    }
+  });
+}
+
+function setProgressHint(text){
+  const el=document.getElementById("caseProgressHint");
+  if(el) el.textContent=text;
+}
 
 const detectiveGrid=document.getElementById("detectiveGrid");
 function stat(label,val){
@@ -2815,32 +3039,50 @@ detectives.forEach(d=>{
 
 function renderPartnerBanner(targetId, hintText="いっしょに捜査中") {
   const box=document.getElementById(targetId);
-  if(!box || !selected) return;
+  if(!box) return;
+  if(!selected){box.innerHTML="";return;}
+  box.classList.remove("originCompanion","originSolo");
   box.innerHTML=`<div class="partnerThumb"><img src="${selected.image}" alt="${selected.name}" onerror="this.parentElement.textContent='${selected.icon}'"></div><div class="partnerMeta"><div class="partnerLabel">NEMO PARTNER</div><div class="partnerName">${selected.name}</div><div class="partnerType">${selected.type} / ${selected.trait}</div></div><div class="partnerHint">${hintText}</div>`;
 }
 
-function renderPartnerPreview(){
-  renderPartnerBanner("investigationPartner","そっと見守り中");
-  renderPartnerBanner("partnerStrip","いっしょに証言確認中");
+function renderActiveCompanionBanner(targetId, hintText="いっしょに捜査中") {
+  const box=document.getElementById(targetId);
+  if(!box) return;
+  if(currentCase?.origin){
+    if(originNemoMet){
+      box.classList.remove("originSolo");
+      box.classList.add("originCompanion");
+      box.innerHTML=`<div class="partnerThumb">🐱</div><div class="partnerMeta"><div class="partnerLabel">???</div><div class="partnerName">ねも</div><div class="partnerType">なぜか、捜査についてきた</div></div><div class="partnerHint">まだ助手ではない</div>`;
+    }else{
+      box.classList.remove("originCompanion");
+      box.classList.add("originSolo");
+      box.innerHTML=`<div class="partnerThumb">🔎</div><div class="partnerMeta"><div class="partnerLabel">SOLO INVESTIGATION</div><div class="partnerName">はじめての依頼</div><div class="partnerType">この事件では、まだ相棒はいません。</div></div>`;
+    }
+    return;
+  }
+  renderPartnerBanner(targetId,hintText);
 }
 
-document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
-  document.body.classList.remove("file-open");
-  document.body.classList.remove("case-active");
-  currentCase=cases[btn.dataset.case];
+function renderPartnerPreview(){
+  renderActiveCompanionBanner("investigationPartner","そっと見守り中");
+  renderActiveCompanionBanner("partnerStrip","いっしょに証言確認中");
+}
+
+function resetCaseState(caseId){
+  currentCaseId=Number(caseId);
+  currentCase=cases[currentCaseId];
   evidence=new Set();
   heardTestimony=new Set();
   flags=new Set();
   contradictionLog=[];
   nemoInsights={};
   tab="evidence";
-  showOnly("selectPanel");
-  document.getElementById("caseNo").textContent=currentCase.title;
-  document.getElementById("phaseLabel").textContent="探偵選択";
-  resetView("selectPanel");
-});
+  originNemoMet=false;
+  document.body.classList.remove("file-open");
+  document.body.classList.remove("case-active");
+}
 
-document.getElementById("startBtn").onclick=()=>{
+function openBriefing(){
   document.body.classList.add("case-active");
   document.body.classList.remove("file-open");
   showOnly("briefingPanel");
@@ -2862,23 +3104,49 @@ document.getElementById("startBtn").onclick=()=>{
   document.getElementById("scene").dataset.place=currentCase.place;
   document.getElementById("scene").classList.toggle("case2",currentCase===cases[2]);
   document.getElementById("scene").classList.toggle("case3",currentCase===cases[3]);
+  document.getElementById("scene").classList.toggle("case4",currentCase===cases[4]);
 
   renderFile();
   renderProgress();
   renderPartnerPreview();
   document.getElementById("phaseLabel").textContent="概要";
   resetView("briefingPanel");
-};
+}
+
+document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
+  const id=Number(btn.dataset.case);
+  if(!isCaseUnlocked(id)){
+    setProgressHint(`🔒 CASE ${String(id-1).padStart(2,"0")}を解決すると、この事件が解放されます。`);
+    return;
+  }
+
+  resetCaseState(id);
+  document.getElementById("caseNo").textContent=currentCase.title;
+
+  if(currentCase.origin){
+    selected=null;
+    document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));
+    document.getElementById("startBtn").disabled=true;
+    document.getElementById("selectedText").textContent="1体選んでください。";
+    openBriefing();
+    return;
+  }
+
+  showOnly("selectPanel");
+  document.getElementById("phaseLabel").textContent="探偵選択";
+  resetView("selectPanel");
+});
+
+document.getElementById("startBtn").onclick=()=>openBriefing();
 
 document.getElementById("beginInvestigationBtn").onclick=()=>{
   document.body.classList.remove("file-open");
   showOnly("investigationPanel");
   resetView("investigationPanel");
   buildScene();
-  renderPartnerBanner("investigationPartner","そっと見守り中");
+  renderActiveCompanionBanner("investigationPartner","そっと見守り中");
   document.getElementById("phaseLabel").textContent="捜査";
 };
-
 
 
 
@@ -3173,11 +3441,18 @@ function insightHtml(insight){
   </div>`;
 }
 
+
+function originNemoEncounterHtml(){
+  return `<div class="originMeet"><strong>？？？</strong><div class="originLine">「……これ、探してる？」</div>ベンチの向こうから、小さな猫耳の子が顔を出した。<br>手には、ピンクの花シールの欠片。<br><br><span class="muted">名前は、ねも。どうやら少しだけ捜査が気になるらしい。</span></div>`;
+}
+
 function collectEvidence(id,btn){
   if(evidence.has(id)) return;
   evidence.add(id);
   btn.classList.add("done");
   const e=currentCase.evidence[id];
+  const originEncounter=currentCase?.origin && id==="bench" && !originNemoMet;
+  if(originEncounter){originNemoMet=true;}
 
   const insight=getNemoInsight(id);
   if(insight){
@@ -3191,7 +3466,8 @@ function collectEvidence(id,btn){
     : investigationPartnerReaction(id);
 
   document.getElementById("investigationMsg").innerHTML=
-    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${nemoPart}`;
+    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${nemoPart}${originEncounter?originNemoEncounterHtml():""}`;
+  if(originEncounter){renderActiveCompanionBanner("investigationPartner","なんとなく、ついてきた");}
 
   document.getElementById("evidenceCount").textContent=
     `証拠 ${evidence.size} / ${Object.keys(currentCase.evidence).length}`;
@@ -3210,7 +3486,7 @@ document.getElementById("toWitnessBtn").onclick=()=>{
   resetView("testimonyPanel");
   document.getElementById("phaseLabel").textContent="証言";
   buildWitnessChooser();
-  renderPartnerBanner("partnerStrip","いっしょに証言確認中");
+  renderActiveCompanionBanner("partnerStrip","いっしょに証言確認中");
   currentWitness=Object.keys(currentCase.witnesses)[0];stmtIndex=0;renderStatement();
 };
 
@@ -3266,7 +3542,15 @@ document.getElementById("nextStmt").onclick=()=>{
 };
 
 function nemoNudgeFor(statement){
-  if(!selected || (!statement.contradiction && !statement.contradictionTestimony)) return "";
+  if((!statement.contradiction && !statement.contradictionTestimony)) return "";
+  if(!selected){
+    if(currentCase?.origin && originNemoMet && statement.contradictionTestimony){
+      const clue=getTestimonyClue(statement.contradictionTestimony);
+      if(!clue || !heardTestimony.has(statement.contradictionTestimony)) return "";
+      return `<div class="nemoNudge"><strong>🐱 ねも</strong><br>……ユウトくんは、ベンチで見つけたって言ってたよ。</div>`;
+    }
+    return "";
+  }
 
   if(statement.contradictionTestimony){
     const clue=getTestimonyClue(statement.contradictionTestimony);
@@ -3333,9 +3617,21 @@ function nemoNudgeFor(statement){
   </div>`;
 }
 function nemoPressReaction(witnessId, statementIndex){
-  if(!selected) return "";
-
   const key=`${witnessId}:${statementIndex}`;
+  if(!selected){
+    if(currentCase?.origin && originNemoMet){
+      const originReactions={
+        "hina:1":"ベンチでバッグの中身、出したんだね。",
+        "mari:1":"文房具屋さんを出る時は、ちゃんと持ってたんだ。",
+        "shin:1":"パン屋さんでは、封筒を見てないんだね。",
+        "yuto:0":"……白い封筒。花のシールも同じだね。",
+        "yuto:1":"落とし物箱。そこに入れたんだ。"
+      };
+      const line=originReactions[key];
+      return line?`<div class="partnerEvent"><strong>🐱 ねも</strong><br>${line}</div>`:"";
+    }
+    return "";
+  }
 
   const reactions={
     66:{
@@ -3510,6 +3806,12 @@ function contradictionMeta(flag){
       evidence:"17:44の店内写真",
       summary:"17:44の写真の鏡には、窓際ではなく蓄音機付近にいるマコが写っている。"
     },
+    hina_memory:{
+      title:"ヒナの記憶と、封筒が見つかった場所が食い違う",
+      statement:"ヒナ『パン屋さんに着くまでは、手紙はバッグに入ってたと思います』",
+      evidence:"ユウト『ベンチのすき間に、白い封筒が落ちてたよ』",
+      summary:"ヒナはパン屋まで持っていたと思っていたが、封筒はその前に立ち寄った公園のベンチで見つかっていた。記憶違いだったようだ。"
+    },
   };
   return map[flag] || {
     title:"新しい矛盾を発見",
@@ -3638,6 +3940,12 @@ function presentEvidence(clueId){
       マコは「17時40分ごろからずっと窓際にいた」と話した。<br>
       しかし <strong>17:44の店内写真</strong> の鏡には、蓄音機のそばに立つマコが写っている。<br><br>
       マコ「……少しだけ、店の奥を見に行きました」`;
+    } else if(rule.flag==="hina_memory"){
+      msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
+      ヒナは「パン屋さんに着くまでは、手紙はバッグに入っていたと思う」と話した。<br>
+      でもユウトは、その前に立ち寄った <strong>公園のベンチのすき間で白い封筒を見つけている</strong>。<br><br>
+      誰かが嘘をついているわけではない。ヒナが、なくしたタイミングを勘違いしていたんだ。<br><br>
+      ヒナ「……じゃあ、公園で落としちゃったんだ」`;
     }
 
     let linkedInsight="";
@@ -3708,7 +4016,9 @@ function setupDeductionPanel(){
       ? "時間、場所、濡れた紙片、忘れ物。集めた手がかりを一本につないで、鍵の行方を確定しよう。"
       : currentCase===cases[3]
         ? "止まった時計で時刻の前提をほどき、写真・箱・カード・蓄音機をつないでオルゴールの行方を組み立てよう。"
-        : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+        : currentCase===cases[4]
+          ? "誰かを犯人にする必要はない。帰り道と証言をつないで、手紙がどこで消え、今どこにあるのか組み立てよう。"
+          : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
 
   const msg=document.getElementById("deductionMsg");
   msg.className="callout special";
@@ -3754,22 +4064,48 @@ document.getElementById("finalDeduceBtn").onclick=()=>{
 };
 
 function finalReveal(){
+  const wasFirstClear=markCaseCleared(currentCaseId);
   showOnly("finalPanel");
   document.getElementById("phaseLabel").textContent="事件解決";
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
-  const titleName=currentCase===cases[3]
-    ? "止まった時間をほどく探偵"
-    : currentCase===cases[2]
-      ? "濡れた紙片をつなぐ探偵"
-      : "はじめての矛盾";
-  document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${titleName}</strong>`;
+
+  const titleName=currentCase===cases[4]
+    ? "はじめての一歩"
+    : currentCase===cases[3]
+      ? "止まった時間をほどく探偵"
+      : currentCase===cases[2]
+        ? "濡れた紙片をつなぐ探偵"
+        : "はじめての矛盾";
+
+  if(currentCase?.origin){
+    document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>${currentCase.originEpilogue}<br><br>🏅 称号：<strong>${titleName}</strong>`;
+  }else{
+    document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${titleName}</strong>`;
+  }
+
   const culpritBox=document.getElementById("culpritComment");
   if(culpritBox){
     const c=currentCase.culpritComment;
     culpritBox.classList.toggle("hidden",!c);
     culpritBox.innerHTML=c ? `<span class="culpritName">${c.name}</span><div class="culpritLine">「${c.line}」</div>` : "";
   }
+
+  const notice=document.getElementById("unlockNotice");
+  if(notice){
+    if(wasFirstClear && currentCaseId<CASE_COUNT){
+      const next=cases[currentCaseId+1];
+      notice.classList.remove("hidden");
+      notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
+    }else if(wasFirstClear && currentCaseId===CASE_COUNT){
+      notice.classList.remove("hidden");
+      notice.innerHTML=`🐱 <strong>ORIGIN EPISODE COMPLETE</strong><br>あなたとねもの探偵の日々は、ここから始まりました。<br><span class="muted">これまでに解決した事件は、事件一覧から何度でも遊べます。</span>`;
+    }else{
+      notice.classList.add("hidden");
+      notice.innerHTML="";
+    }
+  }
+  renderCaseProgress();
 }
 
 function renderFile(){
@@ -3925,6 +4261,8 @@ if(gameMainCol && "ResizeObserver" in window){
   caseFileResizeObserver.observe(gameMainCol);
 }
 
+
+renderCaseProgress();
 </script>
 </body>
 </html>
