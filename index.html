@@ -33,8 +33,15 @@ button,select{font:inherit} button{cursor:pointer}
 .hero{margin-top:14px;padding:28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(40,45,65,.96),rgba(24,27,40,.96));box-shadow:var(--shadow)}
 .hero h1{font-size:clamp(34px,6vw,64px);margin:.2rem 0 .5rem}.hero p{color:var(--muted);line-height:1.8;max-width:850px}
 .badge{display:inline-block;border:1px solid #665b91;background:#292540;color:#dcd4ff;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900}
-.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px}
+.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px;align-items:start}
+.gameMainCol{min-width:0}
 .panel{background:rgba(28,32,48,.96);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.caseFilePanel{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.caseFilePanel h2{margin-bottom:8px}
+.caseFileBody{flex:1;min-height:0;overflow-y:auto;padding-right:4px;scrollbar-width:thin;scrollbar-color:#4a516d #202536}
+.caseFileBody::-webkit-scrollbar{width:10px}
+.caseFileBody::-webkit-scrollbar-track{background:#202536;border-radius:999px}
+.caseFileBody::-webkit-scrollbar-thumb{background:#4a516d;border-radius:999px}
 .panel h2,.panel h3{margin-top:0}.muted{color:var(--muted)}.hidden{display:none!important}.grid{display:grid;gap:12px}
 .caseGrid,.detectives{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
 .caseCard,.detective{border:1px solid var(--line);border-radius:16px;background:var(--panel2);padding:14px;transition:.15s ease;color:var(--text);text-align:left}
@@ -166,6 +173,8 @@ body.file-open{overflow:hidden}
     background:#171b28;
   }
   body.file-open aside.panel{transform:translateY(0)}
+  .caseFilePanel{display:block;overflow:auto;height:auto!important;max-height:none!important}
+  .caseFileBody{overflow:visible;max-height:none!important;padding-right:0}
   .fileClose{
     display:block;
     position:sticky;
@@ -1585,7 +1594,7 @@ body:not(.case-active) .topFileBtn{
   </section>
 
   <section class="layout hidden" id="gameLayout">
-    <div>
+    <div id="gameMainCol">
       <section class="panel" id="briefingPanel">
         <div class="briefing">
           <div class="briefingHero">
@@ -1704,7 +1713,7 @@ body:not(.case-active) .topFileBtn{
       </section>
     </div>
 
-    <aside class="panel">
+    <aside class="panel caseFilePanel" id="caseFilePanel">
       <button class="fileClose" id="fileClose">✕ 閉じる</button>
       <h2>事件ファイル</h2>
       <div class="mobileHint">証言を覚えなくてOK。ここを開いて見比べながら推理できます。</div>
@@ -1714,10 +1723,10 @@ body:not(.case-active) .topFileBtn{
         <button class="tabbtn" data-tab="people">人物</button>
         <button class="tabbtn" data-tab="timeline">時系列</button>
       </div>
-      <div id="fileContent"></div>
+      <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.20 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.21 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1851,7 +1860,7 @@ const cases={
   people:[
     {name:"ミサキ",role:"ギャラリースタッフ",note:"17:05に封筒を机へ置いた。17:15〜17:18は受付を離れていた。"},
     {name:"ユウ",role:"配達員",note:"17:10にポスターを納品。17:13に正面玄関から退出。"},
-    {name:"カナ",role:"コンテスト参加者",note:"17:15来館。『トイレを借りただけ』と話している。バッグに銀色の星飾り。"}
+    {name:"カナ",role:"コンテスト参加者",note:"17:15来館。『トイレを借りただけ』『そのあとは入口付近にいた』と話している。バッグに銀色の星飾り。"}
   ],
   timeline:[
     ["17:05","ミサキが青い封筒をスタッフルームの机に置く"],
@@ -1875,8 +1884,8 @@ const cases={
       {text:"「17時13分には正面玄関から出ました。」",press:"入口カメラにも17:13の退出が写っている。"}
     ]},
     kana:{icon:"🌼",name:"カナ",role:"コンテスト参加者",statements:[
-      {text:"「結果が気になって来たけど、トイレを借りただけです。」",press:"トイレはスタッフルームの隣。カナは『すぐ戻った』と話す。"},
-      {text:"「展示室の奥には行ってません。」",press:"言い切ったあと、カナは一度だけ展示壁の方を見た。",contradiction:"photo"},
+      {text:"「結果が気になって来たけど、トイレを借りただけです。」",press:"17:15ごろトイレへ入り、出たあとは入口付近にいたと話す。"},
+      {text:"「展示室の奥には行ってません。」",press:"そう言い切る前に、カナは展示壁の方を一度だけ見た。",contradiction:"photo"},
       {text:"「あの大きなポスターにも触ってません。」",press:"こちらはまだ『額縁が動いていた』とは伝えていない。",contradiction:"frame",requires:["kana_photo"]},
       {text:"「封筒の中身なんて知りません。まだ発表前ですから。」",press:"カナ自身もコンテスト参加者。結果を気にして来館したことは認めている。"}
     ]}
@@ -2038,6 +2047,7 @@ function showOnly(stage){
   if(select) select.classList.toggle("hidden", stage!=="selectPanel");
   const caseSel=document.getElementById("caseSelectPanel");
   if(caseSel) caseSel.classList.toggle("hidden", stage!=="caseSelectPanel");
+  scheduleCaseFileSync();
 }
 
 function resetView(targetId=null){
@@ -2057,6 +2067,35 @@ function resetView(targetId=null){
       document.body.scrollTop=0;
     });
   });
+}
+
+function syncCaseFileHeight(){
+  const panel=document.getElementById("caseFilePanel");
+  const body=document.getElementById("caseFileBody");
+  const left=document.getElementById("gameMainCol");
+  if(!panel || !body || !left) return;
+
+  if(window.innerWidth<=860){
+    panel.style.height="";
+    body.style.maxHeight="";
+    return;
+  }
+
+  const active=[...left.querySelectorAll("section.panel")].find(el=>!el.classList.contains("hidden"));
+  const source=active || left;
+  const targetHeight=Math.max(380, Math.ceil(source.getBoundingClientRect().height));
+  panel.style.height=`${targetHeight}px`;
+
+  const panelRect=panel.getBoundingClientRect();
+  const bodyRect=body.getBoundingClientRect();
+  const styles=getComputedStyle(panel);
+  const paddingBottom=parseFloat(styles.paddingBottom) || 0;
+  const available=Math.max(150, Math.floor(panelRect.height - (bodyRect.top - panelRect.top) - paddingBottom));
+  body.style.maxHeight=`${available}px`;
+}
+
+function scheduleCaseFileSync(){
+  requestAnimationFrame(()=>requestAnimationFrame(syncCaseFileHeight));
 }
 
 function renderProgress(){
@@ -2081,6 +2120,7 @@ function buildScene(){
     b.onclick=()=>collectEvidence(h[0],b); s.appendChild(b);
   });
   document.getElementById("evidenceCount").textContent=`証拠 0 / ${Object.keys(currentCase.evidence).length}`;
+  scheduleCaseFileSync();
 }
 function investigationPartnerReaction(id){
   if(!selected) return "";
@@ -2262,6 +2302,7 @@ function renderStatement(){
   document.getElementById("speaker").textContent=`${w.name}の証言`;document.getElementById("statementText").textContent=s.text;
   document.getElementById("stmtPos").textContent=`${stmtIndex+1} / ${w.statements.length}`;
   document.getElementById("prevStmt").disabled=stmtIndex===0;document.getElementById("nextStmt").disabled=stmtIndex===w.statements.length-1;
+  scheduleCaseFileSync();
 }
 document.getElementById("prevStmt").onclick=()=>{
   if(stmtIndex>0){
@@ -2388,6 +2429,7 @@ document.getElementById("pressBtn").onclick=()=>{
   }else{
     testimonyMsg.scrollIntoView({behavior:"smooth",block:"nearest"});
   }
+  scheduleCaseFileSync();
 };
 
 document.getElementById("presentBtn").onclick=()=>{
@@ -2408,7 +2450,7 @@ function contradictionMeta(flag){
       title:"カナの居場所が証言と違う",
       statement:"「展示室の奥には行ってません」",
       evidence:"17:17の来館写真",
-      summary:"写真には、トイレとは逆方向の展示壁へ向かうカナが写っている。"
+      summary:"『トイレのあと入口付近にいた』という話に反し、写真にはトイレと逆方向の展示壁へ向かうカナが写っている。"
     },
     kana_frame:{
       title:"『触っていない』のに額縁を知っている",
@@ -2512,6 +2554,7 @@ function presentEvidence(id){
     if(rule.requires && !rule.requires.every(f=>flags.has(f))){
       msg.className="callout bad";
       msg.innerHTML=`その証拠は気になる。でも、この証言を崩すには先に確認すべき矛盾がありそうだ。`;
+      scheduleCaseFileSync();
       return;
     }
 
@@ -2522,7 +2565,8 @@ function presentEvidence(id){
     if(rule.flag==="kana_photo"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
       カナは「展示室の奥には行っていない」と証言した。<br>
-      しかし <strong>17:17の来館写真</strong> には、トイレとは逆方向の展示壁へ向かうカナが写っている。<br><br>
+      しかし <strong>17:17の来館写真</strong> には、トイレとは逆方向の展示壁へ向かうカナが写っている。<br>
+      さっきの「トイレのあと入口付近にいた」という話とも合わない。<br><br>
       カナ「……少しだけ、展示を見ました」`;
     } else if(rule.flag==="kana_frame"){
       msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
@@ -2550,6 +2594,7 @@ function presentEvidence(id){
 
     msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
     renderProgress();
+    scheduleCaseFileSync();
 
     if(currentCase===cases[1] && currentCase.finalReady.every(f=>flags.has(f))){
       return;
@@ -2576,6 +2621,7 @@ function presentEvidence(id){
     }
   }
   msg.innerHTML=`その証拠では、この証言は崩せなさそうだ。<br><span class="muted">事件ファイルの「証拠」「人物」「時系列」を見比べてみよう。</span>${partnerMiss}`;
+  scheduleCaseFileSync();
 }
 
 document.getElementById("finalDeduceBtn").onclick=()=>{
@@ -2621,6 +2667,7 @@ function renderFile(){
   if(tab==="evidence"){
     if(!evidence.size){
       fc.innerHTML=`<p class="muted">まだ証拠はありません。</p>`;
+      scheduleCaseFileSync();
       return;
     }
     fc.innerHTML=`<div class="cardlist">${
@@ -2637,6 +2684,7 @@ function renderFile(){
         </div>`;
       }).join("")
     }</div>`;
+    scheduleCaseFileSync();
     return;
   }
 
@@ -2648,6 +2696,7 @@ function renderFile(){
           <span class="contradictionCount">0件</span>
         </div>
         <p class="muted">まだ矛盾は見つかっていません。証言と証拠の食い違いを見つけると、ここに自動保存されます。</p>`;
+      scheduleCaseFileSync();
       return;
     }
     fc.innerHTML=`
@@ -2668,6 +2717,7 @@ function renderFile(){
           </div>
         `).join("")}
       </div>`;
+    scheduleCaseFileSync();
     return;
   }
 
@@ -2675,12 +2725,14 @@ function renderFile(){
     fc.innerHTML=`<div class="cardlist">${
       currentCase.people.map(p=>`<div class="infoCard"><strong>${p.name}</strong><div>${p.role}</div><div class="muted">${p.note}</div></div>`).join("")
     }</div>`;
+    scheduleCaseFileSync();
     return;
   }
 
   fc.innerHTML=`<div class="timeline">${
     currentCase.timeline.map(t=>`<div class="timeItem"><b>${t[0]}</b><div>${t[1]}</div></div>`).join("")
   }</div>`;
+  scheduleCaseFileSync();
 }
 document.querySelectorAll(".tabbtn").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;renderFile()});
 
@@ -2698,6 +2750,7 @@ function openCaseFile(tabName){
     tab=tabName;
   }
   renderFile();
+  scheduleCaseFileSync();
   document.body.classList.add("file-open");
   setTimeout(()=>{
     const content=document.getElementById("fileContent");
@@ -2736,7 +2789,10 @@ document.addEventListener("DOMContentLoaded",()=>{
   showOnly("caseSelectPanel");
   const layout=document.getElementById("gameLayout");
   if(layout) layout.classList.add("hidden");
+  scheduleCaseFileSync();
 });
+
+window.addEventListener("resize",scheduleCaseFileSync);
 
 </script>
 </body>
