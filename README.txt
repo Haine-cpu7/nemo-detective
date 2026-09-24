@@ -1,4 +1,4 @@
-NEMO Mystery Days v0.38
+NEMO Mystery Days v0.39
 
 変更点:
 - ねも選択カードの画像表示を調整
