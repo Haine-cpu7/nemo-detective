@@ -1545,6 +1545,21 @@ body:not(.case-active) .topFileBtn{
   .evidenceInsight{font-size:11px}
 }
 
+
+/* v0.22: PCの左右パネル外枠を完全に同じ高さにする */
+@media(min-width:861px){
+  .layout{align-items:start}
+  #caseFilePanel{
+    align-self:start;
+    min-height:0;
+    overflow:hidden;
+  }
+  #caseFileBody{
+    min-height:0;
+    overflow-y:auto;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1726,7 +1741,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.21 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.22 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2077,20 +2092,27 @@ function syncCaseFileHeight(){
 
   if(window.innerWidth<=860){
     panel.style.height="";
+    panel.style.maxHeight="";
+    body.style.height="";
     body.style.maxHeight="";
     return;
   }
 
   const active=[...left.querySelectorAll("section.panel")].find(el=>!el.classList.contains("hidden"));
-  const source=active || left;
-  const targetHeight=Math.max(380, Math.ceil(source.getBoundingClientRect().height));
-  panel.style.height=`${targetHeight}px`;
+  if(!active) return;
 
+  // 左の「見えているパネル」の外枠高さを、そのまま右の事件ファイル外枠へコピー。
+  const targetHeight=Math.round(active.getBoundingClientRect().height);
+  panel.style.height=`${targetHeight}px`;
+  panel.style.maxHeight=`${targetHeight}px`;
+
+  // 見出し・タブを除いた残りだけを、事件ファイル本文のスクロール領域にする。
   const panelRect=panel.getBoundingClientRect();
   const bodyRect=body.getBoundingClientRect();
   const styles=getComputedStyle(panel);
   const paddingBottom=parseFloat(styles.paddingBottom) || 0;
-  const available=Math.max(150, Math.floor(panelRect.height - (bodyRect.top - panelRect.top) - paddingBottom));
+  const available=Math.max(120, Math.floor(panelRect.bottom - bodyRect.top - paddingBottom));
+  body.style.height=`${available}px`;
   body.style.maxHeight=`${available}px`;
 }
 
@@ -2793,6 +2815,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 });
 
 window.addEventListener("resize",scheduleCaseFileSync);
+
+// 左側の高さが、証言・矛盾表示などで変わった時も右枠を追従させる。
+const gameMainCol=document.getElementById("gameMainCol");
+if(gameMainCol && "ResizeObserver" in window){
+  const caseFileResizeObserver=new ResizeObserver(()=>scheduleCaseFileSync());
+  caseFileResizeObserver.observe(gameMainCol);
+}
 
 </script>
 </body>
