@@ -2032,7 +2032,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.48</span>
+    <span class="badge">v0.49</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2235,7 +2235,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.48 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.49 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2451,7 +2451,7 @@ const cases={
   place:"星見図書館",
   briefing:{
     lead:"閉館まであとわずか。消えた資料室の鍵を探してほしい。",
-    incident:"17:50、星見図書館の資料室の鍵がフックから消えていることが分かった。鍵は17:30には確かにあった。さらに、レンが使っていた閲覧席の下から、晴れの日には不自然な『濡れた紙片』が見つかっている。",
+    incident:"17:50、星見図書館の資料室の鍵がフックから消えていることが分かった。鍵は17:30には確かにあった。さらに、館内の閲覧席の下から、晴れの日には不自然な『濡れた紙片』が見つかっている。",
     objectives:[
       "鍵を持ち出した人物を特定する",
       "濡れた紙片がどこから来たのか突き止める",
@@ -2473,7 +2473,7 @@ const cases={
     receipt:{
       icon:"🧾",
       name:"レンの自販機レシート",
-      desc:"17:42、図書館裏口横の自販機で水を購入。レンの返却予定の本に挟まっていた。"
+      desc:"17:42、図書館1階の休憩スペースにある館内自販機で水を購入。レンの返却予定の本に挟まっていた。"
     },
     poster:{
       icon:"📌",
@@ -2488,7 +2488,7 @@ const cases={
     note:{
       icon:"📝",
       name:"忘れ物メモ",
-      desc:"17:20、レンが『資料室に青いノートを忘れた』とスタッフへ申し出た記録。資料室はすでに施錠済みだった。"
+      desc:"17:20、高校生利用者が『資料室に青いノートを忘れた』と申し出た記録。署名欄には『R』。資料室はすでに施錠済みだった。"
     },
     returnbox:{
       icon:"📮",
@@ -2510,17 +2510,17 @@ const cases={
     {
       name:"アオイ",
       role:"図書館スタッフ",
-      note:"17:30に鍵を確認。17:35以降は受付担当。レンから忘れ物の相談を受けていた。"
+      note:"17:30に鍵を確認した、最後のスタッフ。17:35以降は受付担当だった。"
     },
     {
       name:"レン",
       role:"高校生利用者",
-      note:"資料室に青いノートを忘れたと相談していた。本人は17:38には退館したと話す。赤いリュックを使用。"
+      note:"高校生利用者。本人は17:38には退館したと話す。赤いリュックを使用。"
     },
     {
       name:"ミナ",
       role:"図書館ボランティア",
-      note:"17:40ごろ裏口で片付け作業。清掃用ホースの水を掲示板にかけてしまった。"
+      note:"17:35〜17:45ごろ、倉庫と裏口の間で片付け作業。鍵フックのある通路の近くも通っている。"
     }
   ],
   timeline:[
@@ -2530,7 +2530,7 @@ const cases={
     ["17:38","レンは『この時刻には退館した』と証言"],
     ["17:39","赤いリュックの制服姿が裏口方向へ向かう"],
     ["17:40","ミナが裏口で清掃。掲示ポスターに水がかかる"],
-    ["17:42","裏口横の自販機でレンのレシートが発行"],
+    ["17:42","館内1階の休憩スペースでレンの自販機レシートが発行"],
     ["17:50","資料室の鍵がないことに気づく"]
   ],
   witnesses:{
@@ -2551,16 +2551,12 @@ const cases={
           requires:["ren_exit"]
         },
         {
-          text:"「17時38分以降、館内には戻ってません。」",
-          press:"レンは『一度出たら、そのまま帰った』と言い切る。",
-          contradiction:"wet",
-          requires:["ren_backdoor"]
+          text:"「閉館前は、少し急いでました。」",
+          press:"理由を聞くと、レンは『忘れ物があったから』とだけ答えた。"
         },
         {
-          text:"「資料室には、別に用事なんてありませんでした。」",
-          press:"レンは少し間を置いてから答えた。",
-          contradiction:"note",
-          requires:["ren_return"]
+          text:"「青いノートのことは、スタッフさんに相談しました。」",
+          press:"『明日取りに来て』と言われたことも認めている。"
         }
       ]
     },
@@ -2578,8 +2574,8 @@ const cases={
           press:"濡れた掲示ポスターの状態と一致する。"
         },
         {
-          text:"「自販機の近くに、制服の子がいた気がします。」",
-          press:"顔は見えなかったが、赤いリュックだったという。"
+          text:"「裏口の方で、誰かの足音は聞きました。」",
+          press:"姿までは見ていない。片付け中だったので、誰かは分からなかったという。"
         }
       ]
     },
@@ -2593,8 +2589,8 @@ const cases={
           press:"鍵を確認してから受付へ移動したという。"
         },
         {
-          text:"「レンくんから、青いノートを忘れたと相談されました。」",
-          press:"資料室はもう施錠していたため、『明日取りに来て』と伝えた。"
+          text:"「閉館前に、資料室の忘れ物について相談を受けました。」",
+          press:"相談したのはレン。青いノートを忘れたと言うので、『明日取りに来て』と伝えた。"
         },
         {
           text:"「17時35分からは、ずっと受付にいました。」",
@@ -2616,23 +2612,9 @@ const cases={
       statement:1,
       flag:"ren_backdoor",
       requires:["ren_exit"]
-    },
-    {
-      witness:"ren",
-      evidence:"wet",
-      statement:2,
-      flag:"ren_return",
-      requires:["ren_exit","ren_backdoor"]
-    },
-    {
-      witness:"ren",
-      evidence:"note",
-      statement:3,
-      flag:"ren_motive",
-      requires:["ren_exit","ren_backdoor","ren_return"]
     }
   ],
-  finalReady:["ren_exit","ren_backdoor","ren_return","ren_motive"],
+  finalReady:["ren_exit","ren_backdoor"],
   deduction:{
     culpritLabel:"鍵を持ち出した人物",
     culpritOptions:[
@@ -2644,7 +2626,7 @@ const cases={
     placeOptions:[
       ["desk","資料室の机の中"],
       ["returnbox","館内返却ポストの底"],
-      ["vending","裏口の自販機の裏"]
+      ["vending","1階休憩スペースの自販機の裏"]
     ],
     motiveLabel:"鍵を持ち出した理由",
     motiveOptions:[
@@ -2658,12 +2640,16 @@ const cases={
       motive:"notebook"
     },
     hints:{
-      culprit:"何度も時刻と行動を訂正することになった人物は誰？",
+      culprit:"17:42にも館内にいて、17:39には裏口方向へ向かっていた人物は誰？",
       place:"現場で『金属音』がした場所を思い出そう。",
       motive:"17:20の忘れ物メモを確認しよう。"
     }
   },
-  ending:"レンは資料室に忘れた青いノートをどうしてもその日のうちに取り戻したくて、アオイが受付へ移った隙に資料室の鍵を持ち出した。ノートを回収したあと裏口へ向かったが、ミナが作業していたため一度引き返す。17:40に濡れた掲示ポスターの紙片が靴に付き、館内へ戻った時に自分の閲覧席で落ちた。鍵を元のフックへ戻す勇気がなく、最後は館内返却ポストの底へ隠した。"
+  ending:"レンは資料室に忘れた青いノートをどうしてもその日のうちに取り戻したくて、アオイが受付へ移った隙に資料室の鍵を持ち出した。ノートを回収して裏口へ向かったが、ミナが作業していたため引き返す。その際、17:40に濡れた掲示ポスターの紙片が靴に付き、館内へ戻ったあと自分の閲覧席で落ちた。17:42には1階の休憩スペースで水を買い、鍵を元のフックへ戻す勇気がないまま、最後は館内返却ポストの底へ隠した。",
+  culpritComment:{
+    name:"レン",
+    line:"ごめんなさい。明日まで待てなくて……。どうしても今日、あのノートを取り戻したかったんです。"
+  }
 }
 };
 
@@ -3268,7 +3254,7 @@ function contradictionMeta(flag){
       title:"レンの退館時刻が合わない",
       statement:"「17時38分には、もう図書館を出てました」",
       evidence:"17:42のレンの自販機レシート",
-      summary:"17:42に図書館裏口横の自販機で水を買っている。17:38には退館したという話と合わない。"
+      summary:"17:42に図書館1階の館内自販機で水を買っている。17:38には退館したという話と合わない。"
     },
     ren_backdoor:{
       title:"『裏口には行っていない』も崩れた",
@@ -3276,18 +3262,6 @@ function contradictionMeta(flag){
       evidence:"17:39の廊下カメラ",
       summary:"レンと同じ制服・赤いリュックの人物が17:39に裏口方向へ向かっている。"
     },
-    ren_return:{
-      title:"レンは館内へ戻っていた",
-      statement:"「17時38分以降、館内には戻ってません」",
-      evidence:"濡れた紙片＋濡れた掲示ポスター",
-      summary:"17:40に濡れた裏口ポスターと同じ紙片が、レンの閲覧席の下から見つかった。裏口付近から館内へ戻った痕跡になる。"
-    },
-    ren_motive:{
-      title:"資料室に用事がない、は嘘",
-      statement:"「資料室には、別に用事なんてありませんでした」",
-      evidence:"17:20の忘れ物メモ",
-      summary:"レンは資料室に青いノートを忘れたとスタッフへ相談していた。鍵を必要とする理由があった。"
-    }
   };
   return map[flag] || {
     title:"新しい矛盾を発見",
@@ -3398,23 +3372,13 @@ function presentEvidence(clueId){
     } else if(rule.flag==="ren_exit"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
       レンは「17時38分にはもう図書館を出た」と証言した。<br>
-      しかし <strong>17:42のレンの自販機レシート</strong> が残っている。<br><br>
-      レン「……ちょっと、自販機に寄っただけです」`;
+      しかし <strong>17:42、館内1階の休憩スペースで発行された自販機レシート</strong> が残っている。<br><br>
+      レン「……ちょっと、休憩スペースに寄っただけです」`;
     } else if(rule.flag==="ren_backdoor"){
       msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
       レンは「裏口には行っていない」と言った。<br>
       しかし <strong>17:39の廊下カメラ</strong> には、同じ制服と赤いリュックの人物が裏口方向へ向かっている。<br><br>
       レン「……裏口の近くまでは行きました」`;
-    } else if(rule.flag==="ren_return"){
-      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
-      レンは「17時38分以降、館内には戻っていない」と言った。<br>
-      けれど、17:40に濡れた裏口ポスターと同じ紙片が、<strong>レンの閲覧席の下</strong>から見つかっている。<br>
-      裏口付近から館内へ戻った痕跡と考えるのが自然だ。`;
-    } else if(rule.flag==="ren_motive"){
-      msg.innerHTML=`<strong>四つ目の矛盾を発見！</strong><br><br>
-      レンは「資料室には用事がない」と言った。<br>
-      しかし <strong>17:20の忘れ物メモ</strong> には、資料室に青いノートを忘れたと相談した記録がある。<br><br>
-      鍵を必要とする理由が、ようやく見えてきた。`;
     }
 
     let linkedInsight="";
@@ -3425,13 +3389,9 @@ function presentEvidence(clueId){
     }else if(rule.flag==="kana_frame" && nemoInsights.frame){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「額縁の跡、やっぱり関係あったんだ。」</div>`;
     }else if(rule.flag==="ren_exit" && nemoInsights.receipt){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:42。やっぱり、17:38には帰ってなかったね。」</div>`;
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:42に館内にいた。やっぱり、17:38には帰ってなかったね。」</div>`;
     }else if(rule.flag==="ren_backdoor" && nemoInsights.camera){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「赤いリュック、ここでつながったね。」</div>`;
-    }else if(rule.flag==="ren_return" && (nemoInsights.wet || nemoInsights.poster)){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。濡れた紙、裏口からついてきたんだ。」</div>`;
-    }else if(rule.flag==="ren_motive" && nemoInsights.note){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「青いノート。だから資料室に入りたかったんだね。」</div>`;
     }
 
     msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
