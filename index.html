@@ -2021,7 +2021,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.54 story progression */
+/* v0.55 story progression */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2033,6 +2033,11 @@ body:not(.case-active) .topFileBtn{
 .caseCard.available:not(.cleared) .caseStatus{color:#f4c96b}
 .caseCard.locked .caseStatus{color:#9297aa}
 .originBadge{display:inline-block;margin-left:7px;padding:2px 6px;border:1px solid #7c6bc0;border-radius:999px;color:#d9d0ff;font-size:9px;letter-spacing:.06em;vertical-align:2px}
+.finalBadge{display:inline-block;margin-left:7px;padding:2px 6px;border:1px solid #8a4f5b;border-radius:999px;color:#ffc2c8;background:#3a2028;font-size:9px;letter-spacing:.06em;vertical-align:2px}
+.caseTeaser{border:1px solid #65424c;border-radius:16px;background:linear-gradient(145deg,#2b2838,#2b222a);padding:14px;color:var(--text);opacity:.72;position:relative;overflow:hidden}
+.caseTeaser:after{content:"LOCKED";position:absolute;right:-22px;top:15px;transform:rotate(35deg);padding:3px 30px;background:#512d36;color:#f1b5bf;font-size:9px;font-weight:1000;letter-spacing:.08em}
+.caseTeaser .caseStatus{margin-top:9px;color:#d993a0;font-size:11px;font-weight:900}
+
 .caseProgressNote{margin-top:12px;padding:10px 12px;border:1px dashed #565e7c;border-radius:12px;background:#202537;color:var(--muted);font-size:12px;line-height:1.65}
 .unlockNotice{margin:20px auto 0;max-width:620px;padding:14px 16px;border:1px solid #7364b5;border-radius:15px;background:linear-gradient(135deg,#30284c,#252b40);color:#e9e4ff;line-height:1.7;text-align:left}
 .unlockNotice strong{color:#f4c96b}
@@ -2045,6 +2050,7 @@ body:not(.case-active) .topFileBtn{
 .originSolo .partnerName{color:#d9dce8}
 .scene.case4{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.40)),linear-gradient(145deg,#738367 0 22%,#6e886f 22% 54%,#8d785c 54% 100%)}
 .scene.case5{background:linear-gradient(rgba(8,10,18,.16),rgba(8,10,18,.52)),linear-gradient(145deg,#3d4658 0 24%,#253446 24% 55%,#5b4e45 55% 78%,#202c38 78% 100%)}
+.scene.case6{background:linear-gradient(rgba(10,9,12,.10),rgba(10,9,12,.44)),linear-gradient(145deg,#8a775f 0 20%,#5f5146 20% 52%,#71634f 52% 76%,#39434b 76% 100%)}
 @media(max-width:860px){
   .caseStatus{font-size:10px}
   .unlockNotice{margin-top:14px;padding:12px 13px}
@@ -2064,7 +2070,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.54</span>
+    <span class="badge">v0.55</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2138,6 +2144,18 @@ body:not(.case-active) .topFileBtn{
         <div class="caseDesc">雨月駅で消えた待ち合わせ相手。人の記憶から、存在しない事件をほどく。</div>
         <div class="caseStatus"></div>
       </button>
+      <button class="caseCard" data-case="6">
+        <div class="caseLabel">CASE 06</div>
+        <div class="caseTitle">宛先のない手紙</div>
+        <div class="caseDesc">古い郵便局で見つかった、二十年前に届かなかった手紙の行き先を追う。</div>
+        <div class="caseStatus"></div>
+      </button>
+      <div class="caseTeaser">
+        <div class="caseLabel">CASE 07 <span class="finalBadge">FINAL CASE</span></div>
+        <div class="caseTitle">？？？？</div>
+        <div class="caseDesc">次は、初めて人が死ぬ事件。少しだけ物騒で、少しだけ変な最終事件。</div>
+        <div class="caseStatus">🩸 COMING SOON · 初の殺人事件</div>
+      </div>
     </div>
     <div class="caseProgressNote" id="caseProgressHint">事件を解決すると、次の事件が届きます。解決済みの事件はいつでも再捜査できます。</div>
   </section>
@@ -2289,7 +2307,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.54 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.55 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3069,12 +3087,101 @@ const cases={
   ending:"宗一郎は駅へ来ていなかった。20:35に榊から古い旅行記を受け取り、その中に挟まれていた若い頃の写真を見て、亡き妻との約束を思い出した。『結婚50年の日、またここへ来よう』――その日が今日だった。宗一郎は駅へ向かう前にほんの少しだけ旧展望台へ寄るつもりで、20:48の夕映丘線に乗った。しかし帰りの便を逃し、ユイとの待ち合わせに間に合わなかった。駅と喫茶店で目撃された『宗一郎』は、たまたまよく似た茶色い帽子をかぶった別人。人々の記憶が、『駅まで来た人が消えた』という存在しない事件を作っていた。",
   culpritComment:{name:"宗一郎",line:"すまんな。少しだけのつもりだったんだ。あいつとの約束を……今日だけは、忘れたくなくてな。"}
 }
-
+,
+6:{
+  title:"CASE 06　宛先のない手紙 ― 二十年前の約束 ―",
+  place:"旧・桜町郵便局",
+  briefing:{
+    lead:"取り壊し前の古い郵便局から、二十年前に届かなかった一通の手紙が見つかった。",
+    incident:"旧・桜町郵便局の仕分け棚を撤去していたところ、棚の裏から古い封筒が見つかった。消印は2006年。宛先欄には住所も名前もなく、表には『春になったら、あの場所で。』とだけ書かれている。中には水濡れで一部読めなくなった手紙と、桜の木の下に立つ二人の子どもの写真。この手紙は、誰に届けるはずだったのだろう。",
+    objectives:[
+      "二十年前の手紙の受取人を特定する",
+      "差出人と、手紙が届かなかった理由を明らかにする",
+      "残された約束が何を意味していたのか確かめる"
+    ]
+  },
+  intro:"依頼：犯人を探す事件ではない。古い記録と人々の記憶をたどり、二十年間止まっていた手紙を本来の相手へ届けよう。",
+  evidence:{
+    oldLetter:{icon:"✉️",name:"宛先のない古い手紙",desc:"2006年の消印。表には『春になったら、あの場所で。』。本文の冒頭は水濡れで『……ルへ』としか読めず、末尾も滲んでいる。"},
+    oldPhoto:{icon:"📷",name:"桜の木の下の古い写真",desc:"2006年3月24日。小学生くらいの子どもが二人、古い桜の木の下で並んでいる。裏には日付だけが書かれている。"},
+    schoolPaper:{icon:"📰",name:"旧桜小学校の学校新聞",desc:"2006年3月の記事。統合直前、『春川 晴くんは家庭事情で予定より早く町を離れた』と記録されている。"},
+    returnLog:{icon:"📮",name:"二十年前の郵便処理記録",desc:"『宛先不詳・差出人確認待ち』の一通が記録されているが、返送完了の印はない。手紙は郵便局内で処理が止まっていた可能性が高い。"},
+    classAlbum:{icon:"📘",name:"旧桜小学校のクラスアルバム",desc:"写真の二人と同じ顔が載っている。名前は『春川 晴』と『結城 悠希』。二人はいつも一緒だったと担任コメントにある。"},
+    teacherLog:{icon:"📝",name:"担任の古い日誌",desc:"2006年3月23日。『晴くん、転居日が急きょ早まり午後に出発。悠希くんは発熱で欠席。二人は最後に会えず』と記されている。"},
+    plaque:{icon:"🌸",name:"桜の根元の小さなプレート",desc:"写真と同じ場所に残る金属板。錆びた文字で『またここで』。古い桜はすでに切られ、そばに若い桜が植えられている。"},
+    townNews:{icon:"🗞️",name:"町内報の切り抜き",desc:"数年前の記事。『故・結城悠希さんが長年手入れしていた若桜を地域で引き継ぐ』とある。悠希は、古い桜がなくなった後も同じ場所を守っていた。"}
+  },
+  requiredEvidence:["oldLetter","schoolPaper","returnLog","classAlbum","teacherLog","townNews"],
+  hotspots:[
+    ["oldLetter","✉️ 古い手紙","7%","12%"],
+    ["oldPhoto","📷 古い写真","auto","13%","7%"],
+    ["schoolPaper","📰 学校新聞","38%","23%"],
+    ["returnLog","📮 郵便記録","8%","auto",null,"18%"],
+    ["classAlbum","📘 アルバム","auto","auto","8%","18%"],
+    ["teacherLog","📝 担任日誌","43%","auto",null,"8%"],
+    ["plaque","🌸 桜のプレート","auto","36%","7%"],
+    ["townNews","🗞️ 町内報","12%","43%"]
+  ],
+  people:[
+    {name:"サエ",role:"旧郵便局の元局員・現管理人",note:"父もこの郵便局で働いていた。棚の裏から手紙を見つけ、届け先を探してほしいと依頼した。"},
+    {name:"タクミ",role:"町の写真館店主",note:"二十年前から桜町に住んでいる。写真に写る子どもたちを見たことがあるという。"},
+    {name:"ミオ",role:"旧桜小学校の教師",note:"統合前の学校資料を管理している。写真の場所と当時の児童記録に詳しい。"},
+    {name:"ハル",role:"二十年ぶりに町へ戻った男性",note:"本名は春川 晴。最近、実家の整理のため桜町へ戻ってきた。昔のことはあまり覚えていないと話す。"}
+  ],
+  timeline:[
+    ["2006/3/23","晴の転居日が急きょ早まり、悠希は発熱で欠席。二人は最後に会えないまま別れる"],
+    ["2006/3/24","桜の木の下で撮られた二人の写真が現像される"],
+    ["2006/4月","宛先のない手紙が桜町郵便局で『宛先不詳・差出人確認待ち』となる"],
+    ["その後","手紙は仕分け棚の裏へ入り込み、処理されないまま残る"],
+    ["数年前","結城悠希が亡くなる。彼が手入れしていた若桜は地域へ引き継がれる"],
+    ["現在","旧郵便局の解体前整理で、手紙が二十年ぶりに見つかる"]
+  ],
+  witnesses:{
+    sae:{icon:"📮",name:"サエ",role:"旧郵便局の元局員",statements:[
+      {text:"『宛先がないなら、いったん差出人へ返された手紙が棚の裏へ紛れたんでしょうね。』",press:"昔の処理ならそうなるはずだ、とサエは考えていた。実際の返送記録まではまだ確認していない。",contradiction:"returnLog"},
+      {text:"『父から、昔この町の子どもが宛先の分からない手紙を持ってきた、という話を聞いたことがあります。』",press:"子どもの名前までは覚えていないが、『どうしても届けたい』と何度も頼んでいたらしい。"}
+    ]},
+    takumi:{icon:"📷",name:"タクミ",role:"写真館店主",statements:[
+      {text:"『写真の二人は、卒業までずっと一緒でしたよ。いつも二人で歩いてた。』",press:"二十年前の記憶なので時期には自信がないが、仲が良かったことだけはよく覚えているという。",contradiction:"schoolPaper",requires:["sae_return"]},
+      {text:"『この写真、うちで現像した気がします。桜の下で撮った最後の一枚だったんじゃないかな。』",press:"写真の日付は2006年3月24日。統合前後の慌ただしい時期だった。"}
+    ]},
+    mio:{icon:"🏫",name:"ミオ",role:"旧桜小学校の教師",statements:[
+      {text:"『アルバムを見る限り、写真の二人は春川晴くんと結城悠希くんで間違いないと思います。』",press:"顔立ちだけでなく、写真の服装も当時の行事写真と一致している。"},
+      {text:"『“またここで”のプレートは、二人が先生に頼んで桜の根元へ付けたものだと聞いています。』",press:"古い桜は数年前に枯れたが、悠希が植えた若い桜が今も同じ場所に残っている。"}
+    ]},
+    haru:{icon:"🧳",name:"ハル",role:"二十年ぶりに帰郷した男性",statements:[
+      {text:"『ユウキとは、転校する日にちゃんと別れたと思います。だから、何か言い残したことがあったとは……。』",press:"ハル自身も記憶が曖昧で、『たぶん、そうだったと思う』と付け加えた。",contradiction:"teacherLog",requires:["takumi_transfer"]},
+      {text:"『“またここで”って言葉は……なんとなく、聞いたことがある気がします。』",press:"桜のプレートを見た瞬間、ハルはしばらく黙り込んだ。"}
+    ]}
+  },
+  multiClear:[
+    {witness:"sae",evidence:"returnLog",statement:0,flag:"sae_return"},
+    {witness:"takumi",evidence:"schoolPaper",statement:0,flag:"takumi_transfer",requires:["sae_return"]},
+    {witness:"haru",evidence:"teacherLog",statement:0,flag:"haru_farewell",requires:["takumi_transfer"]}
+  ],
+  finalReady:["sae_return","takumi_transfer","haru_farewell"],
+  deduction:{
+    culpritLabel:"この手紙を受け取るはずだった人",
+    culpritOptions:[["haru","ハル（春川 晴）"],["sae","サエ"],["mio","ミオ"]],
+    placeLabel:"手紙を書いた人",
+    placeOptions:[["yuuki","結城 悠希"],["takumi","タクミ"],["sae","サエ"]],
+    motiveLabel:"なぜ宛先が書かれていなかった？",
+    motiveOptions:[["direct","直接渡すつもりだったが、突然の転居で渡せず新住所も知らなかった"],["forgot","単純に宛先を書き忘れた"],["secret","誰にも読まれないよう、わざと宛先を消した"]],
+    answer:{culprit:"haru",place:"yuuki",motive:"direct"},
+    hints:{
+      culprit:"写真の二人の名前、転校記録、本文冒頭の『……ルへ』をつなげよう。",
+      place:"写真のもう一人と、二人が最後に会えなかった日の記録、若桜を守っていた人物を確認しよう。",
+      motive:"晴の転居は予定より早まり、悠希はその日欠席していた。新しい住所を知る時間はあっただろうか。"
+    }
+  },
+  ending:"手紙を受け取るはずだったのは、二十年ぶりに町へ戻った春川晴だった。差出人は幼なじみの結城悠希。悠希は転校の日に直接渡すつもりで手紙を書いていたが、晴の転居が急に早まり、自分も発熱で学校を休んでいたため最後に会えなかった。新しい住所を知らないまま、それでも届いてほしくて宛先のない封筒を郵便へ託した。手紙は処理途中で古い仕分け棚の裏へ落ち、そのまま二十年眠り続けた。悠希はその後も『またここで』の約束を忘れず、古い桜が枯れたあとには同じ場所へ若い桜を植え、数年前に亡くなるまで手入れを続けていた。二十年遅れて、手紙はようやく晴の手に渡った。",
+  culpritComment:{name:"ハル",line:"……遅いよ。でも、ちゃんと届いた。"}
+}
 
 };
 
 const SAVE_KEY="nemoMysteryDaysProgress_v1";
-const CASE_COUNT=5;
+const CASE_COUNT=6;
 function loadGameProgress(){
   try{
     const raw=localStorage.getItem(SAVE_KEY);
@@ -3223,6 +3330,7 @@ function openBriefing(){
   document.getElementById("scene").classList.toggle("case3",currentCase===cases[3]);
   document.getElementById("scene").classList.toggle("case4",currentCase===cases[4]);
   document.getElementById("scene").classList.toggle("case5",currentCase===cases[5]);
+  document.getElementById("scene").classList.toggle("case6",currentCase===cases[6]);
 
   renderFile();
   renderProgress();
@@ -3386,7 +3494,15 @@ function investigationPartnerReaction(id){
       giftbox:"この箱、オルゴールが入りそう。",
       birthdayCard:"『お母さんへ』……プレゼントだったのかな。",
       gramophone:"扉、ちょっと浮いてる。中にリボンも見える。",
-      wrapping:"このリボン、お店の包装用なんだね。"
+      wrapping:"このリボン、お店の包装用なんだね。",
+      oldLetter:"水でにじんでる。でも『……ルへ』って読めるね。",
+      oldPhoto:"この二人、すごく仲よさそう。",
+      schoolPaper:"晴くん、予定より早く町を出たんだ。",
+      returnLog:"返した印がない。手紙、ここから出てないのかも。",
+      classAlbum:"写真の二人、晴くんと悠希くんなんだね。",
+      teacherLog:"最後の日、二人は会えてなかったんだ……。",
+      plaque:"『またここで』。ずっと残ってたんだね。",
+      townNews:"悠希くん、この桜をずっと守ってたんだ。"
     },
     96:{
       desk:"これだけだと、まだわかんないね。ほかも見よ。",
@@ -3407,7 +3523,15 @@ function investigationPartnerReaction(id){
       giftbox:"箱の内側の跡、オルゴールの大きさと近いね。",
       birthdayCard:"これが動機につながるかもしれない。",
       gramophone:"隙間のリボン。ここ、最後に確認したい。",
-      wrapping:"マコちゃん、これで包めるか聞いてたんだね。"
+      wrapping:"マコちゃん、これで包めるか聞いてたんだね。",
+      oldLetter:"宛先はないけど、本文の『……ルへ』は受取人の名前の一部かも。",
+      oldPhoto:"2006年3月24日。この日付を学校の記録と並べたいね。",
+      schoolPaper:"予定より早い転居。誰かが別れを準備していたなら、予定が狂ったはず。",
+      returnLog:"返送完了がない。つまり手紙は郵便局の外へ出ていない。",
+      classAlbum:"晴と悠希。写真の二人の名前が確定したね。",
+      teacherLog:"晴は急に出発、悠希は欠席。直接会う予定なら成立しなかった。",
+      plaque:"『またここで』は、二人の約束そのものかもしれない。",
+      townNews:"悠希が若桜を守っていた。約束を忘れていなかった可能性が高いね。"
     },
     31:{
       desk:"机の横に、小さい花がある。……かわいい。",
@@ -3427,7 +3551,15 @@ function investigationPartnerReaction(id){
       giftbox:"ちっちゃい箱。プレゼントっぽいね。",
       birthdayCard:"お母さんへのカードだ。途中まで書いてある。",
       gramophone:"古い蓄音機、かわいい。……扉、少し開いてる？",
-      wrapping:"ピンクのリボン。マコちゃん、これ気にしてたんだね。"
+      wrapping:"ピンクのリボン。マコちゃん、これ気にしてたんだね。",
+      oldLetter:"この手紙、誰かにすごく届けたかった感じがする。",
+      oldPhoto:"二人とも、いい顔してるね。",
+      schoolPaper:"急にお引っ越ししたんだね。お別れ、ちゃんとできたのかな。",
+      returnLog:"返されたんじゃないなら、ずっとここにいたのかな。",
+      classAlbum:"晴くんと悠希くん。ずっと一緒だったんだ。",
+      teacherLog:"会えないままお別れって、さみしいね。",
+      plaque:"『またここで』って、やさしい約束だね。",
+      townNews:"悠希くん、ずっと桜のお世話してたんだね。"
     },
     12:{
       desk:"うーん。ここ、あとで気になるかも。",
@@ -3448,7 +3580,15 @@ function investigationPartnerReaction(id){
       giftbox:"この箱、捨てない方がいい。",
       birthdayCard:"これ、たぶん理由につながる。",
       gramophone:"ここ。たぶん隠すなら、ここ。",
-      wrapping:"このリボンも覚えておこ。"
+      wrapping:"このリボンも覚えておこ。",
+      oldLetter:"この『……ルへ』、たぶん名前。",
+      oldPhoto:"この写真、あとで名前とつながりそう。",
+      schoolPaper:"予定より早い転居。ここ、たぶん大事。",
+      returnLog:"返ってない。手紙、ずっとここにいた。",
+      classAlbum:"晴と悠希。たぶんこの二人。",
+      teacherLog:"会えてない。だから、渡せなかった。",
+      plaque:"『またここで』。これ、約束。",
+      townNews:"悠希くん、待ってたんだと思う。"
     }
   };
 
@@ -3511,6 +3651,16 @@ function getNemoInsight(id){
         kind:"観察",
         note:"写真の裏書きは古いインクで、『結婚50年の日、またここへ来よう』とある。今日の日付と一致する。",
         speech:"この日付、今日だよ。ずっと前からの約束なんだね。"
+      },
+      oldLetter:{
+        kind:"観察",
+        note:"水濡れした本文の冒頭には『…ルへ』と読める跡があり、宛名の一部だった可能性がある。",
+        speech:"ここ、『…ルへ』って残ってる。名前の最後かも。"
+      },
+      plaque:{
+        kind:"観察",
+        note:"『またここで』のプレートは古いが、留め直した跡が何度もある。長く誰かが守っていた。",
+        speech:"このプレート、何回も直してある。ずっと大事にされてたんだね。"
       }
     };
     if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
@@ -3567,6 +3717,16 @@ function getNemoInsight(id){
         kind:"推理",
         note:"20:35に宗一郎へ旅行記を渡した記録があり、榊の『今日は会っていない』という証言とは両立しない。",
         speech:"20:35に渡してる。『会ってない』とは合わないね。"
+      },
+      returnLog:{
+        kind:"推理",
+        note:"返送完了の記録がないため、手紙は差出人へ戻ったのではなく郵便局内で止まったと考えられる。",
+        speech:"返した記録がない。手紙、二十年間ここから出てないんだね。"
+      },
+      teacherLog:{
+        kind:"推理",
+        note:"晴の突然の転居と悠希の欠席が同日に重なっている。直接渡す予定だったものが渡せなくなった可能性がある。",
+        speech:"会うはずだった日に、二人とも会えなかった。これが手紙の理由かも。"
       }
     };
     if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
@@ -3731,6 +3891,12 @@ function nemoNudgeFor(statement){
       line="帽子の中、K.S.って書いてある。宗一郎さんのじゃないよね。";
     }else if(evidenceId==="bookLedger"){
       line="20:35に渡したって記録がある。『会ってない』とは合わないね。";
+    }else if(evidenceId==="returnLog"){
+      line="返送完了の印がない。サエさんの話と違うね。";
+    }else if(evidenceId==="schoolPaper"){
+      line="晴くん、卒業まで町にいなかったみたい。タクミさんの記憶と違うね。";
+    }else if(evidenceId==="teacherLog"){
+      line="最後の日、二人は会えてない。ハルさんの記憶と違うね。";
     }
 
     return `<div class="nemoNudge">
@@ -3817,6 +3983,10 @@ function nemoPressReaction(witnessId, statementIndex){
             "nana:0":"顔は見てないんだ。帽子だけで宗一郎さんだと思ったんだね。",
             "takashi:0":"駅員さんも顔は見てない。帽子が手がかりなんだ。",
             "sakaki:0":"『会ってない』って言い方、ちょっと気になるね。",
+            "sae:1":"子どもが『どうしても届けたい』って頼んだんだね。",
+            "takumi:1":"最後の一枚って言い方、覚えておこ。",
+            "mio:0":"先生の資料で、写真の二人の名前が分かったね。",
+            "haru:1":"『またここで』、ハルさんには何か残ってるみたい。",
     },
     96:{
       "misaki:1":"17:15から17:18。……ここ、覚えておこ。",
@@ -3830,7 +4000,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "mina:2":"17:45までずっと裏口。時間の範囲がはっきりしてるね。",
       "yuna:0":"実時刻じゃなく、壁時計を基準にした証言なんだね。",
       "souta:1":"ソウタさんも壁時計を基準にしてる。共通点だね。",
-      "mako:0":"母親へのプレゼント。動機になり得るけど、まだ決めつけないでおこ。"
+      "mako:0":"母親へのプレゼント。動機になり得るけど、まだ決めつけないでおこ。",
+      "sae:1":"宛先不詳の子どもの手紙。差出人を特定する材料になりそう。",
+      "takumi:1":"2006年3月24日。転居記録と並べてみよう。",
+      "mio:0":"写真の二人は晴と悠希。人物関係が確定したね。",
+      "haru:1":"『またここで』に反応した。記憶は完全に消えてないみたい。"
     },
     31:{
       "misaki:2":"ふつうに答えてる感じだったね。",
@@ -3848,7 +4022,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "aoi:1":"忘れ物の相談については、言い方が変わらないね。",
       "yuna:0":"時間を聞いた時、壁時計を見たってすぐ答えたね。",
       "souta:1":"壁時計の話、自然に出てきたね。本人は本当に17:30だと思ってたのかも。",
-      "mako:0":"お母さんの話をした時、ちょっと大事そうに言ったね。"
+      "mako:0":"お母さんの話をした時、ちょっと大事そうに言ったね。",
+      "sae:1":"その子、何度もお願いしたんだね。大事な手紙だったのかな。",
+      "takumi:1":"写真のことを話す時、ちょっと懐かしそうだったね。",
+      "mio:0":"二人の名前を、迷わず答えたね。",
+      "haru:1":"『またここで』って言った時、ハルさんの顔が変わったね。"
     },
     12:{
       "misaki:1":"この3分、なんかあとで出てきそう。",
@@ -3866,7 +4044,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "mina:2":"ずっと裏口……ほんとにずっとかな。",
       "yuna:0":"17:30……でも時計、止まってるよね。",
       "souta:1":"壁時計。ここ、たぶん大事。",
-      "mako:0":"お母さん。これ、理由かな。"
+      "mako:0":"お母さん。これ、理由かな。",
+      "sae:1":"子どもの手紙。ここ、気になる。",
+      "takumi:1":"最後の写真。たぶん大事。",
+      "mio:0":"晴と悠希。覚えておこ。",
+      "haru:1":"『またここで』。たぶん思い出してる。"
     }
   };
 
@@ -4007,6 +4189,24 @@ function contradictionMeta(flag){
       statement:"榊『今日は宗一郎には会ってません』",
       evidence:"20:35の古本屋受け渡し帳",
       summary:"榊自身の字で宗一郎へ旅行記を渡した記録が残っている。宗一郎は20:35には古本屋付近にいた。"
+    },
+    sae_return:{
+      title:"『返送された』という推測と記録が合わない",
+      statement:"サエ『差出人へ返された手紙が棚の裏へ紛れたんでしょう』",
+      evidence:"二十年前の郵便処理記録",
+      summary:"記録には『宛先不詳・差出人確認待ち』とあるだけで、返送完了の印がない。手紙は郵便局の中で止まったままだった。"
+    },
+    takumi_transfer:{
+      title:"『卒業までずっと一緒』という記憶が違っていた",
+      statement:"タクミ『写真の二人は、卒業までずっと一緒でした』",
+      evidence:"旧桜小学校の学校新聞",
+      summary:"春川晴は家庭事情で予定より早く町を離れている。二人の別れは、周囲が覚えているより突然だった。"
+    },
+    haru_farewell:{
+      title:"『ちゃんと別れた』という記憶が日誌と食い違う",
+      statement:"ハル『ユウキとは、転校する日にちゃんと別れたと思います』",
+      evidence:"担任の古い日誌",
+      summary:"晴は急な転居で午後に出発し、悠希は発熱で欠席。二人は最後に会えないまま別れていた。"
     },
     hina_memory:{
       title:"ヒナの記憶と、封筒が見つかった場所が食い違う",
@@ -4165,6 +4365,21 @@ function presentEvidence(clueId){
       しかし <strong>20:35の受け渡し帳</strong> には、榊自身の字で宗一郎へ旅行記を渡した記録がある。<br><br>
       榊「……店の前で本を渡しただけだ。会ったってほどじゃないと思ってな」<br><br>
       これで、宗一郎の本当の行動を組み立てる材料がそろった。`;
+    } else if(rule.flag==="sae_return"){
+      msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
+      サエは「差出人へ返された手紙が棚の裏へ紛れた」と考えていた。<br>
+      しかし <strong>二十年前の郵便処理記録には返送完了の印がない</strong>。<br><br>
+      サエ「……じゃあ、この手紙は一度も郵便局を出ていなかったの？」`;
+    } else if(rule.flag==="takumi_transfer"){
+      msg.innerHTML=`<strong>二つ目の食い違いを発見！</strong><br><br>
+      タクミは「写真の二人は卒業までずっと一緒だった」と話した。<br>
+      しかし <strong>学校新聞には、春川晴が予定より早く町を離れた記録</strong> がある。<br><br>
+      タクミ「……そうか。あの春、急に引っ越した子がいたな。二十年も前で、混ざってたよ」`;
+    } else if(rule.flag==="haru_farewell"){
+      msg.innerHTML=`<strong>三つ目の食い違いを発見！</strong><br><br>
+      ハルは「転校の日にユウキとちゃんと別れた」と思っていた。<br>
+      でも担任日誌には、<strong>晴は急に出発し、悠希は発熱で欠席。二人は最後に会えなかった</strong> と残っている。<br><br>
+      ハル「……そうだった。あの日、ユウキは休んでた。俺、ちゃんと別れたって……勝手に思ってたんだ」`;
     } else if(rule.flag==="hina_memory"){
       msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
       ヒナは「パン屋さんに着くまでは、手紙はバッグに入っていたと思う」と話した。<br>
@@ -4196,6 +4411,10 @@ function presentEvidence(clueId){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「K.S.の帽子。駅にいた人は、宗一郎さんじゃなかったのかも。」</div>`;
     }else if(rule.flag==="sakaki_ledger" && nemoInsights.bookLedger){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「20:35に本を受け取ってる。ここから本当の道順を追えそう。」</div>`;
+    }else if(rule.flag==="sae_return" && nemoInsights.returnLog){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「返送されてない。二十年間、ここで止まってたんだね。」</div>`;
+    }else if(rule.flag==="haru_farewell" && nemoInsights.teacherLog){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「会えてなかった。だから、渡せないまま残ったんだね。」</div>`;
     }
 
     msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
@@ -4253,7 +4472,9 @@ function setupDeductionPanel(){
           ? "誰かを犯人にする必要はない。帰り道と証言をつないで、手紙がどこで消え、今どこにあるのか組み立てよう。"
           : currentCase===cases[5]
             ? "『宗一郎は駅へ来た』という前提をいったん捨てよう。帽子、バス、旅行記、書きかけのメモから、本当の行き先を組み立ててください。"
-            : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+            : currentCase===cases[6]
+              ? "これは犯人探しではない。写真、学校記録、郵便処理記録、担任日誌、若桜の記録から、二十年前に止まった手紙の受取人と差出人を組み立てよう。"
+              : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
 
   const msg=document.getElementById("deductionMsg");
   msg.className="callout special";
@@ -4305,7 +4526,9 @@ function finalReveal(){
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
 
-  const titleName=currentCase===cases[5]
+  const titleName=currentCase===cases[6]
+    ? "届かなかったものを届けた探偵"
+    : currentCase===cases[5]
     ? "存在しない事件を解いた探偵"
     : currentCase===cases[4]
       ? "はじめての一歩"
@@ -4336,7 +4559,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`✨ <strong>現在届いている事件は、すべて解決しました。</strong><br>これまでに解決した事件は、事件一覧から何度でも再捜査できます。`;
+      notice.innerHTML=`🩸 <strong>CASE 07の事件ファイルは、まだ封印されています。</strong><br>次は、この探偵局で初めて「人が死んだ事件」。<br><span class="muted">少しだけ物騒で、少しだけ変な最終事件。準備ができるまで、解決済みの事件はいつでも再捜査できます。</span>`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
