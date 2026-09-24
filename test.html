@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.59 CASE 05 staged clue reveal */
+/* v0.60 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2071,7 +2071,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.59 separate how-to manual */
+/* v0.60 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2090,7 +2090,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.59 CASE 07 truth reconstruction */
+/* v0.60 CASE 07 truth reconstruction */
 .reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
 .reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
 .reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
@@ -2102,6 +2102,17 @@ body:not(.case-active) .topFileBtn{
 .reconCheck{width:100%;margin-top:2px}.reconResultFlow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:10px}.reconResultChip{border:1px solid #4c956c;background:#193226;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900}.reconResultArrow{color:#7dd8a4;font-weight:1000}
 .reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
 @media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
+
+/* v0.60 cross-case archive mystery */
+.archiveLead{padding:15px 16px;border:1px solid #65568d;border-radius:16px;background:linear-gradient(135deg,#2c2941,#202638);margin-bottom:14px;line-height:1.75}
+.archiveLead strong{color:#f3d47c}.archiveFile{border:1px solid #4f566f;background:#171b28;border-radius:18px;padding:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+.archiveFileTop{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px dashed #505872}.archiveFileTop h3{margin:0 0 3px;font-size:18px}.archiveFileTop p{margin:0;color:var(--muted);font-size:13px}
+.arcSigil{width:62px;height:62px;min-width:62px;position:relative;border-radius:50%;background:conic-gradient(from 32deg,transparent 0 42deg,#c9baff 42deg 315deg,transparent 315deg 360deg);filter:drop-shadow(0 0 10px rgba(159,140,255,.18))}.arcSigil:after{content:"";position:absolute;width:42px;height:7px;left:42px;top:17px;background:repeating-linear-gradient(to bottom,#c9baff 0 1px,transparent 1px 3px);box-shadow:0 8px 0 rgba(201,186,255,.9),0 16px 0 rgba(201,186,255,.75);transform:rotate(0deg)}.arcSigil:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#171b28}
+.archiveCaseGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}.archiveCaseCard{border:1px solid #454d68;border-radius:13px;background:#222738;padding:12px}.archiveCaseNo{font-size:10px;font-weight:1000;letter-spacing:.12em;color:#aaa1d8}.archiveCaseCard strong{display:block;margin:3px 0 5px;font-size:13px}.archiveCaseCard p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
+.archiveQuestion{margin-top:14px;padding:15px;border:1px solid #5a617d;border-radius:15px;background:#202534}.archiveQuestion h3{margin:0 0 9px}.archiveChoices{display:grid;gap:8px}.archiveChoice{width:100%;text-align:left;padding:12px 13px;border:1px solid #555e7d;border-radius:12px;background:#2a3043;color:var(--text);font-weight:900;cursor:pointer}.archiveChoice:hover{border-color:#8f7de1}.archiveChoice.correct{border-color:#63b98a;background:#18382a}.archiveChoice.wrong{border-color:#b9687a;background:#3b222b}
+.archiveResult{margin-top:13px}.archiveReveal{margin-top:15px;border:1px solid #7865b2;border-radius:16px;background:linear-gradient(145deg,#2b2442,#1a2130);padding:16px}.archiveReveal h3{margin:0 0 8px;color:#f2d178}.archiveLocations{display:grid;gap:5px;margin:12px 0;padding:12px;border-left:3px solid #7565ad;background:#171b28;border-radius:0 10px 10px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}.archiveCase08{margin-top:12px;padding:12px;border:1px dashed #7f719f;border-radius:12px;color:#e7e0ff;background:#262138}.archiveNemo{margin-top:12px;color:#e8e2ff}.archiveContinue{margin-top:14px;width:100%}
+@media(max-width:640px){.archiveCaseGrid{grid-template-columns:1fr}.archiveFile{padding:13px}.archiveFileTop{align-items:flex-start}.arcSigil{width:50px;height:50px;min-width:50px}.arcSigil:after{left:34px;top:13px;width:34px}.archiveCaseCard{padding:10px}}
+
 </style>
 </head>
 <body>
@@ -2115,7 +2126,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.59</span>
+    <span class="badge">v0.60</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2341,6 +2352,14 @@ body:not(.case-active) .topFileBtn{
         <div id="deductionMsg" class="callout special">3つの答えを、集めた証拠と証言から選んでください。</div>
       </section>
 
+
+      <section class="panel hidden" id="archiveMysteryPanel">
+        <div class="badge">POST CASE · ARCHIVE MATCH</div>
+        <h2>もうひとつの違和感</h2>
+        <div class="archiveLead" id="archiveLead"><strong>月影館の事件は解けた。</strong><br>けれど、書斎に残された古いファイルを閉じようとしたとき、ねもが表紙の裏を指さした。</div>
+        <div id="archiveMysteryContent"></div>
+      </section>
+
       <section class="panel hidden" id="finalPanel">
         <div class="bigReveal">
           <div class="word">CASE CLEAR</div>
@@ -2366,7 +2385,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.59 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days v0.60 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2504,7 +2523,7 @@ const cases={
     reception:{icon:"🛎️",name:"受付記録",desc:"17:15〜17:18、ミサキは来客案内のため受付を離れている。スタッフルーム側を見られる人はいなかった。"},
     frame:{icon:"🖼",name:"ずれた展示額縁",desc:"大型ポスターの額縁だけ、右端のほこり跡が約2cmずれている。最近動かされた。"},
     star:{icon:"✨",name:"銀色の星飾り",desc:"展示壁の足元に落ちていた小さな星形パーツ。カナのバッグには同型の飾りが付いている。"},
-    photo:{icon:"📷",name:"17:17の来館写真",desc:"客が撮った写真のガラス反射に、展示壁へ向かうカナが写っている。トイレとは逆方向。"},
+    photo:{icon:"📷",name:"17:17の来館写真",desc:"客が撮った写真のガラス反射に、展示壁へ向かうカナが写っている。トイレとは逆方向。写真の端には、搬入口の箱に『途中で切れた丸と、横に三本の短い線』のような小さな記号も写り込んでいる。事件との関係はなさそうだ。"},
     tube:{icon:"📦",name:"配達用ポスター筒",desc:"ユウが納品した筒。封は切られておらず、中身の枚数も伝票と一致する。"}
   },
   requiredEvidence:["photo","frame"],
@@ -2633,7 +2652,7 @@ const cases={
     note:{
       icon:"📝",
       name:"忘れ物メモ",
-      desc:"17:20、高校生利用者が『資料室に青いノートを忘れた』と申し出た記録。署名欄には『R』。資料室はすでに施錠済みだった。"
+      desc:"17:20、高校生利用者が『資料室に青いノートを忘れた』と申し出た記録。署名欄には『R』。資料室はすでに施錠済みだった。用紙の左下には、図書館の正式な印とは別に、Cの字にも見える輪と三本の細い線を組み合わせた小さな管理印がある。"
     },
     returnbox:{
       icon:"📮",
@@ -2825,7 +2844,7 @@ const cases={
     clock:{
       icon:"🕰️",
       name:"17:30で止まった壁時計",
-      desc:"壁時計は17:30を指したまま。裏蓋を開けると、季節飾りの細い紙リボンが分針の軸に挟まっている。取り除くと時計は再び動いた。"
+      desc:"壁時計は17:30を指したまま。裏蓋を開けると、季節飾りの細い紙リボンが分針の軸に挟まっている。取り除くと時計は再び動いた。裏蓋の隅には、メーカー名ではない『途切れた輪の横に三つの線』の古い刻印がある。"
     },
     cafeReceipt:{
       icon:"🧾",
@@ -2968,7 +2987,7 @@ const cases={
     bench:{
       icon:"🪑",
       name:"公園の古いベンチ",
-      desc:"座面と背もたれの隙間が少し広い。奥に、ピンク色の花シールの小さな欠片が引っかかっている。"
+      desc:"座面と背もたれの隙間が少し広い。奥に、ピンク色の花シールの小さな欠片が引っかかっている。ベンチの裏側には、丸の一部が欠け、その脇に細い線が三本並んだ消えかけの焼き印が残っている。"
     },
     breadReceipt:{
       icon:"🥐",
@@ -3084,7 +3103,7 @@ const cases={
     bookLedger:{icon:"📚",name:"古本屋の受け渡し帳",desc:"20:35、『古い旅行記　一冊　宗一郎さんへ受け渡し』と榊自身の字で記録されている。"},
     busLog:{icon:"🚌",name:"20:48のバス利用記録",desc:"宗一郎名義の高齢者ICカードが、駅とは逆方向へ向かう『夕映丘線』で使われている。降車候補には『旧展望台前』がある。"},
     unfinishedMemo:{icon:"✉️",name:"自宅に残された書きかけのメモ",desc:"『ユイへ。駅へ行く前に、どうしても――』とだけ書かれ、その先は空白。急いで家を出たように見える。"},
-    travelBook:{icon:"📷",name:"榊から受け取った古い写真",desc:"20:35に宗一郎が旅行記を受け取った際、古本屋のカウンターへ置き忘れた写真。若い頃の宗一郎と亡き妻が旧展望台で写っている。裏には『結婚50年の日、またここへ来よう』と書かれている。"}
+    travelBook:{icon:"📷",name:"榊から受け取った古い写真",desc:"20:35に宗一郎が旅行記を受け取った際、古本屋のカウンターへ置き忘れた写真。若い頃の宗一郎と亡き妻が旧展望台で写っている。裏には『結婚50年の日、またここへ来よう』と書かれ、日付の横に、欠けた輪と三本の短線を組み合わせた小さな印が押されている。"}
   },
   requiredEvidence:["stationHat","teaReceipt","bookLedger","busLog","unfinishedMemo"],
   sceneEvidenceTotal:6,
@@ -3178,7 +3197,7 @@ const cases={
     oldLetter:{icon:"✉️",name:"宛先のない古い手紙",desc:"2006年の消印。表には『春になったら、あの場所で。』。本文の冒頭は水濡れで『……ルへ』としか読めず、末尾も滲んでいる。"},
     oldPhoto:{icon:"📷",name:"桜の木の下の古い写真",desc:"2006年3月24日。小学生くらいの子どもが二人、古い桜の木の下で並んでいる。裏には日付だけが書かれている。"},
     schoolPaper:{icon:"📰",name:"旧桜小学校の学校新聞",desc:"2006年3月の記事。統合直前、『春川 晴くんは家庭事情で予定より早く町を離れた』と記録されている。"},
-    returnLog:{icon:"📮",name:"二十年前の郵便処理記録",desc:"『宛先不詳・差出人確認待ち』の一通が記録されているが、返送完了の印はない。手紙は郵便局内で処理が止まっていた可能性が高い。"},
+    returnLog:{icon:"📮",name:"二十年前の郵便処理記録",desc:"『宛先不詳・差出人確認待ち』の一通が記録されているが、返送完了の印はない。手紙は郵便局内で処理が止まっていた可能性が高い。欄外には郵便局の公印とは異なる、半円にも見える輪と三本の短い線の小さな印が残っている。"},
     classAlbum:{icon:"📘",name:"旧桜小学校のクラスアルバム",desc:"写真の二人と同じ顔が載っている。名前は『春川 晴』と『結城 悠希』。二人はいつも一緒だったと担任コメントにある。"},
     teacherLog:{icon:"📝",name:"担任の古い日誌",desc:"2006年3月23日。『晴くん、転居日が急きょ早まり午後に出発。悠希くんは発熱で欠席。二人は最後に会えず』と記されている。"},
     plaque:{icon:"🌸",name:"桜の根元の小さなプレート",desc:"写真と同じ場所に残る金属板。錆びた文字で『またここで』。古い桜はすでに切られ、そばに若い桜が植えられている。"},
@@ -3270,7 +3289,7 @@ const cases={
     testAudio:{icon:"🎙️",name:"15:12の音声テスト",desc:"昼に録音された久世の館内放送テスト。途中に小さな咳が入り、その咳の間隔まで20:55に流れた声と一致している。"},
     staffSchedule:{icon:"🗒️",name:"スタッフ用進行表",desc:"20:50『書斎・照明確認　担当ナオ』。一般用進行表には載っていない裏方作業。"},
     seraVideo:{icon:"📹",name:"20:48の配信カメラ映像",desc:"セラの記録映像の背景に、書斎前の廊下を歩くガクが映っている。時刻表示は20:48。"},
-    oldDraft:{icon:"📓",name:"久世とクロベの古い共同制作ノート",desc:"十年前の推理ゲーム案。久世とクロベ両名の筆跡があり、『録音と自動演出で死亡時刻を誤認させる』という未発表案も残っている。"},
+    oldDraft:{icon:"📓",name:"久世とクロベの古い共同制作ノート",desc:"十年前の推理ゲーム案。久世とクロベ両名の筆跡があり、『録音と自動演出で死亡時刻を誤認させる』という未発表案も残っている。表紙の裏には、事件とは無関係に見える『欠けた円に三本線』の印が描かれている。"},
     audioUSB:{icon:"💾",name:"音響操作用USB",desc:"事件当日15:12に設定済み。20:55の久世の館内放送、21:00の全館消灯、効果音がすべて自動実行される。21時に久世本人が操作する必要はなかった。"}
   },
   requiredEvidence:["stoppedWatch","coldCoffee","eventSheet","testAudio","staffSchedule","seraVideo","oldDraft"],
@@ -3389,6 +3408,7 @@ function markCaseCleared(id){
 let gameProgress=loadGameProgress();
 let currentCase=null, currentCaseId=null, selected=null, evidence=new Set(), heardTestimony=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={}, originNemoMet=false;
 let reconstructionAnswers={}, activeReconstructionSlot=null;
+let archiveMysterySolved=false;
 
 
 function renderCaseProgress(){
@@ -3480,6 +3500,7 @@ function resetCaseState(caseId){
   contradictionLog=[];
   reconstructionAnswers={};
   activeReconstructionSlot=null;
+  archiveMysterySolved=false;
   nemoInsights={};
   tab="evidence";
   originNemoMet=false;
@@ -3566,6 +3587,7 @@ function showOnly(stage){
     "investigationPanel",
     "testimonyPanel",
     "deductionPanel",
+    "archiveMysteryPanel",
     "finalPanel"
   ];
   ids.forEach(id=>{
@@ -3575,7 +3597,7 @@ function showOnly(stage){
   });
 
   const layout=document.getElementById("gameLayout");
-  const inGame=["briefingPanel","investigationPanel","testimonyPanel","deductionPanel","finalPanel"].includes(stage);
+  const inGame=["briefingPanel","investigationPanel","testimonyPanel","deductionPanel","archiveMysteryPanel","finalPanel"].includes(stage);
   if(layout){
     layout.classList.toggle("hidden", !inGame);
   }
@@ -4943,7 +4965,83 @@ function checkReconstruction(){
   msg.innerHTML=`<strong>🧩 真相再構築 完了。</strong><br>時刻・録音・自動演出・20:45の目撃証言が、ひとつの事件としてつながった。
     <div class="reconResultFlow"><span class="reconResultChip">20:40〜20:50</span><span class="reconResultArrow">→</span><span class="reconResultChip">クロベが書斎方向へ</span><span class="reconResultArrow">→</span><span class="reconResultChip">20:55 録音</span><span class="reconResultArrow">→</span><span class="reconResultChip">21:00 自動演出</span><span class="reconResultArrow">→</span><span class="reconResultChip">犯人：クロベ</span></div>`;
   scheduleCaseFileSync();
-  setTimeout(()=>finalReveal(),1200);
+  setTimeout(()=>startArchiveMystery(),1000);
+}
+
+
+const ARCHIVE_CASES=[
+  {caseNo:"CASE 01",title:"月見堂ギャラリー",source:"17:17の来館写真",detail:"写真の端。搬入口の箱に、見覚えのない小さな記号。"},
+  {caseNo:"CASE 02",title:"星見図書館",source:"忘れ物メモ",detail:"用紙の左下。図書館の正式印ではない小さな管理印。"},
+  {caseNo:"CASE 03",title:"月灯り堂",source:"17:30で止まった壁時計",detail:"裏蓋の隅。メーカー名ではない古い刻印。"},
+  {caseNo:"CASE 04",title:"春風公園",source:"公園の古いベンチ",detail:"ねもと出会ったあのベンチの裏。消えかけた焼き印。"},
+  {caseNo:"CASE 05",title:"雨月駅の事件",source:"榊から受け取った古い写真",detail:"写真の裏。『結婚50年』の文字のそばに押された小さな印。"},
+  {caseNo:"CASE 06",title:"旧・桜町郵便局",source:"二十年前の郵便処理記録",detail:"欄外。郵便局の公印ではない古い印。"}
+];
+
+function archiveCaseCards(){
+  return ARCHIVE_CASES.map(x=>`<div class="archiveCaseCard"><div class="archiveCaseNo">${x.caseNo}</div><strong>${x.source}</strong><p>${x.detail}</p></div>`).join("");
+}
+
+function startArchiveMystery(){
+  archiveMysterySolved=false;
+  showOnly("archiveMysteryPanel");
+  document.getElementById("phaseLabel").textContent="事件記録";
+  const name=selected?.name || "ねも";
+  document.getElementById("archiveMysteryContent").innerHTML=`
+    <div class="archiveFile">
+      <div class="archiveFileTop">
+        <div class="arcSigil" aria-label="欠けた円に三本線の印"></div>
+        <div><h3>月影館・書斎の古いファイル</h3><p>共同制作ノートと同じ場所から出てきた。表紙の裏に、見覚えのあるような奇妙な印がある。</p></div>
+      </div>
+      <div class="partnerEvent archiveNemo"><strong>🐱 ${name}</strong><br>「……これ。前にも、見た気がする。」</div>
+      <p class="muted" style="margin-top:14px">事件ファイルを思い返すと、直接は事件に関係しなかった小さな記録が残っていた。</p>
+      <div class="archiveCaseGrid">${archiveCaseCards()}</div>
+      <div class="archiveQuestion">
+        <h3>6つの事件に残っていた共通点は？</h3>
+        <div class="archiveChoices">
+          <button type="button" class="archiveChoice" data-archive-answer="person" onclick="checkArchiveMystery('person',this)">同じ人物が、すべての現場にいた</button>
+          <button type="button" class="archiveChoice" data-archive-answer="name" onclick="checkArchiveMystery('name',this)">同じ名字が、すべての記録に残っていた</button>
+          <button type="button" class="archiveChoice" data-archive-answer="mark" onclick="checkArchiveMystery('mark',this)">『欠けた円に三本線』の印が、形を変えながら残っていた</button>
+        </div>
+        <div class="archiveResult" id="archiveResult"></div>
+      </div>
+    </div>`;
+  resetView("archiveMysteryPanel");
+}
+
+function checkArchiveMystery(answer,button){
+  if(archiveMysterySolved) return;
+  document.querySelectorAll(".archiveChoice").forEach(b=>b.classList.remove("wrong","correct"));
+  const result=document.getElementById("archiveResult");
+  if(answer!=="mark"){
+    button.classList.add("wrong");
+    result.innerHTML=`<div class="callout bad"><strong>まだつながらない。</strong><br>人物や名字ではなく、事件の本筋から外れていた「小さなもの」を6件ぶん見比べてみよう。</div>`;
+    return;
+  }
+  archiveMysterySolved=true;
+  button.classList.add("correct");
+  const name=selected?.name || "ねも";
+  result.innerHTML=`
+    <div class="archiveReveal">
+      <h3>ARCHIVE MATCH　6 / 6</h3>
+      <p><strong>同じ印だった。</strong><br>ギャラリーの箱、図書館のメモ、喫茶店の時計、公園のベンチ、宗一郎の写真、二十年前の郵便記録。そして――月影館のファイル。</p>
+      <p>単独の事件では、どれも真相に必要のない情報だった。けれど6つを並べると、偶然では片づけにくい。</p>
+      <div class="archiveLocations">
+        <span>CASE 01　月見堂ギャラリー</span>
+        <span>CASE 02　星見図書館</span>
+        <span>CASE 03　月灯り堂</span>
+        <span>CASE 04　春風公園</span>
+        <span>CASE 05　雨月駅</span>
+        <span>CASE 06　旧・桜町郵便局</span>
+        <span>CASE 07　月影館</span>
+      </div>
+      <p>ファイルをめくる。そこには、あなたたちが解決してきた場所が同じ順番で記録されていた。</p>
+      <div class="archiveCase08"><strong>CASE 08</strong><br>――――――――<br><span class="muted">場所・事件名ともに空欄。</span></div>
+      <div class="partnerEvent archiveNemo"><strong>🐱 ${name}</strong><br>「……どうして、最初の事件まで知ってるの？」</div>
+      <p class="muted">月影館の殺人事件は解決した。けれど、別の謎だけが残った。</p>
+      <button type="button" class="primary archiveContinue" onclick="finalReveal()">CASE 07を完了する →</button>
+    </div>`;
+  result.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
 const reconstructionModal=document.getElementById("reconstructionModal");
@@ -5090,7 +5188,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`📁 <strong>CASE 08は未更新です。</strong><br>ここまでの事件は、すべて解決しました。<br><span class="muted">シリーズはまだ続きます。次の事件が届くまで、解決済みのCASE 01〜07はいつでも再捜査できます。</span>`;
+      notice.innerHTML=`📁 <strong>CASE 08は未更新です。</strong><br>月影館で見つかったファイルには、まだ何も書かれていない「CASE 08」の欄が残っていた。<br><span class="muted">シリーズはまだ続きます。次の事件が届くまで、解決済みのCASE 01〜07はいつでも再捜査できます。</span>`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
