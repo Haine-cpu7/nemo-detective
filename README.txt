@@ -1,17 +1,34 @@
-ねも探偵局 v0.27
+NEMO Mystery Days v0.28
 
-【今回の変更】
-事件選択画面を、物語の入口として再構成。
+【正式タイトル】
+NEMO Mystery Days
+（ネモ ミステリー デイズ）
 
-設定：
-・プレイヤーは今年の春に探偵になったばかりの新米探偵
-・助手はNemo NFTの「ねも」
-・ねもと一緒に現場を調べ、証言を聞き、矛盾を見つけて真相へ進む
+【方向転換】
+NFT保有判定・NFT限定プレイの導入は行わない方針に変更。
+ねもはゲーム内で自由に選べる相棒キャラクターとして扱います。
 
-事件選択画面：
-「事件は、もう始まっています。」から始まる導入文を追加。
+【SEO対応】
+index.html:
+・検索向けタイトル
+・meta description
+・robots meta
+・canonical URL
+・Open Graph
+・Twitter Card
+・JSON-LD構造化データ（VideoGame）
 
-ねも選択画面：
-「今回、一緒に捜査するねもを選ぼう。」に変更。
+追加ファイル:
+・robots.txt
+・sitemap.xml
 
-既存のゲーム進行・能力値・事件内容には触れていません。
+test.html:
+・noindex,nofollow を付与し、テストページが検索結果に出ないよう設定。
+
+公開URL:
+https://haine-cpu7.github.io/nemo-detective/
+
+【公開後に行うこと】
+Google Search Consoleで上記URLを登録し、
+URL検査 → インデックス登録をリクエスト。
+sitemap.xml もSearch Consoleの「サイトマップ」から送信してください。

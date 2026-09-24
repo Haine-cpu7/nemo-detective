@@ -3,7 +3,38 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.27</title>
+<title>NEMO Mystery Days｜ねもと挑むミステリー推理ゲーム</title>
+<meta name="description" content="新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<link rel="canonical" href="https://haine-cpu7.github.io/nemo-detective/" />
+<meta name="theme-color" content="#11131a" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:site_name" content="NEMO Mystery Days" />
+<meta property="og:title" content="NEMO Mystery Days｜ねもと挑むミステリー推理ゲーム" />
+<meta property="og:description" content="新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。" />
+<meta property="og:url" content="https://haine-cpu7.github.io/nemo-detective/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="NEMO Mystery Days｜ねもと挑むミステリー推理ゲーム" />
+<meta name="twitter:description" content="新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "NEMO Mystery Days",
+  "alternateName": "ネモ ミステリー デイズ",
+  "url": "https://haine-cpu7.github.io/nemo-detective/",
+  "description": "新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。",
+  "genre": ["ミステリー", "推理", "アドベンチャー"],
+  "inLanguage": "ja",
+  "gamePlatform": "Web Browser",
+  "applicationCategory": "GameApplication",
+  "isAccessibleForFree": true
+}
+</script>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1671,12 +1702,18 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
+
+.gameLead{
+  color:#dcd4ff;
+  font-weight:900;
+  letter-spacing:.02em;
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
-    <div><div class="brand">ねも探偵局</div><div class="caseNo" id="caseNo">CASE SELECT</div></div>
+    <div><div class="brand">NEMO Mystery Days</div><div class="caseNo" id="caseNo">CASE SELECT</div></div>
     <div class="topActions">
       <div class="phase" id="phaseLabel">事件選択</div>
       <button class="topFileBtn" id="topFileBtn" type="button" aria-label="事件ファイルを開く">📁</button>
@@ -1684,15 +1721,16 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.27</span>
-    <h1>ねも探偵局</h1>
+    <span class="badge">v0.28</span>
+    <h1>NEMO Mystery Days</h1>
   </section>
 
   <section class="panel caseOnly" id="caseSelectPanel">
     <div class="caseSelectHeading">
-      <div class="badge">NEMO DETECTIVE</div>
+      <div class="badge">NEMO MYSTERY DAYS</div>
       <h1>事件は、もう始まっています。</h1>
       <div class="caseOpening">
+        <p class="gameLead">新米探偵と小さな助手ねもが挑む、ブラウザミステリーゲーム。</p>
         <p>あなたは今年の春、探偵になったばかりの新米探偵。</p>
         <p>まだ経験は少ないけれど、そばには小さな助手のねもがいます。</p>
         <p>現場を調べ、証言を聞き、ふとした違和感を見つける。<br>
@@ -1717,7 +1755,7 @@ body:not(.case-active) .topFileBtn{
   <section class="panel hidden" id="selectPanel">
     <h2>今回、一緒に捜査するねもを選ぼう。</h2>
     <p class="muted">ねもによって、得意なことや気づき方が少しずつ違います。あなたの相棒を選んでください。</p>
-    <div class="rosterNote">🧩 現在はテスト用のNemo番号を表示しています。<br>画像は <strong>assets/nemos/66.png</strong> のように置くだけで自動反映される設計です。NFT保有判定は次の段階で接続します。</div>
+    <div class="rosterNote">🐱 ねもには、それぞれ得意なことや気づき方があります。<br>同じねもを選べば、いつでも同じ性格・能力であなたの捜査を手伝います。</div>
     <div class="grid detectives" id="detectiveGrid"></div>
     <div class="row" style="margin-top:14px">
       <button class="primary" id="startBtn" disabled>このねもで捜査開始</button>
@@ -1858,7 +1896,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.27 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">NEMO Mystery Days v0.28 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1922,7 +1960,7 @@ function buildDetective(id){
     };
   }
 
-  // 将来NFTを増やした時も、能力値はかなり尖るように生成する。
+  // 将来ねもを増やした時も、能力値はかなり尖るように生成する。
   const raw=[
     ["obs",seededValue(id,11)],
     ["rea",seededValue(id,23)],
@@ -2088,10 +2126,10 @@ detectives.forEach(d=>{
     <div class="face">
       <img src="${d.image}" alt="${d.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
       <div class="fallback" style="display:none">${d.icon}</div>
-      <div class="nftTag">NEMO NFT</div>
+      <div class="nftTag">NEMO PARTNER</div>
     </div>
     <div class="dname">${d.name}</div>
-    <div class="nftNo">Token character ID: ${d.id}</div>
+    <div class="nftNo">Nemo ID: ${d.id}</div>
     <div class="trait">タイプ：${d.type} / 特性：${d.trait}</div>
     ${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
   el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;};
