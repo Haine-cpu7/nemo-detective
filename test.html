@@ -2021,7 +2021,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.53 story progression */
+/* v0.54 story progression */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2044,6 +2044,7 @@ body:not(.case-active) .topFileBtn{
 .originSolo{border-style:dashed;opacity:.88}
 .originSolo .partnerName{color:#d9dce8}
 .scene.case4{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.40)),linear-gradient(145deg,#738367 0 22%,#6e886f 22% 54%,#8d785c 54% 100%)}
+.scene.case5{background:linear-gradient(rgba(8,10,18,.16),rgba(8,10,18,.52)),linear-gradient(145deg,#3d4658 0 24%,#253446 24% 55%,#5b4e45 55% 78%,#202c38 78% 100%)}
 @media(max-width:860px){
   .caseStatus{font-size:10px}
   .unlockNotice{margin-top:14px;padding:12px 13px}
@@ -2063,7 +2064,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.53</span>
+    <span class="badge">v0.54</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2129,6 +2130,12 @@ body:not(.case-active) .topFileBtn{
         <div class="caseLabel">CASE 04 <span class="originBadge">ORIGIN EPISODE</span></div>
         <div class="caseTitle">はじめての依頼 ― 消えた小さな手紙 ―</div>
         <div class="caseDesc">少しだけ時間を巻き戻そう。あなたがまだ一人だった頃の、最初の事件。</div>
+        <div class="caseStatus"></div>
+      </button>
+      <button class="caseCard" data-case="5">
+        <div class="caseLabel">CASE 05</div>
+        <div class="caseTitle">乗らなかった最終列車</div>
+        <div class="caseDesc">雨月駅で消えた待ち合わせ相手。人の記憶から、存在しない事件をほどく。</div>
         <div class="caseStatus"></div>
       </button>
     </div>
@@ -2282,7 +2289,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.53 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.54 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2965,11 +2972,109 @@ const cases={
   ending:"ヒナの手紙は盗まれていなかった。公園のベンチでバッグの中身を広げた時、風にあおられて封筒が座面の隙間へ落ちていた。あとからユウトが見つけ、中を読まずに公園の落とし物箱へ届けていた。",
   originEpilogue:"手紙を取り戻し、ヒナが笑って帰ったあと。まだ何も飾られていない探偵事務所で、さっき公園にいた猫耳の子が椅子に座っていた。<br><br><strong>ねも</strong>「……見つかって、よかったね。」<br><br>あなた「ねも、帰らないの？」<br><br><strong>ねも</strong>「ここ、なんか好き。」<br><br>翌朝、事務所へ来ると、机の横に小さな椅子がひとつ増えていた。<br><br><strong>この日から、あなたとねもの探偵の日々が始まりました。</strong>"
 }
+,
+5:{
+  title:"CASE 05　乗らなかった最終列車 ― 消えた待ち合わせ相手 ―",
+  place:"雨月駅",
+  briefing:{
+    lead:"最終列車まで、あと少し。駅まで来たはずの祖父が、どこにもいない。",
+    incident:"ユイは祖父・宗一郎と21:10発の列車で待ち合わせをしていた。ところが列車が来ても祖父は現れず、電話は自宅に置かれたまま。喫茶店員も駅員も『宗一郎さんを見た』と話している。つまり祖父は駅まで来て、その後どこかへ消えた――ように見える。",
+    objectives:[
+      "『宗一郎は駅まで来た』という前提が本当に正しいか確かめる",
+      "証言と記録の食い違いから、実際の行動経路を組み立てる",
+      "宗一郎が向かった場所と、その理由を突き止める"
+    ]
+  },
+  intro:"依頼：雨月駅へ来たはずの宗一郎を探す。誰かが嘘をついているとは限らない。人の記憶と記録を切り分けよう。",
+  evidence:{
+    stationHat:{icon:"🎩",name:"ホームの茶色い帽子",desc:"ホームのベンチ脇に落ちていた。宗一郎が普段かぶるものによく似ているが、内側のタグには『K.S.』の刺繍がある。"},
+    platformPhoto:{icon:"📷",name:"20:52のホーム写真",desc:"旅行客が撮影。茶色い帽子の人物が写っているが、顔は傘で隠れている。帽子の左側には小さな白い補修糸が見える。"},
+    teaReceipt:{icon:"🧾",name:"20:42の喫茶店レシート",desc:"ナナが『宗一郎さんの会計』だと思って保管していた伝票。注文はミルクティーとシナモントースト。宗一郎はいつもホットコーヒーしか頼まない。"},
+    bookLedger:{icon:"📚",name:"古本屋の受け渡し帳",desc:"20:35、『古い旅行記　一冊　宗一郎さんへ受け渡し』と榊自身の字で記録されている。"},
+    busLog:{icon:"🚌",name:"20:48のバス利用記録",desc:"宗一郎名義の高齢者ICカードが、駅とは逆方向へ向かう『夕映丘線』で使われている。降車候補には『旧展望台前』がある。"},
+    unfinishedMemo:{icon:"✉️",name:"自宅に残された書きかけのメモ",desc:"『ユイへ。駅へ行く前に、どうしても――』とだけ書かれ、その先は空白。急いで家を出たように見える。"},
+    travelBook:{icon:"📖",name:"古い旅行記と一枚の写真",desc:"若い頃の宗一郎と亡き妻が旧展望台で写っている。写真の裏には『結婚50年の日、またここへ来よう』と書かれている。"}
+  },
+  requiredEvidence:["stationHat","teaReceipt","bookLedger","busLog","travelBook"],
+  hotspots:[
+    ["stationHat","🎩 帽子","7%","12%"],
+    ["platformPhoto","📷 ホーム写真","auto","13%","7%"],
+    ["teaReceipt","🧾 喫茶レシート","38%","24%"],
+    ["bookLedger","📚 受け渡し帳","8%","auto",null,"18%"],
+    ["busLog","🚌 バス記録","auto","auto","8%","18%"],
+    ["unfinishedMemo","✉️ 書きかけメモ","43%","auto",null,"8%"],
+    ["travelBook","📖 旅行記","auto","36%","7%"]
+  ],
+  people:[
+    {name:"ユイ",role:"依頼人・宗一郎の孫",note:"21:10発の列車で祖父と待ち合わせていた。祖父は普段、時間にかなり正確。"},
+    {name:"ナナ",role:"駅前喫茶店の店員",note:"20:40ごろ、茶色い帽子の高齢男性を『宗一郎さん』だと思って接客した。"},
+    {name:"タカシ",role:"雨月駅の駅員",note:"20:50ごろ、宗一郎らしい人物をホームで見たと話す。顔ははっきり見ていない。"},
+    {name:"榊",role:"古本屋店主・宗一郎の旧友",note:"宗一郎とは長い付き合い。今日は『会っていない』と話している。"}
+  ],
+  timeline:[
+    ["20:35","古本屋で古い旅行記が受け渡される"],
+    ["20:42","駅前喫茶店でミルクティーとシナモントーストの会計"],
+    ["20:48","宗一郎名義のICカードが夕映丘線で利用される"],
+    ["20:50ごろ","駅員が茶色い帽子の高齢男性をホームで目撃"],
+    ["20:52","ホームの写真に茶色い帽子の人物が写る"],
+    ["21:10","ユイとの待ち合わせ列車が発車。宗一郎は現れない"]
+  ],
+  witnesses:{
+    yui:{
+      icon:"🧣",name:"ユイ",role:"依頼人",statements:[
+        {text:"『おじいちゃんは、21時10分の列車に乗るって約束してました。』",press:"宗一郎は時間に几帳面で、連絡なしに待ち合わせをすっぽかすような人ではないという。"},
+        {text:"『茶色い帽子は、いつもかぶってます。遠くからでもすぐ分かります。』",press:"ただし似た形の帽子は珍しくなく、宗一郎の帽子には名前の刺繍などはないらしい。"},
+        {text:"『今日は古本屋さんに寄ってから駅へ行く、と朝に言ってました。』",press:"何の本を受け取るのかまでは聞いていなかった。"}
+      ]
+    },
+    nana:{
+      icon:"☕",name:"ナナ",role:"駅前喫茶店の店員",statements:[
+        {text:"『宗一郎さん、いつものコーヒーを飲んでから駅へ向かいましたよ。』",press:"顔はほとんど見ておらず、『いつもの茶色い帽子だったから宗一郎さんだと思った』という。",contradiction:"teaReceipt"},
+        {text:"『20時40分すぎだったと思います。お会計は私がしました。』",press:"その時間帯の伝票は一枚だけ残っている。"}
+      ]
+    },
+    takashi:{
+      icon:"🚉",name:"タカシ",role:"駅員",statements:[
+        {text:"『20時50分ごろ、宗一郎さんがホームにいるのを見ました。』",press:"雨で顔はよく見えなかったが、茶色い帽子を見て宗一郎だと思ったという。",contradiction:"stationHat",requires:["nana_receipt"]},
+        {text:"『その人は、ホームの端の方で列車を待っていました。』",press:"会話はしていない。傘で顔も隠れていた。"}
+      ]
+    },
+    sakaki:{
+      icon:"📚",name:"榊",role:"古本屋店主",statements:[
+        {text:"『今日は宗一郎には会ってませんよ。』",press:"少し考えてから、『店で話し込んだりはしていない』と言い直した。",contradiction:"bookLedger",requires:["takashi_hat"]},
+        {text:"『旅行記？ ああ、昔の町の写真が載ってる古い本です。』",press:"宗一郎が若い頃から探していた一冊だったという。"}
+      ]
+    }
+  },
+  multiClear:[
+    {witness:"nana",evidence:"teaReceipt",statement:0,flag:"nana_receipt"},
+    {witness:"takashi",evidence:"stationHat",statement:0,flag:"takashi_hat",requires:["nana_receipt"]},
+    {witness:"sakaki",evidence:"bookLedger",statement:0,flag:"sakaki_ledger",requires:["takashi_hat"]}
+  ],
+  finalReady:["nana_receipt","takashi_hat","sakaki_ledger"],
+  deduction:{
+    culpritLabel:"宗一郎は駅へ行った？",
+    culpritOptions:[["yes","行った"],["no","行っていない"],["unknown","まだ分からない"]],
+    placeLabel:"宗一郎が向かった場所",
+    placeOptions:[["observatory","丘の上の旧展望台"],["home","自宅"],["station","雨月駅"]],
+    motiveLabel:"そこへ向かった理由",
+    motiveOptions:[["promise","亡き妻との昔の約束を確かめるため"],["forgot","待ち合わせを忘れていた"],["lost","道に迷った"]],
+    answer:{culprit:"no",place:"observatory",motive:"promise"},
+    hints:{
+      culprit:"駅で『宗一郎を見た』二人は、何を根拠に本人だと判断していた？ 帽子のタグと写真も確認しよう。",
+      place:"20:48のバス利用記録は、駅とは逆方向へ向かっている。夕映丘線の行き先を見よう。",
+      motive:"旅行記に挟まれた写真の裏に、宗一郎と妻の約束が残っている。"
+    }
+  },
+  ending:"宗一郎は駅へ来ていなかった。20:35に榊から古い旅行記を受け取り、その中に挟まれていた若い頃の写真を見て、亡き妻との約束を思い出した。『結婚50年の日、またここへ来よう』――その日が今日だった。宗一郎は駅へ向かう前にほんの少しだけ旧展望台へ寄るつもりで、20:48の夕映丘線に乗った。しかし帰りの便を逃し、ユイとの待ち合わせに間に合わなかった。駅と喫茶店で目撃された『宗一郎』は、たまたまよく似た茶色い帽子をかぶった別人。人々の記憶が、『駅まで来た人が消えた』という存在しない事件を作っていた。",
+  culpritComment:{name:"宗一郎",line:"すまんな。少しだけのつもりだったんだ。あいつとの約束を……今日だけは、忘れたくなくてな。"}
+}
+
 
 };
 
 const SAVE_KEY="nemoMysteryDaysProgress_v1";
-const CASE_COUNT=4;
+const CASE_COUNT=5;
 function loadGameProgress(){
   try{
     const raw=localStorage.getItem(SAVE_KEY);
@@ -3117,6 +3222,7 @@ function openBriefing(){
   document.getElementById("scene").classList.toggle("case2",currentCase===cases[2]);
   document.getElementById("scene").classList.toggle("case3",currentCase===cases[3]);
   document.getElementById("scene").classList.toggle("case4",currentCase===cases[4]);
+  document.getElementById("scene").classList.toggle("case5",currentCase===cases[5]);
 
   renderFile();
   renderProgress();
@@ -3395,6 +3501,16 @@ function getNemoInsight(id){
         kind:"観察",
         note:"箱の内側に四角い金具の圧痕があり、消えたオルゴールの底面サイズと近い。",
         speech:"この跡、何か四角いものを入れてたみたい。"
+      },
+      stationHat:{
+        kind:"観察",
+        note:"内側の『K.S.』タグに加え、左側に白い補修糸がある。20:52の写真に写る帽子と同じ特徴。",
+        speech:"この帽子、K.S.って書いてある。写真の白い縫い目も同じだね。"
+      },
+      travelBook:{
+        kind:"観察",
+        note:"写真の裏書きは古いインクで、『結婚50年の日、またここへ来よう』とある。今日の日付と一致する。",
+        speech:"この日付、今日だよ。ずっと前からの約束なんだね。"
       }
     };
     if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
@@ -3436,6 +3552,21 @@ function getNemoInsight(id){
         kind:"推理",
         note:"母親への誕生日カードと、ギフト包装について尋ねた事実は、オルゴールを欲しがる理由につながる。",
         speech:"お母さんへのプレゼント。オルゴールを気にしてた理由、これかな。"
+      },
+      teaReceipt:{
+        kind:"推理",
+        note:"ナナは『いつものコーヒー』と言ったが、20:42の伝票はミルクティーとシナモントースト。本人確認が帽子頼みだった可能性が高い。",
+        speech:"注文が違うね。ナナさん、帽子だけで宗一郎さんだと思ったのかも。"
+      },
+      busLog:{
+        kind:"推理",
+        note:"宗一郎名義のICカードは20:48に駅と逆方向の夕映丘線で使われている。『駅へ来た』前提そのものを疑う材料になる。",
+        speech:"20:48に反対方向のバス。宗一郎さん、駅には来てないのかも。"
+      },
+      bookLedger:{
+        kind:"推理",
+        note:"20:35に宗一郎へ旅行記を渡した記録があり、榊の『今日は会っていない』という証言とは両立しない。",
+        speech:"20:35に渡してる。『会ってない』とは合わないね。"
       }
     };
     if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
@@ -3594,6 +3725,12 @@ function nemoNudgeFor(statement){
       line="17:41におかわりしてる。……17:30には帰ったって言ってたよね？";
     }else if(evidenceId==="mirror"){
       line="あ。17:44の写真、マコちゃんは蓄音機のところにいるよ。";
+    }else if(evidenceId==="teaReceipt"){
+      line="いつものコーヒーじゃないね。ナナさん、本当に宗一郎さんを見たのかな。";
+    }else if(evidenceId==="stationHat"){
+      line="帽子の中、K.S.って書いてある。宗一郎さんのじゃないよね。";
+    }else if(evidenceId==="bookLedger"){
+      line="20:35に渡したって記録がある。『会ってない』とは合わないね。";
     }
 
     return `<div class="nemoNudge">
@@ -3609,24 +3746,36 @@ function nemoNudgeFor(statement){
     else if(evidenceId==="receipt") line="17:38ってはっきり言ったね。時間の手がかりと見比べてみたいかも。";
     else if(evidenceId==="cafeReceipt") line="17:41。帰った時間と違うね。";
     else if(evidenceId==="mirror") line="あ。鏡にマコちゃんいる。窓際じゃないね。";
+    else if(evidenceId==="teaReceipt") line="いつもの注文と違うね。別の人だったのかな。";
+    else if(evidenceId==="stationHat") line="K.S.ってタグ。宗一郎さんの帽子じゃないかも。";
+    else if(evidenceId==="bookLedger") line="榊さん、会ってないって言ったのに記録があるよ。";
   }else if(selected.id===96){
     if(evidenceId==="photo") line="写真と一緒に見ると、ちょっと変だね。";
     else if(evidenceId==="frame") line="『ずらしてない』って言葉、先に出たね。ずれてたことを知ってたのかな。";
     else if(evidenceId==="receipt") line="17:38という時刻、他の記録と並べて確認してみよう。";
     else if(evidenceId==="cafeReceipt") line="17:30に退店、17:41に注文。これは両立しないね。";
     else if(evidenceId==="mirror") line="17:44の位置が、マコちゃんの話と違うね。";
+    else if(evidenceId==="teaReceipt") line="注文内容が違う。人物認識の根拠を疑うべきだね。";
+    else if(evidenceId==="stationHat") line="K.S.の帽子なら、駅員の本人確認は崩れるね。";
+    else if(evidenceId==="bookLedger") line="20:35の受け渡し記録と『会っていない』は両立しない。";
   }else if(selected.id===31){
     if(evidenceId==="photo") line="いまの言い方、ちょっとだけ気になった。写真も見てみよ。";
     else if(evidenceId==="frame") line="『ずらしてない』って言った時、ちょっと言い急いだ感じがしたかも。";
     else if(evidenceId==="receipt") line="時間を言う時、かなりはっきりしてたね。記録も見てみよ。";
     else if(evidenceId==="cafeReceipt") line="17:41のおかわり、言い方と合わないかも。";
     else if(evidenceId==="mirror") line="マコちゃん、写真の場所とお話が違うかも。";
+    else if(evidenceId==="teaReceipt") line="いつものコーヒーじゃないね。ナナさん、思い込みだったのかな。";
+    else if(evidenceId==="stationHat") line="顔を見てないのに、帽子だけで本人だと思ったんだね。";
+    else if(evidenceId==="bookLedger") line="榊さん、言い方が少し引っかかる。帳面と比べてみよ。";
   }else if(selected.id===12){
     if(evidenceId==="photo") line="うーん……写真。たぶん写真。";
     else if(evidenceId==="frame") line="『ずらしてない』……まだ、ずれてたって言ってないのに。";
     else if(evidenceId==="receipt") line="17:38……この時間、覚えておこ。";
     else if(evidenceId==="cafeReceipt") line="この17:41、やっぱり変。";
     else if(evidenceId==="mirror") line="鏡。ここ、たぶん大事。";
+    else if(evidenceId==="teaReceipt") line="注文、違う。たぶん別の人。";
+    else if(evidenceId==="stationHat") line="このK.S.、気になる。";
+    else if(evidenceId==="bookLedger") line="帳面。ここ、嘘とつながる。";
   }
 
   return `<div class="nemoNudge">
@@ -3663,7 +3812,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "mina:2":"『ずっと裏口』ってところ、覚えておこ。",
       "yuna:0":"17:30って、壁時計を見た時間なんだね。",
       "souta:1":"いつも壁時計を見てるんだ。止まってたら気づきにくいね。",
-      "mako:0":"お母さんへのプレゼントを探してたんだね。"
+      "mako:0":"お母さんへのプレゼントを探してたんだね。",
+      "yui:0":"待ち合わせの時間は21:10。ここは動かなそうだね。",
+            "nana:0":"顔は見てないんだ。帽子だけで宗一郎さんだと思ったんだね。",
+            "takashi:0":"駅員さんも顔は見てない。帽子が手がかりなんだ。",
+            "sakaki:0":"『会ってない』って言い方、ちょっと気になるね。",
     },
     96:{
       "misaki:1":"17:15から17:18。……ここ、覚えておこ。",
@@ -3837,6 +3990,24 @@ function contradictionMeta(flag){
       evidence:"17:44の店内写真",
       summary:"17:44の写真の鏡には、窓際ではなく蓄音機付近にいるマコが写っている。"
     },
+    nana_receipt:{
+      title:"ナナの『いつものコーヒー』と伝票が合わない",
+      statement:"ナナ『宗一郎さんは、いつものコーヒーを飲んで駅へ向かった』",
+      evidence:"20:42の喫茶店レシート",
+      summary:"ナナが宗一郎だと思った客の注文は、宗一郎がいつも頼むコーヒーではなくミルクティーとシナモントーストだった。帽子だけで別人を本人だと思い込んだ可能性がある。"
+    },
+    takashi_hat:{
+      title:"駅員の本人確認は『茶色い帽子』だけだった",
+      statement:"タカシ『20時50分ごろ、宗一郎さんがホームにいた』",
+      evidence:"K.S.と刺繍された茶色い帽子",
+      summary:"タカシは顔を見ておらず、帽子だけで宗一郎だと判断していた。ホームに残った帽子は宗一郎のものではない。"
+    },
+    sakaki_ledger:{
+      title:"『今日は会っていない』と受け渡し記録が食い違う",
+      statement:"榊『今日は宗一郎には会ってません』",
+      evidence:"20:35の古本屋受け渡し帳",
+      summary:"榊自身の字で宗一郎へ旅行記を渡した記録が残っている。宗一郎は20:35には古本屋付近にいた。"
+    },
     hina_memory:{
       title:"ヒナの記憶と、封筒が見つかった場所が食い違う",
       statement:"ヒナ『パン屋さんに着くまでは、手紙はバッグに入ってたと思います』",
@@ -3977,6 +4148,23 @@ function presentEvidence(clueId){
       マコは「17時40分ごろからずっと窓際にいた」と話した。<br>
       しかし <strong>17:44の店内写真</strong> の鏡には、蓄音機のそばに立つマコが写っている。<br><br>
       マコ「……少しだけ、店の奥を見に行きました」`;
+    } else if(rule.flag==="nana_receipt"){
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
+      ナナは「宗一郎さんは、いつものコーヒーを飲んで駅へ向かった」と話した。<br>
+      しかし <strong>20:42の伝票はミルクティーとシナモントースト</strong>。宗一郎がいつも頼む注文とは違う。<br><br>
+      ナナ「……あ。私、顔は見てません。茶色い帽子だったから、てっきり宗一郎さんだと……」`;
+    } else if(rule.flag==="takashi_hat"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      タカシも、顔ではなく茶色い帽子を見て宗一郎だと判断していた。<br>
+      しかしホームに残った帽子の内側には <strong>『K.S.』</strong> の刺繍がある。宗一郎のものではない。<br><br>
+      タカシ「……確かに、顔までは見ていませんでした」<br><br>
+      <strong>『宗一郎は駅まで来た』という前提そのものが怪しくなってきた。</strong>`;
+    } else if(rule.flag==="sakaki_ledger"){
+      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
+      榊は「今日は宗一郎には会っていない」と話した。<br>
+      しかし <strong>20:35の受け渡し帳</strong> には、榊自身の字で宗一郎へ旅行記を渡した記録がある。<br><br>
+      榊「……店の前で本を渡しただけだ。会ったってほどじゃないと思ってな」<br><br>
+      これで、宗一郎の本当の行動を組み立てる材料がそろった。`;
     } else if(rule.flag==="hina_memory"){
       msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
       ヒナは「パン屋さんに着くまでは、手紙はバッグに入っていたと思う」と話した。<br>
@@ -4002,6 +4190,12 @@ function presentEvidence(clueId){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:41。やっぱり、ソウタさんの17:30は本当の時刻じゃなかったね。」</div>`;
     }else if(rule.flag==="mako_mirror" && nemoInsights.mirror){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「写真の場所、ここでつながったね。」</div>`;
+    }else if(rule.flag==="nana_receipt" && nemoInsights.teaReceipt){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「注文が違う。ナナさんは別の人を宗一郎さんだと思ってたんだね。」</div>`;
+    }else if(rule.flag==="takashi_hat" && nemoInsights.stationHat){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「K.S.の帽子。駅にいた人は、宗一郎さんじゃなかったのかも。」</div>`;
+    }else if(rule.flag==="sakaki_ledger" && nemoInsights.bookLedger){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「20:35に本を受け取ってる。ここから本当の道順を追えそう。」</div>`;
     }
 
     msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
@@ -4057,7 +4251,9 @@ function setupDeductionPanel(){
         ? "止まった時計で時刻の前提をほどき、写真・箱・カード・蓄音機をつないでオルゴールの行方を組み立てよう。"
         : currentCase===cases[4]
           ? "誰かを犯人にする必要はない。帰り道と証言をつないで、手紙がどこで消え、今どこにあるのか組み立てよう。"
-          : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+          : currentCase===cases[5]
+            ? "『宗一郎は駅へ来た』という前提をいったん捨てよう。帽子、バス、旅行記、書きかけのメモから、本当の行き先を組み立ててください。"
+            : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
 
   const msg=document.getElementById("deductionMsg");
   msg.className="callout special";
@@ -4086,7 +4282,7 @@ document.getElementById("finalDeduceBtn").onclick=()=>{
 
   if(ok){
     msg.className="callout good";
-    msg.innerHTML=`<strong>推理成立。</strong><br>人物・隠し場所・理由が、集めた証拠と矛盾なくつながった。`;
+    msg.innerHTML=`<strong>推理成立。</strong><br>選んだ3つの答えが、集めた証拠と矛盾なくつながった。`;
     scheduleCaseFileSync();
     setTimeout(()=>finalReveal(),800);
     return;
@@ -4109,10 +4305,12 @@ function finalReveal(){
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
 
-  const titleName=currentCase===cases[4]
-    ? "はじめての一歩"
-    : currentCase===cases[3]
-      ? "止まった時間をほどく探偵"
+  const titleName=currentCase===cases[5]
+    ? "存在しない事件を解いた探偵"
+    : currentCase===cases[4]
+      ? "はじめての一歩"
+      : currentCase===cases[3]
+        ? "止まった時間をほどく探偵"
       : currentCase===cases[2]
         ? "濡れた紙片をつなぐ探偵"
         : "はじめての矛盾";
@@ -4138,7 +4336,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`🐱 <strong>ORIGIN EPISODE COMPLETE</strong><br>あなたとねもの探偵の日々は、ここから始まりました。<br><span class="muted">これまでに解決した事件は、事件一覧から何度でも遊べます。</span>`;
+      notice.innerHTML=`✨ <strong>現在届いている事件は、すべて解決しました。</strong><br>これまでに解決した事件は、事件一覧から何度でも再捜査できます。`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
