@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.56 CASE 05 staged clue reveal */
+/* v0.57 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2069,6 +2069,25 @@ body:not(.case-active) .topFileBtn{
   .originMeet{padding:11px 12px}
 }
 
+
+/* v0.57 separate how-to manual */
+.manualLaunch{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
+  background:linear-gradient(135deg,#252b3d,#2c2944);color:var(--text);text-decoration:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);transition:.15s ease
+}
+.manualLaunch:hover{transform:translateY(-1px);border-color:var(--accent);background:linear-gradient(135deg,#2a3146,#342f51)}
+.manualLaunch strong{display:block;font-size:15px}
+.manualLaunch small{display:block;color:var(--muted);margin-top:3px;line-height:1.5}
+.manualLaunch .manualArrow{font-size:22px;color:var(--accent2);font-weight:1000}
+.footerManual{color:#9d95c7;text-decoration:none;border-bottom:1px dotted #665f86}
+@media(max-width:860px){
+  .manualLaunch{padding:12px 13px;margin-top:14px}
+  .manualLaunch strong{font-size:14px}
+  .manualLaunch small{font-size:11px}
+}
+
 </style>
 </head>
 <body>
@@ -2082,7 +2101,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.56</span>
+    <span class="badge">v0.57</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2109,6 +2128,11 @@ body:not(.case-active) .topFileBtn{
           <p class="introCall">ねもと一緒に、最初の事件へ向かいましょう。</p>
           <p class="caseQuestion">さて、最初に挑む事件は――？</p>
         </div>
+
+        <a class="manualLaunch" href="manual.html" target="_blank" rel="noopener">
+          <span><strong>📖 遊び方・取扱説明書</strong><small>捜査の流れや「詳しく聞く」「手がかりを出す」の使い方を確認できます。別ページで開きます。</small></span>
+          <span class="manualArrow" aria-hidden="true">↗</span>
+        </a>
       </div>
 
       <div class="detectiveDecor" aria-hidden="true">
@@ -2319,7 +2343,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.56 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.57 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">

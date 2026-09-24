@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>遊び方｜NEMO Mystery Days</title>
+<meta name="description" content="NEMO Mystery Daysの遊び方。現場捜査、証言、矛盾の発見、事件ファイル、最終推理の流れを説明します。" />
+<meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#11131a" />
+<style>
+:root{
+  --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--text:#f5f1ff;--muted:#b7b9c8;
+  --line:#444b66;--accent:#9f8cff;--accent2:#f4c96b;--cyan:#77d7eb;--good:#7dd8a4;
+  --shadow:0 18px 40px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  background:radial-gradient(circle at 15% 0%,#2a2441 0,transparent 32%),radial-gradient(circle at 90% 10%,#193847 0,transparent 25%),var(--bg);
+  color:var(--text);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",system-ui,sans-serif;line-height:1.8
+}
+a{color:inherit}
+.wrap{width:min(900px,100%);margin:0 auto;padding:20px 14px 70px}
+.top{
+  position:sticky;top:8px;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 15px;background:rgba(28,32,48,.95);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);backdrop-filter:blur(10px)
+}
+.brand{font-weight:1000;letter-spacing:.07em}.sub{font-size:11px;color:var(--muted)}
+.back{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid var(--line);background:#2b3042;border-radius:11px;padding:8px 10px;font-size:12px;font-weight:900}
+.hero{margin-top:14px;padding:25px 22px;border:1px solid var(--line);border-radius:21px;background:linear-gradient(145deg,rgba(40,45,65,.97),rgba(24,27,40,.97));box-shadow:var(--shadow)}
+.badge{display:inline-block;border:1px solid #665b91;background:#292540;color:#dcd4ff;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900}
+h1{font-size:clamp(28px,6vw,46px);margin:12px 0 5px}h2{font-size:21px;margin:0 0 10px}p{margin:8px 0}.muted{color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.quick div{padding:12px;border:1px solid var(--line);border-radius:13px;background:#252a3b;text-align:center;font-weight:900;font-size:13px}
+.section{margin-top:13px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(28,32,48,.97);box-shadow:var(--shadow)}
+.step{display:grid;grid-template-columns:42px 1fr;gap:12px;padding:13px 0;border-top:1px solid rgba(83,91,123,.55)}.step:first-of-type{border-top:0;padding-top:2px}.num{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:#332e50;color:#ded6ff;font-weight:1000}.step strong{display:block;margin-bottom:2px}.step p{color:var(--muted);margin:0;font-size:14px}
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action{padding:14px;border-radius:15px;border:1px solid var(--line);background:#24293a}.action.press{border-color:#4f9ca8}.action.present{border-color:#9f8242}.action b{display:block;font-size:17px;margin-bottom:5px}.action p{color:var(--muted);font-size:13px;margin:0}
+.fileTabs{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.tab{padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#2a2f42;font-weight:900;font-size:12px}.tab.hot{border-color:#8d75dd;color:#e4dcff}
+.tip{margin-top:10px;padding:13px 14px;border:1px solid #665b91;border-radius:14px;background:#2c2546}.tip strong{color:#f4c96b}.good{border-color:#438460;background:#183327}
+.warn{padding:12px 14px;border-radius:13px;background:#222738;border:1px dashed #59617e;color:var(--muted);font-size:13px}
+.footer{text-align:center;color:#777f9b;font-size:11px;margin-top:20px}
+@media(max-width:640px){
+  .wrap{padding:10px 10px 60px}.top{top:6px;padding:10px 11px}.brand{font-size:13px}.sub{font-size:9px}.back{font-size:11px;padding:7px 8px}.hero{padding:19px 15px}.quick{grid-template-columns:1fr}.section{padding:15px}.actionGrid{grid-template-columns:1fr}.step{grid-template-columns:36px 1fr;gap:9px}.num{width:34px;height:34px}.step p{font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div><div class="brand">NEMO Mystery Days</div><div class="sub">PLAY MANUAL</div></div>
+    <a class="back" href="index.html">← ゲームへ戻る</a>
+  </header>
+
+  <section class="hero">
+    <span class="badge">v0.57 · HOW TO PLAY</span>
+    <h1>📖 遊び方</h1>
+    <p class="muted">あなたは新米探偵。現場を調べ、証言を集め、食い違いを見つけながら真相へ進みます。答えを暗記するゲームではありません。事件ファイルを見比べながら遊んでください。</p>
+    <div class="quick">
+      <div>🔎 現場を調べる</div><div>💬 証言を聞く</div><div>⚡ 矛盾を見つける</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>捜査の基本の流れ</h2>
+    <div class="step"><div class="num">1</div><div><strong>事件を選ぶ</strong><p>最初はCASE 01から始まります。事件を解決すると次のCASEが解放され、解決済みの事件はいつでも再捜査できます。</p></div></div>
+    <div class="step"><div class="num">2</div><div><strong>一緒に捜査するねもを選ぶ</strong><p>ねもごとに観察・推理・会話・勘の得意分野が違い、気づくポイントやコメントが少し変わります。特別なCASEでは相棒選択がないこともあります。</p></div></div>
+    <div class="step"><div class="num">3</div><div><strong>現場を調べる</strong><p>気になる場所をタップして証拠を集めます。必要な調査が進むと「証言を聞きに行く」が使えるようになります。</p></div></div>
+    <div class="step"><div class="num">4</div><div><strong>証言を聞く</strong><p>人物を切り替えながら話を確認します。ひとつの証言だけで決めつけず、別の人物の話や時系列と見比べるのがコツです。</p></div></div>
+    <div class="step"><div class="num">5</div><div><strong>矛盾を見つける</strong><p>証言と証拠、または証言同士が噛み合わないところを探します。必要な矛盾が揃うと最終推理へ進めます。</p></div></div>
+    <div class="step"><div class="num">6</div><div><strong>最後の推理を組み立てる</strong><p>集めた情報を使って事件の答えを選びます。CASEによっては犯人探しではなく、物の行方や「最初の前提」そのものを推理します。</p></div></div>
+  </section>
+
+  <section class="section">
+    <h2>証言画面の2つの操作</h2>
+    <div class="actionGrid">
+      <div class="action press"><b>🔍 詳しく聞く</b><p>その証言を掘り下げます。新しい情報が出たり、ねもが気になる点に反応したりします。押しても必ず矛盾が見つかるわけではありません。</p></div>
+      <div class="action present"><b>📁 手がかりを出す</b><p>「この発言はおかしい」と思ったときに使います。事件ファイルから、食い違いを示せる証拠や取得済みの証言を選びます。</p></div>
+    </div>
+    <div class="tip"><strong>ポイント：</strong> 物証だけが手がかりではありません。ある人物の証言を、別の人物の証言に対して出すこともあります。</div>
+  </section>
+
+  <section class="section">
+    <h2>📁 事件ファイル</h2>
+    <p class="muted">覚えておく必要はありません。ゲーム中は事件ファイルを何度でも開いて、情報を見比べられます。</p>
+    <div class="fileTabs"><span class="tab">🔎 証拠</span><span class="tab hot">⚡ 矛盾</span><span class="tab">👥 人物</span><span class="tab">🕒 時系列</span></div>
+    <p class="muted">スマホでは右上の 📁 ボタンから開けます。証言画面や最終推理では、各タブへのショートカットも表示されます。</p>
+  </section>
+
+  <section class="section">
+    <h2>ねもの役割</h2>
+    <p class="muted">ねもは答えを全部教える助手ではありません。得意分野に関係する違和感を見つけたときだけ、短い言葉で手助けします。同じ場面でも、選んだねもによって反応が変わることがあります。</p>
+    <div class="warn">ねもの一言だけで人物を犯人と決めつけず、必ず事件ファイルの情報と照らし合わせてください。</div>
+  </section>
+
+  <section class="section">
+    <h2>セーブについて</h2>
+    <p class="muted">CASEのクリア状況はブラウザに保存されます。同じ端末・同じブラウザなら、ページを閉じても解放済みCASEは残ります。</p>
+    <div class="tip good"><strong>注意：</strong> 別のスマホやPCには自動で引き継がれません。ブラウザのサイトデータを消した場合も進行状況が消えることがあります。</div>
+  </section>
+
+  <section class="section">
+    <h2>詰まったときは</h2>
+    <p class="muted">まず「人物全員の証言を一度ずつ見る → 詳しく聞く → 証拠・時系列を見直す」の順で確認してみてください。時間、場所、本人しか知らないはずの情報、別の人の証言との食い違いが重要です。</p>
+    <p class="muted">そして、すべての事件に犯人がいるとは限りません。</p>
+  </section>
+
+  <div class="footer">NEMO Mystery Days v0.57 — Play Manual</div>
+</div>
+</body>
+</html>
