@@ -767,6 +767,18 @@ body.file-open{overflow:hidden}
   color:#ffccd7;
   font-weight:900;
 }
+.newEvidenceGain{
+  margin:12px 0;
+  padding:12px 13px;
+  border:1px solid #d8bd6e;
+  border-radius:13px;
+  background:linear-gradient(135deg,#332f24,#252839);
+  color:#f7f0d8;
+  line-height:1.75;
+}
+.newEvidenceGain strong:first-child{
+  color:#ffe08a;
+}
 @media(max-width:860px){
   .contradictionCard .vs{
     grid-template-columns:1fr;
@@ -2021,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.55 story progression */
+/* v0.56 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2070,7 +2082,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.55</span>
+    <span class="badge">v0.56</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2307,7 +2319,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.55 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.56 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3011,17 +3023,17 @@ const cases={
     bookLedger:{icon:"📚",name:"古本屋の受け渡し帳",desc:"20:35、『古い旅行記　一冊　宗一郎さんへ受け渡し』と榊自身の字で記録されている。"},
     busLog:{icon:"🚌",name:"20:48のバス利用記録",desc:"宗一郎名義の高齢者ICカードが、駅とは逆方向へ向かう『夕映丘線』で使われている。降車候補には『旧展望台前』がある。"},
     unfinishedMemo:{icon:"✉️",name:"自宅に残された書きかけのメモ",desc:"『ユイへ。駅へ行く前に、どうしても――』とだけ書かれ、その先は空白。急いで家を出たように見える。"},
-    travelBook:{icon:"📖",name:"古い旅行記と一枚の写真",desc:"若い頃の宗一郎と亡き妻が旧展望台で写っている。写真の裏には『結婚50年の日、またここへ来よう』と書かれている。"}
+    travelBook:{icon:"📷",name:"榊から受け取った古い写真",desc:"20:35に宗一郎が旅行記を受け取った際、古本屋のカウンターへ置き忘れた写真。若い頃の宗一郎と亡き妻が旧展望台で写っている。裏には『結婚50年の日、またここへ来よう』と書かれている。"}
   },
-  requiredEvidence:["stationHat","teaReceipt","bookLedger","busLog","travelBook"],
+  requiredEvidence:["stationHat","teaReceipt","bookLedger","busLog","unfinishedMemo"],
+  sceneEvidenceTotal:6,
   hotspots:[
     ["stationHat","🎩 帽子","7%","12%"],
     ["platformPhoto","📷 ホーム写真","auto","13%","7%"],
     ["teaReceipt","🧾 喫茶レシート","38%","24%"],
     ["bookLedger","📚 受け渡し帳","8%","auto",null,"18%"],
     ["busLog","🚌 バス記録","auto","auto","8%","18%"],
-    ["unfinishedMemo","✉️ 書きかけメモ","43%","auto",null,"8%"],
-    ["travelBook","📖 旅行記","auto","36%","7%"]
+    ["unfinishedMemo","✉️ 書きかけメモ","43%","auto",null,"8%"]
   ],
   people:[
     {name:"ユイ",role:"依頼人・宗一郎の孫",note:"21:10発の列車で祖父と待ち合わせていた。祖父は普段、時間にかなり正確。"},
@@ -3060,7 +3072,7 @@ const cases={
     sakaki:{
       icon:"📚",name:"榊",role:"古本屋店主",statements:[
         {text:"『今日は宗一郎には会ってませんよ。』",press:"少し考えてから、『店で話し込んだりはしていない』と言い直した。",contradiction:"bookLedger",requires:["takashi_hat"]},
-        {text:"『旅行記？ ああ、昔の町の写真が載ってる古い本です。』",press:"宗一郎が若い頃から探していた一冊だったという。"}
+        {text:"『旅行記？ ああ、昔の町の写真が載ってる古い本です。』",press:"宗一郎が若い頃から探していた一冊だったという。榊は『あいつ、受け取る時にずいぶん急いでたな』と付け加えた。"}
       ]
     }
   },
@@ -3081,10 +3093,10 @@ const cases={
     hints:{
       culprit:"駅で『宗一郎を見た』二人は、何を根拠に本人だと判断していた？ 帽子のタグと写真も確認しよう。",
       place:"20:48のバス利用記録は、駅とは逆方向へ向かっている。夕映丘線の行き先を見よう。",
-      motive:"旅行記に挟まれた写真の裏に、宗一郎と妻の約束が残っている。"
+      motive:"榊から受け取った古い写真の裏に、宗一郎と妻の約束が残っている。"
     }
   },
-  ending:"宗一郎は駅へ来ていなかった。20:35に榊から古い旅行記を受け取り、その中に挟まれていた若い頃の写真を見て、亡き妻との約束を思い出した。『結婚50年の日、またここへ来よう』――その日が今日だった。宗一郎は駅へ向かう前にほんの少しだけ旧展望台へ寄るつもりで、20:48の夕映丘線に乗った。しかし帰りの便を逃し、ユイとの待ち合わせに間に合わなかった。駅と喫茶店で目撃された『宗一郎』は、たまたまよく似た茶色い帽子をかぶった別人。人々の記憶が、『駅まで来た人が消えた』という存在しない事件を作っていた。",
+  ending:"宗一郎は駅へ来ていなかった。20:35に榊から、若い頃から探していた古い旅行記を受け取った。その時、持っていた古い写真をカウンターへ置き忘れている。写真の裏には、亡き妻との『結婚50年の日、またここへ来よう』という約束。その日が今日だった。宗一郎は駅へ向かう前にほんの少しだけ旧展望台へ寄るつもりで、20:48の夕映丘線に乗った。しかし帰りの便を逃し、ユイとの待ち合わせに間に合わなかった。駅と喫茶店で目撃された『宗一郎』は、たまたまよく似た茶色い帽子をかぶった別人。人々の記憶が、『駅まで来た人が消えた』という存在しない事件を作っていた。",
   culpritComment:{name:"宗一郎",line:"すまんな。少しだけのつもりだったんだ。あいつとの約束を……今日だけは、忘れたくなくてな。"}
 }
 ,
@@ -3468,7 +3480,8 @@ function buildScene(){
     if(h[4]) b.style.right=h[4]; if(h[5]) b.style.bottom=h[5];
     b.onclick=()=>collectEvidence(h[0],b); s.appendChild(b);
   });
-  document.getElementById("evidenceCount").textContent=`証拠 0 / ${Object.keys(currentCase.evidence).length}`;
+  const sceneTotal=currentCase.sceneEvidenceTotal || currentCase.hotspots.length;
+  document.getElementById("evidenceCount").textContent=`証拠 0 / ${sceneTotal}`;
   document.getElementById("toWitnessBtn").disabled=true;
   scheduleCaseFileSync();
 }
@@ -3772,8 +3785,10 @@ function collectEvidence(id,btn){
     `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${nemoPart}${originEncounter?originNemoEncounterHtml():""}`;
   if(originEncounter){renderActiveCompanionBanner("investigationPartner","なんとなく、ついてきた");}
 
+  const sceneTotal=currentCase.sceneEvidenceTotal || currentCase.hotspots.length;
+  const sceneCollected=[...evidence].filter(id=>currentCase.hotspots.some(h=>h[0]===id)).length;
   document.getElementById("evidenceCount").textContent=
-    `証拠 ${evidence.size} / ${Object.keys(currentCase.evidence).length}`;
+    `証拠 ${sceneCollected} / ${sceneTotal}`;
 
   renderFile();
   renderProgress();
@@ -4360,11 +4375,24 @@ function presentEvidence(clueId){
       タカシ「……確かに、顔までは見ていませんでした」<br><br>
       <strong>『宗一郎は駅まで来た』という前提そのものが怪しくなってきた。</strong>`;
     } else if(rule.flag==="sakaki_ledger"){
+      if(!evidence.has("travelBook")){
+        evidence.add("travelBook");
+        const receivedInsight=getNemoInsight("travelBook");
+        if(receivedInsight) nemoInsights.travelBook=receivedInsight;
+      }
+      renderFile();
       msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
       榊は「今日は宗一郎には会っていない」と話した。<br>
       しかし <strong>20:35の受け渡し帳</strong> には、榊自身の字で宗一郎へ旅行記を渡した記録がある。<br><br>
       榊「……店の前で本を渡しただけだ。会ったってほどじゃないと思ってな」<br><br>
-      これで、宗一郎の本当の行動を組み立てる材料がそろった。`;
+      榊は少し黙ると、カウンターの奥から一枚の古い写真を取り出した。<br>
+      「そういえば、あいつが本を受け取った時に置いていったんだ。返そうと思ってた」<br><br>
+      <div class="newEvidenceGain"><strong>📷 新しい証拠を受け取った</strong><br>
+      <strong>『榊から受け取った古い写真』</strong><br>
+      若い宗一郎と亡き妻が旧展望台で写っている。写真の裏には――<br>
+      <strong>『結婚50年の日、またここへ来よう』</strong></div><br>
+      バス記録、書きかけのメモ、そしてこの写真。<br>
+      <strong>ばらばらだった手がかりが、ひとつの行き先へつながり始めた。</strong>`;
     } else if(rule.flag==="sae_return"){
       msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
       サエは「差出人へ返された手紙が棚の裏へ紛れた」と考えていた。<br>
@@ -4471,7 +4499,7 @@ function setupDeductionPanel(){
         : currentCase===cases[4]
           ? "誰かを犯人にする必要はない。帰り道と証言をつないで、手紙がどこで消え、今どこにあるのか組み立てよう。"
           : currentCase===cases[5]
-            ? "『宗一郎は駅へ来た』という前提をいったん捨てよう。帽子、バス、旅行記、書きかけのメモから、本当の行き先を組み立ててください。"
+            ? "『宗一郎は駅へ来た』という前提をいったん捨てよう。帽子、バス、書きかけのメモ、そして榊から受け取った写真から、本当の行き先を組み立ててください。"
             : currentCase===cases[6]
               ? "これは犯人探しではない。写真、学校記録、郵便処理記録、担任日誌、若桜の記録から、二十年前に止まった手紙の受取人と差出人を組み立てよう。"
               : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
