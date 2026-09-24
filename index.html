@@ -2021,7 +2021,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.52 story progression */
+/* v0.53 story progression */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2063,7 +2063,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.52</span>
+    <span class="badge">v0.53</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2282,7 +2282,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.52 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.53 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2530,7 +2530,7 @@ const cases={
     camera:{
       icon:"📹",
       name:"17:39の廊下カメラ",
-      desc:"レンと同じ学校の制服、赤いリュックの人物が裏口方向へ歩いている。顔は映っていない。"
+      desc:"高校生らしい制服と赤いリュックの人物が裏口方向へ歩いている。顔は映っていない。"
     },
     note:{
       icon:"📝",
@@ -2555,6 +2555,11 @@ const cases={
   ],
   people:[
     {
+      name:"ミナ",
+      role:"図書館ボランティア",
+      note:"17:35〜17:45ごろ、倉庫と裏口の間で片付け作業。鍵フックのある通路の近くも通っている。"
+    },
+    {
       name:"アオイ",
       role:"図書館スタッフ",
       note:"17:30に鍵を確認した、最後のスタッフ。17:35以降は受付担当だった。"
@@ -2563,11 +2568,6 @@ const cases={
       name:"レン",
       role:"高校生利用者",
       note:"高校生利用者。本人は17:38には退館したと話す。赤いリュックを使用。"
-    },
-    {
-      name:"ミナ",
-      role:"図書館ボランティア",
-      note:"17:35〜17:45ごろ、倉庫と裏口の間で片付け作業。鍵フックのある通路の近くも通っている。"
     }
   ],
   timeline:[
@@ -2581,6 +2581,49 @@ const cases={
     ["17:50","資料室の鍵がないことに気づく"]
   ],
   witnesses:{
+    mina:{
+      icon:"📦",
+      name:"ミナ",
+      role:"図書館ボランティア",
+      statements:[
+        {
+          text:"「17時40分ごろ、裏口で段ボールを片付けていました。」",
+          press:"作業を始めた時刻は、ボランティア記録とも一致している。"
+        },
+        {
+          text:"「ホースの水が、掲示板に少しかかっちゃって。」",
+          press:"濡れた掲示ポスターの状態と一致する。"
+        },
+        {
+          text:"「片付けを始めてから17時45分ごろまでは、ずっと裏口にいました。」",
+          press:"途中で受付へ戻ったことはない、とミナは答える。",
+          contradictionTestimony:"aoi:3"
+        }
+      ]
+    },
+    aoi:{
+      icon:"📚",
+      name:"アオイ",
+      role:"図書館スタッフ",
+      statements:[
+        {
+          text:"「17時30分には、鍵はちゃんとフックにありました。」",
+          press:"鍵を確認してから受付へ移動したという。"
+        },
+        {
+          text:"「閉館前に、資料室の忘れ物について相談を受けました。」",
+          press:"相談したのはレン。青いノートを忘れたと言うので、『明日取りに来て』と伝えた。"
+        },
+        {
+          text:"「17時35分からは、私はずっと受付にいました。」",
+          press:"受付記録にもアオイの離席は残っていない。"
+        },
+        {
+          text:"「17時43分ごろ、ミナさんが受付にガムテープを取りに来ました。」",
+          press:"備品の貸出メモにも、17:43『ミナ・ガムテープ』と残っている。"
+        }
+      ]
+    },
     ren:{
       icon:"🎒",
       name:"レン",
@@ -2606,52 +2649,21 @@ const cases={
           press:"『明日取りに来て』と言われたことも認めている。"
         }
       ]
-    },
-    mina:{
-      icon:"📦",
-      name:"ミナ",
-      role:"図書館ボランティア",
-      statements:[
-        {
-          text:"「17時40分ごろ、裏口で段ボールを片付けていました。」",
-          press:"作業時間はボランティア記録とも一致している。"
-        },
-        {
-          text:"「ホースの水が、掲示板に少しかかっちゃって。」",
-          press:"濡れた掲示ポスターの状態と一致する。"
-        },
-        {
-          text:"「裏口の方で、誰かの足音は聞きました。」",
-          press:"姿までは見ていない。片付け中だったので、誰かは分からなかったという。"
-        }
-      ]
-    },
-    aoi:{
-      icon:"📚",
-      name:"アオイ",
-      role:"図書館スタッフ",
-      statements:[
-        {
-          text:"「17時30分には、鍵はちゃんとフックにありました。」",
-          press:"鍵を確認してから受付へ移動したという。"
-        },
-        {
-          text:"「閉館前に、資料室の忘れ物について相談を受けました。」",
-          press:"相談したのはレン。青いノートを忘れたと言うので、『明日取りに来て』と伝えた。"
-        },
-        {
-          text:"「17時35分からは、ずっと受付にいました。」",
-          press:"受付記録にも離席は残っていない。"
-        }
-      ]
     }
   },
   multiClear:[
     {
+      witness:"mina",
+      testimony:"aoi:3",
+      statement:2,
+      flag:"mina_tape"
+    },
+    {
       witness:"ren",
       evidence:"receipt",
       statement:0,
-      flag:"ren_exit"
+      flag:"ren_exit",
+      requires:["mina_tape"]
     },
     {
       witness:"ren",
@@ -2661,7 +2673,7 @@ const cases={
       requires:["ren_exit"]
     }
   ],
-  finalReady:["ren_exit","ren_backdoor"],
+  finalReady:["mina_tape","ren_exit","ren_backdoor"],
   deduction:{
     culpritLabel:"鍵を持ち出した人物",
     culpritOptions:[
@@ -3259,7 +3271,7 @@ function investigationPartnerReaction(id){
       tube:"中身、ちゃんと入ってるみたい。これは違うかな。",
       wet:"この紙、ちょっと手ざわりが変。",
       poster:"こっちの紙も、さっきのと似てる気がする。",
-      camera:"あ。赤いリュック。レンくんと同じだね。",
+      camera:"あ。赤いリュック、よく目立つね。覚えておこ。",
       note:"青いノート、忘れてたんだ。取りに行きたかったのかな。",
       returnbox:"あれ？ いま、中でカチッて音した。",
       clock:"時計、止まってる。……17:30のままだね。",
@@ -3555,7 +3567,12 @@ function nemoNudgeFor(statement){
   if(statement.contradictionTestimony){
     const clue=getTestimonyClue(statement.contradictionTestimony);
     if(!clue || !heardTestimony.has(statement.contradictionTestimony)) return "";
-    const line=`あれ？ ${clue.witness.name}さんは「戻った時には、カナさんは展示室にいた」って言ってたよね。入口付近にいたって話と合わないかも。`;
+    let line=`あれ？ ${clue.witness.name}さんのお話と、少し合わないところがあるかも。`;
+    if(currentCase===cases[1]){
+      line=`あれ？ ${clue.witness.name}さんは「戻った時には、カナさんは展示室にいた」って言ってたよね。入口付近にいたって話と合わないかも。`;
+    }else if(currentCase===cases[2] && currentWitness==="mina"){
+      line=`あれ？ アオイさんは17時43分にミナさんが受付へ来たって言ってたよね。『ずっと裏口』とは合わないかも。`;
+    }
     return `<div class="nemoNudge">
       <strong>${selected.icon} ${selected.name}</strong><br>${line}
     </div>`;
@@ -3572,7 +3589,7 @@ function nemoNudgeFor(statement){
     }else if(evidenceId==="frame"){
       line="あれ？ 『ずらしてない』って言ったね。……ずれてたこと、まだ話してないよね。";
     }else if(evidenceId==="receipt"){
-      line="17:42のレシート。……17:38には帰ったって言ってたよね？";
+      line="17:38って、かなりはっきり覚えてるんだね。事件ファイルの時刻と並べてみよ。";
     }else if(evidenceId==="cafeReceipt"){
       line="17:41におかわりしてる。……17:30には帰ったって言ってたよね？";
     }else if(evidenceId==="mirror"){
@@ -3589,25 +3606,25 @@ function nemoNudgeFor(statement){
   if(selected.id===66){
     if(evidenceId==="photo") line="あれ？ 写真と、お話が合ってない気がする。";
     else if(evidenceId==="frame") line="『ずらしてない』って言ったの、ちょっと変だね。まだずれの話してないよ。";
-    else if(evidenceId==="receipt") line="この時間、さっきのお話と違わない？";
+    else if(evidenceId==="receipt") line="17:38ってはっきり言ったね。時間の手がかりと見比べてみたいかも。";
     else if(evidenceId==="cafeReceipt") line="17:41。帰った時間と違うね。";
     else if(evidenceId==="mirror") line="あ。鏡にマコちゃんいる。窓際じゃないね。";
   }else if(selected.id===96){
     if(evidenceId==="photo") line="写真と一緒に見ると、ちょっと変だね。";
     else if(evidenceId==="frame") line="『ずらしてない』って言葉、先に出たね。ずれてたことを知ってたのかな。";
-    else if(evidenceId==="receipt") line="時間を並べると、合わないところがあるね。";
+    else if(evidenceId==="receipt") line="17:38という時刻、他の記録と並べて確認してみよう。";
     else if(evidenceId==="cafeReceipt") line="17:30に退店、17:41に注文。これは両立しないね。";
     else if(evidenceId==="mirror") line="17:44の位置が、マコちゃんの話と違うね。";
   }else if(selected.id===31){
     if(evidenceId==="photo") line="いまの言い方、ちょっとだけ気になった。写真も見てみよ。";
     else if(evidenceId==="frame") line="『ずらしてない』って言った時、ちょっと言い急いだ感じがしたかも。";
-    else if(evidenceId==="receipt") line="時間の話、もう一回見たいかも。";
+    else if(evidenceId==="receipt") line="時間を言う時、かなりはっきりしてたね。記録も見てみよ。";
     else if(evidenceId==="cafeReceipt") line="17:41のおかわり、言い方と合わないかも。";
     else if(evidenceId==="mirror") line="マコちゃん、写真の場所とお話が違うかも。";
   }else if(selected.id===12){
     if(evidenceId==="photo") line="うーん……写真。たぶん写真。";
     else if(evidenceId==="frame") line="『ずらしてない』……まだ、ずれてたって言ってないのに。";
-    else if(evidenceId==="receipt") line="このレシート、なんか引っかかる。";
+    else if(evidenceId==="receipt") line="17:38……この時間、覚えておこ。";
     else if(evidenceId==="cafeReceipt") line="この17:41、やっぱり変。";
     else if(evidenceId==="mirror") line="鏡。ここ、たぶん大事。";
   }
@@ -3641,7 +3658,9 @@ function nemoPressReaction(witnessId, statementIndex){
       "mina:0":"17:40、裏口で作業してたんだね。時間、覚えておこ。",
       "mina:1":"水がかかったのは掲示板。濡れた紙とつながるかも。",
       "aoi:0":"17:30には鍵があった。ここが最後の確認なんだね。",
-      "aoi:1":"青いノートの相談、レンくんだったんだ。",
+      "aoi:1":"忘れ物の相談があったんだ。記録と合わせて見ておこ。",
+      "aoi:3":"17:43にミナさんが受付へ来たんだね。時間がはっきりしてる。",
+      "mina:2":"『ずっと裏口』ってところ、覚えておこ。",
       "yuna:0":"17:30って、壁時計を見た時間なんだね。",
       "souta:1":"いつも壁時計を見てるんだ。止まってたら気づきにくいね。",
       "mako:0":"お母さんへのプレゼントを探してたんだね。"
@@ -3653,7 +3672,9 @@ function nemoPressReaction(witnessId, statementIndex){
       "mina:0":"17:40の裏口作業。紙が濡れた時刻と重なるね。",
       "mina:1":"掲示板の水と、閲覧席の紙片。紙質も比べたい。",
       "aoi:0":"17:30が鍵の最終確認。ここから17:50までが空白だね。",
-      "aoi:1":"レンくんには資料室へ戻りたい理由があったんだ。",
+      "aoi:1":"忘れ物の相談時刻と、鍵の確認時刻を並べてみよう。",
+      "aoi:3":"17:43のミナさん。ほかの証言と照らせそうだね。",
+      "mina:2":"17:45までずっと裏口。時間の範囲がはっきりしてるね。",
       "yuna:0":"実時刻じゃなく、壁時計を基準にした証言なんだね。",
       "souta:1":"ソウタさんも壁時計を基準にしてる。共通点だね。",
       "mako:0":"母親へのプレゼント。動機になり得るけど、まだ決めつけないでおこ。"
@@ -3667,9 +3688,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "ren:2":"『戻ってない』ってところ、言い直したね。",
       "ren:3":"青いノートの話を出したら、どんな顔するかな。",
       "mina:0":"作業の話は迷わず答えたね。",
-      "mina:1":"水をかけちゃったこと、自分から話してる。隠してる感じは薄いかも。",
+      "mina:1":"水をかけちゃったことは、自分から話してるね。",
+      "mina:2":"『ずっと裏口』って言い切ったね。",
+      "aoi:3":"17:43のこと、アオイさんは迷わず答えたね。",
       "aoi:0":"鍵のこと、かなりはっきり覚えてるね。",
-      "aoi:1":"レンくんの名前を出しても、言い方は変わらないね。",
+      "aoi:1":"忘れ物の相談については、言い方が変わらないね。",
       "yuna:0":"時間を聞いた時、壁時計を見たってすぐ答えたね。",
       "souta:1":"壁時計の話、自然に出てきたね。本人は本当に17:30だと思ってたのかも。",
       "mako:0":"お母さんの話をした時、ちょっと大事そうに言ったね。"
@@ -3685,7 +3708,9 @@ function nemoPressReaction(witnessId, statementIndex){
       "mina:0":"17:40。ここ、あとでつながりそう。",
       "mina:1":"水と紙。なんか近い。",
       "aoi:0":"17:30の鍵。ここは大事そう。",
-      "aoi:1":"青いノート。やっぱり気になる。",
+      "aoi:1":"忘れ物の相談。あとでつながりそう。",
+      "aoi:3":"17:43。ここ、誰かのお話と合うかな。",
+      "mina:2":"ずっと裏口……ほんとにずっとかな。",
       "yuna:0":"17:30……でも時計、止まってるよね。",
       "souta:1":"壁時計。ここ、たぶん大事。",
       "mako:0":"お母さん。これ、理由かな。"
@@ -3781,6 +3806,12 @@ function contradictionMeta(flag){
       statement:"「大きなポスターの額縁も、ずらしたりしてません」",
       evidence:"ずれた展示額縁",
       summary:"こちらはまだ額縁がずれていた事実を伝えていない。それなのにカナは『ずらしていない』と先回りして否定した。"
+    },
+    mina_tape:{
+      title:"ミナの『ずっと裏口にいた』とアオイの証言が食い違う",
+      statement:"ミナ『17時45分ごろまで、ずっと裏口にいました』",
+      evidence:"アオイ『17時43分ごろ、ミナさんが受付にガムテープを取りに来ました』",
+      summary:"ミナは作業中ずっと裏口にいたと話したが、アオイは17:43に受付でミナを見ている。ミナの記憶には短い抜けがある。"
     },
     ren_exit:{
       title:"レンの退館時刻が合わない",
@@ -3919,13 +3950,19 @@ function presentEvidence(clueId){
       しかし、こちらはまだ <strong>額縁がずれていたこと自体を伝えていない</strong>。<br>
       知らないはずの『ずれ』を先に否定したことで、カナが額縁の状態を知っていたことが浮かび上がる。<br><br>
       ここまでで、カナの証言は三度崩れた。`;
-    } else if(rule.flag==="ren_exit"){
+    } else if(rule.flag==="mina_tape"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
+      ミナは「17時45分ごろまで、ずっと裏口にいた」と話した。<br>
+      しかしアオイは、<strong>17:43ごろにミナが受付へガムテープを取りに来た</strong> と証言している。<br><br>
+      二人の話は同時には成り立たない。<br>
+      ミナ「……あっ。そうだ、テープを取りに一度だけ受付へ戻りました。ごめんなさい、忘れてました」`;
+    } else if(rule.flag==="ren_exit"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
       レンは「17時38分にはもう図書館を出た」と証言した。<br>
       しかし <strong>17:42、館内1階の休憩スペースで発行された自販機レシート</strong> が残っている。<br><br>
       レン「……ちょっと、休憩スペースに寄っただけです」`;
     } else if(rule.flag==="ren_backdoor"){
-      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
       レンは「裏口には行っていない」と言った。<br>
       しかし <strong>17:39の廊下カメラ</strong> には、同じ制服と赤いリュックの人物が裏口方向へ向かっている。<br><br>
       レン「……裏口の近くまでは行きました」`;
@@ -3949,7 +3986,9 @@ function presentEvidence(clueId){
     }
 
     let linkedInsight="";
-    if(rule.flag==="kana_misaki"){
+    if(rule.flag==="mina_tape"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。『ずっと裏口』と『17:43に受付』は、同時にはできないね。」</div>`;
+    }else if(rule.flag==="kana_misaki"){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。二人のお話、同じ時間なのに場所がちがうね。」</div>`;
     }else if(rule.flag==="kana_photo" && nemoInsights.photo){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。さっきの写真、ここでつながったね。」</div>`;
