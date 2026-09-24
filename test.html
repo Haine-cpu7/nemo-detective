@@ -163,6 +163,8 @@ button,select{font:inherit} button{cursor:pointer}
 .modalCard{width:min(760px,100%);max-height:86vh;overflow:auto;background:#202537;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
 .evidencePick{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
 .pick{background:#2b3042;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left}.pick:hover{border-color:var(--accent2)}
+.clueSectionTitle{grid-column:1/-1;color:var(--accent2);font-weight:1000;font-size:13px;margin-top:4px}
+.testimonyPick{border-color:#5e5879;background:#28283d}.testimonyPick>div{margin-top:5px;color:#d8d8e4;line-height:1.55}
 .bigReveal{text-align:center;padding:30px 12px}.bigReveal .word{font-size:clamp(36px,9vw,88px);font-weight:1000;letter-spacing:.06em;color:var(--accent2);text-shadow:0 5px 0 #493c18}
 .bigReveal p{color:var(--muted);line-height:1.8}.footer{text-align:center;color:#777f9b;font-size:12px;margin-top:18px}
 
@@ -1672,6 +1674,11 @@ body:not(.case-active) .topFileBtn{
   font-size:11px;
   line-height:1.55;
 }
+.clueFileHeading{margin:2px 0 9px;color:var(--accent2);font-weight:1000;font-size:13px;letter-spacing:.02em}
+.clueFileHeading.testimonyHeading{margin-top:16px;color:#cfc6ff}
+.testimonyFileCard{border-color:#56516d;background:#25283a}
+.testimonyFileCard>div{line-height:1.6;color:#e7e4ef}
+
 @media(max-width:860px){
   .nemoInsight{font-size:12px}
   .evidenceInsight{font-size:11px}
@@ -2021,7 +2028,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.44</span>
+    <span class="badge">v0.47</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2154,7 +2161,7 @@ body:not(.case-active) .topFileBtn{
         </div>
         <div class="actionbar">
           <button class="primary press" id="pressBtn">🔍 詳しく聞く</button>
-          <button class="primary present" id="presentBtn">📁 証拠を出す</button>
+          <button class="primary present" id="presentBtn">📁 手がかりを出す</button>
         </div>
         <div id="testimonyMsg" class="callout special">「詳しく聞く」で証言を掘れます。ねもは、今ある証拠や証言から気づいたことがある時だけ反応します。</div>
       </section>
@@ -2223,12 +2230,12 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.44 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.47 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
   <div class="modalCard">
-    <h2>どの証拠を出す？</h2>
+    <h2>どの手がかりを出す？</h2>
     <div class="evidencePick" id="evidencePick"></div>
     <div class="row" style="margin-top:14px"><button class="ghost" id="closeModal">閉じる</button></div>
   </div>
@@ -2386,17 +2393,18 @@ const cases={
       {text:"「17時13分には正面玄関から出ました。」",press:"入口カメラにも17:13の退出が写っている。"}
     ]},
     kana:{icon:"🌼",name:"カナ",role:"コンテスト参加者",statements:[
-      {text:"「結果が気になって来たけど、トイレを借りただけです。」",press:"17:15ごろトイレへ入り、出たあとは入口付近にいたと話す。"},
+      {text:"「結果が気になって来たけど、トイレを借りただけです。」",press:"17:15ごろトイレへ入り、出たあとは入口付近にいたと話す。",contradictionTestimony:"misaki:2"},
       {text:"「展示室の奥には行ってません。」",press:"そう言い切る前に、カナは展示壁の方を一度だけ見た。",contradiction:"photo"},
       {text:"「あの大きなポスターの額縁も、ずらしたりしてません。」",press:"こちらはまだ、額縁が『ずれていた』ことをカナには伝えていない。",contradiction:"frame",requires:["kana_photo"]},
       {text:"「封筒の中身なんて知りません。まだ発表前ですから。」",press:"カナ自身もコンテスト参加者。結果を気にして来館したことは認めている。"}
     ]}
   },
   multiClear:[
-    {witness:"kana", evidence:"photo", statement:1, flag:"kana_photo"},
+    {witness:"kana", testimony:"misaki:2", statement:0, flag:"kana_misaki"},
+    {witness:"kana", evidence:"photo", statement:1, flag:"kana_photo", requires:["kana_misaki"]},
     {witness:"kana", evidence:"frame", statement:2, flag:"kana_frame", requires:["kana_photo"]}
   ],
-  finalReady:["kana_photo","kana_frame"],
+  finalReady:["kana_misaki","kana_photo","kana_frame"],
   deduction:{
     culpritLabel:"犯人",
     culpritOptions:[
@@ -2650,7 +2658,7 @@ const cases={
 }
 };
 
-let currentCase=null, selected=null, evidence=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={};
+let currentCase=null, selected=null, evidence=new Set(), heardTestimony=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={};
 
 const detectiveGrid=document.getElementById("detectiveGrid");
 function stat(label,val){
@@ -2689,6 +2697,7 @@ document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
   document.body.classList.remove("case-active");
   currentCase=cases[btn.dataset.case];
   evidence=new Set();
+  heardTestimony=new Set();
   flags=new Set();
   contradictionLog=[];
   nemoInsights={};
@@ -3023,15 +3032,27 @@ function buildWitnessChooser(){
     box.appendChild(b);
   });
 }
+function testimonyKey(witnessId,index){
+  return `${witnessId}:${index}`;
+}
+function getTestimonyClue(key){
+  const [witnessId,indexRaw]=key.split(":");
+  const index=Number(indexRaw);
+  const witness=currentCase?.witnesses?.[witnessId];
+  const statement=witness?.statements?.[index];
+  if(!witness || !statement) return null;
+  return {key,witnessId,index,witness,statement};
+}
 function renderStatement(){
   const w=currentCase.witnesses[currentWitness];
   const s=w.statements[stmtIndex];
+  heardTestimony.add(testimonyKey(currentWitness,stmtIndex));
   document.querySelectorAll(".witnessBtn").forEach(b=>b.classList.toggle("active",b.dataset.w===currentWitness));
   document.getElementById("wface").textContent=w.icon;document.getElementById("wname").textContent=w.name;document.getElementById("wrole").textContent=w.role;
   document.getElementById("speaker").textContent=`${w.name}の証言`;document.getElementById("statementText").textContent=s.text;
   document.getElementById("stmtPos").textContent=`${stmtIndex+1} / ${w.statements.length}`;
   document.getElementById("prevStmt").disabled=stmtIndex===0;document.getElementById("nextStmt").disabled=stmtIndex===w.statements.length-1;
-  scheduleCaseFileSync();
+  renderFile();
 }
 document.getElementById("prevStmt").onclick=()=>{
   if(stmtIndex>0){
@@ -3054,7 +3075,16 @@ document.getElementById("nextStmt").onclick=()=>{
 };
 
 function nemoNudgeFor(statement){
-  if(!selected || !statement.contradiction) return "";
+  if(!selected || (!statement.contradiction && !statement.contradictionTestimony)) return "";
+
+  if(statement.contradictionTestimony){
+    const clue=getTestimonyClue(statement.contradictionTestimony);
+    if(!clue || !heardTestimony.has(statement.contradictionTestimony)) return "";
+    const line=`あれ？ ${clue.witness.name}さんは「戻った時には、カナさんは展示室にいた」って言ってたよね。入口付近にいたって話と合わないかも。`;
+    return `<div class="nemoNudge">
+      <strong>${selected.icon} ${selected.name}</strong><br>${line}
+    </div>`;
+  }
 
   const evidenceId=statement.contradiction;
   const saved=nemoInsights[evidenceId];
@@ -3146,7 +3176,7 @@ document.getElementById("pressBtn").onclick=()=>{
   const s=currentCase.witnesses[currentWitness].statements[stmtIndex];
   let msg=`<div class="pressDetail">${s.press}</div>`;
 
-  if(s.contradiction){
+  if(s.contradiction || s.contradictionTestimony){
     msg+=nemoNudgeFor(s);
   }else{
     const reaction=nemoPressReaction(currentWitness,stmtIndex);
@@ -3171,11 +3201,35 @@ document.getElementById("pressBtn").onclick=()=>{
 
 document.getElementById("presentBtn").onclick=()=>{
   const pick=document.getElementById("evidencePick");pick.innerHTML="";
-  [...evidence].forEach(id=>{
-    const e=currentCase.evidence[id];const b=document.createElement("button");b.className="pick";
-    b.innerHTML=`<strong>${e.icon} ${e.name}</strong><div class="muted">${e.desc}</div>`;
-    b.onclick=()=>presentEvidence(id);pick.appendChild(b);
-  });
+
+  if(evidence.size){
+    const heading=document.createElement("div");
+    heading.className="clueSectionTitle";
+    heading.textContent="🔎 現場の証拠";
+    pick.appendChild(heading);
+    [...evidence].forEach(id=>{
+      const e=currentCase.evidence[id];const b=document.createElement("button");b.className="pick";
+      b.innerHTML=`<strong>${e.icon} ${e.name}</strong><div class="muted">${e.desc}</div>`;
+      b.onclick=()=>presentEvidence(`evidence:${id}`);pick.appendChild(b);
+    });
+  }
+
+  const currentKey=testimonyKey(currentWitness,stmtIndex);
+  const testimonyKeys=[...heardTestimony].filter(key=>key!==currentKey);
+  if(testimonyKeys.length){
+    const heading=document.createElement("div");
+    heading.className="clueSectionTitle";
+    heading.textContent="🗣️ 取得した証言";
+    pick.appendChild(heading);
+    testimonyKeys.forEach(key=>{
+      const clue=getTestimonyClue(key);
+      if(!clue) return;
+      const b=document.createElement("button");b.className="pick testimonyPick";
+      b.innerHTML=`<strong>🗣️ ${clue.witness.name}の証言</strong><div>${clue.statement.text}</div>`;
+      b.onclick=()=>presentEvidence(`testimony:${key}`);pick.appendChild(b);
+    });
+  }
+
   document.getElementById("evidenceModal").classList.remove("hidden");
 };
 document.getElementById("closeModal").onclick=()=>document.getElementById("evidenceModal").classList.add("hidden");
@@ -3183,11 +3237,17 @@ document.getElementById("closeModal").onclick=()=>document.getElementById("evide
 
 function contradictionMeta(flag){
   const map={
+    kana_misaki:{
+      title:"カナの居場所が証言同士で食い違う",
+      statement:"カナ『トイレのあと入口付近にいた』",
+      evidence:"ミサキ『戻った時には、カナさんは展示室にいました』",
+      summary:"17:18ごろのカナの居場所について、カナ本人の話とミサキの目撃証言が両立しない。"
+    },
     kana_photo:{
       title:"カナの居場所が証言と違う",
       statement:"「展示室の奥には行ってません」",
       evidence:"17:17の来館写真",
-      summary:"『トイレのあと入口付近にいた』という話に反し、写真にはトイレと逆方向の展示壁へ向かうカナが写っている。"
+      summary:"カナは展示室の奥へ行っていないと話したが、17:17の写真には展示壁へ向かう姿が写っている。"
     },
     kana_frame:{
       title:"知らないはずの『額縁のずれ』を口にした",
@@ -3284,20 +3344,23 @@ function nextMoveHtml(){
   return "";
 }
 
-function presentEvidence(id){
+function presentEvidence(clueId){
   document.getElementById("evidenceModal").classList.add("hidden");
   const msg=document.getElementById("testimonyMsg");
+
+  const isTestimony=clueId.startsWith("testimony:");
+  const clueValue=isTestimony ? clueId.slice("testimony:".length) : clueId.replace(/^evidence:/,"");
 
   const rule=(currentCase.multiClear || []).find(r=>
     r.witness===currentWitness &&
     r.statement===stmtIndex &&
-    r.evidence===id
+    ((isTestimony && r.testimony===clueValue) || (!isTestimony && r.evidence===clueValue))
   );
 
   if(rule){
     if(rule.requires && !rule.requires.every(f=>flags.has(f))){
       msg.className="callout bad";
-      msg.innerHTML=`その証拠は気になる。でも、この証言を崩すには先に確認すべき矛盾がありそうだ。`;
+      msg.innerHTML=`その手がかりは気になる。でも、この証言を崩すには先に確認すべき矛盾がありそうだ。`;
       scheduleCaseFileSync();
       return;
     }
@@ -3306,18 +3369,23 @@ function presentEvidence(id){
     saveContradiction(rule.flag);
     msg.className="callout good";
 
-    if(rule.flag==="kana_photo"){
+    if(rule.flag==="kana_misaki"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
+      カナは「トイレのあと、入口付近にいた」と話した。<br>
+      しかしミサキは、受付へ戻った時に <strong>「カナさんは展示室にいた」</strong> と目撃している。<br><br>
+      同じ時間帯の居場所について、二人の証言は食い違っている。<br>
+      カナ「……展示室には、少し入っただけです」`;
+    } else if(rule.flag==="kana_photo"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
       カナは「展示室の奥には行っていない」と証言した。<br>
-      しかし <strong>17:17の来館写真</strong> には、トイレとは逆方向の展示壁へ向かうカナが写っている。<br>
-      さっきの「トイレのあと入口付近にいた」という話とも合わない。<br><br>
+      しかし <strong>17:17の来館写真</strong> には、トイレとは逆方向の展示壁へ向かうカナが写っている。<br><br>
       カナ「……少しだけ、展示を見ました」`;
     } else if(rule.flag==="kana_frame"){
-      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
       カナは「大きなポスターの額縁も、ずらしたりしていない」と言った。<br>
       しかし、こちらはまだ <strong>額縁がずれていたこと自体を伝えていない</strong>。<br>
       知らないはずの『ずれ』を先に否定したことで、カナが額縁の状態を知っていたことが浮かび上がる。<br><br>
-      ここまでで、カナの証言は二度崩れた。`;
+      ここまでで、カナの証言は三度崩れた。`;
     } else if(rule.flag==="ren_exit"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
       レンは「17時38分にはもう図書館を出た」と証言した。<br>
@@ -3341,7 +3409,9 @@ function presentEvidence(id){
     }
 
     let linkedInsight="";
-    if(rule.flag==="kana_photo" && nemoInsights.photo){
+    if(rule.flag==="kana_misaki"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。二人のお話、同じ時間なのに場所がちがうね。」</div>`;
+    }else if(rule.flag==="kana_photo" && nemoInsights.photo){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。さっきの写真、ここでつながったね。」</div>`;
     }else if(rule.flag==="kana_frame" && nemoInsights.frame){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「額縁の跡、やっぱり関係あったんだ。」</div>`;
@@ -3379,7 +3449,7 @@ function presentEvidence(id){
       partnerMiss=`<div class="partnerEvent"><strong>✨ ${selected.name}</strong><br>……それじゃない気がする。</div>`;
     }
   }
-  msg.innerHTML=`その証拠では、この証言は崩せなさそうだ。<br><span class="muted">事件ファイルの「証拠」「人物」「時系列」を見比べてみよう。</span>${partnerMiss}`;
+  msg.innerHTML=`その手がかりでは、この証言は崩せなさそうだ。<br><span class="muted">事件ファイルの証拠・取得した証言・時系列を見比べてみよう。</span>${partnerMiss}`;
   scheduleCaseFileSync();
 }
 
@@ -3462,13 +3532,14 @@ function renderFile(){
   const fc=document.getElementById("fileContent");
 
   if(tab==="evidence"){
-    if(!evidence.size){
-      fc.innerHTML=`<p class="muted">まだ証拠はありません。</p>`;
+    if(!evidence.size && !heardTestimony.size){
+      fc.innerHTML=`<p class="muted">まだ手がかりはありません。</p>`;
       scheduleCaseFileSync();
       return;
     }
-    fc.innerHTML=`<div class="cardlist">${
-      [...evidence].map(id=>{
+    const evidenceHtml=evidence.size ? `
+      <div class="clueFileHeading">🔎 現場の証拠</div>
+      <div class="cardlist">${[...evidence].map(id=>{
         const e=currentCase.evidence[id];
         const insight=nemoInsights[id];
         const insightPart=insight
@@ -3479,8 +3550,20 @@ function renderFile(){
           <div class="muted">${e.desc}</div>
           ${insightPart}
         </div>`;
-      }).join("")
-    }</div>`;
+      }).join("")}</div>` : "";
+
+    const testimonyHtml=heardTestimony.size ? `
+      <div class="clueFileHeading testimonyHeading">🗣️ 取得した証言</div>
+      <div class="cardlist">${[...heardTestimony].map(key=>{
+        const clue=getTestimonyClue(key);
+        if(!clue) return "";
+        return `<div class="infoCard testimonyFileCard">
+          <strong>${clue.witness.icon} ${clue.witness.name}の証言</strong>
+          <div>${clue.statement.text}</div>
+        </div>`;
+      }).join("")}</div>` : "";
+
+    fc.innerHTML=`${evidenceHtml}${testimonyHtml}`;
     scheduleCaseFileSync();
     return;
   }
