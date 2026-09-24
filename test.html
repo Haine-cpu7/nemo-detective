@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.24</title>
+<title>ねも探偵局 v0.23</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1776,7 +1776,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.24 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.23 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2843,6 +2843,33 @@ if(gameMainCol && "ResizeObserver" in window){
   caseFileResizeObserver.observe(gameMainCol);
 }
 
+// 左側の高さが、証言・矛盾表示などで変わった時も右枠を追従させる。
+const gameMainCol=document.getElementById("gameMainCol");
+if(gameMainCol && "ResizeObserver" in window){
+  const caseFileResizeObserver=new ResizeObserver(()=>scheduleCaseFileSync());
+  caseFileResizeObserver.observe(gameMainCol);
+}
+
+</script>
+
+<script>
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.querySelector('.caseCard[data-case="1"]')?.click();},50);
+  setTimeout(()=>{document.querySelector('.detective')?.click();},150);
+  setTimeout(()=>{document.getElementById('startBtn')?.click();},250);
+  setTimeout(()=>{document.getElementById('beginInvestigationBtn')?.click();},350);
+  setTimeout(()=>{document.querySelector('.hotspot[data-id="star"]')?.click();},450);
+  setTimeout(()=>{
+    syncCaseFileHeight();
+    const l=[...document.querySelectorAll('#gameMainCol section.panel')].find(el=>!el.classList.contains('hidden'));
+    const r=document.getElementById('caseFilePanel');
+    const d=document.createElement('div');
+    d.id='metrics';
+    d.style='position:fixed;top:0;left:0;z-index:9999;background:white;color:black;padding:8px;font:16px monospace';
+    d.textContent='left='+Math.round(l.getBoundingClientRect().height)+' right='+Math.round(r.getBoundingClientRect().height)+' title='+document.title;
+    document.body.appendChild(d);
+  },700);
+});
 </script>
 </body>
 </html>
