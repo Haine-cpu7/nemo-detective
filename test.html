@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.60 CASE 05 staged clue reveal */
+/* v0.61 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2071,7 +2071,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.60 separate how-to manual */
+/* v0.61 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2090,7 +2090,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.60 CASE 07 truth reconstruction */
+/* v0.61 CASE 07 truth reconstruction */
 .reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
 .reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
 .reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
@@ -2103,7 +2103,7 @@ body:not(.case-active) .topFileBtn{
 .reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
 @media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
 
-/* v0.60 cross-case archive mystery */
+/* v0.61 cross-case archive mystery */
 .archiveLead{padding:15px 16px;border:1px solid #65568d;border-radius:16px;background:linear-gradient(135deg,#2c2941,#202638);margin-bottom:14px;line-height:1.75}
 .archiveLead strong{color:#f3d47c}.archiveFile{border:1px solid #4f566f;background:#171b28;border-radius:18px;padding:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
 .archiveFileTop{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px dashed #505872}.archiveFileTop h3{margin:0 0 3px;font-size:18px}.archiveFileTop p{margin:0;color:var(--muted);font-size:13px}
@@ -2112,6 +2112,20 @@ body:not(.case-active) .topFileBtn{
 .archiveQuestion{margin-top:14px;padding:15px;border:1px solid #5a617d;border-radius:15px;background:#202534}.archiveQuestion h3{margin:0 0 9px}.archiveChoices{display:grid;gap:8px}.archiveChoice{width:100%;text-align:left;padding:12px 13px;border:1px solid #555e7d;border-radius:12px;background:#2a3043;color:var(--text);font-weight:900;cursor:pointer}.archiveChoice:hover{border-color:#8f7de1}.archiveChoice.correct{border-color:#63b98a;background:#18382a}.archiveChoice.wrong{border-color:#b9687a;background:#3b222b}
 .archiveResult{margin-top:13px}.archiveReveal{margin-top:15px;border:1px solid #7865b2;border-radius:16px;background:linear-gradient(145deg,#2b2442,#1a2130);padding:16px}.archiveReveal h3{margin:0 0 8px;color:#f2d178}.archiveLocations{display:grid;gap:5px;margin:12px 0;padding:12px;border-left:3px solid #7565ad;background:#171b28;border-radius:0 10px 10px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}.archiveCase08{margin-top:12px;padding:12px;border:1px dashed #7f719f;border-radius:12px;color:#e7e0ff;background:#262138}.archiveNemo{margin-top:12px;color:#e8e2ff}.archiveContinue{margin-top:14px;width:100%}
 @media(max-width:640px){.archiveCaseGrid{grid-template-columns:1fr}.archiveFile{padding:13px}.archiveFileTop{align-items:flex-start}.arcSigil{width:50px;height:50px;min-width:50px}.arcSigil:after{left:34px;top:13px;width:34px}.archiveCaseCard{padding:10px}}
+
+/* v0.61 星待館 / ねもの日記 crossover */
+.externalArchiveGate{margin-top:14px;padding:14px;border:1px dashed #7b6a9d;border-radius:14px;background:#211d31}
+.externalArchiveGate p{margin:0 0 10px;line-height:1.7}
+.externalArchive{margin-top:14px;border:1px solid #8a6f78;border-radius:17px;background:linear-gradient(145deg,#30252d,#1c202d);padding:16px;box-shadow:0 12px 28px rgba(0,0,0,.18)}
+.externalArchiveHead{display:flex;gap:12px;align-items:flex-start;border-bottom:1px dashed #68545e;padding-bottom:12px;margin-bottom:12px}
+.externalArchiveIcon{width:48px;height:48px;min-width:48px;display:grid;place-items:center;border-radius:14px;background:#392a35;border:1px solid #795d6d;font-size:24px}
+.externalArchiveHead h3{margin:0 0 3px;color:#f0c9d4}.externalArchiveHead p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.externalArchiveRows{display:grid;gap:7px;margin:12px 0}.externalArchiveRow{display:grid;grid-template-columns:110px 1fr;gap:10px;padding:9px 10px;border-radius:10px;background:#181c28;border:1px solid #443b49;font-size:12px;line-height:1.55}.externalArchiveRow span:first-child{color:#b8a9bd;font-weight:900}.externalArchiveRow strong{color:#f0e9ed}
+.externalDateFlag{margin:12px 0;padding:12px;border-left:3px solid #c48a9f;background:#231b25;border-radius:0 11px 11px 0;line-height:1.7}.externalDateFlag strong{color:#f2c2d1}
+.externalDialogue{display:grid;gap:8px;margin:12px 0}.externalDialogue .line{padding:10px 12px;border-radius:12px;background:#202535;border:1px solid #444b62;line-height:1.65}.externalDialogue .nemo{background:#2a243c;border-color:#665788}
+.noteRecordLink{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding:12px 13px;border:1px solid #735f82;border-radius:13px;background:#29223a;color:#efeaff;text-decoration:none;font-weight:900}.noteRecordLink:hover{border-color:#a88bd0;background:#322744}.noteRecordLink small{display:block;color:#b6aec8;font-weight:600;margin-top:2px}
+.archiveCase08.afterExternal{margin-top:15px}
+@media(max-width:640px){.externalArchive{padding:13px}.externalArchiveRow{grid-template-columns:1fr;gap:3px}.externalArchiveHead{gap:10px}.externalArchiveIcon{width:42px;height:42px;min-width:42px}}
 
 </style>
 </head>
@@ -2126,7 +2140,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.60</span>
+    <span class="badge">v0.61</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2385,7 +2399,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.60 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days v0.61 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -5036,12 +5050,49 @@ function checkArchiveMystery(answer,button){
         <span>CASE 07　月影館</span>
       </div>
       <p>ファイルをめくる。そこには、あなたたちが解決してきた場所が同じ順番で記録されていた。</p>
-      <div class="archiveCase08"><strong>CASE 08</strong><br>――――――――<br><span class="muted">場所・事件名ともに空欄。</span></div>
-      <div class="partnerEvent archiveNemo"><strong>🐱 ${name}</strong><br>「……どうして、最初の事件まで知ってるの？」</div>
-      <p class="muted">月影館の殺人事件は解決した。けれど、別の謎だけが残った。</p>
-      <button type="button" class="primary archiveContinue" onclick="finalReveal()">CASE 07を完了する →</button>
+      <div class="externalArchiveGate" id="externalArchiveGate">
+        <p><strong>けれど、事件番号の振られていない薄い紙束が一つだけ挟まっている。</strong><br><span class="muted">探偵局の事件ファイルではない。表紙には、場所の名前だけが記されていた。</span></p>
+        <button type="button" class="primary archiveContinue" onclick="revealExternalArchive()">記録外事案を開く →</button>
+      </div>
+      <div id="externalArchiveSlot"></div>
     </div>`;
   result.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function revealExternalArchive(){
+  const gate=document.getElementById("externalArchiveGate");
+  const slot=document.getElementById("externalArchiveSlot");
+  if(!slot || slot.dataset.opened==="1") return;
+  slot.dataset.opened="1";
+  if(gate) gate.classList.add("hidden");
+  const name=selected?.name || "ねも";
+  slot.innerHTML=`
+    <div class="externalArchive">
+      <div class="externalArchiveHead">
+        <div class="externalArchiveIcon">♨️</div>
+        <div><div class="archiveCaseNo">EXTRA ARCHIVE · 記録外事案</div><h3>星待館</h3><p>探偵局では扱っていないはずの出来事。なのに、月影館のファイルには詳細な記録が残されている。</p></div>
+      </div>
+      <div class="externalArchiveRows">
+        <div class="externalArchiveRow"><span>関係者</span><strong>星野美津子（旧姓：黒瀬）</strong></div>
+        <div class="externalArchiveRow"><span>記録された人物</span><strong>黒瀬直人</strong></div>
+        <div class="externalArchiveRow"><span>場所</span><strong>旧館・柱時計付近</strong></div>
+        <div class="externalArchiveRow"><span>記録</span><strong>「直人へ」と書かれた紙片／夜間の来訪者</strong></div>
+      </div>
+      <div class="externalDialogue">
+        <div class="line"><strong>あなた</strong><br>「……星待館？　こんな事件、探偵局では扱ってない。」</div>
+        <div class="line nemo"><strong>🐱 ${name}</strong><br>「……ここ、知ってる。わたしが泊まった旅館。」</div>
+      </div>
+      <p>記録の内容は、ねもが旅先で経験し、のちに日記として残した出来事と一致している。</p>
+      <div class="externalDateFlag"><strong>記録作成：ねもの日記が公開されるより前</strong><br><span class="muted">公開された日記を読んで書き写した――それだけでは説明できない。</span></div>
+      <div class="partnerEvent archiveNemo"><strong>🐱 ${name}</strong><br>「直人さんのことまで……。どうして知ってるの？」</div>
+      <a class="noteRecordLink" href="https://note.com/nemocollection/n/nf6c9d0ac6d24" target="_blank" rel="noopener noreferrer"><span>📖 ねもの記録「星待館」を読む<small>noteで公開された日記へ · 別ページで開きます</small></span><span>↗</span></a>
+      <p style="margin-top:14px">さらに紙束の次のページをめくる。</p>
+      <div class="archiveCase08 afterExternal"><strong>CASE 08</strong><br>――――――――<br><span class="muted">場所・事件名ともに空欄。</span></div>
+      <div class="partnerEvent archiveNemo"><strong>🐱 ${name}</strong><br>「……これ、まだ続いてるのかな。」</div>
+      <p class="muted">月影館の殺人事件は解決した。けれど、探偵局の外にまで伸びる別の謎が残った。</p>
+      <button type="button" class="primary archiveContinue" onclick="finalReveal()">CASE 07を完了する →</button>
+    </div>`;
+  setTimeout(()=>slot.scrollIntoView({behavior:"smooth",block:"start"}),60);
 }
 
 const reconstructionModal=document.getElementById("reconstructionModal");
