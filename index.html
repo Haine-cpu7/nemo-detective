@@ -139,6 +139,7 @@ button,select{font:inherit} button{cursor:pointer}
   background:linear-gradient(rgba(10,12,18,.15),rgba(10,12,18,.48)),linear-gradient(140deg,#786c62 0 22%,#33404d 22% 58%,#5f5546 58% 100%)
 }
 .scene.case2{background:linear-gradient(rgba(10,12,18,.12),rgba(10,12,18,.5)),linear-gradient(145deg,#635c50 0 20%,#37414c 20% 54%,#3e5660 54% 100%)}
+.scene.case3{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.50)),linear-gradient(145deg,#7b5d45 0 18%,#4d3a35 18% 50%,#6e5a43 50% 72%,#2f3b45 72% 100%)}
 .scene:before{content:attr(data-place);position:absolute;left:18px;bottom:15px;color:rgba(255,255,255,.24);font-weight:1000;font-size:28px;letter-spacing:.08em}
 .hotspot{position:absolute;border:1px solid rgba(255,255,255,.25);background:rgba(20,24,34,.7);color:white;border-radius:14px;padding:11px 12px;font-weight:900;box-shadow:0 7px 20px rgba(0,0,0,.28)}
 .hotspot:hover{background:rgba(91,80,134,.88)} .hotspot.done{opacity:.5}
@@ -2032,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.49</span>
+    <span class="badge">v0.50</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2085,6 +2086,11 @@ body:not(.case-active) .topFileBtn{
         <div class="caseLabel">CASE 02</div>
         <div class="caseTitle">消えた鍵と濡れた紙片</div>
         <div class="caseDesc">星見図書館で消えた鍵の行方を追う。</div>
+      </button>
+      <button class="caseCard" data-case="3">
+        <div class="caseLabel">CASE 03</div>
+        <div class="caseTitle">止まった時計と消えたオルゴール</div>
+        <div class="caseDesc">アンティーク喫茶で、止まった時間の向こうにある真相を追う。</div>
       </button>
     </div>
   </section>
@@ -2235,7 +2241,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.49 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.50 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2650,6 +2656,137 @@ const cases={
     name:"レン",
     line:"ごめんなさい。明日まで待てなくて……。どうしても今日、あのノートを取り戻したかったんです。"
   }
+},
+3:{
+  title:"CASE 03　止まった時計と消えたオルゴール",
+  place:"アンティーク喫茶 月灯り堂",
+  briefing:{
+    lead:"閉店前、古いオルゴールが棚から消えた。まずは『17時30分』を疑ってみよう。",
+    incident:"アンティーク喫茶『月灯り堂』で、展示販売されていた古いオルゴールが消えた。店員と客は『17時30分ごろまでは棚にあった』と話している。ところが店の壁時計は17時30分で止まったまま。時刻の証言そのものが、事件をややこしくしている。",
+    objectives:[
+      "誰がオルゴールを動かしたのか特定する",
+      "『17時30分』という時刻の食い違いを解く",
+      "オルゴールの隠し場所と、持ち出そうとした理由を明らかにする"
+    ]
+  },
+  intro:"依頼：止まった時計に惑わされず、『誰が・どこへ・なぜ』オルゴールを隠したのか突き止める。",
+  evidence:{
+    clock:{
+      icon:"🕰️",
+      name:"17:30で止まった壁時計",
+      desc:"壁時計は17:30を指したまま。裏蓋を開けると、季節飾りの細い紙リボンが分針の軸に挟まっている。取り除くと時計は再び動いた。"
+    },
+    cafeReceipt:{
+      icon:"🧾",
+      name:"17:41の追加注文レシート",
+      desc:"常連客ソウタが17:41に紅茶のおかわりを注文した記録。店内レジの時刻はスマートフォンと一致している。"
+    },
+    mirror:{
+      icon:"🪞",
+      name:"17:44の店内写真",
+      desc:"客のスマートフォンで17:44に撮られた写真。鏡の反射に、古い蓄音機のそばに立つマコが写っている。"
+    },
+    giftbox:{
+      icon:"🎁",
+      name:"空の小さなギフト箱",
+      desc:"窓際のベンチ下に落ちていた。内側には四角い金具の薄い跡があり、消えたオルゴールの底面と大きさが近い。"
+    },
+    birthdayCard:{
+      icon:"💌",
+      name:"書きかけの誕生日カード",
+      desc:"マコが座っていた席の足元に落ちていた。『お母さんへ。今年こそ、好きだった音を――』まで書かれている。"
+    },
+    gramophone:{
+      icon:"📻",
+      name:"古い蓄音機の下部収納",
+      desc:"収納扉がほんの少し浮いている。隙間に淡いピンク色のリボンの端が見え、扉の金具には新しい擦れ跡がある。"
+    },
+    wrapping:{
+      icon:"🎀",
+      name:"包装用の淡いピンクのリボン",
+      desc:"店のギフト包装に使うリボン。マコは来店時、ユナに『このオルゴールも包んでもらえますか』と尋ねていた。"
+    }
+  },
+  requiredEvidence:["clock","cafeReceipt","mirror","giftbox","birthdayCard","gramophone"],
+  hotspots:[
+    ["clock","🕰️ 壁時計","8%","12%"],
+    ["cafeReceipt","🧾 レシート","auto","12%","7%"],
+    ["mirror","🪞 店内ミラー","38%","22%"],
+    ["giftbox","🎁 ギフト箱","7%","auto",null,"16%"],
+    ["birthdayCard","💌 カード","auto","auto","8%","16%"],
+    ["gramophone","📻 蓄音機","42%","auto",null,"7%"],
+    ["wrapping","🎀 包装リボン","auto","36%","7%"]
+  ],
+  people:[
+    {name:"ユナ",role:"喫茶店スタッフ",note:"閉店準備中。『17時30分ごろ、オルゴールは棚にあった』と話す。時刻は壁時計で確認した。"},
+    {name:"ソウタ",role:"常連客",note:"窓際で読書をしていた。『17時30分ごろには店を出た』と話している。"},
+    {name:"マコ",role:"高校生の客",note:"母親への誕生日プレゼントを探していた。オルゴールについてギフト包装を尋ねていた。"}
+  ],
+  timeline:[
+    ["17:18","マコが来店。プレゼントを探して店内を見て回る"],
+    ["17:22","ソウタが紅茶を注文"],
+    ["17:30頃","壁時計が17:30で停止。以後、時計を見た人の時刻認識がずれる"],
+    ["17:36","ユナが厨房で追加注文を処理"],
+    ["17:41","ソウタが店内で紅茶のおかわりを注文"],
+    ["17:44","客が店内写真を撮影。鏡に蓄音機付近のマコが写る"],
+    ["17:48","展示棚からオルゴールが消えていることにユナが気づく"]
+  ],
+  witnesses:{
+    yuna:{
+      icon:"☕",
+      name:"ユナ",
+      role:"喫茶店スタッフ",
+      statements:[
+        {text:"「17時30分ごろ、オルゴールはまだ棚にありました。」",press:"時刻は壁時計を見て確認したという。スマートフォンまでは見ていない。"},
+        {text:"「そのあと、厨房で追加注文を作っていました。」",press:"17:36の注文記録があり、ユナの話と一致している。"},
+        {text:"「マコさんは、あのオルゴールを何度も見ていました。」",press:"来店してすぐ、ギフト包装ができるか尋ねていたという。"}
+      ]
+    },
+    souta:{
+      icon:"📖",
+      name:"ソウタ",
+      role:"常連客",
+      statements:[
+        {text:"「17時30分ごろには、もう店を出ましたよ。」",press:"『帰る前に壁時計を見たら17時30分だった』とはっきり話す。",contradiction:"cafeReceipt"},
+        {text:"「時間は、いつもあの壁時計で見てます。」",press:"店に来るたび壁時計を見る癖があるらしい。"},
+        {text:"「オルゴールには触ってません。本を読んでいただけです。」",press:"テーブルには本と紅茶だけ。展示棚へ行ったという証言も今のところない。"}
+      ]
+    },
+    mako:{
+      icon:"🎀",
+      name:"マコ",
+      role:"高校生の客",
+      statements:[
+        {text:"「オルゴールは見ただけです。母が好きそうだなって。」",press:"母親の誕生日が近く、プレゼントを探しに来たという。"},
+        {text:"「17時40分ごろからは、ずっと窓際の席にいました。」",press:"時間はスマートフォンで確認したと言う。蓄音機の方へ行ったことは否定している。",contradiction:"mirror",requires:["souta_time"]},
+        {text:"「買えないなら、また今度にしようと思ってました。」",press:"値札を見たあと、しばらくオルゴールの前に立っていたらしい。"}
+      ]
+    }
+  },
+  multiClear:[
+    {witness:"souta",evidence:"cafeReceipt",statement:0,flag:"souta_time"},
+    {witness:"mako",evidence:"mirror",statement:1,flag:"mako_mirror",requires:["souta_time"]}
+  ],
+  finalReady:["souta_time","mako_mirror"],
+  deduction:{
+    culpritLabel:"オルゴールを動かした人物",
+    culpritOptions:[["yuna","ユナ"],["souta","ソウタ"],["mako","マコ"]],
+    placeLabel:"オルゴールを隠した場所",
+    placeOptions:[["counter","カウンター下"],["gramophone","古い蓄音機の下部収納"],["bookshelf","窓際の本棚"]],
+    motiveLabel:"持ち出そうとした理由",
+    motiveOptions:[["birthday","母親への誕生日プレゼントにしたかった"],["resale","高く売れると思った"],["prank","店員を困らせたかった"]],
+    answer:{culprit:"mako",place:"gramophone",motive:"birthday"},
+    hints:{
+      culprit:"17:44の写真で、本人の証言とは違う場所にいたのは誰？",
+      place:"扉の隙間にリボンが見えていた場所を確認しよう。",
+      motive:"書きかけのカードと、ギフト包装についての話をつなげよう。"
+    }
+  },
+  ending:"店の壁時計は17時30分で止まっていたため、ユナもソウタも実際より早い時刻だと思い込んでいた。そのずれに紛れるように、マコは展示棚のオルゴールを小さなギフト箱へ入れた。しかし持ち帰るのが怖くなり、17:44ごろ古い蓄音機の下部収納へ隠した。母親が昔好きだった音色と同じだと知り、誕生日にどうしても渡したかったのだった。",
+  culpritComment:{
+    name:"マコ",
+    line:"ごめんなさい……。お母さんに、どうしても喜んでほしくて。でも、こんなことしちゃだめでした。"
+  }
 }
 };
 
@@ -2724,6 +2861,7 @@ document.getElementById("startBtn").onclick=()=>{
   document.getElementById("caseIntro").textContent=currentCase.intro;
   document.getElementById("scene").dataset.place=currentCase.place;
   document.getElementById("scene").classList.toggle("case2",currentCase===cases[2]);
+  document.getElementById("scene").classList.toggle("case3",currentCase===cases[3]);
 
   renderFile();
   renderProgress();
@@ -2855,7 +2993,14 @@ function investigationPartnerReaction(id){
       poster:"こっちの紙も、さっきのと似てる気がする。",
       camera:"あ。赤いリュック。レンくんと同じだね。",
       note:"青いノート、忘れてたんだ。取りに行きたかったのかな。",
-      returnbox:"あれ？ いま、中でカチッて音した。"
+      returnbox:"あれ？ いま、中でカチッて音した。",
+      clock:"時計、止まってる。……17:30のままだね。",
+      cafeReceipt:"17:41。ソウタさん、まだ店にいたんだ。",
+      mirror:"あ。鏡にマコちゃん映ってる。蓄音機のところ。",
+      giftbox:"この箱、オルゴールが入りそう。",
+      birthdayCard:"『お母さんへ』……プレゼントだったのかな。",
+      gramophone:"扉、ちょっと浮いてる。中にリボンも見える。",
+      wrapping:"このリボン、お店の包装用なんだね。"
     },
     96:{
       desk:"これだけだと、まだわかんないね。ほかも見よ。",
@@ -2869,7 +3014,14 @@ function investigationPartnerReaction(id){
       poster:"水がかかったのは、ここなんだね。",
       camera:"17:39。赤いリュックで裏口方向。時間と場所、覚えておこ。",
       note:"17:20に忘れ物の相談。……これ、理由につながりそう。",
-      returnbox:"金属音がする。鍵が入っててもおかしくないね。"
+      returnbox:"金属音がする。鍵が入っててもおかしくないね。",
+      clock:"17:30で止まってるなら、みんなの『17:30』は同じ実時刻じゃないかも。",
+      cafeReceipt:"17:41の注文記録。ソウタさんの話と並べておこ。",
+      mirror:"17:44、マコちゃんは蓄音機の近く。場所の話と比べられるね。",
+      giftbox:"箱の内側の跡、オルゴールの大きさと近いね。",
+      birthdayCard:"これが動機につながるかもしれない。",
+      gramophone:"隙間のリボン。ここ、最後に確認したい。",
+      wrapping:"マコちゃん、これで包めるか聞いてたんだね。"
     },
     31:{
       desk:"机の横に、小さい花がある。……かわいい。",
@@ -2882,7 +3034,14 @@ function investigationPartnerReaction(id){
       poster:"ポスター、びしょびしょだね。",
       camera:"赤いリュック、目立つね。……カメラにも映ってる。",
       note:"青いノートって、どんなノートだろ。",
-      returnbox:"ポストの中、なんか音する。ちょっと気になる。"
+      returnbox:"ポストの中、なんか音する。ちょっと気になる。",
+      clock:"時計の飾り、かわいい。……あ、止まってる。",
+      cafeReceipt:"紅茶のおかわり。17:41だって。",
+      mirror:"鏡の中にも人いる。……マコちゃんだ。",
+      giftbox:"ちっちゃい箱。プレゼントっぽいね。",
+      birthdayCard:"お母さんへのカードだ。途中まで書いてある。",
+      gramophone:"古い蓄音機、かわいい。……扉、少し開いてる？",
+      wrapping:"ピンクのリボン。マコちゃん、これ気にしてたんだね。"
     },
     12:{
       desk:"うーん。ここ、あとで気になるかも。",
@@ -2896,7 +3055,14 @@ function investigationPartnerReaction(id){
       poster:"あ。これ、さっきの紙と関係あるかも。",
       camera:"この赤いリュック、なんか気になる。",
       note:"このメモ、あとで大事になりそう。",
-      returnbox:"ここ。なんかいる気がする。鍵かな。"
+      returnbox:"ここ。なんかいる気がする。鍵かな。",
+      clock:"この時計、なんか変。17:30のまま。",
+      cafeReceipt:"この17:41、たぶん大事。",
+      mirror:"鏡の写真。ここ、見た方がいい気がする。",
+      giftbox:"この箱、捨てない方がいい。",
+      birthdayCard:"これ、たぶん理由につながる。",
+      gramophone:"ここ。たぶん隠すなら、ここ。",
+      wrapping:"このリボンも覚えておこ。"
     }
   };
 
@@ -2934,6 +3100,21 @@ function getNemoInsight(id){
         kind:"観察",
         note:"返却ポストの奥に新しい金属の擦り跡があり、動かすと底から小さな金属音がする。",
         speech:"あれ？ 奥に新しいキズ。……中で金属の音もしたよ。"
+      },
+      clock:{
+        kind:"観察",
+        note:"分針の軸に紙リボンが挟まっている。取り除くと時計は再び動くため、電池切れではない。",
+        speech:"あ。針のところに紙が挟まってる。これで止まってたんだね。"
+      },
+      gramophone:{
+        kind:"観察",
+        note:"下部収納の扉に新しい擦れ跡があり、隙間には包装用と同色のリボンが見える。",
+        speech:"扉のキズ、新しいよ。中にピンクのリボンも見える。"
+      },
+      giftbox:{
+        kind:"観察",
+        note:"箱の内側に四角い金具の圧痕があり、消えたオルゴールの底面サイズと近い。",
+        speech:"この跡、何か四角いものを入れてたみたい。"
       }
     };
     if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
@@ -2960,6 +3141,21 @@ function getNemoInsight(id){
         kind:"推理",
         note:"レンは17:20に資料室の忘れ物を申し出ている。鍵を必要とする理由になり得る。",
         speech:"青いノートを取りたかったなら、資料室に用事はあったよね。"
+      },
+      cafeReceipt:{
+        kind:"推理",
+        note:"17:41の追加注文記録は、ソウタの『17:30ごろには退店した』という証言と両立しない。",
+        speech:"17:41に注文してる。17:30には帰ったって話と合わないね。"
+      },
+      mirror:{
+        kind:"推理",
+        note:"17:44の写真には蓄音機付近のマコが写る。『17:40ごろから窓際にいた』という証言と比べられる。",
+        speech:"17:44、マコちゃんは蓄音機のところ。窓際じゃないね。"
+      },
+      birthdayCard:{
+        kind:"推理",
+        note:"母親への誕生日カードと、ギフト包装について尋ねた事実は、オルゴールを欲しがる理由につながる。",
+        speech:"お母さんへのプレゼント。オルゴールを気にしてた理由、これかな。"
       }
     };
     if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
@@ -3093,6 +3289,10 @@ function nemoNudgeFor(statement){
       line="あれ？ 『ずらしてない』って言ったね。……ずれてたこと、まだ話してないよね。";
     }else if(evidenceId==="receipt"){
       line="17:42のレシート。……17:38には帰ったって言ってたよね？";
+    }else if(evidenceId==="cafeReceipt"){
+      line="17:41におかわりしてる。……17:30には帰ったって言ってたよね？";
+    }else if(evidenceId==="mirror"){
+      line="あ。17:44の写真、マコちゃんは蓄音機のところにいるよ。";
     }
 
     return `<div class="nemoNudge">
@@ -3106,18 +3306,26 @@ function nemoNudgeFor(statement){
     if(evidenceId==="photo") line="あれ？ 写真と、お話が合ってない気がする。";
     else if(evidenceId==="frame") line="『ずらしてない』って言ったの、ちょっと変だね。まだずれの話してないよ。";
     else if(evidenceId==="receipt") line="この時間、さっきのお話と違わない？";
+    else if(evidenceId==="cafeReceipt") line="17:41。帰った時間と違うね。";
+    else if(evidenceId==="mirror") line="あ。鏡にマコちゃんいる。窓際じゃないね。";
   }else if(selected.id===96){
     if(evidenceId==="photo") line="写真と一緒に見ると、ちょっと変だね。";
     else if(evidenceId==="frame") line="『ずらしてない』って言葉、先に出たね。ずれてたことを知ってたのかな。";
     else if(evidenceId==="receipt") line="時間を並べると、合わないところがあるね。";
+    else if(evidenceId==="cafeReceipt") line="17:30に退店、17:41に注文。これは両立しないね。";
+    else if(evidenceId==="mirror") line="17:44の位置が、マコちゃんの話と違うね。";
   }else if(selected.id===31){
     if(evidenceId==="photo") line="いまの言い方、ちょっとだけ気になった。写真も見てみよ。";
     else if(evidenceId==="frame") line="『ずらしてない』って言った時、ちょっと言い急いだ感じがしたかも。";
     else if(evidenceId==="receipt") line="時間の話、もう一回見たいかも。";
+    else if(evidenceId==="cafeReceipt") line="17:41のおかわり、言い方と合わないかも。";
+    else if(evidenceId==="mirror") line="マコちゃん、写真の場所とお話が違うかも。";
   }else if(selected.id===12){
     if(evidenceId==="photo") line="うーん……写真。たぶん写真。";
     else if(evidenceId==="frame") line="『ずらしてない』……まだ、ずれてたって言ってないのに。";
     else if(evidenceId==="receipt") line="このレシート、なんか引っかかる。";
+    else if(evidenceId==="cafeReceipt") line="この17:41、やっぱり変。";
+    else if(evidenceId==="mirror") line="鏡。ここ、たぶん大事。";
   }
 
   return `<div class="nemoNudge">
@@ -3133,12 +3341,26 @@ function nemoPressReaction(witnessId, statementIndex){
     66:{
       "misaki:1":"3分だけ、受付にいなかったんだね。",
       "yuu:1":"スタッフルームには入ってないんだ。",
-      "kana:0":"トイレのあと、入口付近にいたってところ、覚えておこ。"
+      "kana:0":"トイレのあと、入口付近にいたってところ、覚えておこ。",
+      "mina:0":"17:40、裏口で作業してたんだね。時間、覚えておこ。",
+      "mina:1":"水がかかったのは掲示板。濡れた紙とつながるかも。",
+      "aoi:0":"17:30には鍵があった。ここが最後の確認なんだね。",
+      "aoi:1":"青いノートの相談、レンくんだったんだ。",
+      "yuna:0":"17:30って、壁時計を見た時間なんだね。",
+      "souta:1":"いつも壁時計を見てるんだ。止まってたら気づきにくいね。",
+      "mako:0":"お母さんへのプレゼントを探してたんだね。"
     },
     96:{
       "misaki:1":"17:15から17:18。……ここ、覚えておこ。",
       "yuu:2":"17:13。入口のカメラにも映ってるんだね。",
-      "kana:0":"トイレのあと、入口付近にいたんだね。時間も見ておこ。"
+      "kana:0":"トイレのあと、入口付近にいたんだね。時間も見ておこ。",
+      "mina:0":"17:40の裏口作業。紙が濡れた時刻と重なるね。",
+      "mina:1":"掲示板の水と、閲覧席の紙片。紙質も比べたい。",
+      "aoi:0":"17:30が鍵の最終確認。ここから17:50までが空白だね。",
+      "aoi:1":"レンくんには資料室へ戻りたい理由があったんだ。",
+      "yuna:0":"実時刻じゃなく、壁時計を基準にした証言なんだね。",
+      "souta:1":"ソウタさんも壁時計を基準にしてる。共通点だね。",
+      "mako:0":"母親へのプレゼント。動機になり得るけど、まだ決めつけないでおこ。"
     },
     31:{
       "misaki:2":"ふつうに答えてる感じだったね。",
@@ -3147,7 +3369,14 @@ function nemoPressReaction(witnessId, statementIndex){
       "ren:0":"時間を言う時だけ、すごく早口だったね。",
       "ren:1":"『裏口』って言った時、ちょっと目が泳いだ？",
       "ren:2":"『戻ってない』ってところ、言い直したね。",
-      "ren:3":"青いノートの話を出したら、どんな顔するかな。"
+      "ren:3":"青いノートの話を出したら、どんな顔するかな。",
+      "mina:0":"作業の話は迷わず答えたね。",
+      "mina:1":"水をかけちゃったこと、自分から話してる。隠してる感じは薄いかも。",
+      "aoi:0":"鍵のこと、かなりはっきり覚えてるね。",
+      "aoi:1":"レンくんの名前を出しても、言い方は変わらないね。",
+      "yuna:0":"時間を聞いた時、壁時計を見たってすぐ答えたね。",
+      "souta:1":"壁時計の話、自然に出てきたね。本人は本当に17:30だと思ってたのかも。",
+      "mako:0":"お母さんの話をした時、ちょっと大事そうに言ったね。"
     },
     12:{
       "misaki:1":"この3分、なんかあとで出てきそう。",
@@ -3156,7 +3385,14 @@ function nemoPressReaction(witnessId, statementIndex){
       "ren:0":"17:38……なんか引っかかる。",
       "ren:1":"裏口。そこ、気になる。",
       "ren:2":"戻ってない……ほんとかな。",
-      "ren:3":"青いノート。たぶん、そこ。"
+      "ren:3":"青いノート。たぶん、そこ。",
+      "mina:0":"17:40。ここ、あとでつながりそう。",
+      "mina:1":"水と紙。なんか近い。",
+      "aoi:0":"17:30の鍵。ここは大事そう。",
+      "aoi:1":"青いノート。やっぱり気になる。",
+      "yuna:0":"17:30……でも時計、止まってるよね。",
+      "souta:1":"壁時計。ここ、たぶん大事。",
+      "mako:0":"お母さん。これ、理由かな。"
     }
   };
 
@@ -3261,6 +3497,18 @@ function contradictionMeta(flag){
       statement:"「裏口の方には行ってません」",
       evidence:"17:39の廊下カメラ",
       summary:"レンと同じ制服・赤いリュックの人物が17:39に裏口方向へ向かっている。"
+    },
+    souta_time:{
+      title:"ソウタの『17時30分』が崩れた",
+      statement:"「17時30分ごろには、もう店を出ました」",
+      evidence:"17:41の追加注文レシート",
+      summary:"17:41に店内で紅茶を追加注文している。壁時計を見て『17:30』だと思い込んでいた可能性が高い。"
+    },
+    mako_mirror:{
+      title:"マコの居場所が写真と食い違う",
+      statement:"「17時40分ごろから、ずっと窓際の席にいました」",
+      evidence:"17:44の店内写真",
+      summary:"17:44の写真の鏡には、窓際ではなく蓄音機付近にいるマコが写っている。"
     },
   };
   return map[flag] || {
@@ -3379,6 +3627,17 @@ function presentEvidence(clueId){
       レンは「裏口には行っていない」と言った。<br>
       しかし <strong>17:39の廊下カメラ</strong> には、同じ制服と赤いリュックの人物が裏口方向へ向かっている。<br><br>
       レン「……裏口の近くまでは行きました」`;
+    } else if(rule.flag==="souta_time"){
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
+      ソウタは「17時30分ごろには店を出た」と証言した。<br>
+      しかし <strong>17:41の追加注文レシート</strong> が残っている。<br><br>
+      ソウタ「え？ でも、帰る前に壁時計を見たら17時30分で……」<br><br>
+      <strong>もしかして、間違っているのは人ではなく『時計』の方？</strong>`;
+    } else if(rule.flag==="mako_mirror"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      マコは「17時40分ごろからずっと窓際にいた」と話した。<br>
+      しかし <strong>17:44の店内写真</strong> の鏡には、蓄音機のそばに立つマコが写っている。<br><br>
+      マコ「……少しだけ、店の奥を見に行きました」`;
     }
 
     let linkedInsight="";
@@ -3392,6 +3651,10 @@ function presentEvidence(clueId){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:42に館内にいた。やっぱり、17:38には帰ってなかったね。」</div>`;
     }else if(rule.flag==="ren_backdoor" && nemoInsights.camera){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「赤いリュック、ここでつながったね。」</div>`;
+    }else if(rule.flag==="souta_time" && nemoInsights.cafeReceipt){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:41。やっぱり、ソウタさんの17:30は本当の時刻じゃなかったね。」</div>`;
+    }else if(rule.flag==="mako_mirror" && nemoInsights.mirror){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「写真の場所、ここでつながったね。」</div>`;
     }
 
     msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
@@ -3443,7 +3706,9 @@ function setupDeductionPanel(){
   document.getElementById("deductionIntro").textContent=
     currentCase===cases[2]
       ? "時間、場所、濡れた紙片、忘れ物。集めた手がかりを一本につないで、鍵の行方を確定しよう。"
-      : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+      : currentCase===cases[3]
+        ? "止まった時計で時刻の前提をほどき、写真・箱・カード・蓄音機をつないでオルゴールの行方を組み立てよう。"
+        : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
 
   const msg=document.getElementById("deductionMsg");
   msg.className="callout special";
@@ -3493,7 +3758,12 @@ function finalReveal(){
   document.getElementById("phaseLabel").textContent="事件解決";
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
-  document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${currentCase===cases[2]?"濡れた紙片をつなぐ探偵":"はじめての矛盾"}</strong>`;
+  const titleName=currentCase===cases[3]
+    ? "止まった時間をほどく探偵"
+    : currentCase===cases[2]
+      ? "濡れた紙片をつなぐ探偵"
+      : "はじめての矛盾";
+  document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${titleName}</strong>`;
   const culpritBox=document.getElementById("culpritComment");
   if(culpritBox){
     const c=currentCase.culpritComment;
