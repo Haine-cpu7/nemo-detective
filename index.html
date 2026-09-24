@@ -2021,7 +2021,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.43</span>
+    <span class="badge">v0.44</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2223,7 +2223,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.43 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.44 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2388,7 +2388,7 @@ const cases={
     kana:{icon:"🌼",name:"カナ",role:"コンテスト参加者",statements:[
       {text:"「結果が気になって来たけど、トイレを借りただけです。」",press:"17:15ごろトイレへ入り、出たあとは入口付近にいたと話す。"},
       {text:"「展示室の奥には行ってません。」",press:"そう言い切る前に、カナは展示壁の方を一度だけ見た。",contradiction:"photo"},
-      {text:"「あの大きなポスターにも触ってません。」",press:"こちらはまだ『額縁が動いていた』とは伝えていない。",contradiction:"frame",requires:["kana_photo"]},
+      {text:"「あの大きなポスターの額縁も、ずらしたりしてません。」",press:"こちらはまだ、額縁が『ずれていた』ことをカナには伝えていない。",contradiction:"frame",requires:["kana_photo"]},
       {text:"「封筒の中身なんて知りません。まだ発表前ですから。」",press:"カナ自身もコンテスト参加者。結果を気にして来館したことは認めている。"}
     ]}
   },
@@ -3065,7 +3065,7 @@ function nemoNudgeFor(statement){
     if(evidenceId==="photo"){
       line="あ。さっきの写真と、お話がちがうかも。写真だと展示壁の方にいたよ。";
     }else if(evidenceId==="frame"){
-      line="あれ？ 額縁、さわった跡がまだ新しかったよ。『触ってない』なら変かも。";
+      line="あれ？ 『ずらしてない』って言ったね。……ずれてたこと、まだ話してないよね。";
     }else if(evidenceId==="receipt"){
       line="17:42のレシート。……17:38には帰ったって言ってたよね？";
     }
@@ -3079,19 +3079,19 @@ function nemoNudgeFor(statement){
 
   if(selected.id===66){
     if(evidenceId==="photo") line="あれ？ 写真と、お話が合ってない気がする。";
-    else if(evidenceId==="frame") line="さっき見た額縁と、ちょっと合わないね。";
+    else if(evidenceId==="frame") line="『ずらしてない』って言ったの、ちょっと変だね。まだずれの話してないよ。";
     else if(evidenceId==="receipt") line="この時間、さっきのお話と違わない？";
   }else if(selected.id===96){
     if(evidenceId==="photo") line="写真と一緒に見ると、ちょっと変だね。";
-    else if(evidenceId==="frame") line="『触ってない』と、動いた跡。どっちも本当はむずかしいかも。";
+    else if(evidenceId==="frame") line="『ずらしてない』って言葉、先に出たね。ずれてたことを知ってたのかな。";
     else if(evidenceId==="receipt") line="時間を並べると、合わないところがあるね。";
   }else if(selected.id===31){
     if(evidenceId==="photo") line="いまの言い方、ちょっとだけ気になった。写真も見てみよ。";
-    else if(evidenceId==="frame") line="ポスターの話になった時、ちょっとだけ言いにくそうだった？";
+    else if(evidenceId==="frame") line="『ずらしてない』って言った時、ちょっと言い急いだ感じがしたかも。";
     else if(evidenceId==="receipt") line="時間の話、もう一回見たいかも。";
   }else if(selected.id===12){
     if(evidenceId==="photo") line="うーん……写真。たぶん写真。";
-    else if(evidenceId==="frame") line="なんか額縁が気になる。";
+    else if(evidenceId==="frame") line="『ずらしてない』……まだ、ずれてたって言ってないのに。";
     else if(evidenceId==="receipt") line="このレシート、なんか引っかかる。";
   }
 
@@ -3190,10 +3190,10 @@ function contradictionMeta(flag){
       summary:"『トイレのあと入口付近にいた』という話に反し、写真にはトイレと逆方向の展示壁へ向かうカナが写っている。"
     },
     kana_frame:{
-      title:"『触っていない』のに額縁を知っている",
-      statement:"「大きなポスターには触ってません」",
+      title:"知らないはずの『額縁のずれ』を口にした",
+      statement:"「大きなポスターの額縁も、ずらしたりしてません」",
       evidence:"ずれた展示額縁",
-      summary:"額縁には事件直後に動かされた痕跡があり、カナの説明と噛み合わない。"
+      summary:"こちらはまだ額縁がずれていた事実を伝えていない。それなのにカナは『ずらしていない』と先回りして否定した。"
     },
     ren_exit:{
       title:"レンの退館時刻が合わない",
@@ -3314,8 +3314,9 @@ function presentEvidence(id){
       カナ「……少しだけ、展示を見ました」`;
     } else if(rule.flag==="kana_frame"){
       msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
-      カナは「大きなポスターには触っていない」と言った。<br>
-      だが額縁は事件直後に動かされた形跡がある。さらにカナは、こちらが額縁について説明する前から“大きなポスター”に触れている。<br><br>
+      カナは「大きなポスターの額縁も、ずらしたりしていない」と言った。<br>
+      しかし、こちらはまだ <strong>額縁がずれていたこと自体を伝えていない</strong>。<br>
+      知らないはずの『ずれ』を先に否定したことで、カナが額縁の状態を知っていたことが浮かび上がる。<br><br>
       ここまでで、カナの証言は二度崩れた。`;
     } else if(rule.flag==="ren_exit"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
