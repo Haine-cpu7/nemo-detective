@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.20</title>
+<title>ねも探偵局 v0.23</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1560,6 +1560,41 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
+
+/* v0.23: 右の事件ファイル外枠を、左の現在パネルと完全に同じ高さへ固定 */
+@media(min-width:861px){
+  #gameLayout{align-items:start !important}
+  #caseFilePanel{
+    display:flex !important;
+    flex-direction:column !important;
+    height:var(--case-file-height, auto) !important;
+    max-height:var(--case-file-height, none) !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+    align-self:start !important;
+  }
+  #caseFileBody{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    padding-right:4px;
+  }
+}
+@media(max-width:860px){
+  #caseFilePanel{
+    height:auto !important;
+    max-height:none !important;
+  }
+  #caseFileBody{
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1573,7 +1608,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.20 NEMO CHARACTER</span>
+    <span class="badge">v0.23</span>
     <h1>ねも探偵局</h1>
   </section>
 
@@ -1600,7 +1635,7 @@ body:not(.case-active) .topFileBtn{
   <section class="panel hidden" id="selectPanel">
     <h2>担当ねもを選ぶ</h2>
     <p class="muted">Nemo NFTごとに能力値が固定されます。同じ番号のねもは、いつ遊んでも同じ探偵タイプです。</p>
-    <div class="rosterNote">🧩 v0.5ではテスト用のNemo番号を表示しています。<br>画像は <strong>assets/nemos/66.png</strong> のように置くだけで自動反映される設計です。NFT保有判定は次の段階で接続します。</div>
+    <div class="rosterNote">🧩 現在はテスト用のNemo番号を表示しています。<br>画像は <strong>assets/nemos/66.png</strong> のように置くだけで自動反映される設計です。NFT保有判定は次の段階で接続します。</div>
     <div class="grid detectives" id="detectiveGrid"></div>
     <div class="row" style="margin-top:14px">
       <button class="primary" id="startBtn" disabled>このねもで捜査開始</button>
@@ -1741,7 +1776,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.22 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.23 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2086,34 +2121,20 @@ function resetView(targetId=null){
 
 function syncCaseFileHeight(){
   const panel=document.getElementById("caseFilePanel");
-  const body=document.getElementById("caseFileBody");
   const left=document.getElementById("gameMainCol");
-  if(!panel || !body || !left) return;
+  if(!panel || !left) return;
 
   if(window.innerWidth<=860){
-    panel.style.height="";
-    panel.style.maxHeight="";
-    body.style.height="";
-    body.style.maxHeight="";
+    panel.style.removeProperty("--case-file-height");
     return;
   }
 
   const active=[...left.querySelectorAll("section.panel")].find(el=>!el.classList.contains("hidden"));
   if(!active) return;
 
-  // 左の「見えているパネル」の外枠高さを、そのまま右の事件ファイル外枠へコピー。
-  const targetHeight=Math.round(active.getBoundingClientRect().height);
-  panel.style.height=`${targetHeight}px`;
-  panel.style.maxHeight=`${targetHeight}px`;
-
-  // 見出し・タブを除いた残りだけを、事件ファイル本文のスクロール領域にする。
-  const panelRect=panel.getBoundingClientRect();
-  const bodyRect=body.getBoundingClientRect();
-  const styles=getComputedStyle(panel);
-  const paddingBottom=parseFloat(styles.paddingBottom) || 0;
-  const available=Math.max(120, Math.floor(panelRect.bottom - bodyRect.top - paddingBottom));
-  body.style.height=`${available}px`;
-  body.style.maxHeight=`${available}px`;
+  // 左の見えているパネルの外枠高さを、そのまま右の外枠へ渡す。
+  const targetHeight=Math.max(1, Math.round(active.getBoundingClientRect().height));
+  panel.style.setProperty("--case-file-height", `${targetHeight}px`);
 }
 
 function scheduleCaseFileSync(){
@@ -2815,6 +2836,12 @@ document.addEventListener("DOMContentLoaded",()=>{
 });
 
 window.addEventListener("resize",scheduleCaseFileSync);
+
+const gameMainCol=document.getElementById("gameMainCol");
+if(gameMainCol && "ResizeObserver" in window){
+  const caseFileResizeObserver=new ResizeObserver(()=>scheduleCaseFileSync());
+  caseFileResizeObserver.observe(gameMainCol);
+}
 
 // 左側の高さが、証言・矛盾表示などで変わった時も右枠を追従させる。
 const gameMainCol=document.getElementById("gameMainCol");
