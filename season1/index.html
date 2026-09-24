@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.63 CASE 05 staged clue reveal */
+/* v0.64 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2064,6 +2064,7 @@ body:not(.case-active) .topFileBtn{
 .scene.case5{background:linear-gradient(rgba(8,10,18,.16),rgba(8,10,18,.52)),linear-gradient(145deg,#3d4658 0 24%,#253446 24% 55%,#5b4e45 55% 78%,#202c38 78% 100%)}
 .scene.case6{background:linear-gradient(rgba(10,9,12,.10),rgba(10,9,12,.44)),linear-gradient(145deg,#8a775f 0 20%,#5f5146 20% 52%,#71634f 52% 76%,#39434b 76% 100%)}
 .scene.case7{background:linear-gradient(rgba(9,8,14,.15),rgba(9,8,14,.55)),linear-gradient(145deg,#493e51 0 20%,#2b2c3b 20% 50%,#4b3a36 50% 75%,#1c2630 75% 100%)}
+.scene.case8{background:radial-gradient(circle at 72% 34%,rgba(179,155,255,.16),transparent 24%),linear-gradient(rgba(8,10,18,.12),rgba(8,10,18,.60)),linear-gradient(145deg,#2d3446 0 24%,#1e2636 24% 48%,#3a3140 48% 72%,#18222d 72% 100%)}
 @media(max-width:860px){
   .caseStatus{font-size:10px}
   .unlockNotice{margin-top:14px;padding:12px 13px}
@@ -2071,7 +2072,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.63 separate how-to manual */
+/* v0.64 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2090,7 +2091,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.63 CASE 07 truth reconstruction */
+/* v0.64 CASE 07 truth reconstruction */
 .reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
 .reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
 .reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
@@ -2103,7 +2104,7 @@ body:not(.case-active) .topFileBtn{
 .reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
 @media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
 
-/* v0.63 cross-case archive mystery */
+/* v0.64 cross-case archive mystery */
 .archiveLead{padding:15px 16px;border:1px solid #65568d;border-radius:16px;background:linear-gradient(135deg,#2c2941,#202638);margin-bottom:14px;line-height:1.75}
 .archiveLead strong{color:#f3d47c}.archiveFile{border:1px solid #4f566f;background:#171b28;border-radius:18px;padding:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
 .archiveFileTop{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px dashed #505872}.archiveFileTop h3{margin:0 0 3px;font-size:18px}.archiveFileTop p{margin:0;color:var(--muted);font-size:13px}
@@ -2113,7 +2114,7 @@ body:not(.case-active) .topFileBtn{
 .archiveResult{margin-top:13px}.archiveReveal{margin-top:15px;border:1px solid #7865b2;border-radius:16px;background:linear-gradient(145deg,#2b2442,#1a2130);padding:16px}.archiveReveal h3{margin:0 0 8px;color:#f2d178}.archiveLocations{display:grid;gap:5px;margin:12px 0;padding:12px;border-left:3px solid #7565ad;background:#171b28;border-radius:0 10px 10px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}.archiveCase08{margin-top:12px;padding:12px;border:1px dashed #7f719f;border-radius:12px;color:#e7e0ff;background:#262138}.archiveNemo{margin-top:12px;color:#e8e2ff}.archiveContinue{margin-top:14px;width:100%}
 @media(max-width:640px){.archiveCaseGrid{grid-template-columns:1fr}.archiveFile{padding:13px}.archiveFileTop{align-items:flex-start}.arcSigil{width:50px;height:50px;min-width:50px}.arcSigil:after{left:34px;top:13px;width:34px}.archiveCaseCard{padding:10px}}
 
-/* v0.63 星待館 / ねもの日記 crossover */
+/* v0.64 星待館 / ねもの日記 crossover */
 .externalArchiveGate{margin-top:14px;padding:14px;border:1px dashed #7b6a9d;border-radius:14px;background:#211d31}
 .externalArchiveGate p{margin:0 0 10px;line-height:1.7}
 .externalArchive{margin-top:14px;border:1px solid #8a6f78;border-radius:17px;background:linear-gradient(145deg,#30252d,#1c202d);padding:16px;box-shadow:0 12px 28px rgba(0,0,0,.18)}
@@ -2128,7 +2129,11 @@ body:not(.case-active) .topFileBtn{
 @media(max-width:640px){.externalArchive{padding:13px}.externalArchiveRow{grid-template-columns:1fr;gap:3px}.externalArchiveHead{gap:10px}.externalArchiveIcon{width:42px;height:42px;min-width:42px}}
 
 
-/* v0.63 season architecture */
+
+/* v0.64 CASE 08 photo trace */
+.evidencePhoto{margin:11px 0 3px;border:1px solid #56617f;border-radius:14px;overflow:hidden;background:#111722;max-width:360px}.evidencePhoto img{display:block;width:100%;height:auto}.photoTraceTag{display:inline-block;margin-top:8px;padding:5px 8px;border:1px solid #7567a8;border-radius:999px;background:#26203a;color:#dcd4ff;font-size:10px;font-weight:900;letter-spacing:.06em}.seasonCompleteMark{margin-top:14px;padding:14px 15px;border:1px solid #8c78e1;border-radius:15px;background:linear-gradient(135deg,#2b2550,#1a2435);color:#eee9ff}.seasonCompleteMark strong{color:#f3d37b}
+
+/* v0.64 season architecture */
 .seasonNavRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 0;padding:10px 12px;border:1px solid #3c465f;border-radius:12px;background:#171c2a;color:#9da7bd;font-size:12px;font-weight:800}.seasonHomeLink{color:#d7dcef;text-decoration:none}.seasonHomeLink:hover{color:#fff}.seasonFinaleTeaser{border-style:dashed!important}.seasonFinaleTeaser .caseDesc{max-width:720px}@media(max-width:640px){.seasonNavRow{align-items:flex-start;flex-direction:column;gap:5px}}
 </style>
 </head>
@@ -2143,7 +2148,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.63</span>
+    <span class="badge">v0.64</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2234,12 +2239,12 @@ body:not(.case-active) .topFileBtn{
         <div class="caseDesc">月影館の推理ゲーム。本物の死を、偽物の殺人演出から見つけ出す。</div>
         <div class="caseStatus"></div>
       </button>
-      <div class="caseTeaser seasonFinaleTeaser">
+      <button class="caseCard seasonFinaleTeaser" data-case="8">
         <div class="caseLabel">CASE 08 <span class="originBadge">SEASON 1 FINALE</span></div>
-        <div class="caseTitle">未更新</div>
-        <div class="caseDesc">Season 1最後の事件。月影館で見つかった空欄の「CASE 08」へ。</div>
-        <div class="caseStatus">🔒 COMING SOON · 未更新</div>
-      </div>
+        <div class="caseTitle">最後の一枚 ― 写真の向こう側 ―</div>
+        <div class="caseDesc">ずっと見ていた一枚の写真。そこに写っていない“撮影者”を追う。</div>
+        <div class="caseStatus"></div>
+      </button>
     </div>
     <div class="seasonNavRow">
       <a class="seasonHomeLink" href="../">← シーズン選択へ戻る</a>
@@ -2406,7 +2411,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 1 v0.63 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 1 v0.64 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3394,13 +3399,88 @@ const cases={
   },
   ending:"久世玲司が死亡したのは21時ではなく、20時40分から50分の間だった。20:55の声は昼に録音されたもの。21:00の停電と効果音も、久世自身がUSBに設定した自動演出だった。クロベは20:45ごろ書斎へ向かい、長年自分の案が久世の作品として扱われてきたことを巡って久世と口論になった。衝動的に机上の重いブックエンドで久世を殴り、久世は倒れた。その時の衝撃で腕時計が20:46で止まった。直後、クロベは進行表を見て気づく。何もしなくても21時になれば『久世玲司が殺される演出』が始まる。そこで現場を大きく変えずに離れ、全員が21時を死亡時刻だと思うことに賭けた。だが録音、映像、証言、そして自動演出の設定を並べ直すと、本物の事件だけが21時より前へ浮かび上がった。クロベが『あいつの最後のトリックに隠れることになるとはな』と呟くと、あなたは答えた。『違う。そのトリックを解いたから、あなたに辿り着いた。』事件のあと、ねもは小さく言った。『……探偵って、見つけたくない答えも見つけないといけないんだね。でも、ひとりじゃなくてよかった。』",
   culpritComment:{name:"クロベ",line:"……皮肉だな。あいつが作った最後のトリックに、俺が隠れることになるとは。"}
+},
+8:{
+  title:"CASE 08　最後の一枚 ― 写真の向こう側 ―",
+  place:"探偵局 / 星待駅の記録",
+  briefing:{
+    lead:"ずっと見ていた写真に、知らない誰かがいる。",
+    incident:"月影館の事件から戻った翌日。探偵局の机に、差出人のない薄い封筒が置かれていた。中には『CASE 08』とだけ印字されたカードと、一枚の写真データの断片。照合すると、それはねもが星待館の旅の最終日に公開した――そして探偵局でも相棒写真として何度も見てきた、肉まんを食べる一枚と同じ画像だった。けれど、その写真は自撮りではない。誰が撮ったのか。なぜ月影館のファイルと同じ印が、写真の外側に残っているのか。Season 1最後の捜査が始まる。",
+    objectives:[
+      "写真が撮られた時刻と場所を確定する",
+      "黒瀬直人や駅員など、既知の撮影者候補を検証する",
+      "公開前の元画像を持っていた人物と、謎の印のつながりを明らかにする"
+    ]
+  },
+  intro:"依頼人はいない。今回追うのは、ずっと目の前にあった『一枚の写真』そのもの。誰がシャッターを切ったのかを、記録から逆算する。",
+  evidence:{
+    familiarPhoto:{icon:"📷",name:"見慣れた肉まんの写真",image:"../assets/nemos/66.png",desc:"ねもが星待館の旅の最終日に公開した写真。探偵局では、かんさつねもちゃんの相棒写真としても使っている。両手には肉まん。自撮り棒や鏡越しの撮影には見えず、少し離れた位置から撮られている。"},
+    day8Record:{icon:"📖",name:"ねもの日記・8日目の公開記録",desc:"公開された日記にはこの写真が掲載されているが、撮影者についての記述はない。公開版は写真の端がわずかにトリミングされている。"},
+    photoMeta:{icon:"🕒",name:"写真データの撮影時刻",desc:"古い端末バックアップに残っていた撮影情報。星待駅前で10:46に撮影。公開記録より前の時刻で、元データは投稿版よりわずかに横幅が広い。"},
+    naotoDeparture:{icon:"🎫",name:"黒瀬直人の移動記録",desc:"直人は星待館を出たあと10:18発の便で町を離れている。交通ICの利用記録と乗車券控えが一致。写真が撮られた10:46には星待駅にいなかった。"},
+    stationDuty:{icon:"📋",name:"星待駅の勤務記録",desc:"10:40〜11:00、窓口担当の駅員は改札内の対応から離れていない。駅員が外へ出て写真を撮った記録もない。"},
+    concourseStill:{icon:"🎥",name:"10:45〜10:47の駅舎記録",desc:"古い防犯記録の静止画。ねもの正面から少し離れたガラス付近に、濃い上着の人物が立っている。顔は柱と反射で見えない。"},
+    archiveCopy:{icon:"🗃️",name:"月影館ファイルの画像照合記録",desc:"月影館の古いファイルには、公開版と同じ写真の元データを示すハッシュ値が残っていた。登録時刻は『ねもの日記』公開より前。公開画像を後から保存しただけでは説明できない。"},
+    case08Card:{icon:"◌",name:"『CASE 08』のカード",desc:"差出人不明の封筒に入っていたカード。裏面には、CASE 01〜07で見つかった『欠けた円に三本線』の印。"},
+    fullFrame:{icon:"🔍",name:"復元された元画像の右端",desc:"バックアップ断片と月影館の照合記録から復元した、投稿前の元画像。公開版では切れていた右端のガラス反射に、カメラを構える人物が薄く映る。肩掛けバッグには『欠けた円に三本線』の印がある。"}
+  },
+  requiredEvidence:["familiarPhoto","photoMeta","naotoDeparture","stationDuty","concourseStill","archiveCopy","case08Card"],
+  hotspots:[
+    ["familiarPhoto","📷 見慣れた写真","7%","12%"],
+    ["day8Record","📖 8日目の記録","auto","13%","7%"],
+    ["photoMeta","🕒 撮影情報","39%","22%"],
+    ["naotoDeparture","🎫 直人の移動","7%","auto",null,"18%"],
+    ["stationDuty","📋 駅の勤務記録","auto","auto","7%","18%"],
+    ["concourseStill","🎥 駅舎記録","44%","auto",null,"8%"],
+    ["archiveCopy","🗃️ 画像照合","auto","38%","7%"],
+    ["case08Card","◌ CASE 08カード","auto","auto","38%","8%"]
+  ],
+  people:[
+    {name:"ねも",role:"星待館の旅を記録した本人",note:"最終日の写真を誰かに撮ってもらったことは覚えているが、相手の顔や名前は曖昧。"},
+    {name:"黒瀬直人",role:"星待館で出会った人物",note:"星待館を出たあと、写真の撮影時刻より前に町を離れた記録がある。"},
+    {name:"マユ",role:"当時の星待駅員",note:"当日の駅勤務記録を確認。ねもを見かけた記憶はあるが、撮影者までは覚えていない。"}
+  ],
+  timeline:[
+    ["朝","ねもが星待館を出発。旅の最終日"],
+    ["10:18","黒瀬直人が星待の町を離れる便に乗車"],
+    ["10:40〜11:00","駅員マユは窓口対応。勤務記録上、駅舎外へ出ていない"],
+    ["10:46","肉まんを食べるねもの写真が星待駅前で撮影される"],
+    ["10:45〜10:47","駅舎記録に、ガラス付近へ立つ正体不明の人物"],
+    ["日記公開前","月影館の古いファイルに、元画像と一致する照合記録が作られている"],
+    ["その後","ねもの日記8日目に、トリミングされた写真が公開される"],
+    ["現在","探偵局に『CASE 08』のカードが届く"]
+  ],
+  witnesses:{
+    nemo:{icon:"🐱",name:"ねも",role:"旅の記録者",statements:[
+      {text:"『撮ってくれた人……直人さんだった気もする。帰る前に、駅で会ったような……。』",press:"ねも自身も自信はなく、『ずっと前のことだから混ざってるかも』と首をかしげる。",contradiction:"naotoDeparture"},
+      {text:"『顔は、ぜんぜん覚えてない。濃い色の上着だったような気はする。』",press:"相手が『撮ろうか』と声をかけたことだけは、ぼんやり覚えているという。"},
+      {text:"『誰かがこの写真を持ってるなら、日記を見て保存しただけじゃないのかな。』",press:"公開した写真は誰でも見られる。ねもは、月影館の記録者も公開後に画像を拾っただけだと考えている。",contradiction:"archiveCopy",requires:["mayu_third"]}
+    ]},
+    naoto:{icon:"🧳",name:"黒瀬直人",role:"星待館で出会った人物",statements:[
+      {text:"『僕は10時18分の便で町を出ています。あの写真を撮ったのは僕じゃない。』",press:"交通ICの記録とも一致している。写真の撮影は10:46なので、直人はすでに星待を離れていた。"},
+      {text:"『あの写真を初めて見たのは、日記が公開されたあとです。』",press:"直人は写真の構図にも心当たりがないと話す。"}
+    ]},
+    mayu:{icon:"🚉",name:"マユ",role:"当時の星待駅員",statements:[
+      {text:"『10時46分ごろなら、ねもさんの近くに写真を撮れる人はいなかったと思います。駅前は静かでしたから。』",press:"窓口越しに駅前を見ていたが、忙しい時間帯ではなく、目立つ人影は記憶にないという。",contradiction:"concourseStill",requires:["nemo_naoto"]},
+      {text:"『駅員が撮った可能性はありません。私はその時間、窓口を離れていませんでした。』",press:"勤務記録にも10:40〜11:00の連続対応が残っている。"},
+      {text:"『防犯記録の人……こんな位置に誰かいたんですね。柱とガラスで、窓口からは見えにくい場所です。』",press:"濃い上着の人物は、ちょうどねもへカメラを向けられる位置に立っていた。"}
+    ]}
+  },
+  multiClear:[
+    {witness:"nemo",evidence:"naotoDeparture",statement:0,flag:"nemo_naoto"},
+    {witness:"mayu",evidence:"concourseStill",statement:0,flag:"mayu_third",requires:["nemo_naoto"]},
+    {witness:"nemo",evidence:"archiveCopy",statement:2,flag:"nemo_archive",requires:["mayu_third"]}
+  ],
+  finalReady:["nemo_naoto","mayu_third","nemo_archive"],
+  ending:"写真が撮られたのは10:46。黒瀬直人はその28分前に星待の町を離れており、駅員も窓口を離れていない。駅舎記録には、ねもの正面――写真を撮れる位置に、名前の分からない第三者が立っていた。そして月影館の古いファイルには、公開版ではなく『元画像』と一致する照合記録が、日記公開より前の時刻で残されていた。復元した元画像の右端には、ガラスに映る撮影者の姿。肩掛けバッグには、CASE 01から何度も現れていた『欠けた円に三本線』の印があった。撮影者の名前までは分からない。けれど一つだけ確定した。記録者は、後から日記を読んだ誰かではない。星待館の旅の最終日、ねものすぐ近くに実際にいた。そして、探偵局で何度も見てきたこの写真そのものが、ずっと伏線として残っていた。Season 1はここで一区切りになる。謎の人物が誰なのか――その答えは、まだ事件ファイルの外にある。",
+  culpritComment:{name:"ねも",line:"……この写真、ずっと見てたのにね。"}
 }
 
 };
 
 const SAVE_KEY="nemoMysteryDaysSeason1Progress_v1";
 const LEGACY_SAVE_KEY="nemoMysteryDaysProgress_v1";
-const CASE_COUNT=7; // 現在プレイ可能な件数。Season 1はCASE 08まで。
+const CASE_COUNT=8; // Season 1はCASE 08までプレイ可能。
 const SEASON1_TOTAL_CASES=8;
 function loadGameProgress(){
   try{
@@ -3561,6 +3641,7 @@ function openBriefing(){
   document.getElementById("scene").classList.toggle("case5",currentCase===cases[5]);
   document.getElementById("scene").classList.toggle("case6",currentCase===cases[6]);
   document.getElementById("scene").classList.toggle("case7",currentCase===cases[7]);
+  document.getElementById("scene").classList.toggle("case8",currentCase===cases[8]);
 
   renderFile();
   renderProgress();
@@ -3935,6 +4016,21 @@ function getNemoInsight(id){
         kind:"観察",
         note:"カップは室温近くまで冷えている。21時直前に淹れたものとは考えにくい。",
         speech:"これ、もうほとんど冷たいよ。かなり前から置いてたのかも。"
+      },
+      familiarPhoto:{
+        kind:"観察",
+        note:"ねもは両手で肉まんを持っている。カメラとの距離も、他の日の自撮りより明らかに遠い。",
+        speech:"……これ、自撮りじゃないね。誰かが前に立って撮ってる。"
+      },
+      concourseStill:{
+        kind:"観察",
+        note:"ガラス際の人影は、ねもの正面にカメラを向けられる位置に立っている。",
+        speech:"あ。ここに人いる。ちょうど写真を撮れる場所。"
+      },
+      fullFrame:{
+        kind:"観察",
+        note:"右端の反射にカメラを構える人物。肩掛けバッグには、欠けた円と三本線の印が見える。",
+        speech:"……このバッグの印。今までのと同じ。"
       }
     };
     if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
@@ -4016,6 +4112,16 @@ function getNemoInsight(id){
         kind:"推理",
         note:"20:55の声と21:00の演出は自動実行。久世の生存を示していた二つの時刻証拠が同時に消える。",
         speech:"21時に久世さんが操作する必要、なかったんだ。時間を全部組み直せるね。"
+      },
+      naotoDeparture:{
+        kind:"推理",
+        note:"直人は10:18に町を離れ、写真は10:46撮影。直人が撮影者である可能性は時系列上成立しない。",
+        speech:"直人さんはもう町を出てる。10:46の写真は撮れないね。"
+      },
+      archiveCopy:{
+        kind:"推理",
+        note:"元画像の照合記録は日記公開前。公開画像を見て後から保存したという説明では時系列が逆になる。",
+        speech:"公開より前に元画像を持ってる。日記を見ただけじゃないね。"
       }
     };
     if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
@@ -4038,6 +4144,11 @@ function originNemoEncounterHtml(){
   return `<div class="originMeet"><strong>？？？</strong><div class="originLine">「……これ、探してる？」</div>ベンチの向こうから、小さな猫耳の子が顔を出した。<br>手には、ピンクの花シールの欠片。<br><br><span class="muted">名前は、ねも。どうやら少しだけ捜査が気になるらしい。</span></div>`;
 }
 
+function evidenceMedia(e){
+  if(!e?.image) return "";
+  return `<div class="evidencePhoto"><img src="${e.image}" alt="${e.name}"></div>`;
+}
+
 function collectEvidence(id,btn){
   if(evidence.has(id)) return;
   evidence.add(id);
@@ -4058,7 +4169,7 @@ function collectEvidence(id,btn){
     : investigationPartnerReaction(id);
 
   document.getElementById("investigationMsg").innerHTML=
-    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${nemoPart}${originEncounter?originNemoEncounterHtml():""}`;
+    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${evidenceMedia(e)}${nemoPart}${originEncounter?originNemoEncounterHtml():""}`;
   if(originEncounter){renderActiveCompanionBanner("investigationPartner","なんとなく、ついてきた");}
 
   const sceneTotal=currentCase.sceneEvidenceTotal || currentCase.hotspots.length;
@@ -4196,6 +4307,12 @@ function nemoNudgeFor(statement){
       line="20:50の仕事、『書斎の照明確認』って書いてあるね。";
     }else if(evidenceId==="seraVideo"){
       line="20:48。ガクさん、書斎の前にいるね。";
+    }else if(evidenceId==="naotoDeparture"){
+      line="10:18には町を出てる。写真は10:46……直人さんじゃないね。";
+    }else if(evidenceId==="concourseStill"){
+      line="あ。ねもちゃんの正面に人がいる。『誰もいなかった』とは合わないね。";
+    }else if(evidenceId==="archiveCopy"){
+      line="公開より前に元画像の記録がある。あとから保存したわけじゃないね。";
     }
 
     return `<div class="nemoNudge">
@@ -4547,6 +4664,24 @@ function contradictionMeta(flag){
       evidence:"ガク『20:45ごろ、クロベさんに書斎はどっちだと聞かれた』",
       summary:"クロベは20:45ごろ食堂ではなく書斎へ向かう廊下にいた。さらに、共同制作に関わっていたクロベが書斎の場所を知らないふりをした理由も不自然に残る。"
     },
+    nemo_naoto:{
+      title:"『直人が撮った』という記憶が時刻と合わない",
+      statement:"ねも『撮ってくれた人……直人さんだった気もする』",
+      evidence:"黒瀬直人は10:18に星待の町を離れている",
+      summary:"写真の撮影時刻は10:46。直人は28分前に町を離れており、撮影者ではあり得ない。ねもの記憶は別の場面と混ざっていた。"
+    },
+    mayu_third:{
+      title:"『近くに誰もいなかった』と駅舎記録が食い違う",
+      statement:"マユ『ねもさんの近くに写真を撮れる人はいなかったと思います』",
+      evidence:"10:45〜10:47の駅舎記録に、ねもの正面へ立つ人影",
+      summary:"柱とガラスの死角に、カメラを向けられる位置の第三者がいた。窓口から見えなかっただけだった。"
+    },
+    nemo_archive:{
+      title:"『公開後に保存しただけ』では説明できない",
+      statement:"ねも『日記を見て保存しただけじゃないのかな』",
+      evidence:"月影館ファイルの元画像照合記録は日記公開より前",
+      summary:"記録者は公開画像を後から拾ったのではない。公開前の元画像へアクセスしていた。"
+    },
     hina_memory:{
       title:"ヒナの記憶と、封筒が見つかった場所が食い違う",
       statement:"ヒナ『パン屋さんに着くまでは、手紙はバッグに入ってたと思います』",
@@ -4612,7 +4747,7 @@ function nextMoveHtml(){
     return `<div class="nextMove">
       <div class="nextMoveTitle">🧩 手がかりはそろった</div>
       <div>見つけた矛盾と証拠を使って、事件の真相を組み立てよう。</div>
-      <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">${currentCaseId===7?"真相再構築へ →":"最終推理へ →"}</button>
+      <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">${(currentCaseId===7||currentCaseId===8)?"真相再構築へ →":"最終推理へ →"}</button>
     </div>`;
   }
   return "";
@@ -4771,6 +4906,34 @@ function presentEvidence(clueId){
       20:55の声は録音。21:00の事件は自動演出。<br>
       そして20:45、クロベは書斎へ向かっていた。<br><br>
       <strong>本物の事件だけが、21時より前へ浮かび上がった。</strong>`;
+    } else if(rule.flag==="nemo_naoto"){
+      msg.innerHTML=`<strong>一つ目の食い違いを発見！</strong><br><br>
+      ねもは『直人さんに撮ってもらった気もする』と記憶していた。<br>
+      しかし <strong>直人は10:18に町を離れ、写真は10:46に撮影</strong> されている。<br><br>
+      ねも「……そっか。直人さんじゃない。じゃあ、誰だったんだろ。」`;
+    } else if(rule.flag==="mayu_third"){
+      msg.innerHTML=`<strong>二つ目の食い違いを発見！</strong><br><br>
+      マユは『写真を撮れる位置には誰もいなかったと思う』と話した。<br>
+      けれど <strong>10:45〜10:47の駅舎記録</strong> には、柱とガラスの死角に濃い上着の人物が立っている。<br><br>
+      マユ「……窓口から見えにくい場所です。こんな人がいたんですね」<br><br>
+      <strong>撮影時、ねものすぐ近くには正体不明の第三者がいた。</strong>`;
+    } else if(rule.flag==="nemo_archive"){
+      if(!evidence.has("fullFrame")){
+        evidence.add("fullFrame");
+        const receivedInsight=getNemoInsight("fullFrame");
+        if(receivedInsight) nemoInsights.fullFrame=receivedInsight;
+      }
+      renderFile();
+      msg.innerHTML=`<strong>三つ目の食い違いを発見！</strong><br><br>
+      ねもは『日記を見て保存しただけでは』と考えた。<br>
+      しかし月影館の記録には、<strong>日記公開より前の時刻で元画像と一致する照合データ</strong> が残っている。<br><br>
+      つまり、記録者は公開された写真を見ただけではない。<br><br>
+      画像断片を組み合わせると、投稿版では切れていた右端が復元できた。<br><br>
+      <div class="newEvidenceGain"><strong>🔍 新しい証拠を復元した</strong><br>
+      <strong>『元画像の右端』</strong><br>
+      ガラスの反射に、カメラを構える人物。<br>
+      その肩掛けバッグには――<strong>欠けた円に三本線</strong>。</div><br>
+      <strong>ずっと見慣れていた一枚の外側に、シリーズをまたぐ痕跡が残っていた。</strong>`;
     } else if(rule.flag==="hina_memory"){
       msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
       ヒナは「パン屋さんに着くまでは、手紙はバッグに入っていたと思う」と話した。<br>
@@ -4810,6 +4973,12 @@ function presentEvidence(clueId){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「21時の前にも、みんな動いてた。時間を最初から見直した方がいいね。」</div>`;
     }else if(rule.flag==="kurobe_alibi"){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「20:45。クロベさん、食堂じゃなくて書斎の方にいたんだね。」</div>`;
+    }else if(rule.flag==="nemo_naoto"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「直人さんじゃない。まず一人、候補が消えたね。」</div>`;
+    }else if(rule.flag==="mayu_third"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「誰もいなかったんじゃなくて、見えない場所にいたんだね。」</div>`;
+    }else if(rule.flag==="nemo_archive"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「公開前から持ってた。……あの人、ほんとにそこにいたのかも。」</div>`;
     }else if(rule.flag==="sae_return" && nemoInsights.returnLog){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「返送されてない。二十年間、ここで止まってたんだね。」</div>`;
     }else if(rule.flag==="haru_farewell" && nemoInsights.teacherLog){
@@ -4844,7 +5013,8 @@ function presentEvidence(clueId){
   scheduleCaseFileSync();
 }
 
-const CASE7_RECONSTRUCTION={
+const CASE_RECONSTRUCTIONS={
+  7:{
   cards:{
     timeEarly:{kind:"時刻",text:"20:40〜20:50"},
     time2055:{kind:"時刻",text:"20:55"},
@@ -4886,11 +5056,53 @@ const CASE7_RECONSTRUCTION={
     locationProof:{label:"その行動を証明する証言",options:["gakuTestimony","seraTestimony","naoTestimony"],answer:"gakuTestimony",section:"location"},
     culprit:{label:"すべてをつないだ結論：犯人",options:["culpritKurobe","culpritNao","culpritGaku","culpritSera"],answer:"culpritKurobe",section:"culprit"}
   }
+  },
+  8:{
+    cards:{
+      time1046:{kind:"時刻",text:"10:46"},
+      time1018:{kind:"時刻",text:"10:18"},
+      timeAfterPost:{kind:"時刻",text:"日記公開後"},
+      photoMeta:{kind:"証拠",text:"🕒 写真データの撮影情報"},
+      day8Record:{kind:"記録",text:"📖 ねもの日記・8日目"},
+      notNaoto:{kind:"主張",text:"撮影者は黒瀬直人ではない"},
+      isNaoto:{kind:"主張",text:"撮影者は黒瀬直人だった"},
+      isStaff:{kind:"主張",text:"撮影者は駅員だった"},
+      naotoDeparture:{kind:"証拠",text:"🎫 黒瀬直人の10:18の移動記録"},
+      stationDuty:{kind:"証拠",text:"📋 星待駅の勤務記録"},
+      thirdPerson:{kind:"主張",text:"撮影時、ねもの近くに第三者がいた"},
+      noThird:{kind:"主張",text:"撮影時、ねもは完全に一人だった"},
+      selfTimer:{kind:"主張",text:"写真はセルフタイマーで撮った"},
+      concourseStill:{kind:"証拠",text:"🎥 10:45〜10:47の駅舎記録"},
+      beforePublish:{kind:"主張",text:"記録者は日記公開前から元画像を持っていた"},
+      afterPublish:{kind:"主張",text:"記録者は公開後に画像を保存しただけ"},
+      archiveCopy:{kind:"証拠",text:"🗃️ 月影館ファイルの画像照合記録"},
+      sameMark:{kind:"主張",text:"撮影者は『欠けた円＋三本線』の印とつながる"},
+      randomBag:{kind:"主張",text:"バッグの印は事件と無関係な偶然"},
+      fullFrame:{kind:"証拠",text:"🔍 復元された元画像の右端"},
+      recorderOnsite:{kind:"結論",text:"記録者は星待館の旅の最終日、ねものすぐ近くにいた"},
+      readerOnly:{kind:"結論",text:"記録者は公開された日記だけを読んでいた"},
+      naotoConclusion:{kind:"結論",text:"黒瀬直人が全事件を記録していた"}
+    },
+    slots:{
+      captureTime:{label:"写真が撮られた時刻",options:["time1046","time1018","timeAfterPost"],answer:"time1046",section:"photoTime"},
+      captureProof:{label:"その時刻を証明する記録",options:["photoMeta","day8Record","stationDuty"],answer:"photoMeta",section:"photoTime"},
+      photographerClaim:{label:"まず外せる撮影者候補",options:["notNaoto","isNaoto","isStaff"],answer:"notNaoto",section:"naoto"},
+      photographerProof:{label:"その根拠",options:["naotoDeparture","stationDuty","day8Record"],answer:"naotoDeparture",section:"naoto"},
+      thirdClaim:{label:"撮影時の現場にいたのは？",options:["thirdPerson","noThird","selfTimer"],answer:"thirdPerson",section:"third"},
+      thirdProof:{label:"第三者の存在を示すもの",options:["concourseStill","stationDuty","day8Record"],answer:"concourseStill",section:"third"},
+      publishClaim:{label:"元画像を入手した時期",options:["beforePublish","afterPublish"],answer:"beforePublish",section:"publish"},
+      publishProof:{label:"その時系列を証明するもの",options:["archiveCopy","day8Record","photoMeta"],answer:"archiveCopy",section:"publish"},
+      markClaim:{label:"写真と過去事件をつなぐもの",options:["sameMark","randomBag"],answer:"sameMark",section:"mark"},
+      markProof:{label:"最後に復元された証拠",options:["fullFrame","stationDuty","naotoDeparture"],answer:"fullFrame",section:"mark"},
+      culprit:{label:"SEASON 1で確定した結論",options:["recorderOnsite","readerOnly","naotoConclusion"],answer:"recorderOnsite",section:"conclusion"}
+    }
+  }
 };
 
-function reconstructionCard(id){return CASE7_RECONSTRUCTION.cards[id];}
+function currentReconstruction(){return CASE_RECONSTRUCTIONS[currentCaseId];}
+function reconstructionCard(id){return currentReconstruction().cards[id];}
 function reconSlotHtml(id){
-  const slot=CASE7_RECONSTRUCTION.slots[id];
+  const slot=currentReconstruction().slots[id];
   const chosen=reconstructionAnswers[id];
   const card=chosen?reconstructionCard(chosen):null;
   return `<button type="button" class="reconSlot ${chosen?"filled":""}" data-recon-slot="${id}" onclick="openReconstructionSlot('${id}')">
@@ -4902,35 +5114,33 @@ function reconSlotHtml(id){
 function renderReconstruction(){
   const box=document.getElementById("reconstructionDeduction");
   if(!box) return;
+  if(currentCaseId===8){
+    box.innerHTML=`
+      <div class="reconLead"><strong>📷 PHOTO TRACE · 真相再構築</strong><br>見慣れた一枚を「時刻・人物・公開前後・印」の順にほどいて、写真の向こう側にいた人物を追おう。<br><span class="muted">名前を当てるのではなく、何が確定できるかを証拠で組み立てます。</span></div>
+      <div class="reconstructionBoard">
+        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">1</div><div><div class="reconStepTitle">写真の時刻を固定する</div><div class="reconStepSub">まず「いつ撮られた一枚か」を確定する</div></div></div><div class="reconLogic">${reconSlotHtml("captureTime")}<div class="reconArrow">⇐</div>${reconSlotHtml("captureProof")}</div></section>
+        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">2</div><div><div class="reconStepTitle">撮影者候補を外す</div><div class="reconStepSub">ねもの曖昧な記憶と移動記録を比べる</div></div></div><div class="reconLogic">${reconSlotHtml("photographerClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("photographerProof")}</div></section>
+        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">3</div><div><div class="reconStepTitle">第三者の存在を確定する</div><div class="reconStepSub">「誰もいなかった」という記憶を記録で検証する</div></div></div><div class="reconLogic">${reconSlotHtml("thirdClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("thirdProof")}</div></section>
+        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">4</div><div><div class="reconStepTitle">公開後に拾っただけ？</div><div class="reconStepSub">月影館のファイルと日記公開の前後を比べる</div></div></div><div class="reconLogic">${reconSlotHtml("publishClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("publishProof")}</div></section>
+        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">5</div><div><div class="reconStepTitle">写真をシリーズの謎へつなぐ</div><div class="reconStepSub">投稿版では見えなかった右端を確認する</div></div></div><div class="reconLogic">${reconSlotHtml("markClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("markProof")}</div></section>
+        <section class="reconConclusion"><div class="reconConclusionLabel">SEASON 1 · FINAL CONCLUSION</div>${reconSlotHtml("culprit")}</section>
+      </div>
+      <button type="button" class="primary reconCheck" id="reconstructionCheckBtn" onclick="checkReconstruction()">この記録をつなぐ</button>`;
+    return;
+  }
   box.innerHTML=`
     <div class="reconLead"><strong>🧩 真相再構築</strong><br>空欄をタップして、事件ファイルで集めた「時刻・主張・証拠・証言」のカードを当てはめよう。<br><span class="muted">順番だけでなく、どの証拠がどの主張を支えるかまで組み立てます。</span></div>
     <div class="reconstructionBoard">
-      <section class="reconStep">
-        <div class="reconStepHead"><div class="reconStepNo">1</div><div><div class="reconStepTitle">死亡時刻を組み直す</div><div class="reconStepSub">「21:00に死亡した」という前提を外す</div></div></div>
-        <div class="reconLogic multiProof">${reconSlotHtml("trueTime")}<div class="reconArrow">⇐</div><div class="reconProofStack">${reconSlotHtml("timeProof1")}${reconSlotHtml("timeProof2")}</div></div>
-      </section>
-      <section class="reconStep">
-        <div class="reconStepHead"><div class="reconStepNo">2</div><div><div class="reconStepTitle">20:55の声を検証する</div><div class="reconStepSub">「声を聞いた＝生きていた」は成立する？</div></div></div>
-        <div class="reconLogic">${reconSlotHtml("voiceClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("voiceProof")}</div>
-      </section>
-      <section class="reconStep">
-        <div class="reconStepHead"><div class="reconStepNo">3</div><div><div class="reconStepTitle">21:00の事件を分解する</div><div class="reconStepSub">偽物の殺人演出を動かしたものは何か</div></div></div>
-        <div class="reconLogic">${reconSlotHtml("showClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("showProof")}</div>
-      </section>
-      <section class="reconStep">
-        <div class="reconStepHead"><div class="reconStepNo">4</div><div><div class="reconStepTitle">20:45の人物配置を確定する</div><div class="reconStepSub">食堂のアリバイと廊下の証言をつなぐ</div></div></div>
-        <div class="reconLogic">${reconSlotHtml("locationClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("locationProof")}</div>
-      </section>
-      <section class="reconConclusion">
-        <div class="reconConclusionLabel">FINAL CONCLUSION</div>
-        ${reconSlotHtml("culprit")}
-      </section>
+      <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">1</div><div><div class="reconStepTitle">死亡時刻を組み直す</div><div class="reconStepSub">「21:00に死亡した」という前提を外す</div></div></div><div class="reconLogic multiProof">${reconSlotHtml("trueTime")}<div class="reconArrow">⇐</div><div class="reconProofStack">${reconSlotHtml("timeProof1")}${reconSlotHtml("timeProof2")}</div></div></section>
+      <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">2</div><div><div class="reconStepTitle">20:55の声を検証する</div><div class="reconStepSub">「声を聞いた＝生きていた」は成立する？</div></div></div><div class="reconLogic">${reconSlotHtml("voiceClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("voiceProof")}</div></section>
+      <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">3</div><div><div class="reconStepTitle">21:00の事件を分解する</div><div class="reconStepSub">偽物の殺人演出を動かしたものは何か</div></div></div><div class="reconLogic">${reconSlotHtml("showClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("showProof")}</div></section>
+      <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">4</div><div><div class="reconStepTitle">20:45の人物配置を確定する</div><div class="reconStepSub">食堂のアリバイと廊下の証言をつなぐ</div></div></div><div class="reconLogic">${reconSlotHtml("locationClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("locationProof")}</div></section>
+      <section class="reconConclusion"><div class="reconConclusionLabel">FINAL CONCLUSION</div>${reconSlotHtml("culprit")}</section>
     </div>
     <button type="button" class="primary reconCheck" id="reconstructionCheckBtn" onclick="checkReconstruction()">この真相を検証する</button>`;
 }
-
 function openReconstructionSlot(id){
-  const slot=CASE7_RECONSTRUCTION.slots[id];
+  const slot=currentReconstruction().slots[id];
   if(!slot) return;
   activeReconstructionSlot=id;
   document.getElementById("reconstructionModalTitle").textContent=slot.label;
@@ -4958,7 +5168,14 @@ function selectReconstructionCard(cardId){
 
 function reconstructionNemoHint(section){
   const name=selected?.name || "ねも";
-  const hints={
+  const hints=currentCaseId===8 ? {
+    photoTime:"まず写真そのものの撮影情報。日記の公開時刻とは別だよ。",
+    naoto:"直人さんが町を出た時刻と、写真が撮られた時刻を並べてみよう。",
+    third:"『見えなかった』と『いなかった』は同じじゃないかも。駅舎記録を見てみよ。",
+    publish:"公開された写真しか知らない人が、公開前の元画像を持てるかな。",
+    mark:"最後に復元した右端。バッグに何が見えてた？",
+    conclusion:"名前はまだ分からない。でも『その場にいたか』なら、もう答えられそう。"
+  } : {
     time:"21時を基準にしないで、腕時計とコーヒーを同じ時系列に置いてみよう。",
     voice:"20:55の声、本当にその場で話したものかな。同じ咳が残っている記録を見てみよう。",
     show:"21時に誰かがその場で操作する必要はあったのかな。自動実行の記録を確認しよう。",
@@ -4967,9 +5184,8 @@ function reconstructionNemoHint(section){
   };
   return `<div class="partnerEvent"><strong>🐱 ${name}</strong><br>${hints[section]||"どこかひとつ、証拠とのつながりが弱いみたい。"}</div>`;
 }
-
 function checkReconstruction(){
-  const slots=CASE7_RECONSTRUCTION.slots;
+  const slots=currentReconstruction().slots;
   const msg=document.getElementById("deductionMsg");
   const missing=Object.keys(slots).filter(id=>!reconstructionAnswers[id]);
   if(missing.length){
@@ -4989,6 +5205,13 @@ function checkReconstruction(){
   }
   document.querySelectorAll(".reconSlot").forEach(el=>el.classList.add("correct"));
   msg.className="callout good";
+  if(currentCaseId===8){
+    msg.innerHTML=`<strong>📷 PHOTO TRACE 完了。</strong><br>見慣れた一枚から、撮影者の存在と『記録者』への接点が一本につながった。
+      <div class="reconResultFlow"><span class="reconResultChip">10:46 撮影</span><span class="reconResultArrow">→</span><span class="reconResultChip">直人ではない</span><span class="reconResultArrow">→</span><span class="reconResultChip">第三者が現場にいた</span><span class="reconResultArrow">→</span><span class="reconResultChip">公開前の元画像</span><span class="reconResultArrow">→</span><span class="reconResultChip">同じ印</span></div>`;
+    scheduleCaseFileSync();
+    setTimeout(()=>finalReveal(),1100);
+    return;
+  }
   msg.innerHTML=`<strong>🧩 真相再構築 完了。</strong><br>時刻・録音・自動演出・20:45の目撃証言が、ひとつの事件としてつながった。
     <div class="reconResultFlow"><span class="reconResultChip">20:40〜20:50</span><span class="reconResultArrow">→</span><span class="reconResultChip">クロベが書斎方向へ</span><span class="reconResultArrow">→</span><span class="reconResultChip">20:55 録音</span><span class="reconResultArrow">→</span><span class="reconResultChip">21:00 自動演出</span><span class="reconResultArrow">→</span><span class="reconResultChip">犯人：クロベ</span></div>`;
   scheduleCaseFileSync();
@@ -5126,15 +5349,19 @@ function setupDeductionPanel(){
   const title=document.getElementById("deductionTitle");
   const msg=document.getElementById("deductionMsg");
 
-  if(currentCaseId===7){
+  if(currentCaseId===7 || currentCaseId===8){
     standard.classList.add("hidden");
     reconstruct.classList.remove("hidden");
-    badge.textContent="TRUTH RECONSTRUCTION";
-    title.textContent="🧩 真相再構築";
-    document.getElementById("deductionIntro").textContent="3択で答えるのではなく、時刻・主張・証拠・証言を組み合わせて『本物の事件』を再構築してください。空欄をタップするとカードを選べます。";
+    badge.textContent=currentCaseId===8?"PHOTO TRACE":"TRUTH RECONSTRUCTION";
+    title.textContent=currentCaseId===8?"📷 写真の真相再構築":"🧩 真相再構築";
+    document.getElementById("deductionIntro").textContent=currentCaseId===8
+      ? "見慣れた一枚を、撮影時刻・人物・公開前後・謎の印に分けて再構築してください。『誰の名前か』ではなく、証拠からどこまで確定できるかを追います。"
+      : "3択で答えるのではなく、時刻・主張・証拠・証言を組み合わせて『本物の事件』を再構築してください。空欄をタップするとカードを選べます。";
     renderReconstruction();
     msg.className="callout special";
-    msg.innerHTML="最初は21:00を基準に考えないこと。『何が実際の出来事で、何が久世の演出だったか』を分けてみよう。";
+    msg.innerHTML=currentCaseId===8
+      ? "写真を何度見たかではなく、『いつ・誰が・公開前に何を持っていたか』を順に固定していこう。"
+      : "最初は21:00を基準に考えないこと。『何が実際の出来事で、何が久世の演出だったか』を分けてみよう。";
     scheduleCaseFileSync();
     return;
   }
@@ -5173,7 +5400,7 @@ function setupDeductionPanel(){
 }
 
 document.getElementById("finalDeduceBtn").onclick=()=>{
-  if(currentCaseId===7){ checkReconstruction(); return; }
+  if(currentCaseId===7 || currentCaseId===8){ checkReconstruction(); return; }
   const culprit=document.getElementById("finalCulprit").value;
   const place=document.getElementById("finalPlace").value;
   const motive=document.getElementById("finalMotive").value;
@@ -5217,7 +5444,9 @@ function finalReveal(){
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
 
-  const titleName=currentCase===cases[7]
+  const titleName=currentCase===cases[8]
+    ? "写真の向こう側を見つけた探偵"
+    : currentCase===cases[7]
     ? "見つけたくない真実を追った探偵"
     : currentCase===cases[6]
     ? "届かなかったものを届けた探偵"
@@ -5252,7 +5481,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`📁 <strong>SEASON 1 · CASE 08は未更新です。</strong><br>月影館で見つかったファイルには、まだ何も書かれていない「CASE 08」の欄が残っていた。<br><span class="muted">CASE 08がSeason 1の最後の事件です。その先からSeason 2へ続きます。解決済みのCASE 01〜07はいつでも再捜査できます。</span>`;
+      notice.innerHTML=`<div class="seasonCompleteMark">🔓 <strong>SEASON 1 COMPLETE</strong><br>CASE 08を解決しました。<br><br><strong>SEASON 2「新たな事件簿」が解放されました。</strong><br><span class="muted">撮影者の名前はまだ分からない。けれど、『記録者は実際にねもの近くにいた』ことは証明された。次の事件簿は、この謎を抱えたまま始まります。</span></div>`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
@@ -5282,6 +5511,7 @@ function renderFile(){
         return `<div class="infoCard">
           <strong><span class="evidenceIcon">${e.icon}</span>${e.name}</strong>
           <div class="muted">${e.desc}</div>
+          ${evidenceMedia(e)}
           ${insightPart}
         </div>`;
       }).join("")}</div>` : "";

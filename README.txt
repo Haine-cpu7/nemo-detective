@@ -1,9 +1,9 @@
-NEMO Mystery Days v0.63
+NEMO Mystery Days v0.64
 
 GitHub Pages structure:
 - index.html       : Season select portal
 - manual.html      : How to play
-- season1/index.html : Season 1 (CASE 01-07 playable, CASE 08 coming soon)
+- season1/index.html : Season 1 (CASE 01-08 playable; CASE 08 completes Season 1)
 - season2/index.html : Season 2 placeholder / lock gate
 
 Important:

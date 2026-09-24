@@ -9,25 +9,26 @@
 <style>
 :root{--bg:#0d111b;--panel:#171d2c;--line:#3a4663;--text:#f1f3fa;--muted:#aeb5c7;--gold:#f3c969;--purple:#9a86ff;--soft:#232a3d}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#282642 0,#111622 40%,var(--bg) 72%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;min-height:100vh}
-a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:34px 0 52px}.brand{padding:26px 24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(27,33,52,.96),rgba(21,25,40,.96));box-shadow:0 18px 55px rgba(0,0,0,.28)}.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--gold);font-weight:900}.brand h1{font-size:clamp(31px,6vw,54px);letter-spacing:.04em;margin:10px 0 9px}.brand p{margin:0;color:var(--muted);line-height:1.8}.seasonGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.seasonCard{position:relative;display:flex;flex-direction:column;min-height:330px;padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#1b2234,#151a28);overflow:hidden;text-decoration:none;transition:.18s transform,.18s border-color}.seasonCard.available:hover{transform:translateY(-2px);border-color:#69789d}.seasonCard::after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-75px;top:-65px;background:radial-gradient(circle,rgba(154,134,255,.22),transparent 68%)}.seasonNo{font-size:12px;letter-spacing:.12em;font-weight:900;color:var(--gold)}.seasonCard h2{font-size:29px;margin:12px 0 4px}.subtitle{font-size:16px;color:#d8dcef;font-weight:800}.desc{margin:18px 0;color:var(--muted);line-height:1.8;flex:1}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.chip{border:1px solid #48536f;border-radius:999px;padding:6px 9px;font-size:11px;color:#cbd1e2;background:#20273a}.go{display:flex;justify-content:space-between;align-items:center;border-radius:14px;padding:14px 15px;background:#7e70dc;color:#0f1020;font-weight:950}.locked{opacity:.62;cursor:not-allowed}.locked .go{background:#2a3144;color:#9ea7bd}.lockedReason{font-size:12px;color:#b3bad0;margin-top:10px;line-height:1.65}.seriesStatus{margin-top:18px;padding:15px 17px;border:1px solid #38435d;border-radius:16px;background:#141a27;color:var(--muted);line-height:1.75}.seriesStatus strong{color:#e8ebf6}.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.links a{padding:10px 13px;border:1px solid #3d4863;border-radius:12px;text-decoration:none;color:#d8deed;background:#171d2b;font-weight:800;font-size:13px}.footer{text-align:center;color:#70798f;font-size:12px;margin-top:30px}.unlockFlash{display:none;margin-top:20px;padding:14px 16px;border:1px solid #7e70dc;border-radius:15px;background:#211d39;color:#eae6ff;font-weight:850}
+a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:34px 0 52px}.brand{padding:26px 24px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,rgba(27,33,52,.96),rgba(21,25,40,.96));box-shadow:0 18px 55px rgba(0,0,0,.28)}.eyebrow{font-size:12px;letter-spacing:.16em;color:var(--gold);font-weight:900}.brand h1{font-size:clamp(31px,6vw,54px);letter-spacing:.04em;margin:10px 0 9px}.brand p{margin:0;color:var(--muted);line-height:1.8}.portalCue{display:inline-flex;align-items:center;gap:7px;margin:4px 0 12px;padding:7px 10px;border:1px solid #46516d;border-radius:999px;background:#151b2a;color:#c8cfdf;font-size:10px;font-weight:900;letter-spacing:.09em}.portalCue:before{content:"";width:7px;height:7px;border-radius:50%;background:#7dd8a4;box-shadow:0 0 11px rgba(125,216,164,.75)}.brand .portalLead strong{color:#f3f0ff}.brand .portalLead .openingLine{display:block;font-size:clamp(17px,3vw,22px);color:#fff;font-weight:950;margin-bottom:8px}.seasonGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.seasonCard{position:relative;display:flex;flex-direction:column;min-height:330px;padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,#1b2234,#151a28);overflow:hidden;text-decoration:none;transition:.18s transform,.18s border-color}.seasonCard.available:hover{transform:translateY(-2px);border-color:#69789d}.seasonCard::after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-75px;top:-65px;background:radial-gradient(circle,rgba(154,134,255,.22),transparent 68%)}.seasonNo{font-size:12px;letter-spacing:.12em;font-weight:900;color:var(--gold)}.seasonCard h2{font-size:29px;margin:12px 0 4px}.subtitle{font-size:16px;color:#d8dcef;font-weight:800}.desc{margin:18px 0;color:var(--muted);line-height:1.8;flex:1}.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.chip{border:1px solid #48536f;border-radius:999px;padding:6px 9px;font-size:11px;color:#cbd1e2;background:#20273a}.go{display:flex;justify-content:space-between;align-items:center;border-radius:14px;padding:14px 15px;background:#7e70dc;color:#0f1020;font-weight:950}.locked{opacity:.62;cursor:not-allowed}.locked .go{background:#2a3144;color:#9ea7bd}.lockedReason{font-size:12px;color:#b3bad0;margin-top:10px;line-height:1.65}.seriesStatus{margin-top:18px;padding:15px 17px;border:1px solid #38435d;border-radius:16px;background:#141a27;color:var(--muted);line-height:1.75}.seriesStatus strong{color:#e8ebf6}.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.links a{padding:10px 13px;border:1px solid #3d4863;border-radius:12px;text-decoration:none;color:#d8deed;background:#171d2b;font-weight:800;font-size:13px}.footer{text-align:center;color:#70798f;font-size:12px;margin-top:30px}.unlockFlash{display:none;margin-top:20px;padding:14px 16px;border:1px solid #7e70dc;border-radius:15px;background:#211d39;color:#eae6ff;font-weight:850}
 @media(max-width:720px){.wrap{width:min(100% - 18px,980px);padding-top:18px}.brand{padding:22px 18px;border-radius:20px}.seasonGrid{grid-template-columns:1fr}.seasonCard{min-height:290px;padding:20px}.seasonCard h2{font-size:26px}}
 </style>
 </head>
 <body>
 <main class="wrap">
 <section class="brand">
-<div class="eyebrow">NEMO MYSTERY SERIES · v0.63</div>
+<div class="eyebrow">NEMO MYSTERY SERIES · v0.64</div>
 <h1>NEMO Mystery Days</h1>
-<p>事件を解き、記録をつなぎ、まだ見えていない大きな謎を追う。<br>ここは、NEMO Mystery Days のシーズン選択画面です。</p>
+<div class="portalCue">ARCHIVE CONNECTED · CASE FILES READY</div>
+<p class="portalLead"><span class="openingLine">事件は、ひとつでは終わらなかった。</span>あなたとねもが解いてきた、小さな事件たち。<br>その記録をたどると、やがて同じ痕跡が見え始める。<br><br>まだ、すべての答えは見つかっていない。<br><strong>さあ、事件簿を開こう。</strong></p>
 </section>
 <div class="unlockFlash" id="unlockFlash">🔓 SEASON 2 が解放されました。</div>
 <section class="seasonGrid">
 <a class="seasonCard available" href="season1/">
 <div class="seasonNo">SEASON 1</div>
 <h2>最初の事件簿</h2>
-<div class="subtitle">ねもとの出会いから、CASE 08まで。</div>
-<div class="desc">新米探偵として事件を追い始めたあなたと、小さな助手ねも。独立した事件の向こうで、少しずつ同じ痕跡が重なり始めます。</div>
-<div class="meta"><span class="chip">CASE 01–08</span><span class="chip">星待館と接続</span><span class="chip">大きな謎の始まり</span></div>
+<div class="subtitle">すべては、小さな依頼から始まった。</div>
+<div class="desc">新米探偵と、小さな助手ねも。ひとつずつ事件を解いていくうちに、無関係だったはずの記録に同じ痕跡が現れ始めます。</div>
+<div class="meta"><span class="chip">CASE 01–08</span><span class="chip">ねもとの出会い</span><span class="chip">大きな謎の始まり</span></div>
 <div class="go"><span>SEASON 1を開く</span><span>→</span></div>
 </a>
 <div class="seasonCard locked" id="season2Card" aria-disabled="true">
@@ -42,7 +43,7 @@ a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:3
 </section>
 <div class="seriesStatus" id="seriesStatus"><strong>進行状況</strong><br>同じブラウザでは、Season 1のクリア状況を引き継ぎます。Season 2はSeason 1 CASE 08クリア後に解放される設計です。</div>
 <div class="links"><a href="manual.html" target="_blank" rel="noopener">📖 遊び方・取扱説明書</a><a href="https://note.com/nemocollection/n/n1b8d72ea299a" target="_blank" rel="noopener noreferrer">📖 ねもの日記「星待館」</a></div>
-<div class="footer">NEMO Mystery Days · Series Portal v0.63</div>
+<div class="footer">NEMO Mystery Days · Series Portal v0.64</div>
 </main>
 <script>
 const S1_KEY="nemoMysteryDaysSeason1Progress_v1";
