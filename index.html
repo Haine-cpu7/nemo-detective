@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.57 CASE 05 staged clue reveal */
+/* v0.58 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2063,6 +2063,7 @@ body:not(.case-active) .topFileBtn{
 .scene.case4{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.40)),linear-gradient(145deg,#738367 0 22%,#6e886f 22% 54%,#8d785c 54% 100%)}
 .scene.case5{background:linear-gradient(rgba(8,10,18,.16),rgba(8,10,18,.52)),linear-gradient(145deg,#3d4658 0 24%,#253446 24% 55%,#5b4e45 55% 78%,#202c38 78% 100%)}
 .scene.case6{background:linear-gradient(rgba(10,9,12,.10),rgba(10,9,12,.44)),linear-gradient(145deg,#8a775f 0 20%,#5f5146 20% 52%,#71634f 52% 76%,#39434b 76% 100%)}
+.scene.case7{background:linear-gradient(rgba(9,8,14,.15),rgba(9,8,14,.55)),linear-gradient(145deg,#493e51 0 20%,#2b2c3b 20% 50%,#4b3a36 50% 75%,#1c2630 75% 100%)}
 @media(max-width:860px){
   .caseStatus{font-size:10px}
   .unlockNotice{margin-top:14px;padding:12px 13px}
@@ -2070,7 +2071,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.57 separate how-to manual */
+/* v0.58 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2101,7 +2102,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.57</span>
+    <span class="badge">v0.58</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2186,11 +2187,17 @@ body:not(.case-active) .topFileBtn{
         <div class="caseDesc">古い郵便局で見つかった、二十年前に届かなかった手紙の行き先を追う。</div>
         <div class="caseStatus"></div>
       </button>
+      <button class="caseCard" data-case="7">
+        <div class="caseLabel">CASE 07 <span class="finalBadge">FIRST DEATH CASE</span></div>
+        <div class="caseTitle">これは事件ではありません</div>
+        <div class="caseDesc">月影館の推理ゲーム。本物の死を、偽物の殺人演出から見つけ出す。</div>
+        <div class="caseStatus"></div>
+      </button>
       <div class="caseTeaser">
-        <div class="caseLabel">CASE 07 <span class="finalBadge">FINAL CASE</span></div>
-        <div class="caseTitle">？？？？</div>
-        <div class="caseDesc">次は、初めて人が死ぬ事件。少しだけ物騒で、少しだけ変な最終事件。</div>
-        <div class="caseStatus">🩸 COMING SOON · 初の殺人事件</div>
+        <div class="caseLabel">CASE 08</div>
+        <div class="caseTitle">未更新</div>
+        <div class="caseDesc">次の事件は、まだ探偵局に届いていません。</div>
+        <div class="caseStatus">🔒 COMING SOON · 未更新</div>
       </div>
     </div>
     <div class="caseProgressNote" id="caseProgressHint">事件を解決すると、次の事件が届きます。解決済みの事件はいつでも再捜査できます。</div>
@@ -2343,7 +2350,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.57 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days v0.58 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3212,12 +3219,117 @@ const cases={
   },
   ending:"手紙を受け取るはずだったのは、二十年ぶりに町へ戻った春川晴だった。差出人は幼なじみの結城悠希。悠希は転校の日に直接渡すつもりで手紙を書いていたが、晴の転居が急に早まり、自分も発熱で学校を休んでいたため最後に会えなかった。新しい住所を知らないまま、それでも届いてほしくて宛先のない封筒を郵便へ託した。手紙は処理途中で古い仕分け棚の裏へ落ち、そのまま二十年眠り続けた。悠希はその後も『またここで』の約束を忘れず、古い桜が枯れたあとには同じ場所へ若い桜を植え、数年前に亡くなるまで手入れを続けていた。二十年遅れて、手紙はようやく晴の手に渡った。",
   culpritComment:{name:"ハル",line:"……遅いよ。でも、ちゃんと届いた。"}
+},
+7:{
+  title:"CASE 07　これは事件ではありません ― 月影館の死 ―",
+  place:"月影館",
+  briefing:{
+    lead:"今夜21時、主催者は『殺される』予定だった。――予定だったはずなのに。",
+    incident:"山奥の洋館『月影館』で、一晩限りの推理ゲームが開かれた。主催者はミステリー作家の久世玲司。招待客の前で彼は『今夜21時、私はこの館で殺されます』と宣言する。21:00、全館が消灯。効果音のあと書斎で久世が倒れているのが見つかった。参加者は演出だと思って笑った。しかし、ねもが静かに告げる。『……これ、ゲームじゃないよ』。久世玲司は本当に死亡していた。",
+    objectives:[
+      "久世玲司が本当に死亡した時刻を特定する",
+      "21時の『殺人演出』と本物の事件を切り分ける",
+      "久世を殺した人物と、利用された仕掛けを明らかにする"
+    ]
+  },
+  intro:"依頼ではない。目の前で始まった、探偵局では初めての死亡事件。『21時に起きた殺人』という前提から疑え。",
+  evidence:{
+    stoppedWatch:{icon:"⌚",name:"20:46で止まった腕時計",desc:"久世の腕時計は20:46で止まっている。床へ倒れた衝撃で止まった可能性はあるが、死亡時刻そのものとはまだ断定できない。"},
+    coldCoffee:{icon:"☕",name:"冷めきったコーヒー",desc:"書斎机のカップ。21:00直前に淹れたにしては冷えすぎている。久世がかなり前から書斎にいたことを示すかもしれない。"},
+    eventSheet:{icon:"📋",name:"一般用イベント進行表",desc:"21:00『全館消灯 → 効果音 → 書斎で事件発生』と記載。20:55の館内放送については書かれていない。"},
+    testAudio:{icon:"🎙️",name:"15:12の音声テスト",desc:"昼に録音された久世の館内放送テスト。途中に小さな咳が入り、その咳の間隔まで20:55に流れた声と一致している。"},
+    staffSchedule:{icon:"🗒️",name:"スタッフ用進行表",desc:"20:50『書斎・照明確認　担当ナオ』。一般用進行表には載っていない裏方作業。"},
+    seraVideo:{icon:"📹",name:"20:48の配信カメラ映像",desc:"セラの記録映像の背景に、書斎前の廊下を歩くガクが映っている。時刻表示は20:48。"},
+    oldDraft:{icon:"📓",name:"久世とクロベの古い共同制作ノート",desc:"十年前の推理ゲーム案。久世とクロベ両名の筆跡があり、『録音と自動演出で死亡時刻を誤認させる』という未発表案も残っている。"},
+    audioUSB:{icon:"💾",name:"音響操作用USB",desc:"事件当日15:12に設定済み。20:55の久世の館内放送、21:00の全館消灯、効果音がすべて自動実行される。21時に久世本人が操作する必要はなかった。"}
+  },
+  requiredEvidence:["stoppedWatch","coldCoffee","eventSheet","testAudio","staffSchedule","seraVideo","oldDraft"],
+  hotspots:[
+    ["stoppedWatch","⌚ 腕時計","7%","12%"],
+    ["coldCoffee","☕ コーヒー","auto","13%","7%"],
+    ["eventSheet","📋 進行表","38%","23%"],
+    ["testAudio","🎙️ 音声テスト","8%","auto",null,"18%"],
+    ["staffSchedule","🗒️ スタッフ表","auto","auto","8%","18%"],
+    ["seraVideo","📹 配信映像","43%","auto",null,"8%"],
+    ["oldDraft","📓 古いノート","auto","38%","7%"]
+  ],
+  people:[
+    {name:"久世玲司",role:"被害者・推理ゲーム主催者",note:"有名ミステリー作家兼ゲーム制作者。『21時に自分が殺される』という演出を自ら用意していた。"},
+    {name:"ナオ",role:"イベントスタッフ",note:"当日の進行と照明を担当。21時の停電は久世の指示による演出だと説明している。"},
+    {name:"ガク",role:"舞台俳優",note:"ゲームでは『第一発見者役』の予定だった。事件発生後もしばらく台本の続きだと思っていた。"},
+    {name:"セラ",role:"謎解き配信者",note:"イベント記録用のカメラを回していた。20:55に久世の館内放送を聞いたと証言。"},
+    {name:"クロベ",role:"久世の旧友・元共同制作者",note:"久世と昔から推理ゲームを作っていた人物。現在は別々に活動している。"}
+  ],
+  timeline:[
+    ["20:40","クロベは『ここから21:00まで食堂にいた』と証言"],
+    ["20:46","久世の腕時計が止まる"],
+    ["20:48","セラの映像に書斎前を歩くガクが映る"],
+    ["20:50","スタッフ用進行表ではナオが書斎の照明確認をする予定"],
+    ["20:55","館内に久世の声『そろそろ事件の時間だ』が流れる"],
+    ["21:00","全館消灯。効果音。書斎で久世が倒れているのを発見"],
+    ["21:02","演出ではなく、本当に死亡していることが判明"]
+  ],
+  timelineAfterReveal:[
+    ["20:40〜20:50","⚠️ 真の事件発生時間。久世はこの間に死亡した可能性が高い"],
+    ["20:45ごろ","ガクは廊下でクロベと会い、『書斎はどっちだ』と聞かれたと証言"],
+    ["20:46","久世の腕時計が止まる"],
+    ["20:48","ガクが書斎前を通る。久世の死亡後だった可能性がある"],
+    ["20:50","ナオが書斎の照明確認。扉を少し開けたが、演出準備中と思い深く確認しなかった"],
+    ["20:55","録音済みの久世の声が自動再生される"],
+    ["21:00","自動で全館消灯・効果音。『偽物の殺人事件』が予定通り始まる"],
+    ["21:02","その演出の中から、本物の死亡事件が見つかる"]
+  ],
+  witnesses:{
+    sera:{icon:"📹",name:"セラ",role:"謎解き配信者",statements:[
+      {text:"『20時55分の久世さんの声は、生放送だったと思います。途中で咳もしてましたから。』",press:"館内放送のスピーカー越しだったので姿は見ていない。ただ、自然な咳まで入っていたため録音とは思わなかったという。",contradiction:"testAudio"},
+      {text:"『21時の停電直前まで、私はずっとカメラを回していました。』",press:"録画ファイルには時刻情報が残っており、編集された形跡はない。"},
+      {text:"『20時48分ごろ、廊下の奥に誰か映ってます。後で見たらガクさんでした。』",press:"本人を追って撮ったわけではなく、配信画面の背景に偶然映り込んでいた。"}
+    ]},
+    nao:{icon:"🎧",name:"ナオ",role:"イベントスタッフ",statements:[
+      {text:"『20時50分に書斎の前へは行きました。でも、中には入ってません。』",press:"照明確認だけだったので扉の外から済ませた、と最初は話す。",contradiction:"staffSchedule",requires:["sera_recorded"]},
+      {text:"『21時の停電と効果音は、久世さんの指示でタイマーに入れてありました。』",press:"当日の昼、久世本人が音響PCを触っていたことも覚えている。"},
+      {text:"『昼に久世さんが、館内放送の録音テストをしてました。何度か録り直してましたよ。』",press:"20:55の放送が録音だった可能性を聞くと、ナオは『あり得ます』と答えた。"}
+    ]},
+    gaku:{icon:"🎭",name:"ガク",role:"舞台俳優",statements:[
+      {text:"『21時の効果音を聞くまで、書斎には近づいてません。僕は第一発見者役でしたから。』",press:"自分の出番まで食堂周辺で待っていた、とかなり自信ありげに話す。",contradiction:"seraVideo",requires:["nao_study"]},
+      {text:"『正直、久世さんが倒れてても最初は“芝居うまいな”って思いましたよ。……本当に死んでるなんて。』",press:"ガクは演出内容の詳細を知らされておらず、『倒れている久世を見つける役』とだけ聞かされていた。"},
+      {text:"『そうだ。20時45分くらい、クロベさんに“書斎ってどっちだ？”って聞かれました。』",press:"ガクは廊下でクロベとすれ違い、書斎の方向を指さしたという。『昔からの仲なら場所くらい知ってると思ってたけど』と首をかしげる。"}
+    ]},
+    kurobe:{icon:"🕯️",name:"クロベ",role:"久世の旧友・元共同制作者",statements:[
+      {text:"『20時40分から21時まで、私はずっと食堂にいた。久世とは会っていない。』",press:"一人で資料を読んでいたため、食堂にいたことを直接証明できる人物はいないという。",contradictionTestimony:"gaku:2",requires:["gaku_corridor"]},
+      {text:"『久世とは昔いろいろ作ったが、今は別々だ。今日も昔話をしに来ただけだよ。』",press:"古い共同制作ノートについて聞くと、『ずいぶん昔のアイデアだ』と短く答えた。"},
+      {text:"『月影館は今日が初めてだ。書斎の場所だって知らなかった。』",press:"ガクに道を尋ねた理由としては自然に聞こえる。ただし、共同制作ノートには月影館を使った今回の企画の初期案が挟まっている。"}
+    ]}
+  },
+  multiClear:[
+    {witness:"sera",evidence:"testAudio",statement:0,flag:"sera_recorded"},
+    {witness:"nao",evidence:"staffSchedule",statement:0,flag:"nao_study",requires:["sera_recorded"]},
+    {witness:"gaku",evidence:"seraVideo",statement:0,flag:"gaku_corridor",requires:["nao_study"]},
+    {witness:"kurobe",testimony:"gaku:2",statement:0,flag:"kurobe_alibi",requires:["gaku_corridor"]}
+  ],
+  finalReady:["sera_recorded","nao_study","gaku_corridor","kurobe_alibi"],
+  deduction:{
+    culpritLabel:"久世玲司が死亡した時刻",
+    culpritOptions:[["before21","21時より前"],["at21","21時ちょうど"],["after21","21時より後"]],
+    placeLabel:"久世を殺した人物",
+    placeOptions:[["kurobe","クロベ"],["nao","ナオ"],["gaku","ガク"],["sera","セラ"]],
+    motiveLabel:"犯人がアリバイ作りに利用したもの",
+    motiveOptions:[["autoShow","久世自身が設定した自動の殺人演出"],["secretPassage","館の秘密通路"],["blackoutOnly","21時の停電だけ"]],
+    answer:{culprit:"before21",place:"kurobe",motive:"autoShow"},
+    hints:{
+      culprit:"20:55の声は録音だった。止まった腕時計、冷めたコーヒー、USBの自動実行時刻を並べ直そう。",
+      place:"『20:40から食堂にいた』という証言と、20:45ごろのガクの目撃証言を比べよう。",
+      motive:"20:55の声も21:00の停電と効果音も、久世が生きて操作する必要はなかった。"
+    }
+  },
+  ending:"久世玲司が死亡したのは21時ではなく、20時40分から50分の間だった。20:55の声は昼に録音されたもの。21:00の停電と効果音も、久世自身がUSBに設定した自動演出だった。クロベは20:45ごろ書斎へ向かい、長年自分の案が久世の作品として扱われてきたことを巡って久世と口論になった。衝動的に机上の重いブックエンドで久世を殴り、久世は倒れた。その時の衝撃で腕時計が20:46で止まった。直後、クロベは進行表を見て気づく。何もしなくても21時になれば『久世玲司が殺される演出』が始まる。そこで現場を大きく変えずに離れ、全員が21時を死亡時刻だと思うことに賭けた。だが録音、映像、証言、そして自動演出の設定を並べ直すと、本物の事件だけが21時より前へ浮かび上がった。クロベが『あいつの最後のトリックに隠れることになるとはな』と呟くと、あなたは答えた。『違う。そのトリックを解いたから、あなたに辿り着いた。』事件のあと、ねもは小さく言った。『……探偵って、見つけたくない答えも見つけないといけないんだね。でも、ひとりじゃなくてよかった。』",
+  culpritComment:{name:"クロベ",line:"……皮肉だな。あいつが作った最後のトリックに、俺が隠れることになるとは。"}
 }
 
 };
 
 const SAVE_KEY="nemoMysteryDaysProgress_v1";
-const CASE_COUNT=6;
+const CASE_COUNT=7;
 function loadGameProgress(){
   try{
     const raw=localStorage.getItem(SAVE_KEY);
@@ -3367,6 +3479,7 @@ function openBriefing(){
   document.getElementById("scene").classList.toggle("case4",currentCase===cases[4]);
   document.getElementById("scene").classList.toggle("case5",currentCase===cases[5]);
   document.getElementById("scene").classList.toggle("case6",currentCase===cases[6]);
+  document.getElementById("scene").classList.toggle("case7",currentCase===cases[7]);
 
   renderFile();
   renderProgress();
@@ -3539,7 +3652,15 @@ function investigationPartnerReaction(id){
       classAlbum:"写真の二人、晴くんと悠希くんなんだね。",
       teacherLog:"最後の日、二人は会えてなかったんだ……。",
       plaque:"『またここで』。ずっと残ってたんだね。",
-      townNews:"悠希くん、この桜をずっと守ってたんだ。"
+      townNews:"悠希くん、この桜をずっと守ってたんだ。",
+      stoppedWatch:"20:46で止まってる。落ちた時かな。",
+      coldCoffee:"これ、かなり冷たいね。さっき淹れた感じじゃない。",
+      eventSheet:"21時に『事件発生』って最初から書いてある。",
+      testAudio:"あれ。この咳、さっき聞いた声と同じかも。",
+      staffSchedule:"20:50、ナオさんが書斎の照明確認。覚えておこ。",
+      seraVideo:"20:48。ガクさん、書斎の前にいるね。",
+      oldDraft:"久世さんとクロベさん、昔は一緒に作ってたんだ。",
+      audioUSB:"20:55も21:00も、自動で動くようになってる。"
     },
     96:{
       desk:"これだけだと、まだわかんないね。ほかも見よ。",
@@ -3568,7 +3689,15 @@ function investigationPartnerReaction(id){
       classAlbum:"晴と悠希。写真の二人の名前が確定したね。",
       teacherLog:"晴は急に出発、悠希は欠席。直接会う予定なら成立しなかった。",
       plaque:"『またここで』は、二人の約束そのものかもしれない。",
-      townNews:"悠希が若桜を守っていた。約束を忘れていなかった可能性が高いね。"
+      townNews:"悠希が若桜を守っていた。約束を忘れていなかった可能性が高いね。",
+      stoppedWatch:"20:46。死亡時刻の候補として、ほかの記録と並べよう。",
+      coldCoffee:"温度だけで時刻は決められないけど、21時直前より前から置かれていた可能性は高い。",
+      eventSheet:"21時の殺人は最初から予定された演出。現実の事件と分けて考えよう。",
+      testAudio:"咳まで一致するなら、20:55の声は録音の可能性が高い。",
+      staffSchedule:"20:50にナオさんは書斎へ行く予定だった。証言と照らせるね。",
+      seraVideo:"20:48の映像は動かせない記録。ガクさんの時間の話と比べよう。",
+      oldDraft:"録音と自動演出で死亡時刻を誤認させる案。今回の構造と似ている。",
+      audioUSB:"20:55も21:00も自動。久世さんが21時に生きている必要はない。"
     },
     31:{
       desk:"机の横に、小さい花がある。……かわいい。",
@@ -3596,7 +3725,15 @@ function investigationPartnerReaction(id){
       classAlbum:"晴くんと悠希くん。ずっと一緒だったんだ。",
       teacherLog:"会えないままお別れって、さみしいね。",
       plaque:"『またここで』って、やさしい約束だね。",
-      townNews:"悠希くん、ずっと桜のお世話してたんだね。"
+      townNews:"悠希くん、ずっと桜のお世話してたんだね。",
+      stoppedWatch:"時計、20:46で止まってる。……こわいね。",
+      coldCoffee:"コーヒー、すごく冷たい。ずっとここにあったのかな。",
+      eventSheet:"『21時に事件』って、ゲームの予定なんだね。",
+      testAudio:"同じ咳……録音って、こんなに本物っぽいんだ。",
+      staffSchedule:"ナオさん、20:50に書斎へ行く予定だったんだ。",
+      seraVideo:"ガクさん、映ってる。書斎のところ。",
+      oldDraft:"二人で書いたノートなんだ。……なんか、さみしいね。",
+      audioUSB:"これが勝手に全部動かしてたんだね。"
     },
     12:{
       desk:"うーん。ここ、あとで気になるかも。",
@@ -3625,7 +3762,15 @@ function investigationPartnerReaction(id){
       classAlbum:"晴と悠希。たぶんこの二人。",
       teacherLog:"会えてない。だから、渡せなかった。",
       plaque:"『またここで』。これ、約束。",
-      townNews:"悠希くん、待ってたんだと思う。"
+      townNews:"悠希くん、待ってたんだと思う。",
+      stoppedWatch:"20:46。これ、たぶん大事。",
+      coldCoffee:"冷たすぎる。21時より前な気がする。",
+      eventSheet:"21時は、作られた事件。",
+      testAudio:"同じ咳。これ、録音。",
+      staffSchedule:"20:50。ナオさん、書斎。",
+      seraVideo:"20:48。ガクさん。ここ。",
+      oldDraft:"この古い案、今回と似てる。",
+      audioUSB:"21時に本人、いらなかったんだ。"
     }
   };
 
@@ -3698,6 +3843,16 @@ function getNemoInsight(id){
         kind:"観察",
         note:"『またここで』のプレートは古いが、留め直した跡が何度もある。長く誰かが守っていた。",
         speech:"このプレート、何回も直してある。ずっと大事にされてたんだね。"
+      },
+      stoppedWatch:{
+        kind:"観察",
+        note:"文字盤に新しい傷があり、20:46で止まった瞬間に強い衝撃を受けたように見える。",
+        speech:"20:46。ここに新しい傷もある。倒れた時に止まったのかな。"
+      },
+      coldCoffee:{
+        kind:"観察",
+        note:"カップは室温近くまで冷えている。21時直前に淹れたものとは考えにくい。",
+        speech:"これ、もうほとんど冷たいよ。かなり前から置いてたのかも。"
       }
     };
     if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
@@ -3764,6 +3919,21 @@ function getNemoInsight(id){
         kind:"推理",
         note:"晴の突然の転居と悠希の欠席が同日に重なっている。直接渡す予定だったものが渡せなくなった可能性がある。",
         speech:"会うはずだった日に、二人とも会えなかった。これが手紙の理由かも。"
+      },
+      testAudio:{
+        kind:"推理",
+        note:"15:12のテスト音声と20:55の館内放送は咳の位置まで一致する。20:55の声は録音と考えられる。",
+        speech:"咳まで同じ。20:55の声、録音だったんだね。"
+      },
+      seraVideo:{
+        kind:"推理",
+        note:"20:48の映像は、ガクの『21時まで書斎に近づいていない』という証言と両立しない。",
+        speech:"20:48に書斎前。ガクさんの話と合わないね。"
+      },
+      audioUSB:{
+        kind:"推理",
+        note:"20:55の声と21:00の演出は自動実行。久世の生存を示していた二つの時刻証拠が同時に消える。",
+        speech:"21時に久世さんが操作する必要、なかったんだ。時間を全部組み直せるね。"
       }
     };
     if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
@@ -3902,6 +4072,8 @@ function nemoNudgeFor(statement){
       line=`あれ？ ${clue.witness.name}さんは「戻った時には、カナさんは展示室にいた」って言ってたよね。入口付近にいたって話と合わないかも。`;
     }else if(currentCase===cases[2] && currentWitness==="mina"){
       line=`あれ？ アオイさんは17時43分にミナさんが受付へ来たって言ってたよね。『ずっと裏口』とは合わないかも。`;
+    }else if(currentCase===cases[7] && currentWitness==="kurobe"){
+      line=`あれ？ ガクさん、20:45ごろ廊下でクロベさんに会ったって言ってたよね。『ずっと食堂』とは合わないかも。`;
     }
     return `<div class="nemoNudge">
       <strong>${selected.icon} ${selected.name}</strong><br>${line}
@@ -3936,6 +4108,12 @@ function nemoNudgeFor(statement){
       line="晴くん、卒業まで町にいなかったみたい。タクミさんの記憶と違うね。";
     }else if(evidenceId==="teacherLog"){
       line="最後の日、二人は会えてない。ハルさんの記憶と違うね。";
+    }else if(evidenceId==="testAudio"){
+      line="この咳、20:55の声と同じ。録音だったのかも。";
+    }else if(evidenceId==="staffSchedule"){
+      line="20:50の仕事、『書斎の照明確認』って書いてあるね。";
+    }else if(evidenceId==="seraVideo"){
+      line="20:48。ガクさん、書斎の前にいるね。";
     }
 
     return `<div class="nemoNudge">
@@ -4026,6 +4204,10 @@ function nemoPressReaction(witnessId, statementIndex){
             "takumi:1":"最後の一枚って言い方、覚えておこ。",
             "mio:0":"先生の資料で、写真の二人の名前が分かったね。",
             "haru:1":"『またここで』、ハルさんには何か残ってるみたい。",
+            "sera:1":"カメラはずっと回ってたんだ。時間の記録、使えそう。",
+            "nao:1":"停電は最初から演出だったんだね。",
+            "gaku:2":"20:45にクロベさん。ここ、覚えておこ。",
+            "kurobe:1":"昔の話、あまりしたくなさそうだね。",
     },
     96:{
       "misaki:1":"17:15から17:18。……ここ、覚えておこ。",
@@ -4043,7 +4225,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "sae:1":"宛先不詳の子どもの手紙。差出人を特定する材料になりそう。",
       "takumi:1":"2006年3月24日。転居記録と並べてみよう。",
       "mio:0":"写真の二人は晴と悠希。人物関係が確定したね。",
-      "haru:1":"『またここで』に反応した。記憶は完全に消えてないみたい。"
+      "haru:1":"『またここで』に反応した。記憶は完全に消えてないみたい。",
+      "sera:1":"映像の時刻情報は固定。証言より強い記録になるね。",
+      "nao:1":"21時の停電はタイマー。事件時刻の証拠にはならない。",
+      "gaku:2":"20:45にクロベが書斎方向。アリバイと照らせる。",
+      "kurobe:1":"共同制作ノートと関係性を並べて確認したいね。"
     },
     31:{
       "misaki:2":"ふつうに答えてる感じだったね。",
@@ -4065,7 +4251,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "sae:1":"その子、何度もお願いしたんだね。大事な手紙だったのかな。",
       "takumi:1":"写真のことを話す時、ちょっと懐かしそうだったね。",
       "mio:0":"二人の名前を、迷わず答えたね。",
-      "haru:1":"『またここで』って言った時、ハルさんの顔が変わったね。"
+      "haru:1":"『またここで』って言った時、ハルさんの顔が変わったね。",
+      "sera:1":"セラさん、カメラの話は迷わず答えたね。",
+      "nao:1":"ナオさん、停電が演出なのは最初から知ってたんだね。",
+      "gaku:2":"クロベさんの話をした時、ガクさんは急に思い出した感じだった。",
+      "kurobe:1":"昔の共同制作の話になると、言葉が短くなるね。"
     },
     12:{
       "misaki:1":"この3分、なんかあとで出てきそう。",
@@ -4087,7 +4277,11 @@ function nemoPressReaction(witnessId, statementIndex){
       "sae:1":"子どもの手紙。ここ、気になる。",
       "takumi:1":"最後の写真。たぶん大事。",
       "mio:0":"晴と悠希。覚えておこ。",
-      "haru:1":"『またここで』。たぶん思い出してる。"
+      "haru:1":"『またここで』。たぶん思い出してる。",
+      "sera:1":"カメラ。時間。たぶん使う。",
+      "nao:1":"停電は仕掛け。",
+      "gaku:2":"20:45、クロベさん。大事。",
+      "kurobe:1":"昔のノート。なんかある。"
     }
   };
 
@@ -4246,6 +4440,30 @@ function contradictionMeta(flag){
       statement:"ハル『ユウキとは、転校する日にちゃんと別れたと思います』",
       evidence:"担任の古い日誌",
       summary:"晴は急な転居で午後に出発し、悠希は発熱で欠席。二人は最後に会えないまま別れていた。"
+    },
+    sera_recorded:{
+      title:"20:55の声は『生放送』ではなかった",
+      statement:"セラ『20:55の久世さんの声は生放送だったと思う』",
+      evidence:"15:12の音声テスト",
+      summary:"20:55の館内放送と同じ咳・間の取り方が、昼の録音データに残っている。声を聞いたことは、20:55に久世が生きていた証明にならない。"
+    },
+    nao_study:{
+      title:"ナオは書斎の中を確認していた",
+      statement:"ナオ『20:50、書斎の前へ行ったが中には入っていない』",
+      evidence:"スタッフ用進行表",
+      summary:"スタッフ用進行表には20:50『書斎・照明確認　担当ナオ』とある。外からでは確認できない作業で、ナオの説明は不正確だった。"
+    },
+    gaku_corridor:{
+      title:"ガクは21時より前に書斎前へ行っていた",
+      statement:"ガク『21時の効果音まで書斎には近づいていない』",
+      evidence:"20:48の配信カメラ映像",
+      summary:"20:48の映像背景に、書斎前の廊下を歩くガクが映っている。21時まで近づいていないという証言は崩れた。"
+    },
+    kurobe_alibi:{
+      title:"クロベの20:40〜21:00のアリバイが崩れた",
+      statement:"クロベ『20:40から21:00まで、ずっと食堂にいた』",
+      evidence:"ガク『20:45ごろ、クロベさんに書斎はどっちだと聞かれた』",
+      summary:"クロベは20:45ごろ食堂ではなく書斎へ向かう廊下にいた。さらに、共同制作に関わっていたクロベが書斎の場所を知らないふりをした理由も不自然に残る。"
     },
     hina_memory:{
       title:"ヒナの記憶と、封筒が見つかった場所が食い違う",
@@ -4432,6 +4650,45 @@ function presentEvidence(clueId){
       ハルは「転校の日にユウキとちゃんと別れた」と思っていた。<br>
       でも担任日誌には、<strong>晴は急に出発し、悠希は発熱で欠席。二人は最後に会えなかった</strong> と残っている。<br><br>
       ハル「……そうだった。あの日、ユウキは休んでた。俺、ちゃんと別れたって……勝手に思ってたんだ」`;
+    } else if(rule.flag==="sera_recorded"){
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
+      セラは20:55の久世の声を『生放送』だと思っていた。<br>
+      しかし <strong>15:12の音声テスト</strong> には、20:55とまったく同じ咳と間の取り方が残っている。<br><br>
+      セラ「……じゃあ、あの時聞いたのは録音？ 久世さんが20:55に生きてた証拠にはならない……」<br><br>
+      <strong>死亡時刻の前提が、初めて揺らいだ。</strong>`;
+    } else if(rule.flag==="nao_study"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      ナオは『書斎の前へ行っただけで、中には入っていない』と話した。<br>
+      しかし <strong>スタッフ用進行表には20:50『書斎・照明確認　担当ナオ』</strong> とある。<br><br>
+      ナオ「……扉は開けました。照明を見て、すぐ閉めただけです。久世さんが演出の準備中だと思って……」<br><br>
+      ナオの説明は変わった。ただし、これだけで犯人とは限らない。`;
+    } else if(rule.flag==="gaku_corridor"){
+      if(!evidence.has("audioUSB")){
+        evidence.add("audioUSB");
+        const receivedInsight=getNemoInsight("audioUSB");
+        if(receivedInsight) nemoInsights.audioUSB=receivedInsight;
+      }
+      heardTestimony.add("gaku:2");
+      renderFile();
+      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
+      ガクは『21時まで書斎には近づいていない』と言った。<br>
+      しかし <strong>20:48の配信映像</strong> には、書斎前を歩くガクが映っている。<br><br>
+      ガク「立ち位置を確認しに行っただけです！ ……あ、そうだ。20:45くらいにクロベさんにも会いました。『書斎ってどっちだ？』って聞かれて……」<br><br>
+      その話を聞いたナオが、倉庫から音響操作用USBを持ってきた。<br><br>
+      <div class="newEvidenceGain"><strong>💾 新しい証拠を受け取った</strong><br>
+      <strong>『音響操作用USB』</strong><br>
+      20:55の館内放送、21:00の停電、効果音。<br>
+      <strong>すべて15:12に自動実行として設定されている。</strong></div><br>
+      <strong>21時には、久世が生きている必要すらなかった。</strong><br>
+      事件ファイルの時系列が、新しい死亡時刻を前提に組み替わる。`;
+    } else if(rule.flag==="kurobe_alibi"){
+      msg.innerHTML=`<strong>四つ目の矛盾を発見！</strong><br><br>
+      クロベは『20:40から21:00まで、ずっと食堂にいた』と証言した。<br>
+      しかしガクは、<strong>20:45ごろ廊下でクロベと会い、書斎の場所を聞かれた</strong> と話している。<br><br>
+      クロベ「……時間を勘違いしているんじゃないか」<br><br>
+      20:55の声は録音。21:00の事件は自動演出。<br>
+      そして20:45、クロベは書斎へ向かっていた。<br><br>
+      <strong>本物の事件だけが、21時より前へ浮かび上がった。</strong>`;
     } else if(rule.flag==="hina_memory"){
       msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
       ヒナは「パン屋さんに着くまでは、手紙はバッグに入っていたと思う」と話した。<br>
@@ -4463,6 +4720,14 @@ function presentEvidence(clueId){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「K.S.の帽子。駅にいた人は、宗一郎さんじゃなかったのかも。」</div>`;
     }else if(rule.flag==="sakaki_ledger" && nemoInsights.bookLedger){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「20:35に本を受け取ってる。ここから本当の道順を追えそう。」</div>`;
+    }else if(rule.flag==="sera_recorded"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「声があっても、そこに本人がいるとは限らないんだね。」</div>`;
+    }else if(rule.flag==="nao_study"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「ナオさんも書斎を見てた。でも、まだ犯人って決めないでおこ。」</div>`;
+    }else if(rule.flag==="gaku_corridor"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「21時の前にも、みんな動いてた。時間を最初から見直した方がいいね。」</div>`;
+    }else if(rule.flag==="kurobe_alibi"){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「20:45。クロベさん、食堂じゃなくて書斎の方にいたんだね。」</div>`;
     }else if(rule.flag==="sae_return" && nemoInsights.returnLog){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「返送されてない。二十年間、ここで止まってたんだね。」</div>`;
     }else if(rule.flag==="haru_farewell" && nemoInsights.teacherLog){
@@ -4526,7 +4791,9 @@ function setupDeductionPanel(){
             ? "『宗一郎は駅へ来た』という前提をいったん捨てよう。帽子、バス、書きかけのメモ、そして榊から受け取った写真から、本当の行き先を組み立ててください。"
             : currentCase===cases[6]
               ? "これは犯人探しではない。写真、学校記録、郵便処理記録、担任日誌、若桜の記録から、二十年前に止まった手紙の受取人と差出人を組み立てよう。"
-              : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+              : currentCase===cases[7]
+                ? "21時に起きたと思っていた事件を、もう一度20時台から組み直そう。録音、自動演出、映像、証言をつないで、本当の死亡時刻と犯人を確定する。"
+                : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
 
   const msg=document.getElementById("deductionMsg");
   msg.className="callout special";
@@ -4578,7 +4845,9 @@ function finalReveal(){
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
 
-  const titleName=currentCase===cases[6]
+  const titleName=currentCase===cases[7]
+    ? "見つけたくない真実を追った探偵"
+    : currentCase===cases[6]
     ? "届かなかったものを届けた探偵"
     : currentCase===cases[5]
     ? "存在しない事件を解いた探偵"
@@ -4611,7 +4880,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`🩸 <strong>CASE 07の事件ファイルは、まだ封印されています。</strong><br>次は、この探偵局で初めて「人が死んだ事件」。<br><span class="muted">少しだけ物騒で、少しだけ変な最終事件。準備ができるまで、解決済みの事件はいつでも再捜査できます。</span>`;
+      notice.innerHTML=`📁 <strong>CASE 08は未更新です。</strong><br>ここまでの事件は、すべて解決しました。<br><span class="muted">シリーズはまだ続きます。次の事件が届くまで、解決済みのCASE 01〜07はいつでも再捜査できます。</span>`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
@@ -4702,8 +4971,11 @@ function renderFile(){
     return;
   }
 
+  const activeTimeline=(currentCase.timelineAfterReveal && flags.has("gaku_corridor"))
+    ? currentCase.timelineAfterReveal
+    : currentCase.timeline;
   fc.innerHTML=`<div class="timeline">${
-    currentCase.timeline.map(t=>`<div class="timeItem"><b>${t[0]}</b><div>${t[1]}</div></div>`).join("")
+    activeTimeline.map(t=>`<div class="timeItem"><b>${t[0]}</b><div>${t[1]}</div></div>`).join("")
   }</div>`;
   scheduleCaseFileSync();
 }
