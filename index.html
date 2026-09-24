@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ねも探偵局 v0.26</title>
+<title>ねも探偵局 v0.27</title>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -1646,6 +1646,31 @@ body:not(.case-active) .topFileBtn{
   .statement{font-size:17px!important}
 }
 
+
+.caseOpening{
+  margin-top:12px;
+  max-width:820px;
+  color:var(--muted);
+  line-height:1.9;
+}
+.caseOpening p{
+  margin:0 0 8px;
+}
+.caseOpening .caseQuestion{
+  margin-top:14px;
+  color:var(--text);
+  font-weight:1000;
+  font-size:17px;
+}
+@media(max-width:860px){
+  .caseOpening{
+    line-height:1.75;
+  }
+  .caseOpening .caseQuestion{
+    font-size:16px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1659,15 +1684,21 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.23</span>
+    <span class="badge">v0.27</span>
     <h1>ねも探偵局</h1>
   </section>
 
   <section class="panel caseOnly" id="caseSelectPanel">
     <div class="caseSelectHeading">
       <div class="badge">NEMO DETECTIVE</div>
-      <h1>事件を選ぶ</h1>
-      <p class="muted">捜査する事件を選択してください。</p>
+      <h1>事件は、もう始まっています。</h1>
+      <div class="caseOpening">
+        <p>あなたは今年の春、探偵になったばかりの新米探偵。</p>
+        <p>まだ経験は少ないけれど、そばには小さな助手のねもがいます。</p>
+        <p>現場を調べ、証言を聞き、ふとした違和感を見つける。<br>
+        ねもと一緒に手がかりをつないで、隠された真相を見つけよう。</p>
+        <p class="caseQuestion">さて、最初に挑む事件は――？</p>
+      </div>
     </div>
     <div class="grid caseGrid">
       <button class="caseCard" data-case="1">
@@ -1684,8 +1715,8 @@ body:not(.case-active) .topFileBtn{
   </section>
 
   <section class="panel hidden" id="selectPanel">
-    <h2>担当ねもを選ぶ</h2>
-    <p class="muted">Nemo NFTごとに能力値が固定されます。同じ番号のねもは、いつ遊んでも同じ探偵タイプです。</p>
+    <h2>今回、一緒に捜査するねもを選ぼう。</h2>
+    <p class="muted">ねもによって、得意なことや気づき方が少しずつ違います。あなたの相棒を選んでください。</p>
     <div class="rosterNote">🧩 現在はテスト用のNemo番号を表示しています。<br>画像は <strong>assets/nemos/66.png</strong> のように置くだけで自動反映される設計です。NFT保有判定は次の段階で接続します。</div>
     <div class="grid detectives" id="detectiveGrid"></div>
     <div class="row" style="margin-top:14px">
@@ -1827,7 +1858,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.26 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">ねも探偵局 v0.27 — browser prototype / NFT連携は未実装</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
