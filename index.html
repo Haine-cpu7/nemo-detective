@@ -97,7 +97,7 @@ button,select{font:inherit} button{cursor:pointer}
 }
 .detective[data-nemo-id="96"] .face img{
   object-fit:cover;
-  object-position:50% 4%;
+  object-position:50% 0%;
 }
 .detective[data-nemo-id="96"] .dname{
   color:#eef3ff;
@@ -110,12 +110,25 @@ button,select{font:inherit} button{cursor:pointer}
 }
 .detective[data-nemo-id="31"] .face img{
   object-fit:cover;
-  object-position:58% 6%;
+  object-position:58% 1%;
 }
 
 .detective[data-nemo-id="12"] .face img{
   object-fit:cover;
   object-position:center 24%;
+}
+.detective[data-nemo-id="91"] .face{
+  background:linear-gradient(135deg,#51405f,#2c2d45);
+}
+.detective[data-nemo-id="91"] .face img{
+  object-fit:cover;
+  object-position:50% 12%;
+}
+.detective[data-nemo-id="91"] .dname{
+  color:#ffe5ef;
+}
+.detective[data-nemo-id="91"] .nftNo{
+  color:#f0c86a;
 }
 .detective[data-nemo-id="31"] .dname{
   color:#eef1ff;
@@ -177,8 +190,9 @@ button,select{font:inherit} button{cursor:pointer}
 body.file-open{overflow:hidden}
 
 @media(max-width:1180px){
-  .detective[data-nemo-id="96"] .face img{object-position:50% 3%;}
-  .detective[data-nemo-id="31"] .face img{object-position:58% 5%;}
+  .detective[data-nemo-id="96"] .face img{object-position:50% 0%;}
+  .detective[data-nemo-id="31"] .face img{object-position:58% 0%;}
+  .detective[data-nemo-id="91"] .face img{object-position:50% 10%;}
 }
 
 
@@ -449,19 +463,61 @@ body.file-open{overflow:hidden}
 .partnerStrip{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
   margin-bottom:12px;
-  padding:9px 12px;
+  padding:10px 12px;
   border:1px solid #5a527a;
-  border-radius:12px;
-  background:#24223a;
+  border-radius:14px;
+  background:linear-gradient(135deg,#24223a,#222739);
   color:#ddd7ff;
   font-size:13px;
   font-weight:900;
 }
+.partnerThumb{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  overflow:hidden;
+  flex:0 0 44px;
+  border:1px solid rgba(255,255,255,.14);
+  background:#30354a;
+  display:grid;
+  place-items:center;
+}
+.partnerThumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+  display:block;
+}
+.partnerMeta{
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+.partnerLabel{
+  font-size:11px;
+  letter-spacing:.05em;
+  color:#f4c96b;
+}
+.partnerName{
+  font-size:14px;
+  color:#f7f1ff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 .partnerStrip .partnerType{
   color:var(--muted);
   font-weight:700;
+  font-size:12px;
+}
+.partnerHint{
+  margin-left:auto;
+  color:#cfd7ff;
+  font-size:12px;
+  white-space:nowrap;
 }
 .nemoNudge{
   margin-top:12px;
@@ -531,6 +587,16 @@ body.file-open{overflow:hidden}
     margin-bottom:9px;
     padding:8px 10px;
     font-size:12px;
+    align-items:flex-start;
+  }
+  .partnerThumb{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    flex-basis:40px;
+  }
+  .partnerHint{
+    display:none;
   }
 
   /* 事件ファイルは補助ナビ。stickyにしない */
@@ -2068,6 +2134,7 @@ body:not(.case-active) .topFileBtn{
         <div class="progressStrip" id="progressStrip"></div>
         <h2 id="caseTitle"></h2>
         <div class="missionBanner" id="caseIntro"></div>
+        <div class="partnerStrip" id="investigationPartner"></div>
         <div class="scene" id="scene" data-place=""></div>
         <div id="investigationMsg" class="callout special">気になる場所をクリックしてください。</div>
         <div class="row" style="margin-top:12px">
@@ -2182,7 +2249,7 @@ body:not(.case-active) .topFileBtn{
 </div>
 
 <script>
-const TEST_NEMO_IDS=[66,96,31,12];
+const TEST_NEMO_IDS=[66,96,31,12,91];
 const NEMO_ICONS=["🐱","🌙","🌼","✨","🔎","📚","🗝️","🪶"];
 
 const TEST_NEMO_PROFILES={
@@ -2212,10 +2279,19 @@ const TEST_NEMO_PROFILES={
   },
   12:{
     icon:"✨",
+    name:"Nemo #12",
     trait:"なんとなく気づく",
     type:"直感型",
     quirk:"理由はうまく言えない。でも『なんか変』にはよく気づく。",
     obs:46, rea:17, talk:42, luck:100
+  },
+  91:{
+    icon:"🕵️",
+    name:"きりっとおむかえねも",
+    trait:"すっと見抜いて、やさしく導く",
+    type:"推理型",
+    quirk:"きりっとしたまなざしで、散らばった手がかりを静かにつなぐ。迷った時は、そっと背中を押してくれる。",
+    obs:72, rea:92, talk:56, luck:38
   }
 };
 
@@ -2615,9 +2691,20 @@ detectives.forEach(d=>{
     <div class="nftNo">Nemo #${d.id}</div>
     <div class="trait">タイプ：${d.type} / 特性：${d.trait}</div>
     ${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
-  el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;};
+  el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;renderPartnerPreview();};
   detectiveGrid.appendChild(el);
 });
+
+function renderPartnerBanner(targetId, hintText="いっしょに捜査中") {
+  const box=document.getElementById(targetId);
+  if(!box || !selected) return;
+  box.innerHTML=`<div class="partnerThumb"><img src="${selected.image}" alt="${selected.name}" onerror="this.parentElement.textContent='${selected.icon}'"></div><div class="partnerMeta"><div class="partnerLabel">NEMO PARTNER</div><div class="partnerName">${selected.name}</div><div class="partnerType">${selected.type} / ${selected.trait}</div></div><div class="partnerHint">${hintText}</div>`;
+}
+
+function renderPartnerPreview(){
+  renderPartnerBanner("investigationPartner","そっと見守り中");
+  renderPartnerBanner("partnerStrip","いっしょに証言確認中");
+}
 
 document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
   document.body.classList.remove("file-open");
@@ -2658,6 +2745,7 @@ document.getElementById("startBtn").onclick=()=>{
 
   renderFile();
   renderProgress();
+  renderPartnerPreview();
   document.getElementById("phaseLabel").textContent="概要";
   resetView("briefingPanel");
 };
@@ -2667,6 +2755,7 @@ document.getElementById("beginInvestigationBtn").onclick=()=>{
   showOnly("investigationPanel");
   resetView("investigationPanel");
   buildScene();
+  renderPartnerBanner("investigationPartner","そっと見守り中");
   document.getElementById("phaseLabel").textContent="捜査";
 };
 
@@ -2943,10 +3032,7 @@ document.getElementById("toWitnessBtn").onclick=()=>{
   resetView("testimonyPanel");
   document.getElementById("phaseLabel").textContent="証言";
   buildWitnessChooser();
-  const partner=document.getElementById("partnerStrip");
-  if(partner && selected){
-    partner.innerHTML=`<span>${selected.icon}</span><span>担当：${selected.name}</span><span class="partnerType">${selected.type} / ${selected.trait}</span>`;
-  }
+  renderPartnerBanner("partnerStrip","いっしょに証言確認中");
   currentWitness=Object.keys(currentCase.witnesses)[0];stmtIndex=0;renderStatement();
 };
 

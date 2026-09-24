@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta name="robots" content="noindex,nofollow" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NEMO Mystery Days v0.40 - Test</title>
+<title>NEMO Mystery Days｜ねもと挑むミステリー推理ゲーム</title>
+<meta name="description" content="新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+<link rel="canonical" href="https://haine-cpu7.github.io/nemo-detective/" />
+<meta name="theme-color" content="#11131a" />
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:site_name" content="NEMO Mystery Days" />
+<meta property="og:title" content="NEMO Mystery Days｜ねもと挑むミステリー推理ゲーム" />
+<meta property="og:description" content="新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。" />
+<meta property="og:url" content="https://haine-cpu7.github.io/nemo-detective/" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="NEMO Mystery Days｜ねもと挑むミステリー推理ゲーム" />
+<meta name="twitter:description" content="新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "NEMO Mystery Days",
+  "alternateName": "ネモ ミステリー デイズ",
+  "url": "https://haine-cpu7.github.io/nemo-detective/",
+  "description": "新米探偵となり、小さな助手ねもと一緒に事件へ。現場を調べ、証言を聞き、矛盾を見つけて真相にたどり着く無料ブラウザミステリーゲーム。",
+  "genre": ["ミステリー", "推理", "アドベンチャー"],
+  "inLanguage": "ja",
+  "gamePlatform": "Web Browser",
+  "applicationCategory": "GameApplication",
+  "isAccessibleForFree": true
+}
+</script>
 <style>
 :root{
   --bg:#11131a;--panel:#1c2030;--panel2:#262b3d;--paper:#f7f3e8;--ink:#262229;
@@ -48,8 +78,64 @@ button,select{font:inherit} button{cursor:pointer}
 .caseCard,.detective{border:1px solid var(--line);border-radius:16px;background:var(--panel2);padding:14px;transition:.15s ease;color:var(--text);text-align:left}
 .caseCard:hover,.detective:hover{transform:translateY(-2px)} .detective.selected,.caseCard.selected{outline:3px solid var(--accent);background:#302b4c}
 .caseTitle{font-weight:1000;font-size:18px}.caseDesc{font-size:13px;color:var(--muted);line-height:1.6}
-.face{height:150px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#343a51,#26283a);font-size:50px;margin-bottom:10px;overflow:hidden;position:relative}
-.face img{width:100%;height:100%;object-fit:cover;display:block}
+.face{min-height:150px;height:auto;aspect-ratio:16 / 10;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#343a51,#26283a);font-size:50px;margin-bottom:10px;overflow:hidden;position:relative}
+.face img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.detective[data-nemo-id="66"] .face{
+  background:linear-gradient(135deg,#4d394e,#3b3145);
+}
+.detective[data-nemo-id="66"] .face img{
+  object-position:50% 24%;
+}
+.detective[data-nemo-id="66"] .dname{
+  color:#ffe5ef;
+}
+.detective[data-nemo-id="66"] .nftNo{
+  color:#f4c96b;
+}
+.detective[data-nemo-id="96"] .face{
+  background:linear-gradient(135deg,#3b4167,#2f3150);
+}
+.detective[data-nemo-id="96"] .face img{
+  object-fit:cover;
+  object-position:50% 0%;
+}
+.detective[data-nemo-id="96"] .dname{
+  color:#eef3ff;
+}
+.detective[data-nemo-id="96"] .nftNo{
+  color:#f0c86a;
+}
+.detective[data-nemo-id="31"] .face{
+  background:linear-gradient(135deg,#4a4666,#2d2b45);
+}
+.detective[data-nemo-id="31"] .face img{
+  object-fit:cover;
+  object-position:58% 1%;
+}
+
+.detective[data-nemo-id="12"] .face img{
+  object-fit:cover;
+  object-position:center 24%;
+}
+.detective[data-nemo-id="91"] .face{
+  background:linear-gradient(135deg,#51405f,#2c2d45);
+}
+.detective[data-nemo-id="91"] .face img{
+  object-fit:cover;
+  object-position:50% 12%;
+}
+.detective[data-nemo-id="91"] .dname{
+  color:#ffe5ef;
+}
+.detective[data-nemo-id="91"] .nftNo{
+  color:#f0c86a;
+}
+.detective[data-nemo-id="31"] .dname{
+  color:#eef1ff;
+}
+.detective[data-nemo-id="31"] .nftNo{
+  color:#f0c86a;
+}
 .face .fallback{display:grid;place-items:center;width:100%;height:100%;font-size:54px;background:linear-gradient(135deg,#343a51,#26283a)}
 .nftTag{position:absolute;left:8px;bottom:8px;background:rgba(15,17,26,.82);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:1000;letter-spacing:.04em}
 .nftNo{font-size:11px;color:var(--accent2);font-weight:1000;margin-top:3px}
@@ -102,6 +188,13 @@ button,select{font:inherit} button{cursor:pointer}
 .fileClose{display:none}
 .mobileHint{display:none}
 body.file-open{overflow:hidden}
+
+@media(max-width:1180px){
+  .detective[data-nemo-id="96"] .face img{object-position:50% 0%;}
+  .detective[data-nemo-id="31"] .face img{object-position:58% 0%;}
+  .detective[data-nemo-id="91"] .face img{object-position:50% 10%;}
+}
+
 
 @media(max-width:860px){
   body{padding-bottom:84px}
@@ -370,19 +463,61 @@ body.file-open{overflow:hidden}
 .partnerStrip{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
   margin-bottom:12px;
-  padding:9px 12px;
+  padding:10px 12px;
   border:1px solid #5a527a;
-  border-radius:12px;
-  background:#24223a;
+  border-radius:14px;
+  background:linear-gradient(135deg,#24223a,#222739);
   color:#ddd7ff;
   font-size:13px;
   font-weight:900;
 }
+.partnerThumb{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  overflow:hidden;
+  flex:0 0 44px;
+  border:1px solid rgba(255,255,255,.14);
+  background:#30354a;
+  display:grid;
+  place-items:center;
+}
+.partnerThumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+  display:block;
+}
+.partnerMeta{
+  min-width:0;
+  display:grid;
+  gap:2px;
+}
+.partnerLabel{
+  font-size:11px;
+  letter-spacing:.05em;
+  color:#f4c96b;
+}
+.partnerName{
+  font-size:14px;
+  color:#f7f1ff;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 .partnerStrip .partnerType{
   color:var(--muted);
   font-weight:700;
+  font-size:12px;
+}
+.partnerHint{
+  margin-left:auto;
+  color:#cfd7ff;
+  font-size:12px;
+  white-space:nowrap;
 }
 .nemoNudge{
   margin-top:12px;
@@ -452,6 +587,16 @@ body.file-open{overflow:hidden}
     margin-bottom:9px;
     padding:8px 10px;
     font-size:12px;
+    align-items:flex-start;
+  }
+  .partnerThumb{
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    flex-basis:40px;
+  }
+  .partnerHint{
+    display:none;
   }
 
   /* 事件ファイルは補助ナビ。stickyにしない */
@@ -1596,12 +1741,293 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
+
+/* v0.25: low-height desktop fit. Left side stays non-scrollable; only case file scrolls. */
+@media(min-width:861px) and (max-height:820px){
+  .wrap{padding-top:10px;padding-bottom:20px}
+  .topbar{padding:9px 13px;top:6px}
+  .layout{margin-top:10px;gap:12px}
+  .panel{padding:15px}
+  .progressStrip{margin-bottom:7px;gap:5px}
+  .progressChip{padding:4px 7px;font-size:10px}
+  #caseTitle{font-size:22px;margin:0 0 7px}
+  .missionBanner{padding:7px 9px;line-height:1.45;margin-bottom:7px;font-size:13px}
+  .scene{height:215px!important;min-height:215px!important;padding:14px}
+  .scene:before{font-size:22px;left:14px;bottom:10px}
+  .hotspot{padding:8px 10px;font-size:12px;border-radius:11px}
+  #investigationMsg{margin-top:8px;padding:11px 12px;line-height:1.5;font-size:13px}
+  #investigationMsg .partnerEvent,#investigationMsg .nemoInsight{margin-top:6px;padding:7px 9px;font-size:11px}
+  .row{gap:7px}
+  #investigationPanel .row{margin-top:8px!important}
+
+  .partnerStrip{padding:7px 10px;margin-bottom:7px;font-size:12px}
+  .witnessChooser{gap:7px;margin-bottom:8px}
+  .witnessBtn{padding:8px 9px}
+  .witnessBtn strong{font-size:14px}
+  .witnessBtn .muted{font-size:10px}
+  #testimonyPanel>h2{font-size:21px;margin:6px 0 7px}
+  .dialogueBox{min-height:96px;padding:12px 14px}
+  .speaker{font-size:13px;margin-bottom:5px}
+  .statement{font-size:18px!important;line-height:1.45!important}
+  .statementNav{margin-top:7px}
+  .statementNav .secondary{padding:8px 10px;font-size:12px}
+  .actionbar{margin-top:7px;gap:8px}
+  .actionbar button{min-height:42px!important;padding:8px 11px!important;font-size:14px!important}
+  #testimonyMsg{margin-top:8px;padding:11px 12px;line-height:1.5;font-size:13px;max-height:none!important;overflow:visible!important}
+  #testimonyMsg .partnerEvent,#testimonyMsg .nemoNudge,#testimonyMsg .nemoInsight{margin-top:7px;padding:8px 10px;font-size:12px}
+  .nextMove{margin-top:7px;padding:8px 9px}
+  .nextContradictionBtn{min-height:36px}
+
+  .caseFilePanel{overflow:hidden!important}
+  .caseFileBody{overflow-y:auto!important;min-height:0}
+  .footer{display:none}
+}
+
+@media(min-width:861px) and (max-height:690px){
+  .scene{height:180px!important;min-height:180px!important}
+  .topbar{padding:7px 12px}
+  .panel{padding:13px}
+  .missionBanner{font-size:12px}
+  .dialogueBox{min-height:82px}
+  .statement{font-size:17px!important}
+}
+
+
+/* v0.30 — case-select story intro */
+.mysteryIntro{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 220px;
+  gap:18px;
+  align-items:center;
+  padding:20px 22px;
+  margin-bottom:18px;
+  border:1px solid rgba(159,140,255,.45);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(119,215,235,.13), transparent 30%),
+    radial-gradient(circle at 72% 92%, rgba(244,201,107,.08), transparent 28%),
+    linear-gradient(135deg, rgba(48,43,76,.78), rgba(29,34,51,.72));
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.025),
+    0 12px 32px rgba(0,0,0,.16);
+}
+.mysteryIntro:after{
+  content:"";
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent),transparent 82%);
+  opacity:.75;
+}
+.introCopy{
+  position:relative;
+  z-index:2;
+  min-width:0;
+}
+.introChips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:10px 0 10px;
+}
+.introChips span{
+  display:inline-flex;
+  align-items:center;
+  min-height:27px;
+  padding:4px 9px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  background:rgba(17,19,26,.46);
+  color:#e9e4ff;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.02em;
+}
+.mysteryIntro h1{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:6px 0 10px;
+  font-size:30px;
+  line-height:1.25;
+}
+.titleMark{
+  display:inline-grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  border:1px solid rgba(244,201,107,.45);
+  border-radius:13px;
+  background:linear-gradient(145deg,rgba(244,201,107,.16),rgba(159,140,255,.16));
+  box-shadow:0 7px 18px rgba(0,0,0,.2);
+  font-size:23px;
+}
+.caseOpening{
+  margin-top:0;
+  max-width:780px;
+  color:var(--muted);
+  line-height:1.72;
+  font-size:14px;
+}
+.caseOpening p{
+  margin:0 0 8px;
+}
+.caseOpening strong{
+  color:#f0eaff;
+}
+.caseOpening .introCall{
+  margin-top:10px;
+  color:#ddd4ff;
+  font-weight:900;
+}
+.caseOpening .caseQuestion{
+  margin:10px 0 0;
+  color:var(--text);
+  font-weight:1000;
+  font-size:17px;
+  letter-spacing:.02em;
+}
+.detectiveDecor{
+  position:relative;
+  z-index:1;
+  min-height:188px;
+  display:grid;
+  place-items:center;
+}
+.decorGlow{
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(159,140,255,.24),rgba(119,215,235,.08) 48%,transparent 70%);
+  filter:blur(2px);
+}
+.detectiveEmblem{
+  position:relative;
+  width:154px;
+  height:154px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  border:1px solid rgba(244,201,107,.38);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,.07), transparent 30%),
+    linear-gradient(145deg,rgba(35,39,58,.96),rgba(25,28,42,.9));
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.28),
+    inset 0 0 0 7px rgba(159,140,255,.035);
+}
+.detectiveEmblem:before{
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px dashed rgba(159,140,255,.35);
+  border-radius:50%;
+}
+.emblemGlass{
+  position:relative;
+  z-index:2;
+  font-size:42px;
+  line-height:1;
+  transform:rotate(-8deg);
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.24));
+}
+.emblemHat{
+  position:absolute;
+  top:22px;
+  font-size:43px;
+  line-height:1;
+  color:rgba(244,201,107,.78);
+  transform:scaleX(1.7);
+}
+.emblemText{
+  position:relative;
+  z-index:2;
+  margin-top:5px;
+  color:#f7f1ff;
+  font-size:17px;
+  font-weight:1000;
+  letter-spacing:.13em;
+}
+.detectiveEmblem small{
+  position:relative;
+  z-index:2;
+  margin-top:2px;
+  color:var(--accent2);
+  font-size:8px;
+  font-weight:1000;
+  letter-spacing:.12em;
+}
+.clue{
+  position:absolute;
+  display:grid;
+  place-items:center;
+  color:#f7e7ad;
+  text-shadow:0 4px 12px rgba(0,0,0,.35);
+}
+.clue1{left:10px;top:25px;font-size:22px}
+.clue2{right:7px;top:36px;font-size:24px;font-weight:1000;color:#b9adff}
+.clue3{right:10px;bottom:25px;font-size:20px;transform:rotate(11deg)}
+.clue4{left:13px;bottom:28px;font-size:20px;transform:rotate(-9deg)}
+
+@media(max-width:860px){
+  .mysteryIntro{
+    grid-template-columns:1fr;
+    padding:16px;
+    gap:8px;
+  }
+  .mysteryIntro h1{
+    font-size:25px;
+  }
+  .titleMark{
+    width:38px;
+    height:38px;
+    flex-basis:38px;
+    font-size:21px;
+  }
+  .caseOpening{
+    line-height:1.68;
+    font-size:13px;
+  }
+  .caseOpening .caseQuestion{
+    font-size:16px;
+  }
+  .detectiveDecor{
+    position:absolute;
+    right:-21px;
+    top:12px;
+    min-height:0;
+    width:120px;
+    height:120px;
+    opacity:.18;
+    pointer-events:none;
+  }
+  .detectiveEmblem{
+    width:112px;
+    height:112px;
+  }
+  .emblemGlass{font-size:31px}
+  .emblemHat{top:15px;font-size:31px}
+  .emblemText{font-size:12px}
+  .detectiveEmblem small{font-size:6px}
+  .clue{display:none}
+  .introCopy{
+    padding-right:16px;
+  }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="topbar">
-    <div><div class="brand">ねも探偵局</div><div class="caseNo" id="caseNo">CASE SELECT</div></div>
+    <div><div class="brand">NEMO Mystery Days</div><div class="caseNo" id="caseNo">CASE SELECT</div></div>
     <div class="topActions">
       <div class="phase" id="phaseLabel">事件選択</div>
       <button class="topFileBtn" id="topFileBtn" type="button" aria-label="事件ファイルを開く">📁</button>
@@ -1609,15 +2035,48 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.23</span>
-    <h1>ねも探偵局</h1>
+    <span class="badge">v0.40</span>
+    <h1>NEMO Mystery Days</h1>
   </section>
 
   <section class="panel caseOnly" id="caseSelectPanel">
-    <div class="caseSelectHeading">
-      <div class="badge">NEMO DETECTIVE</div>
-      <h1>事件を選ぶ</h1>
-      <p class="muted">捜査する事件を選択してください。</p>
+    <div class="caseSelectHeading mysteryIntro">
+      <div class="introCopy">
+        <div class="badge">NEMO MYSTERY DAYS</div>
+
+        <div class="introChips" aria-label="ゲーム設定">
+          <span>🕵️ 新米探偵</span>
+          <span>🐱 助手ねも</span>
+          <span>📁 調査開始</span>
+        </div>
+
+        <h1><span class="titleMark" aria-hidden="true">🔎</span>事件は、もう始まっています。</h1>
+
+        <div class="caseOpening">
+          <p>あなたは今年の春、探偵になったばかりの新米探偵。<br>
+          まだ経験は浅いけれど、そばには小さな助手の<strong>ねも</strong>がいます。</p>
+
+          <p>現場を調べ、証言を聞き、ふとした違和感を見つけていく。<br>
+          小さな手がかりをつなげれば、隠れていた真相が少しずつ見えてくるはず。</p>
+
+          <p class="introCall">ねもと一緒に、最初の事件へ向かいましょう。</p>
+          <p class="caseQuestion">さて、最初に挑む事件は――？</p>
+        </div>
+      </div>
+
+      <div class="detectiveDecor" aria-hidden="true">
+        <div class="decorGlow"></div>
+        <div class="detectiveEmblem">
+          <div class="emblemHat">⌒</div>
+          <div class="emblemGlass">🔎</div>
+          <div class="emblemText">NEMO</div>
+          <small>MYSTERY DAYS</small>
+        </div>
+        <span class="clue clue1">✦</span>
+        <span class="clue clue2">?</span>
+        <span class="clue clue3">🔑</span>
+        <span class="clue clue4">✉</span>
+      </div>
     </div>
     <div class="grid caseGrid">
       <button class="caseCard" data-case="1">
@@ -1634,9 +2093,9 @@ body:not(.case-active) .topFileBtn{
   </section>
 
   <section class="panel hidden" id="selectPanel">
-    <h2>担当ねもを選ぶ</h2>
-    <p class="muted">Nemo NFTごとに能力値が固定されます。同じ番号のねもは、いつ遊んでも同じ探偵タイプです。</p>
-    <div class="rosterNote">🧩 現在はテスト用のNemo番号を表示しています。<br>画像は <strong>assets/nemos/66.png</strong> のように置くだけで自動反映される設計です。NFT保有判定は次の段階で接続します。</div>
+    <h2>今回、一緒に捜査するねもを選ぼう。</h2>
+    <p class="muted">ねもによって、得意なことや気づき方が少しずつ違います。あなたの相棒を選んでください。</p>
+    <div class="rosterNote">🐱 ねもには、それぞれ得意なことや気づき方があります。<br>同じねもを選べば、いつでも同じ性格・能力であなたの捜査を手伝います。</div>
     <div class="grid detectives" id="detectiveGrid"></div>
     <div class="row" style="margin-top:14px">
       <button class="primary" id="startBtn" disabled>このねもで捜査開始</button>
@@ -1675,6 +2134,7 @@ body:not(.case-active) .topFileBtn{
         <div class="progressStrip" id="progressStrip"></div>
         <h2 id="caseTitle"></h2>
         <div class="missionBanner" id="caseIntro"></div>
+        <div class="partnerStrip" id="investigationPartner"></div>
         <div class="scene" id="scene" data-place=""></div>
         <div id="investigationMsg" class="callout special">気になる場所をクリックしてください。</div>
         <div class="row" style="margin-top:12px">
@@ -1717,7 +2177,7 @@ body:not(.case-active) .topFileBtn{
         <div class="progressStrip" id="deductionProgress"></div>
         <div class="badge">FINAL DEDUCTION</div>
         <h2>最後の推理</h2>
-        <p class="muted">ここからは証拠を突きつけるだけでは終わりません。事件ファイルを見ながら、あなた自身で真相を組み立ててください。</p>
+        <p class="muted" id="deductionIntro">ここからは証拠を突きつけるだけでは終わりません。事件ファイルを見ながら、あなた自身で真相を組み立ててください。</p>
         <div class="mobileFileQuick">
           <button type="button" data-open-file="evidence">🔎 証拠</button>
           <button type="button" data-open-file="contradictions">⚡ 矛盾</button>
@@ -1725,7 +2185,7 @@ body:not(.case-active) .topFileBtn{
           <button type="button" class="timelineQuick" data-open-file="timeline">🕒 時系列</button>
         </div>
         <div class="deductionGrid">
-          <label>犯人
+          <label><span id="finalCulpritLabel">犯人</span>
             <select id="finalCulprit">
               <option value="">選択してください</option>
               <option value="misaki">ミサキ</option>
@@ -1733,7 +2193,7 @@ body:not(.case-active) .topFileBtn{
               <option value="kana">カナ</option>
             </select>
           </label>
-          <label>封筒を隠した場所
+          <label><span id="finalPlaceLabel">封筒を隠した場所</span>
             <select id="finalPlace">
               <option value="">選択してください</option>
               <option value="locker">スタッフロッカー</option>
@@ -1741,7 +2201,7 @@ body:not(.case-active) .topFileBtn{
               <option value="tube">配達用ポスター筒</option>
             </select>
           </label>
-          <label>動機
+          <label><span id="finalMotiveLabel">動機</span>
             <select id="finalMotive">
               <option value="">選択してください</option>
               <option value="sell">結果を外部へ売るため</option>
@@ -1777,7 +2237,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">ねも探偵局 v0.23 — browser prototype / NFT連携は未実装</div>
+  <div class="footer">NEMO Mystery Days v0.40 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -1789,37 +2249,49 @@ body:not(.case-active) .topFileBtn{
 </div>
 
 <script>
-const TEST_NEMO_IDS=[66,96,31,12];
+const TEST_NEMO_IDS=[66,96,31,12,91];
 const NEMO_ICONS=["🐱","🌙","🌼","✨","🔎","📚","🗝️","🪶"];
 
 const TEST_NEMO_PROFILES={
   66:{
     icon:"🐱",
-    trait:"よく見てる",
+    name:"にくまんほわほわねも",
+    trait:"ほかほかしながら、そっと見てる",
     type:"観察型",
-    quirk:"小さな違いにすぐ気づく。人と話すより、まず周りを見ている。",
+    quirk:"ほかほかの肉まんをほおばりながら、気になることをふんわり見つけてくれる。",
     obs:99, rea:61, talk:14, luck:82
   },
   96:{
     icon:"🌙",
-    trait:"考えごとが好き",
+    name:"みあげてかんがえるねも",
+    trait:"ゆっくり考える",
     type:"推理型",
-    quirk:"ことばは少なめ。見つけたものを、頭の中でゆっくりつなげる。",
+    quirk:"見上げながら、ひとつずつ考える。やさしい顔で、静かに答えへ近づいていく。",
     obs:58, rea:100, talk:9, luck:21
   },
   31:{
     icon:"🌼",
-    trait:"声をよく聞く",
+    name:"うるうるおねがいねも",
+    trait:"じっと見つめて聞く",
     type:"会話型",
-    quirk:"人の言い方や表情によく気づく。たまに花や小物に気を取られる。",
+    quirk:"まっすぐ見つめながら、相手の気持ちをそっと引き出す。小さなひとことも聞き逃さない。",
     obs:11, rea:34, talk:99, luck:63
   },
   12:{
     icon:"✨",
+    name:"Nemo #12",
     trait:"なんとなく気づく",
     type:"直感型",
     quirk:"理由はうまく言えない。でも『なんか変』にはよく気づく。",
     obs:46, rea:17, talk:42, luck:100
+  },
+  91:{
+    icon:"🕵️",
+    name:"きりっとおむかえねも",
+    trait:"すっと見抜いて、やさしく導く",
+    type:"推理型",
+    quirk:"きりっとしたまなざしで、散らばった手がかりを静かにつなぐ。迷った時は、そっと背中を押してくれる。",
+    obs:72, rea:92, talk:56, luck:38
   }
 };
 
@@ -1836,12 +2308,12 @@ function buildDetective(id){
     return {
       id,
       ...override,
-      name:`Nemo #${id}`,
+      name:override.name || `Nemo #${id}`,
       image:`assets/nemos/${id}.png`
     };
   }
 
-  // 将来NFTを増やした時も、能力値はかなり尖るように生成する。
+  // 将来ねもを増やした時も、能力値はかなり尖るように生成する。
   const raw=[
     ["obs",seededValue(id,11)],
     ["rea",seededValue(id,23)],
@@ -1900,6 +2372,7 @@ const cases={
     photo:{icon:"📷",name:"17:17の来館写真",desc:"客が撮った写真のガラス反射に、展示壁へ向かうカナが写っている。トイレとは逆方向。"},
     tube:{icon:"📦",name:"配達用ポスター筒",desc:"ユウが納品した筒。封は切られておらず、中身の枚数も伝票と一致する。"}
   },
+  requiredEvidence:["photo","frame"],
   hotspots:[
     ["desk","🗂 机","7%","12%"],
     ["reception","🛎️ 受付記録","auto","13%","7%"],
@@ -1946,51 +2419,256 @@ const cases={
     {witness:"kana", evidence:"frame", statement:2, flag:"kana_frame", requires:["kana_photo"]}
   ],
   finalReady:["kana_photo","kana_frame"],
+  deduction:{
+    culpritLabel:"犯人",
+    culpritOptions:[
+      ["misaki","ミサキ"],
+      ["yuu","ユウ"],
+      ["kana","カナ"]
+    ],
+    placeLabel:"封筒を隠した場所",
+    placeOptions:[
+      ["locker","スタッフロッカー"],
+      ["frame","展示ポスターの額縁裏"],
+      ["tube","配達用ポスター筒"]
+    ],
+    motiveLabel:"動機",
+    motiveOptions:[
+      ["sell","結果を外部へ売るため"],
+      ["early","発表前に自分の結果を知るため"],
+      ["revenge","ギャラリーへの嫌がらせ"]
+    ],
+    answer:{
+      culprit:"kana",
+      place:"frame",
+      motive:"early"
+    },
+    hints:{
+      culprit:"二度、証言が崩れた人物は誰だった？",
+      place:"事件直後に『動かされた痕跡』があったものを確認しよう。",
+      motive:"審査結果そのものに直接利害がある人物は誰？"
+    }
+  },
   ending:"カナは発表前に自分の結果を知りたくなり、ミサキが受付を離れた短い隙に青い封筒を持ち出した。展示壁の前で中身を確認したあと、怖くなって大型ポスターの額縁裏へ封筒を隠した。額縁を急いで動かした際、バッグの銀色の星飾りが落ちた。"
 },
 2:{
   title:"CASE 02　消えた鍵と濡れた紙片",
   place:"星見図書館",
-  intro:"閉館前、資料室の鍵が消えた。机の下には、なぜか濡れた小さな紙片が落ちている。今日は雨も降っていない。",
-  evidence:{
-    wet:{icon:"💧",name:"濡れた紙片",desc:"机の下に落ちていた。片面に『17:40』、端に青いインク。今日は晴れ。"},
-    keyhook:{icon:"🔑",name:"空の鍵フック",desc:"資料室の鍵が掛かっていた。17:30までは鍵があった。"},
-    receipt:{icon:"🧾",name:"自販機レシート",desc:"17:42。図書館裏口横の自販機で水を購入。"},
-    poster:{icon:"📌",name:"濡れた掲示ポスター",desc:"裏口近くの掲示板。清掃用ホースの水が一部だけかかっている。"},
-    camera:{icon:"📹",name:"廊下カメラ",desc:"17:39、青い封筒を持った人物が裏口方向へ歩く影。顔は映っていない。"}
+  briefing:{
+    lead:"閉館まであとわずか。消えた資料室の鍵を探してほしい。",
+    incident:"17:50、星見図書館の資料室の鍵がフックから消えていることが分かった。鍵は17:30には確かにあった。さらに、レンが使っていた閲覧席の下から、晴れの日には不自然な『濡れた紙片』が見つかっている。",
+    objectives:[
+      "鍵を持ち出した人物を特定する",
+      "濡れた紙片がどこから来たのか突き止める",
+      "鍵の隠し場所と、持ち出した理由を明らかにする"
+    ]
   },
+  intro:"依頼：閉館までに『誰が鍵を持ち出したのか・どこへ隠したのか・なぜ持ち出したのか』を明らかにする。",
+  evidence:{
+    wet:{
+      icon:"💧",
+      name:"濡れた紙片",
+      desc:"レンが使っていた閲覧席の下に落ちていた。青いインクと『17:40』の文字。今日は一日晴れ。"
+    },
+    keyhook:{
+      icon:"🔑",
+      name:"空の鍵フック",
+      desc:"資料室の鍵が掛かっていた場所。アオイが17:30に鍵があることを確認している。"
+    },
+    receipt:{
+      icon:"🧾",
+      name:"レンの自販機レシート",
+      desc:"17:42、図書館裏口横の自販機で水を購入。レンの返却予定の本に挟まっていた。"
+    },
+    poster:{
+      icon:"📌",
+      name:"濡れた掲示ポスター",
+      desc:"裏口の掲示板。17:40ごろ清掃用ホースの水がかかり、右下が破れている。青いインクと紙質は濡れた紙片によく似ている。"
+    },
+    camera:{
+      icon:"📹",
+      name:"17:39の廊下カメラ",
+      desc:"レンと同じ学校の制服、赤いリュックの人物が裏口方向へ歩いている。顔は映っていない。"
+    },
+    note:{
+      icon:"📝",
+      name:"忘れ物メモ",
+      desc:"17:20、レンが『資料室に青いノートを忘れた』とスタッフへ申し出た記録。資料室はすでに施錠済みだった。"
+    },
+    returnbox:{
+      icon:"📮",
+      name:"館内返却ポスト",
+      desc:"投入口の奥に新しい金属の擦り跡がある。ポストを少し動かすと、底の方から小さな金属音がする。"
+    }
+  },
+  requiredEvidence:["wet","receipt","poster","camera","note","returnbox"],
   hotspots:[
-    ["wet","💧 紙片","7%","14%"],["keyhook","🔑 鍵フック","auto","15%","8%"],["receipt","🧾 レシート","10%","auto",null,"18%"],["poster","📌 掲示板","auto","auto","9%","19%"],["camera","📹 カメラ","42%","20%"]
+    ["wet","💧 紙片","7%","14%"],
+    ["keyhook","🔑 鍵フック","auto","15%","8%"],
+    ["receipt","🧾 レシート","10%","auto",null,"18%"],
+    ["poster","📌 掲示板","auto","auto","9%","19%"],
+    ["camera","📹 カメラ","42%","20%"],
+    ["note","📝 忘れ物メモ","auto","34%","8%"],
+    ["returnbox","📮 返却ポスト","35%","auto",null,"8%"]
   ],
   people:[
-    {name:"アオイ",role:"図書館スタッフ",note:"17:30に鍵の存在を確認。17:35から受付。"},
-    {name:"レン",role:"高校生利用者",note:"17:38ごろ退館したと証言。"},
-    {name:"ミナ",role:"ボランティア",note:"17:40ごろ裏口で段ボールを片付けたと証言。"}
+    {
+      name:"アオイ",
+      role:"図書館スタッフ",
+      note:"17:30に鍵を確認。17:35以降は受付担当。レンから忘れ物の相談を受けていた。"
+    },
+    {
+      name:"レン",
+      role:"高校生利用者",
+      note:"資料室に青いノートを忘れたと相談していた。本人は17:38には退館したと話す。赤いリュックを使用。"
+    },
+    {
+      name:"ミナ",
+      role:"図書館ボランティア",
+      note:"17:40ごろ裏口で片付け作業。清掃用ホースの水を掲示板にかけてしまった。"
+    }
   ],
-  timeline:[["17:30","鍵あり"],["17:35","アオイが受付へ"],["17:38","レンが退館したと証言"],["17:39","裏口方向へ人影"],["17:40","紙片の時刻"],["17:42","自販機レシート"],["17:50","鍵紛失発覚"]],
+  timeline:[
+    ["17:20","レンが『資料室に青いノートを忘れた』とスタッフへ相談"],
+    ["17:30","アオイが資料室の鍵をフックで確認"],
+    ["17:35","アオイが受付担当へ移動"],
+    ["17:38","レンは『この時刻には退館した』と証言"],
+    ["17:39","赤いリュックの制服姿が裏口方向へ向かう"],
+    ["17:40","ミナが裏口で清掃。掲示ポスターに水がかかる"],
+    ["17:42","裏口横の自販機でレンのレシートが発行"],
+    ["17:50","資料室の鍵がないことに気づく"]
+  ],
   witnesses:{
-    ren:{icon:"🎒",name:"レン",role:"高校生利用者",statements:[
-      {text:"「17時38分には、もう図書館を出てました。」",press:"本人は時刻をかなりはっきり覚えている。"},
-      {text:"「裏口には行ってません。」",press:"正面玄関から帰ったという。",contradiction:"receipt"},
-      {text:"「水も買ってません。」",press:"財布を忘れていた、と付け加えた。",contradiction:"receipt"}
-    ]},
-    mina:{icon:"📦",name:"ミナ",role:"ボランティア",statements:[
-      {text:"「17時40分ごろ、裏口で段ボールを片付けていました。」",press:"清掃用ホースも使ったという。"},
-      {text:"「掲示板にも少し水がかかっちゃって。」",press:"濡れたポスターの説明とは一致する。"},
-      {text:"「誰かが自販機の前にいた気はします。」",press:"制服っぽい人影だったが顔は見ていない。"}
-    ]},
-    aoi:{icon:"📚",name:"アオイ",role:"図書館スタッフ",statements:[
-      {text:"「17時30分には鍵はありました。」",press:"鍵フックを見たという。"},
-      {text:"「その後は受付にいたので、裏口には行ってません。」",press:"受付記録と一致している。"},
-      {text:"「鍵を持ち出す理由もありません。」",press:"資料室は翌朝開ける予定だった。"}
-    ]}
+    ren:{
+      icon:"🎒",
+      name:"レン",
+      role:"高校生利用者",
+      statements:[
+        {
+          text:"「17時38分には、もう図書館を出てました。」",
+          press:"レンは時刻をかなりはっきり覚えていると言う。",
+          contradiction:"receipt"
+        },
+        {
+          text:"「裏口の方には行ってません。正面から帰りました。」",
+          press:"赤いリュックを背負っていたことは認めている。",
+          contradiction:"camera",
+          requires:["ren_exit"]
+        },
+        {
+          text:"「17時38分以降、館内には戻ってません。」",
+          press:"レンは『一度出たら、そのまま帰った』と言い切る。",
+          contradiction:"wet",
+          requires:["ren_backdoor"]
+        },
+        {
+          text:"「資料室には、別に用事なんてありませんでした。」",
+          press:"レンは少し間を置いてから答えた。",
+          contradiction:"note",
+          requires:["ren_return"]
+        }
+      ]
+    },
+    mina:{
+      icon:"📦",
+      name:"ミナ",
+      role:"図書館ボランティア",
+      statements:[
+        {
+          text:"「17時40分ごろ、裏口で段ボールを片付けていました。」",
+          press:"作業時間はボランティア記録とも一致している。"
+        },
+        {
+          text:"「ホースの水が、掲示板に少しかかっちゃって。」",
+          press:"濡れた掲示ポスターの状態と一致する。"
+        },
+        {
+          text:"「自販機の近くに、制服の子がいた気がします。」",
+          press:"顔は見えなかったが、赤いリュックだったという。"
+        }
+      ]
+    },
+    aoi:{
+      icon:"📚",
+      name:"アオイ",
+      role:"図書館スタッフ",
+      statements:[
+        {
+          text:"「17時30分には、鍵はちゃんとフックにありました。」",
+          press:"鍵を確認してから受付へ移動したという。"
+        },
+        {
+          text:"「レンくんから、青いノートを忘れたと相談されました。」",
+          press:"資料室はもう施錠していたため、『明日取りに来て』と伝えた。"
+        },
+        {
+          text:"「17時35分からは、ずっと受付にいました。」",
+          press:"受付記録にも離席は残っていない。"
+        }
+      ]
+    }
   },
   multiClear:[
-    {witness:"ren", evidence:"receipt", statement:1, flag:"ren_exit"},
-    {witness:"ren", evidence:"receipt", statement:2, flag:"ren_water"},
-    {witness:"ren", evidence:"wet", statement:0, flag:"wet_link", requires:["ren_exit","ren_water"]}
+    {
+      witness:"ren",
+      evidence:"receipt",
+      statement:0,
+      flag:"ren_exit"
+    },
+    {
+      witness:"ren",
+      evidence:"camera",
+      statement:1,
+      flag:"ren_backdoor",
+      requires:["ren_exit"]
+    },
+    {
+      witness:"ren",
+      evidence:"wet",
+      statement:2,
+      flag:"ren_return",
+      requires:["ren_exit","ren_backdoor"]
+    },
+    {
+      witness:"ren",
+      evidence:"note",
+      statement:3,
+      flag:"ren_motive",
+      requires:["ren_exit","ren_backdoor","ren_return"]
+    }
   ],
-  ending:"レンは17:38に退館したと嘘をつき、裏口の自販機で水を買っていた。そこで落としたレシートの時刻は17:42。さらに、机の下の濡れた紙片は裏口の濡れた掲示ポスターからちぎれたものと一致した。レンは資料室に忘れ物を取りに入りたくて鍵を持ち出し、戻そうとして発覚を恐れて隠していた。"
+  finalReady:["ren_exit","ren_backdoor","ren_return","ren_motive"],
+  deduction:{
+    culpritLabel:"鍵を持ち出した人物",
+    culpritOptions:[
+      ["aoi","アオイ"],
+      ["ren","レン"],
+      ["mina","ミナ"]
+    ],
+    placeLabel:"鍵を隠した場所",
+    placeOptions:[
+      ["desk","資料室の机の中"],
+      ["returnbox","館内返却ポストの底"],
+      ["vending","裏口の自販機の裏"]
+    ],
+    motiveLabel:"鍵を持ち出した理由",
+    motiveOptions:[
+      ["sell","鍵を売るため"],
+      ["notebook","資料室に忘れた青いノートを取り戻すため"],
+      ["prank","図書館を困らせるため"]
+    ],
+    answer:{
+      culprit:"ren",
+      place:"returnbox",
+      motive:"notebook"
+    },
+    hints:{
+      culprit:"何度も時刻と行動を訂正することになった人物は誰？",
+      place:"現場で『金属音』がした場所を思い出そう。",
+      motive:"17:20の忘れ物メモを確認しよう。"
+    }
+  },
+  ending:"レンは資料室に忘れた青いノートをどうしてもその日のうちに取り戻したくて、アオイが受付へ移った隙に資料室の鍵を持ち出した。ノートを回収したあと裏口へ向かったが、ミナが作業していたため一度引き返す。17:40に濡れた掲示ポスターの紙片が靴に付き、館内へ戻った時に自分の閲覧席で落ちた。鍵を元のフックへ戻す勇気がなく、最後は館内返却ポストの底へ隠した。"
 }
 };
 
@@ -2002,20 +2680,31 @@ function stat(label,val){
   return `<div class="stat extreme ${cls}"><span>${label}</span><div class="track"><i style="width:${val}%"></i></div><b>${val}</b></div>`;
 }
 detectives.forEach(d=>{
-  const el=document.createElement("button");el.className="detective";
+  const el=document.createElement("button");el.className="detective";el.dataset.nemoId=d.id;
   el.innerHTML=`
     <div class="face">
       <img src="${d.image}" alt="${d.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
       <div class="fallback" style="display:none">${d.icon}</div>
-      <div class="nftTag">NEMO NFT</div>
+      <div class="nftTag">NEMO PARTNER</div>
     </div>
     <div class="dname">${d.name}</div>
-    <div class="nftNo">Token character ID: ${d.id}</div>
+    <div class="nftNo">Nemo #${d.id}</div>
     <div class="trait">タイプ：${d.type} / 特性：${d.trait}</div>
     ${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
-  el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;};
+  el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;renderPartnerPreview();};
   detectiveGrid.appendChild(el);
 });
+
+function renderPartnerBanner(targetId, hintText="いっしょに捜査中") {
+  const box=document.getElementById(targetId);
+  if(!box || !selected) return;
+  box.innerHTML=`<div class="partnerThumb"><img src="${selected.image}" alt="${selected.name}" onerror="this.parentElement.textContent='${selected.icon}'"></div><div class="partnerMeta"><div class="partnerLabel">NEMO PARTNER</div><div class="partnerName">${selected.name}</div><div class="partnerType">${selected.type} / ${selected.trait}</div></div><div class="partnerHint">${hintText}</div>`;
+}
+
+function renderPartnerPreview(){
+  renderPartnerBanner("investigationPartner","そっと見守り中");
+  renderPartnerBanner("partnerStrip","いっしょに証言確認中");
+}
 
 document.querySelectorAll(".caseCard").forEach(btn=>btn.onclick=()=>{
   document.body.classList.remove("file-open");
@@ -2056,6 +2745,7 @@ document.getElementById("startBtn").onclick=()=>{
 
   renderFile();
   renderProgress();
+  renderPartnerPreview();
   document.getElementById("phaseLabel").textContent="概要";
   resetView("briefingPanel");
 };
@@ -2065,6 +2755,7 @@ document.getElementById("beginInvestigationBtn").onclick=()=>{
   showOnly("investigationPanel");
   resetView("investigationPanel");
   buildScene();
+  renderPartnerBanner("investigationPartner","そっと見守り中");
   document.getElementById("phaseLabel").textContent="捜査";
 };
 
@@ -2146,7 +2837,7 @@ function renderProgress(){
   const chips=[
     ["現場を調べる", evidence.size>=4],
     [`矛盾を見つける ${flags.size}/${(currentCase?.multiClear||[]).length}`, flags.size>=1],
-    ["真相を組み立てる", currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))]
+    ["真相を組み立てる", currentCase?.finalReady?.every(f=>flags.has(f))]
   ];
   const markup=chips.map(c=>`<span class="progressChip ${c[1]?"done":""}">${c[1]?"✓ ":""}${c[0]}</span>`).join("");
   const a=document.getElementById("progressStrip");
@@ -2164,6 +2855,7 @@ function buildScene(){
     b.onclick=()=>collectEvidence(h[0],b); s.appendChild(b);
   });
   document.getElementById("evidenceCount").textContent=`証拠 0 / ${Object.keys(currentCase.evidence).length}`;
+  document.getElementById("toWitnessBtn").disabled=true;
   scheduleCaseFileSync();
 }
 function investigationPartnerReaction(id){
@@ -2179,7 +2871,9 @@ function investigationPartnerReaction(id){
       tube:"中身、ちゃんと入ってるみたい。これは違うかな。",
       wet:"この紙、ちょっと手ざわりが変。",
       poster:"こっちの紙も、さっきのと似てる気がする。",
-      camera:"あ。人がいる。裏口の方に歩いてる。"
+      camera:"あ。赤いリュック。レンくんと同じだね。",
+      note:"青いノート、忘れてたんだ。取りに行きたかったのかな。",
+      returnbox:"あれ？ いま、中でカチッて音した。"
     },
     96:{
       desk:"これだけだと、まだわかんないね。ほかも見よ。",
@@ -2191,7 +2885,9 @@ function investigationPartnerReaction(id){
       wet:"どうして濡れたんだろ。晴れてるのにね。",
       receipt:"17:42。……この時間、覚えておこ。",
       poster:"水がかかったのは、ここなんだね。",
-      camera:"17:39。こっちも時間を覚えておこ。"
+      camera:"17:39。赤いリュックで裏口方向。時間と場所、覚えておこ。",
+      note:"17:20に忘れ物の相談。……これ、理由につながりそう。",
+      returnbox:"金属音がする。鍵が入っててもおかしくないね。"
     },
     31:{
       desk:"机の横に、小さい花がある。……かわいい。",
@@ -2202,7 +2898,9 @@ function investigationPartnerReaction(id){
       tube:"筒の中、暗い。……何も見えない。",
       wet:"外の花壇、ちょっと見たい。……紙も見よ。",
       poster:"ポスター、びしょびしょだね。",
-      camera:"カメラ、こっち見てる。"
+      camera:"赤いリュック、目立つね。……カメラにも映ってる。",
+      note:"青いノートって、どんなノートだろ。",
+      returnbox:"ポストの中、なんか音する。ちょっと気になる。"
     },
     12:{
       desk:"うーん。ここ、あとで気になるかも。",
@@ -2214,7 +2912,9 @@ function investigationPartnerReaction(id){
       wet:"この紙、なんか近い。",
       receipt:"この時間、気になる。",
       poster:"あ。これ、さっきの紙と関係あるかも。",
-      camera:"この影、なんか気になる。"
+      camera:"この赤いリュック、なんか気になる。",
+      note:"このメモ、あとで大事になりそう。",
+      returnbox:"ここ。なんかいる気がする。鍵かな。"
     }
   };
 
@@ -2247,6 +2947,11 @@ function getNemoInsight(id){
         kind:"観察",
         note:"濡れたポスターの紙質と青いインクが、濡れた紙片によく似ている。",
         speech:"あ。こっちの紙、さっきの濡れた紙と似てるよ。"
+      },
+      returnbox:{
+        kind:"観察",
+        note:"返却ポストの奥に新しい金属の擦り跡があり、動かすと底から小さな金属音がする。",
+        speech:"あれ？ 奥に新しいキズ。……中で金属の音もしたよ。"
       }
     };
     if(obs[id]) return {...obs[id], stat:`観察 ${selected.obs}`};
@@ -2266,8 +2971,13 @@ function getNemoInsight(id){
       },
       camera:{
         kind:"推理",
-        note:"17:39の人影は、レンの退館時刻の証言と並べて確認する価値がある。",
-        speech:"17:39。さっきの『17:38』と、ちょっと合わないね。"
+        note:"17:39の赤いリュックの制服姿は、レンの『17:38には退館した』という話と並べて確認する価値がある。",
+        speech:"17:39。赤いリュック。……17:38には帰ったって話と合わないね。"
+      },
+      note:{
+        kind:"推理",
+        note:"レンは17:20に資料室の忘れ物を申し出ている。鍵を必要とする理由になり得る。",
+        speech:"青いノートを取りたかったなら、資料室に用事はあったよね。"
       }
     };
     if(rea[id]) return {...rea[id], stat:`推理 ${selected.rea}`};
@@ -2311,10 +3021,10 @@ function collectEvidence(id,btn){
   renderFile();
   renderProgress();
 
-  // 能力差で詰まない。必須証拠はプレイヤー側で取得できる。
-  if(evidence.size>=4){
-    document.getElementById("toWitnessBtn").disabled=false;
-  }
+  // 能力差で詰まない。推理に必要な証拠を集めてから証言へ進む。
+  const required=currentCase.requiredEvidence || [];
+  const hasRequired=required.every(id=>evidence.has(id));
+  document.getElementById("toWitnessBtn").disabled=!(evidence.size>=4 && hasRequired);
 }
 
 document.getElementById("toWitnessBtn").onclick=()=>{
@@ -2322,10 +3032,7 @@ document.getElementById("toWitnessBtn").onclick=()=>{
   resetView("testimonyPanel");
   document.getElementById("phaseLabel").textContent="証言";
   buildWitnessChooser();
-  const partner=document.getElementById("partnerStrip");
-  if(partner && selected){
-    partner.innerHTML=`<span>${selected.icon}</span><span>担当：${selected.name}</span><span class="partnerType">${selected.type} / ${selected.trait}</span>`;
-  }
+  renderPartnerBanner("partnerStrip","いっしょに証言確認中");
   currentWitness=Object.keys(currentCase.witnesses)[0];stmtIndex=0;renderStatement();
 };
 
@@ -2423,22 +3130,30 @@ function nemoPressReaction(witnessId, statementIndex){
     66:{
       "misaki:1":"3分だけ、受付にいなかったんだね。",
       "yuu:1":"スタッフルームには入ってないんだ。",
-      "kana:0":"『すぐ戻った』ってところ、覚えておこ。"
+      "kana:0":"トイレのあと、入口付近にいたってところ、覚えておこ。"
     },
     96:{
       "misaki:1":"17:15から17:18。……ここ、覚えておこ。",
       "yuu:2":"17:13。入口のカメラにも映ってるんだね。",
-      "kana:0":"『すぐ戻った』。時間がわかるといいね。"
+      "kana:0":"トイレのあと、入口付近にいたんだね。時間も見ておこ。"
     },
     31:{
       "misaki:2":"ふつうに答えてる感じだったね。",
       "yuu:0":"この話は、すらすら出てきたね。",
-      "kana:0":"結果の話をした時、ちょっとだけ声が小さくなった？"
+      "kana:0":"結果の話をした時、ちょっとだけ声が小さくなった？",
+      "ren:0":"時間を言う時だけ、すごく早口だったね。",
+      "ren:1":"『裏口』って言った時、ちょっと目が泳いだ？",
+      "ren:2":"『戻ってない』ってところ、言い直したね。",
+      "ren:3":"青いノートの話を出したら、どんな顔するかな。"
     },
     12:{
       "misaki:1":"この3分、なんかあとで出てきそう。",
       "yuu:2":"ここは、そんなに変じゃない気がする。",
-      "kana:0":"うーん。この話、まだ何かありそう。"
+      "kana:0":"うーん。この話、まだ何かありそう。",
+      "ren:0":"17:38……なんか引っかかる。",
+      "ren:1":"裏口。そこ、気になる。",
+      "ren:2":"戻ってない……ほんとかな。",
+      "ren:3":"青いノート。たぶん、そこ。"
     }
   };
 
@@ -2505,20 +3220,26 @@ function contradictionMeta(flag){
     ren_exit:{
       title:"レンの退館時刻が合わない",
       statement:"「17時38分には、もう図書館を出てました」",
-      evidence:"17:42の自販機レシート",
-      summary:"17:42に図書館裏口横の自販機を利用した記録が残っている。"
+      evidence:"17:42のレンの自販機レシート",
+      summary:"17:42に図書館裏口横の自販機で水を買っている。17:38には退館したという話と合わない。"
     },
-    ren_water:{
-      title:"『水を買っていない』は嘘",
-      statement:"「水も買ってません」",
-      evidence:"自販機レシート",
-      summary:"17:42の水の購入記録と証言が矛盾している。"
+    ren_backdoor:{
+      title:"『裏口には行っていない』も崩れた",
+      statement:"「裏口の方には行ってません」",
+      evidence:"17:39の廊下カメラ",
+      summary:"レンと同じ制服・赤いリュックの人物が17:39に裏口方向へ向かっている。"
     },
-    wet_link:{
-      title:"濡れた紙片が裏口につながった",
-      statement:"レンの行動経路",
-      evidence:"濡れた紙片＋掲示ポスター",
-      summary:"紙質と青インクが一致し、裏口付近を通った人物が紙片を持ち込んだ可能性が高い。"
+    ren_return:{
+      title:"レンは館内へ戻っていた",
+      statement:"「17時38分以降、館内には戻ってません」",
+      evidence:"濡れた紙片＋濡れた掲示ポスター",
+      summary:"17:40に濡れた裏口ポスターと同じ紙片が、レンの閲覧席の下から見つかった。裏口付近から館内へ戻った痕跡になる。"
+    },
+    ren_motive:{
+      title:"資料室に用事がない、は嘘",
+      statement:"「資料室には、別に用事なんてありませんでした」",
+      evidence:"17:20の忘れ物メモ",
+      summary:"レンは資料室に青いノートを忘れたとスタッフへ相談していた。鍵を必要とする理由があった。"
     }
   };
   return map[flag] || {
@@ -2547,7 +3268,8 @@ function findNextContradiction(){
 function goToNextContradiction(){
   const next=findNextContradiction();
   if(!next){
-    if(currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))){
+    if(currentCase.finalReady?.every(f=>flags.has(f))){
+      setupDeductionPanel();
       showOnly("deductionPanel");
       document.getElementById("phaseLabel").textContent="推理";
       renderProgress();
@@ -2574,10 +3296,10 @@ function nextMoveHtml(){
       <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">次の矛盾を探す →</button>
     </div>`;
   }
-  if(currentCase===cases[1] && currentCase.finalReady?.every(f=>flags.has(f))){
+  if(currentCase.finalReady?.every(f=>flags.has(f))){
     return `<div class="nextMove">
-      <div class="nextMoveTitle">🧩 矛盾はそろった</div>
-      <div>見つけた矛盾を使って、事件の真相を組み立てよう。</div>
+      <div class="nextMoveTitle">🧩 手がかりはそろった</div>
+      <div>見つけた矛盾と証拠を使って、事件の真相を組み立てよう。</div>
       <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">最終推理へ →</button>
     </div>`;
   }
@@ -2618,11 +3340,25 @@ function presentEvidence(id){
       だが額縁は事件直後に動かされた形跡がある。さらにカナは、こちらが額縁について説明する前から“大きなポスター”に触れている。<br><br>
       ここまでで、カナの証言は二度崩れた。`;
     } else if(rule.flag==="ren_exit"){
-      msg.innerHTML=`<strong>矛盾を発見！</strong><br>17:42の自販機レシートがある。17:38に図書館を出たという証言と合わない。`;
-    } else if(rule.flag==="ren_water"){
-      msg.innerHTML=`<strong>矛盾を発見！</strong><br>「水も買っていない」と言ったが、17:42のレシートが残っている。`;
-    } else if(rule.flag==="wet_link"){
-      msg.innerHTML=`<strong>決定的なつながり！</strong><br>濡れた紙片は、裏口掲示ポスターと同じ紙質・青インク。ホースの水がかかった掲示物からちぎれた可能性が高い。`;
+      msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
+      レンは「17時38分にはもう図書館を出た」と証言した。<br>
+      しかし <strong>17:42のレンの自販機レシート</strong> が残っている。<br><br>
+      レン「……ちょっと、自販機に寄っただけです」`;
+    } else if(rule.flag==="ren_backdoor"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      レンは「裏口には行っていない」と言った。<br>
+      しかし <strong>17:39の廊下カメラ</strong> には、同じ制服と赤いリュックの人物が裏口方向へ向かっている。<br><br>
+      レン「……裏口の近くまでは行きました」`;
+    } else if(rule.flag==="ren_return"){
+      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
+      レンは「17時38分以降、館内には戻っていない」と言った。<br>
+      けれど、17:40に濡れた裏口ポスターと同じ紙片が、<strong>レンの閲覧席の下</strong>から見つかっている。<br>
+      裏口付近から館内へ戻った痕跡と考えるのが自然だ。`;
+    } else if(rule.flag==="ren_motive"){
+      msg.innerHTML=`<strong>四つ目の矛盾を発見！</strong><br><br>
+      レンは「資料室には用事がない」と言った。<br>
+      しかし <strong>17:20の忘れ物メモ</strong> には、資料室に青いノートを忘れたと相談した記録がある。<br><br>
+      鍵を必要とする理由が、ようやく見えてきた。`;
     }
 
     let linkedInsight="";
@@ -2630,10 +3366,14 @@ function presentEvidence(id){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。さっきの写真、ここでつながったね。」</div>`;
     }else if(rule.flag==="kana_frame" && nemoInsights.frame){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「額縁の跡、やっぱり関係あったんだ。」</div>`;
-    }else if((rule.flag==="ren_exit" || rule.flag==="ren_water") && nemoInsights.receipt){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:42。さっき覚えた時間、ここで合わなくなったね。」</div>`;
-    }else if(rule.flag==="wet_link" && (nemoInsights.wet || nemoInsights.poster)){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。紙、やっぱり同じところから来たのかも。」</div>`;
+    }else if(rule.flag==="ren_exit" && nemoInsights.receipt){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「17:42。やっぱり、17:38には帰ってなかったね。」</div>`;
+    }else if(rule.flag==="ren_backdoor" && nemoInsights.camera){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「赤いリュック、ここでつながったね。」</div>`;
+    }else if(rule.flag==="ren_return" && (nemoInsights.wet || nemoInsights.poster)){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「あ。濡れた紙、裏口からついてきたんだ。」</div>`;
+    }else if(rule.flag==="ren_motive" && nemoInsights.note){
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「青いノート。だから資料室に入りたかったんだね。」</div>`;
     }
 
     msg.innerHTML += `${linkedInsight}<div class="savedContradiction">⚡ 矛盾ファイルに保存しました</div>${nextMoveHtml()}`;
@@ -2644,10 +3384,6 @@ function presentEvidence(id){
       return;
     }
 
-    if(currentCase===cases[2] && rule.flag==="wet_link"){
-      setTimeout(()=>finalReveal(),1000);
-      return;
-    }
     return;
   }
 
@@ -2668,32 +3404,70 @@ function presentEvidence(id){
   scheduleCaseFileSync();
 }
 
+function fillSelect(selectId, options){
+  const el=document.getElementById(selectId);
+  el.innerHTML=`<option value="">選択してください</option>` +
+    options.map(([value,label])=>`<option value="${value}">${label}</option>`).join("");
+}
+
+function setupDeductionPanel(){
+  const d=currentCase.deduction;
+  if(!d) return;
+
+  document.getElementById("finalCulpritLabel").textContent=d.culpritLabel;
+  document.getElementById("finalPlaceLabel").textContent=d.placeLabel;
+  document.getElementById("finalMotiveLabel").textContent=d.motiveLabel;
+
+  fillSelect("finalCulprit", d.culpritOptions);
+  fillSelect("finalPlace", d.placeOptions);
+  fillSelect("finalMotive", d.motiveOptions);
+
+  document.getElementById("deductionIntro").textContent=
+    currentCase===cases[2]
+      ? "時間、場所、濡れた紙片、忘れ物。集めた手がかりを一本につないで、鍵の行方を確定しよう。"
+      : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+
+  const msg=document.getElementById("deductionMsg");
+  msg.className="callout special";
+  msg.innerHTML="3つの答えを、集めた証拠と証言から選んでください。";
+  scheduleCaseFileSync();
+}
+
 document.getElementById("finalDeduceBtn").onclick=()=>{
   const culprit=document.getElementById("finalCulprit").value;
   const place=document.getElementById("finalPlace").value;
   const motive=document.getElementById("finalMotive").value;
   const msg=document.getElementById("deductionMsg");
+  const d=currentCase.deduction;
 
   if(!culprit || !place || !motive){
     msg.className="callout bad";
     msg.innerHTML="3項目すべて選んでください。";
+    scheduleCaseFileSync();
     return;
   }
 
-  const ok=culprit==="kana" && place==="frame" && motive==="early";
+  const ok=
+    culprit===d.answer.culprit &&
+    place===d.answer.place &&
+    motive===d.answer.motive;
+
   if(ok){
     msg.className="callout good";
-    msg.innerHTML=`<strong>推理成立。</strong><br>犯人・隠し場所・動機が、集めた証拠とすべて矛盾なくつながった。`;
+    msg.innerHTML=`<strong>推理成立。</strong><br>人物・隠し場所・理由が、集めた証拠と矛盾なくつながった。`;
+    scheduleCaseFileSync();
     setTimeout(()=>finalReveal(),800);
     return;
   }
 
   const hints=[];
-  if(culprit!=="kana") hints.push("犯人：二度、証言が崩れた人物は誰だった？");
-  if(place!=="frame") hints.push("隠し場所：事件直後に『動かされた痕跡』があったものを確認しよう。");
-  if(motive!=="early") hints.push("動機：容疑者のうち、審査結果そのものに直接利害がある人物は誰？");
+  if(culprit!==d.answer.culprit) hints.push(`${d.culpritLabel}：${d.hints.culprit}`);
+  if(place!==d.answer.place) hints.push(`${d.placeLabel}：${d.hints.place}`);
+  if(motive!==d.answer.motive) hints.push(`${d.motiveLabel}：${d.hints.motive}`);
+
   msg.className="callout bad";
   msg.innerHTML=`推理のどこかが証拠と噛み合っていない。<br><br>${hints.join("<br>")}`;
+  scheduleCaseFileSync();
 };
 
 function finalReveal(){
@@ -2701,7 +3475,7 @@ function finalReveal(){
   document.getElementById("phaseLabel").textContent="事件解決";
   resetView("finalPanel");
   document.getElementById("finalTitle").textContent=currentCase.title;
-  document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br><strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${currentCase===cases[2]?"紙片をつなぐ者":"はじめての矛盾"}</strong>`;
+  document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${currentCase===cases[2]?"濡れた紙片をつなぐ探偵":"はじめての矛盾"}</strong>`;
 }
 
 function renderFile(){
@@ -2844,33 +3618,6 @@ if(gameMainCol && "ResizeObserver" in window){
   caseFileResizeObserver.observe(gameMainCol);
 }
 
-// 左側の高さが、証言・矛盾表示などで変わった時も右枠を追従させる。
-const gameMainCol=document.getElementById("gameMainCol");
-if(gameMainCol && "ResizeObserver" in window){
-  const caseFileResizeObserver=new ResizeObserver(()=>scheduleCaseFileSync());
-  caseFileResizeObserver.observe(gameMainCol);
-}
-
-</script>
-
-<script>
-window.addEventListener('load',()=>{
-  setTimeout(()=>{document.querySelector('.caseCard[data-case="1"]')?.click();},50);
-  setTimeout(()=>{document.querySelector('.detective')?.click();},150);
-  setTimeout(()=>{document.getElementById('startBtn')?.click();},250);
-  setTimeout(()=>{document.getElementById('beginInvestigationBtn')?.click();},350);
-  setTimeout(()=>{document.querySelector('.hotspot[data-id="star"]')?.click();},450);
-  setTimeout(()=>{
-    syncCaseFileHeight();
-    const l=[...document.querySelectorAll('#gameMainCol section.panel')].find(el=>!el.classList.contains('hidden'));
-    const r=document.getElementById('caseFilePanel');
-    const d=document.createElement('div');
-    d.id='metrics';
-    d.style='position:fixed;top:0;left:0;z-index:9999;background:white;color:black;padding:8px;font:16px monospace';
-    d.textContent='left='+Math.round(l.getBoundingClientRect().height)+' right='+Math.round(r.getBoundingClientRect().height)+' title='+document.title;
-    document.body.appendChild(d);
-  },700);
-});
 </script>
 </body>
 </html>
