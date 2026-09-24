@@ -97,7 +97,7 @@ button,select{font:inherit} button{cursor:pointer}
 }
 .detective[data-nemo-id="96"] .face img{
   object-fit:cover;
-  object-position:50% 0%;
+  object-position:50% 20%;
 }
 .detective[data-nemo-id="96"] .dname{
   color:#eef3ff;
@@ -116,19 +116,6 @@ button,select{font:inherit} button{cursor:pointer}
 .detective[data-nemo-id="12"] .face img{
   object-fit:cover;
   object-position:center 24%;
-}
-.detective[data-nemo-id="91"] .face{
-  background:linear-gradient(135deg,#51405f,#2c2d45);
-}
-.detective[data-nemo-id="91"] .face img{
-  object-fit:cover;
-  object-position:50% 12%;
-}
-.detective[data-nemo-id="91"] .dname{
-  color:#ffe5ef;
-}
-.detective[data-nemo-id="91"] .nftNo{
-  color:#f0c86a;
 }
 .detective[data-nemo-id="31"] .dname{
   color:#eef1ff;
@@ -190,9 +177,8 @@ button,select{font:inherit} button{cursor:pointer}
 body.file-open{overflow:hidden}
 
 @media(max-width:1180px){
-  .detective[data-nemo-id="96"] .face img{object-position:50% 0%;}
+  .detective[data-nemo-id="96"] .face img{object-position:50% 18%;}
   .detective[data-nemo-id="31"] .face img{object-position:58% 0%;}
-  .detective[data-nemo-id="91"] .face img{object-position:50% 10%;}
 }
 
 
@@ -2249,7 +2235,7 @@ body:not(.case-active) .topFileBtn{
 </div>
 
 <script>
-const TEST_NEMO_IDS=[66,96,31,12,91];
+const TEST_NEMO_IDS=[66,96,31,12];
 const NEMO_ICONS=["🐱","🌙","🌼","✨","🔎","📚","🗝️","🪶"];
 
 const TEST_NEMO_PROFILES={
@@ -2284,14 +2270,6 @@ const TEST_NEMO_PROFILES={
     type:"直感型",
     quirk:"理由はうまく言えない。でも『なんか変』にはよく気づく。",
     obs:46, rea:17, talk:42, luck:100
-  },
-  91:{
-    icon:"🕵️",
-    name:"きりっとおむかえねも",
-    trait:"すっと見抜いて、やさしく導く",
-    type:"推理型",
-    quirk:"きりっとしたまなざしで、散らばった手がかりを静かにつなぐ。迷った時は、そっと背中を押してくれる。",
-    obs:72, rea:92, talk:56, luck:38
   }
 };
 
