@@ -1,7 +1,8 @@
-NEMO Mystery Days v0.36
+NEMO Mystery Days v0.37
 
 変更点:
-- ねも選択カードのタイプ名から「ふんわり」を削除
-  - 観察型 / 推理型 / 会話型 に修正
-- 全画面表示時にカード画像が崩れにくいよう、画像エリアを固定高さからアスペクト比ベースに調整
-- Nemo #96 と Nemo #31 は object-fit: contain に変更し、全画面時も顔や構図が切れにくいよう調整
+- Nemo #12 の画像を差し替え
+  - assets/nemos/12.png を新しい画像に更新
+- 12番カード用の表示位置を追加調整
+  - object-fit: cover
+  - object-position: center 24%
