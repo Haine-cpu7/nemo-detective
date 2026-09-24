@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.58 CASE 05 staged clue reveal */
+/* v0.59 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2071,7 +2071,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.58 separate how-to manual */
+/* v0.59 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2089,6 +2089,19 @@ body:not(.case-active) .topFileBtn{
   .manualLaunch small{font-size:11px}
 }
 
+
+/* v0.59 CASE 07 truth reconstruction */
+.reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
+.reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
+.reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
+.reconStepHead{display:flex;align-items:center;gap:9px;margin-bottom:10px}.reconStepNo{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:#3a3158;color:#efeaff;font-weight:1000}.reconStepTitle{font-weight:1000}.reconStepSub{font-size:11px;color:var(--muted);margin-top:1px}
+.reconLogic{display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);gap:8px;align-items:stretch}.reconLogic.multiProof{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)}
+.reconArrow{display:grid;place-items:center;color:#9f8cff;font-size:20px;font-weight:1000}.reconProofStack{display:grid;gap:7px}
+.reconSlot{width:100%;min-height:68px;text-align:left;padding:10px 11px;border-radius:13px;border:1px dashed #65708e;background:#181d2b;color:var(--text);cursor:pointer;transition:.16s ease;display:flex;flex-direction:column;justify-content:center;gap:4px}.reconSlot:hover{border-color:#9f8cff;transform:translateY(-1px)}.reconSlot.filled{border-style:solid;border-color:#7667aa;background:#2a2740}.reconSlot.correct{border-color:#4c956c;background:#193226}.reconSlot.wrong{border-color:#a65f68;background:#392127}.reconSlotLabel{font-size:10px;letter-spacing:.05em;color:#9da5bd;font-weight:900}.reconSlotValue{font-size:13px;font-weight:900;line-height:1.45}.reconSlotEmpty{font-size:12px;color:#7f879e}
+.reconConclusion{border:1px solid #8a7441;background:linear-gradient(145deg,#342e20,#282638);border-radius:17px;padding:15px}.reconConclusion .reconLogic{grid-template-columns:1fr}.reconConclusionLabel{font-size:11px;color:#e0c77c;font-weight:1000;letter-spacing:.08em;margin-bottom:8px}
+.reconCheck{width:100%;margin-top:2px}.reconResultFlow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:10px}.reconResultChip{border:1px solid #4c956c;background:#193226;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900}.reconResultArrow{color:#7dd8a4;font-weight:1000}
+.reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
+@media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
 </style>
 </head>
 <body>
@@ -2102,7 +2115,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.58</span>
+    <span class="badge">v0.59</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2286,8 +2299,8 @@ body:not(.case-active) .topFileBtn{
 
       <section class="panel hidden" id="deductionPanel">
         <div class="progressStrip" id="deductionProgress"></div>
-        <div class="badge">FINAL DEDUCTION</div>
-        <h2>最後の推理</h2>
+        <div class="badge" id="deductionBadge">FINAL DEDUCTION</div>
+        <h2 id="deductionTitle">最後の推理</h2>
         <p class="muted" id="deductionIntro">ここからは証拠を突きつけるだけでは終わりません。事件ファイルを見ながら、あなた自身で真相を組み立ててください。</p>
         <div class="mobileFileQuick">
           <button type="button" data-open-file="evidence">🔎 証拠</button>
@@ -2295,33 +2308,36 @@ body:not(.case-active) .topFileBtn{
           <button type="button" data-open-file="people">👥 人物</button>
           <button type="button" class="timelineQuick" data-open-file="timeline">🕒 時系列</button>
         </div>
-        <div class="deductionGrid">
-          <label><span id="finalCulpritLabel">犯人</span>
-            <select id="finalCulprit">
-              <option value="">選択してください</option>
-              <option value="misaki">ミサキ</option>
-              <option value="yuu">ユウ</option>
-              <option value="kana">カナ</option>
-            </select>
-          </label>
-          <label><span id="finalPlaceLabel">封筒を隠した場所</span>
-            <select id="finalPlace">
-              <option value="">選択してください</option>
-              <option value="locker">スタッフロッカー</option>
-              <option value="frame">展示ポスターの額縁裏</option>
-              <option value="tube">配達用ポスター筒</option>
-            </select>
-          </label>
-          <label><span id="finalMotiveLabel">動機</span>
-            <select id="finalMotive">
-              <option value="">選択してください</option>
-              <option value="sell">結果を外部へ売るため</option>
-              <option value="early">発表前に自分の結果を知るため</option>
-              <option value="revenge">ギャラリーへの嫌がらせ</option>
-            </select>
-          </label>
+        <div id="standardDeduction">
+          <div class="deductionGrid">
+            <label><span id="finalCulpritLabel">犯人</span>
+              <select id="finalCulprit">
+                <option value="">選択してください</option>
+                <option value="misaki">ミサキ</option>
+                <option value="yuu">ユウ</option>
+                <option value="kana">カナ</option>
+              </select>
+            </label>
+            <label><span id="finalPlaceLabel">封筒を隠した場所</span>
+              <select id="finalPlace">
+                <option value="">選択してください</option>
+                <option value="locker">スタッフロッカー</option>
+                <option value="frame">展示ポスターの額縁裏</option>
+                <option value="tube">配達用ポスター筒</option>
+              </select>
+            </label>
+            <label><span id="finalMotiveLabel">動機</span>
+              <select id="finalMotive">
+                <option value="">選択してください</option>
+                <option value="sell">結果を外部へ売るため</option>
+                <option value="early">発表前に自分の結果を知るため</option>
+                <option value="revenge">ギャラリーへの嫌がらせ</option>
+              </select>
+            </label>
+          </div>
+          <button class="primary" id="finalDeduceBtn">この推理で決着をつける</button>
         </div>
-        <button class="primary" id="finalDeduceBtn">この推理で決着をつける</button>
+        <div id="reconstructionDeduction" class="hidden"></div>
         <div id="deductionMsg" class="callout special">3つの答えを、集めた証拠と証言から選んでください。</div>
       </section>
 
@@ -2350,7 +2366,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.58 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days v0.59 — browser mystery game · <a class="footerManual" href="manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2358,6 +2374,20 @@ body:not(.case-active) .topFileBtn{
     <h2>どの手がかりを出す？</h2>
     <div class="evidencePick" id="evidencePick"></div>
     <div class="row" style="margin-top:14px"><button class="ghost" id="closeModal">閉じる</button></div>
+  </div>
+</div>
+
+<div class="modal hidden" id="reconstructionModal">
+  <div class="modalCard reconstructionModalCard">
+    <div class="reconModalTop">
+      <div>
+        <div class="badge">TRUTH CARD</div>
+        <h2 id="reconstructionModalTitle">カードを選ぶ</h2>
+      </div>
+      <button class="ghost" id="closeReconstructionModal">閉じる</button>
+    </div>
+    <p class="muted" id="reconstructionModalHint">この空欄に当てはまるカードを選んでください。</p>
+    <div class="reconCardGrid" id="reconstructionPick"></div>
   </div>
 </div>
 
@@ -3358,6 +3388,7 @@ function markCaseCleared(id){
 }
 let gameProgress=loadGameProgress();
 let currentCase=null, currentCaseId=null, selected=null, evidence=new Set(), heardTestimony=new Set(), tab="evidence", currentWitness=null, stmtIndex=0, flags=new Set(), contradictionLog=[], nemoInsights={}, originNemoMet=false;
+let reconstructionAnswers={}, activeReconstructionSlot=null;
 
 
 function renderCaseProgress(){
@@ -3447,6 +3478,8 @@ function resetCaseState(caseId){
   heardTestimony=new Set();
   flags=new Set();
   contradictionLog=[];
+  reconstructionAnswers={};
+  activeReconstructionSlot=null;
   nemoInsights={};
   tab="evidence";
   originNemoMet=false;
@@ -4530,7 +4563,7 @@ function nextMoveHtml(){
     return `<div class="nextMove">
       <div class="nextMoveTitle">🧩 手がかりはそろった</div>
       <div>見つけた矛盾と証拠を使って、事件の真相を組み立てよう。</div>
-      <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">最終推理へ →</button>
+      <button type="button" class="nextContradictionBtn" onclick="goToNextContradiction()">${currentCaseId===7?"真相再構築へ →":"最終推理へ →"}</button>
     </div>`;
   }
   return "";
@@ -4762,6 +4795,162 @@ function presentEvidence(clueId){
   scheduleCaseFileSync();
 }
 
+const CASE7_RECONSTRUCTION={
+  cards:{
+    timeEarly:{kind:"時刻",text:"20:40〜20:50"},
+    time2055:{kind:"時刻",text:"20:55"},
+    time2100:{kind:"時刻",text:"21:00"},
+    stoppedWatch:{kind:"証拠",text:"⌚ 20:46で止まった腕時計"},
+    coldCoffee:{kind:"証拠",text:"☕ 書斎の冷めきったコーヒー"},
+    eventSheet:{kind:"証拠",text:"📋 一般用イベント進行表"},
+    staffSchedule:{kind:"証拠",text:"🗒️ スタッフ用進行表"},
+    voiceRecorded:{kind:"主張",text:"20:55の久世の声は事前録音だった"},
+    voiceLive:{kind:"主張",text:"20:55の久世の声は生放送だった"},
+    voiceActed:{kind:"主張",text:"20:55の声はガクが久世を演じた"},
+    testAudio:{kind:"証拠",text:"🎙️ 15:12の音声テスト"},
+    seraVideo:{kind:"証拠",text:"📹 20:48の配信カメラ映像"},
+    oldDraft:{kind:"証拠",text:"📓 久世とクロベの共同制作ノート"},
+    showAuto:{kind:"主張",text:"21:00の停電・効果音は自動実行だった"},
+    showManual:{kind:"主張",text:"21:00の演出は犯人がその場で手動操作した"},
+    showBlackout:{kind:"主張",text:"仕掛けは停電だけで、館内放送は生放送だった"},
+    audioUSB:{kind:"証拠",text:"💾 音響操作用USB"},
+    locationKurobe:{kind:"行動",text:"20:45ごろ、クロベは書斎方向へ向かっていた"},
+    locationGaku:{kind:"行動",text:"20:45ごろ、ガクは書斎方向へ向かっていた"},
+    locationNao:{kind:"行動",text:"20:45ごろ、ナオは書斎方向へ向かっていた"},
+    gakuTestimony:{kind:"証言",text:"🎭 ガク『20:45ごろ、クロベに書斎はどっちだと聞かれた』"},
+    seraTestimony:{kind:"証言",text:"📹 セラ『21時の停電直前までカメラを回していた』"},
+    naoTestimony:{kind:"証言",text:"🎧 ナオ『21時の停電と効果音はタイマーに入れていた』"},
+    culpritKurobe:{kind:"人物",text:"🕯️ クロベ"},
+    culpritNao:{kind:"人物",text:"🎧 ナオ"},
+    culpritGaku:{kind:"人物",text:"🎭 ガク"},
+    culpritSera:{kind:"人物",text:"📹 セラ"}
+  },
+  slots:{
+    trueTime:{label:"本物の事件が起きた時間",options:["timeEarly","time2055","time2100"],answer:"timeEarly",section:"time"},
+    timeProof1:{label:"時間を絞る物証①",options:["stoppedWatch","eventSheet","staffSchedule","seraVideo"],answer:"stoppedWatch",section:"time"},
+    timeProof2:{label:"時間を絞る物証②",options:["coldCoffee","eventSheet","oldDraft","staffSchedule"],answer:"coldCoffee",section:"time"},
+    voiceClaim:{label:"20:55の声の正体",options:["voiceRecorded","voiceLive","voiceActed"],answer:"voiceRecorded",section:"voice"},
+    voiceProof:{label:"その主張を証明する証拠",options:["testAudio","seraVideo","eventSheet","oldDraft"],answer:"testAudio",section:"voice"},
+    showClaim:{label:"21:00の『殺人』はどう動いた？",options:["showAuto","showManual","showBlackout"],answer:"showAuto",section:"show"},
+    showProof:{label:"その仕掛けを証明する証拠",options:["audioUSB","eventSheet","staffSchedule","oldDraft"],answer:"audioUSB",section:"show"},
+    locationClaim:{label:"20:45ごろ食堂にいなかった人物",options:["locationKurobe","locationGaku","locationNao"],answer:"locationKurobe",section:"location"},
+    locationProof:{label:"その行動を証明する証言",options:["gakuTestimony","seraTestimony","naoTestimony"],answer:"gakuTestimony",section:"location"},
+    culprit:{label:"すべてをつないだ結論：犯人",options:["culpritKurobe","culpritNao","culpritGaku","culpritSera"],answer:"culpritKurobe",section:"culprit"}
+  }
+};
+
+function reconstructionCard(id){return CASE7_RECONSTRUCTION.cards[id];}
+function reconSlotHtml(id){
+  const slot=CASE7_RECONSTRUCTION.slots[id];
+  const chosen=reconstructionAnswers[id];
+  const card=chosen?reconstructionCard(chosen):null;
+  return `<button type="button" class="reconSlot ${chosen?"filled":""}" data-recon-slot="${id}" onclick="openReconstructionSlot('${id}')">
+    <span class="reconSlotLabel">${slot.label}</span>
+    ${card?`<span class="reconSlotValue">${card.text}</span>`:`<span class="reconSlotEmpty">＋ カードを選ぶ</span>`}
+  </button>`;
+}
+
+function renderReconstruction(){
+  const box=document.getElementById("reconstructionDeduction");
+  if(!box) return;
+  box.innerHTML=`
+    <div class="reconLead"><strong>🧩 真相再構築</strong><br>空欄をタップして、事件ファイルで集めた「時刻・主張・証拠・証言」のカードを当てはめよう。<br><span class="muted">順番だけでなく、どの証拠がどの主張を支えるかまで組み立てます。</span></div>
+    <div class="reconstructionBoard">
+      <section class="reconStep">
+        <div class="reconStepHead"><div class="reconStepNo">1</div><div><div class="reconStepTitle">死亡時刻を組み直す</div><div class="reconStepSub">「21:00に死亡した」という前提を外す</div></div></div>
+        <div class="reconLogic multiProof">${reconSlotHtml("trueTime")}<div class="reconArrow">⇐</div><div class="reconProofStack">${reconSlotHtml("timeProof1")}${reconSlotHtml("timeProof2")}</div></div>
+      </section>
+      <section class="reconStep">
+        <div class="reconStepHead"><div class="reconStepNo">2</div><div><div class="reconStepTitle">20:55の声を検証する</div><div class="reconStepSub">「声を聞いた＝生きていた」は成立する？</div></div></div>
+        <div class="reconLogic">${reconSlotHtml("voiceClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("voiceProof")}</div>
+      </section>
+      <section class="reconStep">
+        <div class="reconStepHead"><div class="reconStepNo">3</div><div><div class="reconStepTitle">21:00の事件を分解する</div><div class="reconStepSub">偽物の殺人演出を動かしたものは何か</div></div></div>
+        <div class="reconLogic">${reconSlotHtml("showClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("showProof")}</div>
+      </section>
+      <section class="reconStep">
+        <div class="reconStepHead"><div class="reconStepNo">4</div><div><div class="reconStepTitle">20:45の人物配置を確定する</div><div class="reconStepSub">食堂のアリバイと廊下の証言をつなぐ</div></div></div>
+        <div class="reconLogic">${reconSlotHtml("locationClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("locationProof")}</div>
+      </section>
+      <section class="reconConclusion">
+        <div class="reconConclusionLabel">FINAL CONCLUSION</div>
+        ${reconSlotHtml("culprit")}
+      </section>
+    </div>
+    <button type="button" class="primary reconCheck" id="reconstructionCheckBtn" onclick="checkReconstruction()">この真相を検証する</button>`;
+}
+
+function openReconstructionSlot(id){
+  const slot=CASE7_RECONSTRUCTION.slots[id];
+  if(!slot) return;
+  activeReconstructionSlot=id;
+  document.getElementById("reconstructionModalTitle").textContent=slot.label;
+  document.getElementById("reconstructionModalHint").textContent="事件ファイルの情報と噛み合うカードを選んでください。";
+  const pick=document.getElementById("reconstructionPick");
+  pick.innerHTML=slot.options.map(cardId=>{
+    const card=reconstructionCard(cardId);
+    const current=reconstructionAnswers[id]===cardId?" current":"";
+    return `<button type="button" class="reconCard${current}" onclick="selectReconstructionCard('${cardId}')"><div class="reconCardKind">${card.kind}</div><div class="reconCardText">${card.text}</div></button>`;
+  }).join("");
+  document.getElementById("reconstructionModal").classList.remove("hidden");
+}
+
+function selectReconstructionCard(cardId){
+  if(!activeReconstructionSlot) return;
+  reconstructionAnswers[activeReconstructionSlot]=cardId;
+  document.getElementById("reconstructionModal").classList.add("hidden");
+  activeReconstructionSlot=null;
+  renderReconstruction();
+  const msg=document.getElementById("deductionMsg");
+  msg.className="callout special";
+  msg.innerHTML="カードを入れ替えながら、主張と根拠が一本につながる形を探そう。";
+  scheduleCaseFileSync();
+}
+
+function reconstructionNemoHint(section){
+  const name=selected?.name || "ねも";
+  const hints={
+    time:"21時を基準にしないで、腕時計とコーヒーを同じ時系列に置いてみよう。",
+    voice:"20:55の声、本当にその場で話したものかな。同じ咳が残っている記録を見てみよう。",
+    show:"21時に誰かがその場で操作する必要はあったのかな。自動実行の記録を確認しよう。",
+    location:"20:45のクロベの居場所は、本当に食堂で確定していたかな。誰かが廊下で話していたね。",
+    culprit:"犯人を決める前に、20:45の人物配置と21時の自動演出をもう一度つなごう。"
+  };
+  return `<div class="partnerEvent"><strong>🐱 ${name}</strong><br>${hints[section]||"どこかひとつ、証拠とのつながりが弱いみたい。"}</div>`;
+}
+
+function checkReconstruction(){
+  const slots=CASE7_RECONSTRUCTION.slots;
+  const msg=document.getElementById("deductionMsg");
+  const missing=Object.keys(slots).filter(id=>!reconstructionAnswers[id]);
+  if(missing.length){
+    msg.className="callout bad";
+    msg.innerHTML=`まだ空いているピースが <strong>${missing.length}個</strong> あります。すべての空欄にカードを入れてください。`;
+    return;
+  }
+  document.querySelectorAll(".reconSlot").forEach(el=>el.classList.remove("correct","wrong"));
+  const wrong=Object.keys(slots).filter(id=>reconstructionAnswers[id]!==slots[id].answer);
+  if(wrong.length){
+    const first=wrong[0];
+    document.querySelectorAll(`[data-recon-slot="${first}"]`).forEach(el=>el.classList.add("wrong"));
+    msg.className="callout bad";
+    msg.innerHTML=`真相のどこかに、まだ論理の穴がある。<br><span class="muted">赤く光ったピース周辺を事件ファイルと見比べてみよう。</span>${reconstructionNemoHint(slots[first].section)}`;
+    scheduleCaseFileSync();
+    return;
+  }
+  document.querySelectorAll(".reconSlot").forEach(el=>el.classList.add("correct"));
+  msg.className="callout good";
+  msg.innerHTML=`<strong>🧩 真相再構築 完了。</strong><br>時刻・録音・自動演出・20:45の目撃証言が、ひとつの事件としてつながった。
+    <div class="reconResultFlow"><span class="reconResultChip">20:40〜20:50</span><span class="reconResultArrow">→</span><span class="reconResultChip">クロベが書斎方向へ</span><span class="reconResultArrow">→</span><span class="reconResultChip">20:55 録音</span><span class="reconResultArrow">→</span><span class="reconResultChip">21:00 自動演出</span><span class="reconResultArrow">→</span><span class="reconResultChip">犯人：クロベ</span></div>`;
+  scheduleCaseFileSync();
+  setTimeout(()=>finalReveal(),1200);
+}
+
+const reconstructionModal=document.getElementById("reconstructionModal");
+const closeReconstructionModal=document.getElementById("closeReconstructionModal");
+if(closeReconstructionModal) closeReconstructionModal.onclick=()=>{reconstructionModal.classList.add("hidden");activeReconstructionSlot=null;};
+if(reconstructionModal) reconstructionModal.addEventListener("click",e=>{if(e.target===reconstructionModal){reconstructionModal.classList.add("hidden");activeReconstructionSlot=null;}});
+
 function fillSelect(selectId, options){
   const el=document.getElementById(selectId);
   el.innerHTML=`<option value="">選択してください</option>` +
@@ -4769,6 +4958,29 @@ function fillSelect(selectId, options){
 }
 
 function setupDeductionPanel(){
+  const standard=document.getElementById("standardDeduction");
+  const reconstruct=document.getElementById("reconstructionDeduction");
+  const badge=document.getElementById("deductionBadge");
+  const title=document.getElementById("deductionTitle");
+  const msg=document.getElementById("deductionMsg");
+
+  if(currentCaseId===7){
+    standard.classList.add("hidden");
+    reconstruct.classList.remove("hidden");
+    badge.textContent="TRUTH RECONSTRUCTION";
+    title.textContent="🧩 真相再構築";
+    document.getElementById("deductionIntro").textContent="3択で答えるのではなく、時刻・主張・証拠・証言を組み合わせて『本物の事件』を再構築してください。空欄をタップするとカードを選べます。";
+    renderReconstruction();
+    msg.className="callout special";
+    msg.innerHTML="最初は21:00を基準に考えないこと。『何が実際の出来事で、何が久世の演出だったか』を分けてみよう。";
+    scheduleCaseFileSync();
+    return;
+  }
+
+  standard.classList.remove("hidden");
+  reconstruct.classList.add("hidden");
+  badge.textContent="FINAL DEDUCTION";
+  title.textContent="最後の推理";
   const d=currentCase.deduction;
   if(!d) return;
 
@@ -4791,17 +5003,15 @@ function setupDeductionPanel(){
             ? "『宗一郎は駅へ来た』という前提をいったん捨てよう。帽子、バス、書きかけのメモ、そして榊から受け取った写真から、本当の行き先を組み立ててください。"
             : currentCase===cases[6]
               ? "これは犯人探しではない。写真、学校記録、郵便処理記録、担任日誌、若桜の記録から、二十年前に止まった手紙の受取人と差出人を組み立てよう。"
-              : currentCase===cases[7]
-                ? "21時に起きたと思っていた事件を、もう一度20時台から組み直そう。録音、自動演出、映像、証言をつないで、本当の死亡時刻と犯人を確定する。"
-                : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
+              : "事件ファイルを見ながら、犯人・隠し場所・動機をあなた自身で組み立ててください。";
 
-  const msg=document.getElementById("deductionMsg");
   msg.className="callout special";
   msg.innerHTML="3つの答えを、集めた証拠と証言から選んでください。";
   scheduleCaseFileSync();
 }
 
 document.getElementById("finalDeduceBtn").onclick=()=>{
+  if(currentCaseId===7){ checkReconstruction(); return; }
   const culprit=document.getElementById("finalCulprit").value;
   const place=document.getElementById("finalPlace").value;
   const motive=document.getElementById("finalMotive").value;
