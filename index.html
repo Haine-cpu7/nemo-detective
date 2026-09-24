@@ -104,6 +104,18 @@ button,select{font:inherit} button{cursor:pointer}
 .detective[data-nemo-id="96"] .nftNo{
   color:#f0c86a;
 }
+.detective[data-nemo-id="31"] .face{
+  background:linear-gradient(135deg,#4a4666,#2d2b45);
+}
+.detective[data-nemo-id="31"] .face img{
+  object-position:50% 18%;
+}
+.detective[data-nemo-id="31"] .dname{
+  color:#eef1ff;
+}
+.detective[data-nemo-id="31"] .nftNo{
+  color:#f0c86a;
+}
 .face .fallback{display:grid;place-items:center;width:100%;height:100%;font-size:54px;background:linear-gradient(135deg,#343a51,#26283a)}
 .nftTag{position:absolute;left:8px;bottom:8px;background:rgba(15,17,26,.82);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:1000;letter-spacing:.04em}
 .nftNo{font-size:11px;color:var(--accent2);font-weight:1000;margin-top:3px}
@@ -1944,7 +1956,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.34</span>
+    <span class="badge">v0.35</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2145,7 +2157,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days v0.34 — browser mystery game</div>
+  <div class="footer">NEMO Mystery Days v0.35 — browser mystery game</div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2179,9 +2191,10 @@ const TEST_NEMO_PROFILES={
   },
   31:{
     icon:"🌼",
-    trait:"声をよく聞く",
-    type:"会話型",
-    quirk:"人の言い方や表情によく気づく。たまに花や小物に気を取られる。",
+    name:"うるうるおねがいねも",
+    trait:"じっと見つめて聞く",
+    type:"ふんわり会話型",
+    quirk:"まっすぐ見つめながら、相手の気持ちをそっと引き出す。小さなひとことも聞き逃さない。",
     obs:11, rea:34, talk:99, luck:63
   },
   12:{
