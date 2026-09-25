@@ -2270,7 +2270,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.85</span>
+    <span class="badge">v0.87</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2533,7 +2533,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 1 v0.85 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 1 v0.87 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2802,7 +2802,7 @@ const cases={
     note:{
       icon:"📝",
       name:"忘れ物メモ",
-      desc:"17:20、高校生利用者が『資料室に青いノートを忘れた』と申し出た記録。署名欄には『R』。資料室はすでに施錠済みだった。用紙の左下には、図書館の正式な印とは別に、Cの字にも見える輪と三本の細い線を組み合わせた小さな管理印がある。"
+      desc:"17:20、高校生利用者が『資料室に青いノートを忘れた』と申し出た記録。署名欄には『R』。資料室はすでに施錠済みだった。用紙の左下には、図書館の正式な印とは別に、Cの字にも見える輪と三本の細い線を組み合わせた小さな管理印がある。そのすぐ脇に、ひらがなにも漢字にも見えない小さな一文字が薄く残っている。"
     },
     returnbox:{
       icon:"📮",
@@ -3106,7 +3106,8 @@ const cases={
   culpritComment:{
     name:"マコ",
     line:"ごめんなさい……。お母さんに、どうしても喜んでほしくて。でも、こんなことしちゃだめでした。"
-  }
+  },
+  loreTrace:"<div class='externalDateFlag'><strong>事件とは関係のない、小さな違和感</strong><br>回収したオルゴールを店へ戻す前、ねもが蓋を閉じながら小さく鼻歌をうたった。オルゴールが鳴らした三音の、その先を二音だけ。<br><br>あなた『……その続き、知ってるの？』<br><br><strong>ねも『え？　ねも、いま歌ってた？』</strong><br><br><span class='muted'>その二音は、オルゴールのシリンダーには記録されていなかった。</span></div>"
 }
 ,
 4:{
@@ -3230,7 +3231,7 @@ const cases={
     }
   },
   ending:"ヒナの手紙は盗まれていなかった。公園のベンチでバッグの中身を広げた時、風にあおられて封筒が座面の隙間へ落ちていた。あとからユウトが見つけ、中を読まずに公園の落とし物箱へ届けていた。",
-  originEpilogue:"手紙を取り戻し、ヒナが笑って帰ったあと。まだ何も飾られていない探偵事務所で、さっき公園にいた猫耳の子が椅子に座っていた。<br><br><strong>ねも</strong>「……見つかって、よかったね。」<br><br>あなた「ねも、帰らないの？」<br><br><strong>ねも</strong>「ここ、なんか好き。」<br><br>翌朝、事務所へ来ると、机の横に小さな椅子がひとつ増えていた。<br><br><strong>この日から、あなたとねもの探偵の日々が始まりました。</strong>"
+  originEpilogue:"手紙を取り戻し、ヒナが笑って帰ったあと。まだ何も飾られていない探偵事務所で、さっき公園にいた猫耳の子が椅子に座っていた。<br><br><strong>ねも</strong>「……見つかって、よかったね。」<br><br>あなた「ねも、帰らないの？」<br><br><strong>ねも</strong>「ここ、なんか好き。」<br><br>公園を出る直前、ねもは一度だけ古いベンチを振り返った。<br><br><strong>ねも</strong>「あの印……なんか、なつかしいね。」<br><br>あなた「知ってるの？」<br><br><strong>ねも</strong>「……わかんない。」<br><br>翌朝、事務所へ来ると、机の横に小さな椅子がひとつ増えていた。<br><br><strong>この日から、あなたとねもの探偵の日々が始まりました。</strong>"
 }
 ,
 5:{
@@ -3253,7 +3254,7 @@ const cases={
     bookLedger:{icon:"📚",name:"古本屋の受け渡し帳",desc:"20:35、『古い旅行記　一冊　宗一郎さんへ受け渡し』と榊自身の字で記録されている。"},
     busLog:{icon:"🚌",name:"20:48のバス利用記録",desc:"宗一郎名義の高齢者ICカードが、駅とは逆方向へ向かう『夕映丘線』で使われている。降車候補には『旧展望台前』がある。"},
     unfinishedMemo:{icon:"✉️",name:"自宅に残された書きかけのメモ",desc:"『ユイへ。駅へ行く前に、どうしても――』とだけ書かれ、その先は空白。急いで家を出たように見える。"},
-    travelBook:{icon:"📷",name:"榊から受け取った古い写真",desc:"20:35に宗一郎が旅行記を受け取った際、古本屋のカウンターへ置き忘れた写真。若い頃の宗一郎と亡き妻が旧展望台で写っている。裏には『結婚50年の日、またここへ来よう』と書かれ、日付の横に、欠けた輪と三本の短線を組み合わせた小さな印が押されている。"}
+    travelBook:{icon:"📷",name:"榊から受け取った古い写真",desc:"20:35に宗一郎が旅行記を受け取った際、古本屋のカウンターへ置き忘れた写真。若い頃の宗一郎と亡き妻が旧展望台で写っている。裏には『結婚50年の日、またここへ来よう』と書かれ、日付の横に、欠けた輪と三本の短線を組み合わせた小さな印が押されている。遠景の石段には、耳のような二つの突起を持つ小さな影が写っているが、枝の重なりにも見える。"}
   },
   requiredEvidence:["stationHat","teaReceipt","bookLedger","busLog","unfinishedMemo"],
   sceneEvidenceTotal:6,
@@ -3417,7 +3418,8 @@ const cases={
     }
   },
   ending:"手紙を受け取るはずだったのは、二十年ぶりに町へ戻った春川晴だった。差出人は幼なじみの結城悠希。悠希は転校の日に直接渡すつもりで手紙を書いていたが、晴の転居が急に早まり、自分も発熱で学校を休んでいたため最後に会えなかった。新しい住所を知らないまま、それでも届いてほしくて宛先のない封筒を郵便へ託した。手紙は処理途中で古い仕分け棚の裏へ落ち、そのまま二十年眠り続けた。悠希はその後も『またここで』の約束を忘れず、古い桜が枯れたあとには同じ場所へ若い桜を植え、数年前に亡くなるまで手入れを続けていた。二十年遅れて、手紙はようやく晴の手に渡った。",
-  culpritComment:{name:"ハル",line:"……遅いよ。でも、ちゃんと届いた。"}
+  culpritComment:{name:"ハル",line:"……遅いよ。でも、ちゃんと届いた。"},
+  loreTrace:"<div class='externalDateFlag'><strong>仕分け棚の裏に残っていた古い走り書き</strong><br>手紙を取り出したあと、さらに奥の木板に、鉛筆で一行だけ残っているのが見つかった。<br><br><strong>『この子に、帰る場所を決めてはならない。』</strong><br><br><span class='muted'>差出人も日付もない。今回の手紙と関係があるのかも分からない。</span></div>"
 },
 7:{
   title:"CASE 07　これは事件ではありません ― 月影館の死 ―",
@@ -3439,7 +3441,7 @@ const cases={
     testAudio:{icon:"🎙️",name:"15:12の音声テスト",desc:"昼に録音された久世の館内放送テスト。途中に小さな咳が入り、その咳の間隔まで20:55に流れた声と一致している。"},
     staffSchedule:{icon:"🗒️",name:"スタッフ用進行表",desc:"20:50『書斎・照明確認　担当ナオ』。一般用進行表には載っていない裏方作業。"},
     seraVideo:{icon:"📹",name:"20:48の配信カメラ映像",desc:"セラの記録映像の背景に、書斎前の廊下を歩くガクが映っている。時刻表示は20:48。"},
-    oldDraft:{icon:"📓",name:"久世とクロベの古い共同制作ノート",desc:"十年前の推理ゲーム案。久世とクロベ両名の筆跡があり、『録音と自動演出で死亡時刻を誤認させる』という未発表案も残っている。表紙の裏には、事件とは無関係に見える『欠けた円に三本線』の印が描かれている。"},
+    oldDraft:{icon:"📓",name:"久世とクロベの古い共同制作ノート",desc:"十年前の推理ゲーム案。久世とクロベ両名の筆跡があり、『録音と自動演出で死亡時刻を誤認させる』という未発表案も残っている。表紙の裏には、事件とは無関係に見える『欠けた円に三本線』の印が描かれている。さらに消しゴムで消された古い筆記の跡から、『同行を命じない』という部分だけが読める。"},
     audioUSB:{icon:"💾",name:"音響操作用USB",desc:"事件当日15:12に設定済み。20:55の久世の館内放送、21:00の全館消灯、効果音がすべて自動実行される。21時に久世本人が操作する必要はなかった。"}
   },
   requiredEvidence:["stoppedWatch","coldCoffee","eventSheet","testAudio","staffSchedule","seraVideo","oldDraft"],
@@ -5582,10 +5584,11 @@ function finalReveal(){
         ? "濡れた紙片をつなぐ探偵"
         : "はじめての矛盾";
 
+  const loreTrace=currentCase.loreTrace ? `<br><br>${currentCase.loreTrace}` : "";
   if(currentCase?.origin){
-    document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>${currentCase.originEpilogue}<br><br>🏅 称号：<strong>${titleName}</strong>`;
+    document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>${currentCase.originEpilogue}${loreTrace}<br><br>🏅 称号：<strong>${titleName}</strong>`;
   }else{
-    document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。<br><br>🏅 称号：<strong>${titleName}</strong>`;
+    document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>あなたと <strong>${selected.name}</strong> は事件を解決した。${loreTrace}<br><br>🏅 称号：<strong>${titleName}</strong>`;
   }
 
   const culpritBox=document.getElementById("culpritComment");
