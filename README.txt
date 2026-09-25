@@ -1,4 +1,4 @@
-NEMO Mystery Days v0.74
+NEMO Mystery Days v0.75
 
 GitHub Pages structure:
 - index.html          : Season select portal
