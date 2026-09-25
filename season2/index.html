@@ -2797,14 +2797,14 @@ const cases={
   ],
   witnesses:{
     rina:{icon:"🧹",name:"リナ",role:"元アルバイト",statements:[
-      {text:"『閉店整理では箱を外から分けただけです。No.416のスリーブは開けてません。』",press:"リナは『古いネガは壊しそうで怖かったから、中身には触っていない』と言い切る。",contradiction:"orangeSticker"},
       {text:"『暗室の方は、水漏れがないか見ただけです。写真を抜いたりはしてません。』",press:"天井から水が落ちた日があり、濡れていないか確認したという。"},
+      {text:"『閉店整理では箱を外から分けただけです。No.416のスリーブは開けてません。』",press:"リナは『古いネガは壊しそうで怖かったから、中身には触っていない』と言い切る。",contradiction:"orangeSticker"},
       {text:"『13番が空いていたかどうかは……その時は気にしてませんでした。』",press:"整理の目的は廃棄物と保存物の仕分けで、内容確認まではしていなかったという。"}
     ]},
     sanada:{icon:"📰",name:"真田ケイ",role:"地域紙記者",statements:[
-      {text:"『No.416？　そのフィルムは知りません。借りたこともないです。』",press:"『古い写真はいくつも借りたから、番号なんて覚えていない』とも付け加える。",contradiction:"loanLedger",requires:["rina_opened"]},
       {text:"『記事に使えそうな町の写真は何度か借りましたよ。』",press:"商店街や駅前の昔の写真を地域特集で使っていた。"},
-      {text:"『……仮に借りてたとしても、今さら一枚だけ切ったりしません。』",press:"ネガそのものを傷つける理由はないと話す。"}
+      {text:"『……仮に借りてたとしても、今さら一枚だけ切ったりしません。』",press:"ネガそのものを傷つける理由はないと話す。"},
+      {text:"『No.416？　そのフィルムは知りません。借りたこともないです。』",press:"『古い写真はいくつも借りたから、番号なんて覚えていない』とも付け加える。",contradiction:"loanLedger",requires:["rina_opened"]}
     ]},
     kamiya:{icon:"📷",name:"神谷トオル",role:"元・白昼堂店主",statements:[
       {text:"『うちは現像した写真は全部、お客さんに渡してました。店に一枚だけ残すようなことはしてません。』",press:"神谷は長年の店のやり方だと言う。『受け渡しで揉めた記憶もない』とのこと。",contradiction:"receptionLedger",requires:["sanada_borrowed"]},
@@ -2813,8 +2813,8 @@ const cases={
     ]}
   },
   multiClear:[
-    {witness:"rina",evidence:"orangeSticker",statement:0,flag:"rina_opened"},
-    {witness:"sanada",evidence:"loanLedger",statement:0,flag:"sanada_borrowed",requires:["rina_opened"]},
+    {witness:"rina",evidence:"orangeSticker",statement:1,flag:"rina_opened"},
+    {witness:"sanada",evidence:"loanLedger",statement:2,flag:"sanada_borrowed",requires:["rina_opened"]},
     {witness:"kamiya",evidence:"receptionLedger",statement:0,flag:"kamiya_twelve",requires:["sanada_borrowed"]}
   ],
   finalReady:["rina_opened","sanada_borrowed","kamiya_twelve"],
@@ -2871,9 +2871,9 @@ const cases={
   ],
   witnesses:{
     reika:{icon:"🎹",name:"早瀬レイカ",role:"ピアノ講師",statements:[
-      {text:"『18時10分、楽譜をピアノに置いて扉を閉めました。外のランプが赤になったので、ちゃんと鍵がかかったと思います。』",press:"レイカは『いつも赤くなれば閉まった合図だと思っていた』と話す。実際に青い鍵マークを確認した記憶はない。",contradiction:"doorPanel"},
       {text:"『楽譜が青い表紙だということは、生徒には特に伝えていません。原本を見せる予定も本番前だけでした。』",press:"原本は作曲家本人の書き込みがあるため、普段はコピー譜で練習していたという。"},
-      {text:"『ユズさんは第6ページのカデンツァを気にしていました。でも原本を持ち出していいとは言っていません。』",press:"ユズは昼にも『本物の書き込みを一度だけ見たい』と頼んでいた。"}
+      {text:"『ユズさんは第6ページのカデンツァを気にしていました。でも原本を持ち出していいとは言っていません。』",press:"ユズは昼にも『本物の書き込みを一度だけ見たい』と頼んでいた。"},
+      {text:"『18時10分、楽譜をピアノに置いて扉を閉めました。外のランプが赤になったので、ちゃんと鍵がかかったと思います。』",press:"レイカは『いつも赤くなれば閉まった合図だと思っていた』と話す。実際に青い鍵マークを確認した記憶はない。",contradiction:"doorPanel"}
     ]},
     ken:{icon:"🧰",name:"園田ケン",role:"設備担当",statements:[
       {text:"『電子錠の修理は夕方までに終わってます。18時には普通に施錠できたはずですよ。』",press:"ケンは『扉の開閉センサーは動いていたし、見た目も正常だった』と話す。",contradiction:"repairTag",requires:["reika_red"]},
@@ -2881,15 +2881,15 @@ const cases={
       {text:"『部品が届くまで施錠できないことは、受付へ伝えたつもりでした。』",press:"連絡メモを置いたが、レイカ本人には直接説明していなかったという。"}
     ]},
     yuzu:{icon:"🎻",name:"羽鳥ユズ",role:"発表会参加生徒",statements:[
-      {text:"『18時20分ごろ第3練習室の前は通りました。でも中には入ってません。コピー室で、自分の楽譜をコピーしてました。』",press:"ユズはコピー機を使ったこと自体は認めている。『自分の練習譜を8枚』と言う。",contradiction:"jammedPage",requires:["ken_lock"]},
       {text:"『青いノクターンの原本は触ってません。本番前に見せてもらえれば十分です。』",press:"第6ページについて尋ねると、少し言葉が詰まる。"},
+      {text:"『18時20分ごろ第3練習室の前は通りました。でも中には入ってません。コピー室で、自分の楽譜をコピーしてました。』",press:"ユズはコピー機を使ったこと自体は認めている。『自分の練習譜を8枚』と言う。",contradiction:"jammedPage",requires:["ken_lock"]},
       {text:"『……難しいところだけ、作曲家さんの書き込みを見たかったんです。』",press:"売るつもりも盗むつもりもなく、コピーしてすぐ戻すつもりだったと話す。"}
     ]}
   },
   multiClear:[
-    {witness:"reika",evidence:"doorPanel",statement:0,flag:"reika_red"},
+    {witness:"reika",evidence:"doorPanel",statement:2,flag:"reika_red"},
     {witness:"ken",evidence:"repairTag",statement:0,flag:"ken_lock",requires:["reika_red"]},
-    {witness:"yuzu",evidence:"jammedPage",statement:0,flag:"yuzu_copy",requires:["ken_lock"]}
+    {witness:"yuzu",evidence:"jammedPage",statement:1,flag:"yuzu_copy",requires:["ken_lock"]}
   ],
   finalReady:["reika_red","ken_lock","yuzu_copy"],
   deduction:{
@@ -2959,14 +2959,14 @@ const cases={
   ],
   witnesses:{
     eri:{icon:"📻",name:"大庭エリ",role:"八音ラジオ局長",statements:[
-      {text:"『朔さんは昨日18時半前には帰りました。旧放送ブースも使っていません。あそこは今、ほとんど物置です。』",press:"エリは18時すぎに一度見送ったのを最後だと思っていたという。『戻ってきたなら気づかなかった』と話す。",contradiction:"boothLog"},
       {text:"『昨日は外線障害が出ていました。普通の電話なら18時44分以降は外へつながらなかったはずです。』",press:"館内設備は動いていたが、外へ発信する電話回線だけが止まっていた。"},
+      {text:"『朔さんは昨日18時半前には帰りました。旧放送ブースも使っていません。あそこは今、ほとんど物置です。』",press:"エリは18時すぎに一度見送ったのを最後だと思っていたという。『戻ってきたなら気づかなかった』と話す。",contradiction:"boothLog"},
       {text:"『朔さんは昔、誕生日になると放送局からミオちゃんへ電話してたんです。ちょっとした恒例行事でした。』",press:"今年も何か言いたそうにしていたが、内容までは聞いていないという。"}
     ]},
     kaito:{icon:"🔧",name:"牧野カイト",role:"設備技術者",statements:[
-      {text:"『今朝09時08分の時点では外線はまだ落ちてました。復旧したのは僕が来た09時半ごろです。だから局の機械から送られたとは考えにくいです。』",press:"カイトは現地で復旧確認をした時刻を、そのまま復旧時刻だと思っていたという。",contradiction:"restoreLog",requires:["eri_booth"]},
       {text:"『障害自体は局の外で起きたものです。局内の録音機材やラックまで壊れたわけじゃありません。』",press:"外線以外の電源と局内ネットワークは生きていた。"},
-      {text:"『古い機械が残っていても、今の電話回線では勝手に何か送るようなことはないと思います。』",press:"旧式機材については担当外で、細かい仕様までは確認していないという。"}
+      {text:"『古い機械が残っていても、今の電話回線では勝手に何か送るようなことはないと思います。』",press:"旧式機材については担当外で、細かい仕様までは確認していないという。"},
+      {text:"『今朝09時08分の時点では外線はまだ落ちてました。復旧したのは僕が来た09時半ごろです。だから局の機械から送られたとは考えにくいです。』",press:"カイトは現地で復旧確認をした時刻を、そのまま復旧時刻だと思っていたという。",contradiction:"restoreLog",requires:["eri_booth"]}
     ]},
     natsu:{icon:"🎧",name:"朝倉ナツ",role:"元パーソナリティ・整理担当",statements:[
       {text:"『昔の音声中継機なら、去年の整理で撤去したはずです。だから昔の仕組みが勝手に声を送った、という線はないと思います。』",press:"ナツは撤去リストを作った側だが、実作業は別の業者へ任せていた。",contradiction:"inventoryCard",requires:["kaito_restore"]},
@@ -2975,8 +2975,8 @@ const cases={
     ]}
   },
   multiClear:[
-    {witness:"eri",evidence:"boothLog",statement:0,flag:"eri_booth"},
-    {witness:"kaito",evidence:"restoreLog",statement:0,flag:"kaito_restore",requires:["eri_booth"]},
+    {witness:"eri",evidence:"boothLog",statement:1,flag:"eri_booth"},
+    {witness:"kaito",evidence:"restoreLog",statement:2,flag:"kaito_restore",requires:["eri_booth"]},
     {witness:"natsu",evidence:"inventoryCard",statement:0,flag:"natsu_relay",requires:["kaito_restore"]}
   ],
   finalReady:["eri_booth","kaito_restore","natsu_relay"],
@@ -3048,13 +3048,13 @@ const cases={
   ],
   witnesses:{
     chihiro:{icon:"🏛️",name:"瀬尾チヒロ",role:"郷土資料館・学芸員",statements:[
-      {text:"『15時20分ごろに書庫を確認してから、台帳が消えるまで誰も閉架書庫には入っていません。鍵も管理できていました。』",press:"チヒロは常用鍵を持っていた。ただし研究者向けの臨時閲覧パスがあることを思い出し、『今日は使っていないと思う』と付け加える。",contradiction:"accessLog"},
       {text:"『第六冊は寄贈者名と資料の出所を記録した台帳です。写真や地図そのものより、由来を確かめる時に使います。』",press:"星待館周辺の古い資料も含まれるが、今回の企画展では一部しか使わない予定だったという。"},
-      {text:"『盗難なら困ります。でも、資料館の外へ持ち出された記録はありません。』",press:"正面・職員口とも、15時以降に大型冊子を持って出た人物は確認されていない。"}
+      {text:"『盗難なら困ります。でも、資料館の外へ持ち出された記録はありません。』",press:"正面・職員口とも、15時以降に大型冊子を持って出た人物は確認されていない。"},
+      {text:"『15時20分ごろに書庫を確認してから、台帳が消えるまで誰も閉架書庫には入っていません。鍵も管理できていました。』",press:"チヒロは常用鍵を持っていた。ただし研究者向けの臨時閲覧パスがあることを思い出し、『今日は使っていないと思う』と付け加える。",contradiction:"accessLog"}
     ]},
     kazuki:{icon:"📝",name:"有馬カズキ",role:"地域史研究者",statements:[
-      {text:"『15時半ごろ書庫には入りました。でも見たのは古地図だけです。寄贈台帳 第六冊には触れていません。』",press:"カズキは旧町名の読み方を確認していたという。資料スキャナも一度使ったと認めるが、『地図の一部だった』と話す。",contradiction:"scanHistory",requires:["chihiro_access"]},
       {text:"『調べていたのは、昔の通り名の表記です。台帳を盗む理由なんてありません。』",press:"記事や出版物に使う予定はなく、個人研究のための確認だったという。"},
+      {text:"『15時半ごろ書庫には入りました。でも見たのは古地図だけです。寄贈台帳 第六冊には触れていません。』",press:"カズキは旧町名の読み方を確認していたという。資料スキャナも一度使ったと認めるが、『地図の一部だった』と話す。",contradiction:"scanHistory",requires:["chihiro_access"]},
       {text:"『15時36分には書庫を出ました。使った資料は閲覧ワゴンへ戻しています。』",press:"棚へ直接戻すのではなく、職員が確認してから戻す決まりなのでワゴンへ置いたという。"}
     ]},
     riko:{icon:"📦",name:"三枝リコ",role:"整理ボランティア",statements:[
@@ -3064,8 +3064,8 @@ const cases={
     ]}
   },
   multiClear:[
-    {witness:"chihiro",evidence:"accessLog",statement:0,flag:"chihiro_access"},
-    {witness:"kazuki",evidence:"scanHistory",statement:0,flag:"kazuki_scan",requires:["chihiro_access"]},
+    {witness:"chihiro",evidence:"accessLog",statement:2,flag:"chihiro_access"},
+    {witness:"kazuki",evidence:"scanHistory",statement:1,flag:"kazuki_scan",requires:["chihiro_access"]},
     {witness:"riko",evidence:"wagonPhoto",statement:0,flag:"riko_wagon",requires:["kazuki_scan"]}
   ],
   finalReady:["chihiro_access","kazuki_scan","riko_wagon"],
@@ -3142,20 +3142,20 @@ const cases={
       {text:"『ユウはカメラに詳しかったです。壊れかけの機材も、だいたいあの子が何とかしてました。』",press:"篠原ユウは部の備品係を兼ね、最後の活動日もメインカメラを扱っていたという。"}
     ]},
     tomo:{icon:"🚌",name:"佐倉トモ",role:"旧写真部員",statements:[
-      {text:"『ユウなら、写真を撮る前に帰ったと思います。17時40分くらいのバスに乗るって言ってたから。だから七人なんじゃないですか？』",press:"トモは『引っ越し前日だったから、荷造りで早く帰ると言っていた』と覚えている。ただ実際にバスへ乗るところは見ていない。",contradiction:"returnLog",requires:["misa_timer"]},
       {text:"『あの日のユウは、濃い色のジャケットを着てました。袖に白い線が入ったやつ。』",press:"17:41の部室スナップにも、同じ服装のユウが写っている。"},
-      {text:"『写真のあと、みんなで片付けをした……気がします。でも十五年前だから、順番は曖昧です。』",press:"記憶より、当日の備品記録の方が時刻を確定できそうだ。"}
+      {text:"『写真のあと、みんなで片付けをした……気がします。でも十五年前だから、順番は曖昧です。』",press:"記憶より、当日の備品記録の方が時刻を確定できそうだ。"},
+      {text:"『ユウなら、写真を撮る前に帰ったと思います。17時40分くらいのバスに乗るって言ってたから。だから七人なんじゃないですか？』",press:"トモは『引っ越し前日だったから、荷造りで早く帰ると言っていた』と覚えている。ただ実際にバスへ乗るところは見ていない。",contradiction:"returnLog",requires:["misa_timer"]}
     ]},
     asami:{icon:"🧪",name:"桐谷アサミ",role:"旧写真部員・暗室担当",statements:[
-      {text:"『展示に使ってるその写真は、ネガをほとんどそのまま焼いたものです。端を切って、人を消すようなトリミングはしてません。』",press:"アサミは当時の暗室担当。『多少余白を整えたかもしれないけど、写っている内容は変わらない』と言う。",contradiction:"contactSheet",requires:["tomo_yuu"]},
       {text:"『コンタクトシートは、ネガ全体を確認するためのものです。もし端に何か写っていれば、そっちには残るはず。』",press:"展示プリントとコンタクトシートを比較すれば、元の画角が分かる。"},
+      {text:"『展示に使ってるその写真は、ネガをほとんどそのまま焼いたものです。端を切って、人を消すようなトリミングはしてません。』",press:"アサミは当時の暗室担当。『多少余白を整えたかもしれないけど、写っている内容は変わらない』と言う。",contradiction:"contactSheet",requires:["tomo_yuu"]},
       {text:"『……この反射。白い線の袖……。ユウ、ここにいたんだ。』",press:"窓の反射には、三脚の横でケーブルを持つ人物。17:41のユウの服装と一致する。"}
     ]}
   },
   multiClear:[
     {witness:"misa",evidence:"repairSlip",statement:0,flag:"misa_timer"},
-    {witness:"tomo",evidence:"returnLog",statement:0,flag:"tomo_yuu",requires:["misa_timer"]},
-    {witness:"asami",evidence:"contactSheet",statement:0,flag:"asami_crop",requires:["tomo_yuu"]}
+    {witness:"tomo",evidence:"returnLog",statement:2,flag:"tomo_yuu",requires:["misa_timer"]},
+    {witness:"asami",evidence:"contactSheet",statement:1,flag:"asami_crop",requires:["tomo_yuu"]}
   ],
   finalReady:["misa_timer","tomo_yuu","asami_crop"],
   deduction:{
@@ -3287,14 +3287,14 @@ const cases={
   ],
   witnesses:{
     akira:{icon:"🧑‍💼",name:"久我アキラ",role:"館長",statements:[
-      {text:"『白い保管箱は昼の確認以降、私は見ていません。夕方の管理は担当に任せていました。』",press:"アキラは『午後は会議が続いていた』と言う。ただし封印点検は館長本人の署名が必要な運用になっている。",contradiction:"sealCheck"},
       {text:"『あの箱は外へ持ち出せません。封印を切ればすぐ分かります。』",press:"箱の封印番号は記録と一致しており、盗難目的なら箱そのものを運ぶ必要は薄いという。"},
+      {text:"『白い保管箱は昼の確認以降、私は見ていません。夕方の管理は担当に任せていました。』",press:"アキラは『午後は会議が続いていた』と言う。ただし封印点検は館長本人の署名が必要な運用になっている。",contradiction:"sealCheck"},
       {text:"『匿名の依頼人？　心当たりはありません。センター内部の点検票を見られる人間は限られますが……。』",press:"アキラは、17:05の点検票が依頼封筒に入っていたことに強い違和感を示す。"}
     ]},
     sana:{icon:"🧪",name:"相沢サナ",role:"保存研究員",statements:[
-      {text:"『17時を過ぎてからは保管庫Bには入っていません。湿度の確認も遠隔でできますから。』",press:"サナは17時以降、別室でデータ整理をしていたと言う。だが保管庫の電子錠は個人カードを記録する。",contradiction:"accessCopy",requires:["akira_seal"]},
       {text:"『17:21の湿度警報は見ました。でも短時間なら問題ないと思っていました。』",press:"警報マニュアル上は、紙資料について『10分を超える場合は環境調整室へ一時退避』とある。"},
-      {text:"『湿度警報のあと、リョウさんに環境調整室を空けてもらいました。でも、箱を運ぶところまでは見てません。』",press:"サナは『一時退避できるようにして』とは伝えたが、正式な搬送指示は出していないという。"}
+      {text:"『湿度警報のあと、リョウさんに環境調整室を空けてもらいました。でも、箱を運ぶところまでは見てません。』",press:"サナは『一時退避できるようにして』とは伝えたが、正式な搬送指示は出していないという。"},
+      {text:"『17時を過ぎてからは保管庫Bには入っていません。湿度の確認も遠隔でできますから。』",press:"サナは17時以降、別室でデータ整理をしていたと言う。だが保管庫の電子錠は個人カードを記録する。",contradiction:"accessCopy",requires:["akira_seal"]}
     ]},
     ryo:{icon:"🧹",name:"早瀬リョウ",role:"清掃・搬送補助",statements:[
       {text:"『清掃カートは西廊下を通りました。でも白い箱なんて載せてません。掃除道具だけです。』",press:"リョウは17:20台にサナから『廊下を空けて』と言われたことは認めるが、箱には触れていないと言う。",contradiction:"cartStill",requires:["sana_entry"]},
@@ -3303,8 +3303,8 @@ const cases={
     ]}
   },
   multiClear:[
-    {witness:"akira",evidence:"sealCheck",statement:0,flag:"akira_seal"},
-    {witness:"sana",evidence:"accessCopy",statement:0,flag:"sana_entry",requires:["akira_seal"]},
+    {witness:"akira",evidence:"sealCheck",statement:1,flag:"akira_seal"},
+    {witness:"sana",evidence:"accessCopy",statement:2,flag:"sana_entry",requires:["akira_seal"]},
     {witness:"ryo",evidence:"cartStill",statement:0,flag:"ryo_cart",requires:["sana_entry"]}
   ],
   finalReady:["akira_seal","sana_entry","ryo_cart"],
