@@ -16,7 +16,7 @@ a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:3
 <body>
 <main class="wrap">
 <section class="brand">
-<div class="eyebrow">NEMO MYSTERY SERIES · v0.79</div>
+<div class="eyebrow">NEMO MYSTERY SERIES · v0.82</div>
 <h1>NEMO Mystery Days</h1>
 <div class="portalCue">ARCHIVE CONNECTED · CASE FILES READY</div>
 <p class="portalLead"><span class="openingLine">事件は、ひとつでは終わらなかった。</span>あなたとねもが解いてきた、小さな事件たち。<br>その記録をたどると、やがて同じ痕跡が見え始める。<br><br>まだ、すべての答えは見つかっていない。<br><strong>さあ、事件簿を開こう。</strong></p>
@@ -35,15 +35,15 @@ a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:3
 <div class="seasonNo">SEASON 2</div>
 <h2>新たな事件簿</h2>
 <div class="subtitle" id="season2Subtitle">LOCKED</div>
-<div class="desc">Season 1のその先へ。存在しない依頼人、鍵のかかっていない密室、死後に届いた声。そして古い資料から繰り返し現れる「黒瀬」という名前。普通の事件を追いながら、日記・黒瀬家・記録者の正体へ近づく全8話。最後まで解いたあと、事件ファイルの外側に残された一件の記録が現れます。</div>
-<div class="meta"><span class="chip">CASE 01–08</span><span class="chip">CASE 01–08 公開済み</span><span class="chip">記録の向こう側</span></div>
+<div class="desc">Season 1の事件が終わったあと、ねもたちの前に、ひとつの記録が残されていた。<br><br><strong style="color:#f3f0ff">まだ、終わっていない。</strong><br><br>新しい事件簿を開く。</div>
+<div class="meta"><span class="chip">CASE FILES</span><span class="chip">ねもと捜査</span><span class="chip">記録の向こう側</span></div>
 <div class="go" id="season2Go"><span>🔒 SEASON 1 · CASE 08クリアで解放</span><span>—</span></div>
 <div class="lockedReason" id="season2Reason">現在はSeason 1のCASE 08までが物語の入口です。</div>
 </div>
 </section>
 <div class="seriesStatus" id="seriesStatus"><strong>進行状況</strong><br>同じブラウザでは、Season 1のクリア状況を引き継ぎます。Season 2はSeason 1 CASE 08クリア後に解放される設計です。</div>
 <div class="links"><a href="manual.html" target="_blank" rel="noopener">📖 遊び方・取扱説明書</a><a href="https://note.com/nemocollection/n/n1b8d72ea299a" target="_blank" rel="noopener noreferrer">📖 ねもの日記「星待館」</a></div>
-<div class="footer">NEMO Mystery Days · Series Portal v0.79</div>
+<div class="footer">NEMO Mystery Days · Series Portal v0.82</div>
 </main>
 <script>
 const S1_KEY="nemoMysteryDaysSeason1Progress_v1";
@@ -68,25 +68,15 @@ if(s1Complete){
   const card=document.getElementById("season2Card");
   card.classList.remove("locked");card.classList.add("available");card.setAttribute("aria-disabled","false");card.setAttribute("role","link");card.tabIndex=0;
   const nextS2=s2Complete?9:(s2Cleared.includes(7)?8:(s2Cleared.includes(6)?7:(s2Cleared.includes(5)?6:(s2Cleared.includes(4)?5:(s2Cleared.includes(3)?4:(s2Cleared.includes(2)?3:(s2Cleared.includes(1)?2:1)))))));
-  document.getElementById("season2Subtitle").textContent=s2Complete?(s2Progress.day9Read?"COMPLETE · 未解決の記録 1":"COMPLETE · 未読の記録 1"):`UNLOCKED · CASE 0${nextS2} AVAILABLE`;
+  document.getElementById("season2Subtitle").textContent=s2Complete?(s2Progress.day9Read?"SEASON 2 COMPLETE":"COMPLETE · まだ、ひとつ残っている"):"SEASON 2 解放済み";
   document.getElementById("season2Go").innerHTML='<span>SEASON 2を開く</span><span>→</span>';
   document.getElementById("season2Reason").textContent=nextS2===1
-    ? "CASE 01「存在しない依頼人」が届いています。"
-    : nextS2===2
-      ? "CASE 02「鍵のかかっていない密室」が届いています。"
-      : nextS2===3
-        ? "CASE 03「届いたのは昨日の声」が届いています。"
-        : nextS2===4
-          ? "CASE 04「黒瀬という名前」が届いています。"
-          : nextS2===5
-            ? "CASE 05「写っていない一人」が届いています。"
-            : nextS2===6
-              ? "CASE 06「日記を書いた人」が届いています。"
-              : nextS2===7
-                ? "CASE 07「記録者からの依頼」が届いています。"
-                : nextS2===8
-                  ? "CASE 08「選ばれた場所」が届いています。"
-                  : (s2Progress.day9Read?"8事件は解決済み。事件ファイル外に未解決の記録が1件残っています。":"8事件は解決済み。事件ファイル外に未読の記録が1件あります。");
+    ? "新しい事件が、届いています。"
+    : nextS2===8
+      ? "最後の事件が、届いています。"
+      : nextS2===9
+        ? (s2Progress.day9Read?"事件は解決した。それでも、記録はまだ残っている。":"事件簿の外に、まだ何かが残っています。")
+        : "次の事件が、届いています。";
   const go=()=>location.href="season2/";card.addEventListener("click",go);card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
 }
 </script>
