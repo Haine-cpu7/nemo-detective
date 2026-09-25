@@ -141,6 +141,7 @@ button,select{font:inherit} button{cursor:pointer}
 .scene.s2case1{background:linear-gradient(rgba(9,10,15,.12),rgba(9,10,15,.52)),linear-gradient(145deg,#4b4045 0 22%,#302f3b 22% 50%,#424b54 50% 73%,#1c2630 73% 100%)}
 .scene.case2{background:linear-gradient(rgba(10,12,18,.12),rgba(10,12,18,.5)),linear-gradient(145deg,#635c50 0 20%,#37414c 20% 54%,#3e5660 54% 100%)}
 .scene.case3{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.50)),linear-gradient(145deg,#7b5d45 0 18%,#4d3a35 18% 50%,#6e5a43 50% 72%,#2f3b45 72% 100%)}
+.scene.case4{background:linear-gradient(rgba(10,12,18,.10),rgba(10,12,18,.52)),linear-gradient(145deg,#6a6253 0 20%,#3e4b47 20% 48%,#776449 48% 72%,#303941 72% 100%)}
 .scene:before{content:attr(data-place);position:absolute;left:18px;bottom:15px;color:rgba(255,255,255,.24);font-weight:1000;font-size:28px;letter-spacing:.08em}
 .hotspot{position:absolute;border:1px solid rgba(255,255,255,.25);background:rgba(20,24,34,.7);color:white;border-radius:14px;padding:11px 12px;font-weight:900;box-shadow:0 7px 20px rgba(0,0,0,.28)}
 .hotspot:hover{background:rgba(91,80,134,.88)} .hotspot.done{opacity:.5}
@@ -2070,7 +2071,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.71 CASE 05 staged clue reveal */
+/* v0.72 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2109,7 +2110,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.71 separate how-to manual */
+/* v0.72 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2128,7 +2129,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.71 CASE 07 truth reconstruction */
+/* v0.72 CASE 07 truth reconstruction */
 .reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
 .reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
 .reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
@@ -2141,7 +2142,7 @@ body:not(.case-active) .topFileBtn{
 .reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
 @media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
 
-/* v0.71 cross-case archive mystery */
+/* v0.72 cross-case archive mystery */
 .archiveLead{padding:15px 16px;border:1px solid #65568d;border-radius:16px;background:linear-gradient(135deg,#2c2941,#202638);margin-bottom:14px;line-height:1.75}
 .archiveLead strong{color:#f3d47c}.archiveFile{border:1px solid #4f566f;background:#171b28;border-radius:18px;padding:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
 .archiveFileTop{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px dashed #505872}.archiveFileTop h3{margin:0 0 3px;font-size:18px}.archiveFileTop p{margin:0;color:var(--muted);font-size:13px}
@@ -2151,7 +2152,7 @@ body:not(.case-active) .topFileBtn{
 .archiveResult{margin-top:13px}.archiveReveal{margin-top:15px;border:1px solid #7865b2;border-radius:16px;background:linear-gradient(145deg,#2b2442,#1a2130);padding:16px}.archiveReveal h3{margin:0 0 8px;color:#f2d178}.archiveLocations{display:grid;gap:5px;margin:12px 0;padding:12px;border-left:3px solid #7565ad;background:#171b28;border-radius:0 10px 10px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}.archiveCase08{margin-top:12px;padding:12px;border:1px dashed #7f719f;border-radius:12px;color:#e7e0ff;background:#262138}.archiveNemo{margin-top:12px;color:#e8e2ff}.archiveContinue{margin-top:14px;width:100%}
 @media(max-width:640px){.archiveCaseGrid{grid-template-columns:1fr}.archiveFile{padding:13px}.archiveFileTop{align-items:flex-start}.arcSigil{width:50px;height:50px;min-width:50px}.arcSigil:after{left:34px;top:13px;width:34px}.archiveCaseCard{padding:10px}}
 
-/* v0.71 星待館 / ねもの日記 crossover */
+/* v0.72 星待館 / ねもの日記 crossover */
 .externalArchiveGate{margin-top:14px;padding:14px;border:1px dashed #7b6a9d;border-radius:14px;background:#211d31}
 .externalArchiveGate p{margin:0 0 10px;line-height:1.7}
 .externalArchive{margin-top:14px;border:1px solid #8a6f78;border-radius:17px;background:linear-gradient(145deg,#30252d,#1c202d);padding:16px;box-shadow:0 12px 28px rgba(0,0,0,.18)}
@@ -2167,16 +2168,16 @@ body:not(.case-active) .topFileBtn{
 
 
 
-/* v0.71 CASE 08 photo trace */
+/* v0.72 CASE 08 photo trace */
 .evidencePhoto{margin:11px 0 3px;border:1px solid #56617f;border-radius:14px;overflow:hidden;background:#111722;max-width:360px}.evidencePhoto img{display:block;width:100%;height:auto}.photoTraceTag{display:inline-block;margin-top:8px;padding:5px 8px;border:1px solid #7567a8;border-radius:999px;background:#26203a;color:#dcd4ff;font-size:10px;font-weight:900;letter-spacing:.06em}.seasonCompleteMark{margin-top:14px;padding:14px 15px;border:1px solid #8c78e1;border-radius:15px;background:linear-gradient(135deg,#2b2550,#1a2435);color:#eee9ff}.seasonCompleteMark strong{color:#f3d37b}
 
-/* v0.71 season architecture */
+/* v0.72 season architecture */
 .seasonNavRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 0;padding:10px 12px;border:1px solid #3c465f;border-radius:12px;background:#171c2a;color:#9da7bd;font-size:12px;font-weight:800}.seasonHomeLink{color:#d7dcef;text-decoration:none}.seasonHomeLink:hover{color:#fff}.seasonFinaleTeaser{border-style:dashed!important}.seasonFinaleTeaser .caseDesc{max-width:720px}@media(max-width:640px){.seasonNavRow{align-items:flex-start;flex-direction:column;gap:5px}}
 
 
 .caseComingCard{border:1px dashed var(--line);border-radius:16px;background:var(--panel2);padding:14px;color:var(--text);text-align:left;opacity:.52;filter:saturate(.55)}
 
-/* v0.71 Season 2 / post-report twist */
+/* v0.72 Season 2 / post-report twist */
 .afterCaseLead{padding:15px 16px;border:1px solid #62598c;border-radius:16px;background:linear-gradient(135deg,#2a2640,#1d2434);line-height:1.85;margin-bottom:14px}
 .afterCaseCard{margin-top:12px;padding:15px 16px;border:1px solid #48536d;border-radius:15px;background:#181e2d;line-height:1.85}.afterCaseCard strong{color:#f3d17b}
 .afterCaseEvidence{margin-top:12px;padding:12px 13px;border-left:3px solid #8171d4;background:#201d34;border-radius:0 12px 12px 0;line-height:1.75}.afterCaseEvidence b{color:#f4d47c}
@@ -2200,7 +2201,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.71</span>
+    <span class="badge">v0.72</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2267,9 +2268,15 @@ body:not(.case-active) .topFileBtn{
         <div class="caseDesc">亡くなった祖父から、翌朝届いた留守電。声はいつ生まれ、なぜ死後に届いたのか。時刻と古い放送設備を追う。</div>
         <div class="caseStatus"></div>
       </button>
-      <div class="caseComingCard locked seasonFinaleTeaser" aria-disabled="true">
+      <button class="caseCard" data-case="4">
         <div class="caseLabel">SEASON 2 · CASE 04</div>
-        <div class="caseTitle">黒瀬という名前</div>
+        <div class="caseTitle">黒瀬という名前 ― 消えた寄贈台帳 ―</div>
+        <div class="caseDesc">郷土資料館から消えた一冊の台帳。事件を解いたあと、古い封筒の中から「黒瀬」という名字が何度も現れる。</div>
+        <div class="caseStatus"></div>
+      </button>
+      <div class="caseComingCard locked seasonFinaleTeaser" aria-disabled="true">
+        <div class="caseLabel">SEASON 2 · CASE 05</div>
+        <div class="caseTitle">写っていない一人</div>
         <div class="caseDesc">次の事件は、まだ探偵局に届いていません。</div>
         <div class="caseStatus">🔒 COMING SOON</div>
       </div>
@@ -2278,7 +2285,7 @@ body:not(.case-active) .topFileBtn{
       <a class="seasonHomeLink" href="../">← シーズン選択へ戻る</a>
       <span>SEASON 2 · CASE 01–08</span>
     </div>
-    <div class="caseProgressNote" id="caseProgressHint">CASE 03「届いたのは昨日の声」まで追加されています。順番に事件を解決すると解放されます。</div>
+    <div class="caseProgressNote" id="caseProgressHint">CASE 04「黒瀬という名前」まで追加されています。順番に事件を解決すると解放されます。</div>
   </section>
 
   <section class="panel hidden" id="selectPanel">
@@ -2446,7 +2453,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 2 v0.71 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 2 v0.72 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2831,6 +2838,95 @@ const cases={
   ending:"09:08に届いた声は、死後に作られたものではなかった。<br><br>東雲朔は昨日18:47、八音ラジオの旧放送ブースへ戻っていた。18:49ごろ、誕生日を迎えるミオへ電話をかけようとしたが、その5分前から外線は障害で停止していた。<br><br>旧放送室に残っていた『VOICE RELAY R-8』は、発信に失敗した42秒の音声通話を一時保留した。翌朝09:07に回線が復旧すると、古い機械は保留していた通話を一度だけ自動再発信した。だから声が届いたのは09:08。今朝、誰かが送信操作をしたわけではない。<br><br>朔が亡くなったのは、その後の20:10だった。<br><br>留守電で言われた倉庫の赤い箱には、小さなマイク型のキーホルダーと、ミオへ宛てた短い誕生日カードが入っていた。声は一日遅れた。でも、伝えたかった言葉はちゃんと届いた。",
   culpritComment:{name:"東雲ミオ",line:"……昨日の声だったんですね。おじいちゃん、最後まで時間にルーズだなあ。……でも、届いてよかった。"},
   postscript:"事件後、ねもが旧音声中継機のログをもう一度見ていた。<br><br><strong>BUFFER 08 / SLOT 08 / RETRY 08</strong><br><br>ただの機材管理番号にも見える。今回の事件を解くうえでは、何の意味もない。<br><br><span class='quiet'>ねも「……8。なんか、多いね。」</span>"
+},
+
+4:{
+  title:"CASE 04　黒瀬という名前 ― 消えた寄贈台帳 ―",
+  place:"夕凪郷土資料館・閉架書庫",
+  briefing:{
+    lead:"展示準備中の郷土資料館から、古い『地域寄贈台帳 第六冊』が消えた。",
+    incident:"夕凪郷土資料館では、町の古い写真や地図をまとめた企画展の準備が進んでいる。ところが16:05、閉架書庫に戻したはずの『地域寄贈台帳 第六冊』が棚から消えていることが判明した。台帳には数十年前の寄贈者名や資料の由来が記録されており、翌朝の展示確認に必要だという。盗難なのか、誰かが移動させたのか。まずは最後に台帳を見た人たちの行動を整理する。",
+    objectives:[
+      "台帳が棚から消えた時間帯を絞る",
+      "三人の証言と書庫の記録を照合する",
+      "台帳を移動させた人物・場所・理由を特定する"
+    ]
+  },
+  intro:"依頼：夕凪郷土資料館から消えた『地域寄贈台帳 第六冊』を探す。",
+  evidence:{
+    shelfPhoto:{icon:"📚",name:"15:12の棚確認写真",desc:"企画展準備の記録写真。閉架書庫B棚の定位置に、茶色い背表紙の『地域寄贈台帳 第六冊』が写っている。"},
+    accessLog:{icon:"🔐",name:"閉架書庫の入室ログ",desc:"15:27、臨時閲覧パスT-02で閉架書庫が開錠されている。15:36に退室。パスの利用者欄は有馬カズキ。"},
+    scanHistory:{icon:"🖨️",name:"資料スキャナ履歴",desc:"15:31、利用者KAZUKIで『YN-DON-06 / p.113』を1枚スキャン。YN-DON-06は地域寄贈台帳 第六冊の資料番号。"},
+    wagonPhoto:{icon:"📷",name:"15:42の館内記録写真",desc:"天井の染みを記録するため職員が撮った写真。奥の整理ワゴンに、青い写真箱と一緒に茶色い大型冊子が載っている。ワゴンを押しているのは三枝リコ。"},
+    drawerGuide:{icon:"🗺️",name:"大型資料引き出し案内",desc:"大型地図A-1〜A-4は、作業中に大型資料を一時退避するためにも使われる。A-3だけ、今日は中身が少なく空間がある。"},
+    callMemo:{icon:"📞",name:"15:44の受付呼び出しメモ",desc:"『三枝さん、受付応援お願いします』。リコは書庫整理の途中で急きょ受付へ呼ばれている。"},
+    recoveredLedger:{icon:"📕",name:"回収された寄贈台帳 第六冊",desc:"大型地図A-3の奥から発見。破損なし。後ろ表紙の内側に、古い薄茶色の封筒が挟まれていた。"},
+    kuroseRoster:{icon:"📜",name:"古い『地域記録保存会』名簿抜粋",desc:"回収した台帳の封筒に入っていた古い名簿。年代の違う記録に『黒瀬 惣一』『黒瀬 澄江』『黒瀬 俊臣』など、黒瀬姓が繰り返し現れる。欄外には『欠けた円に三本線』の小さな印。"}
+  },
+  requiredEvidence:["shelfPhoto","accessLog","scanHistory","wagonPhoto","drawerGuide","callMemo"],
+  hotspots:[
+    ["shelfPhoto","📚 棚確認写真","7%","14%"],
+    ["accessLog","🔐 入室ログ","auto","15%","7%"],
+    ["scanHistory","🖨️ スキャナ履歴","39%","25%"],
+    ["wagonPhoto","📷 館内写真","7%","auto",null,"18%"],
+    ["drawerGuide","🗺️ 引き出し案内","39%","auto",null,"18%"],
+    ["callMemo","📞 呼び出しメモ","auto","auto","7%","18%"]
+  ],
+  people:[
+    {name:"瀬尾チヒロ",role:"郷土資料館・学芸員",note:"企画展の担当者。15:12に台帳を棚へ戻したと話す。閉架書庫の管理も担当している。"},
+    {name:"有馬カズキ",role:"地域史研究者",note:"地名の変遷を調べるため、企画展準備中の資料を閲覧していた。臨時閲覧パスを利用できる。"},
+    {name:"三枝リコ",role:"整理ボランティア",note:"写真箱や古地図の整理を手伝っていた。15:44に受付応援へ呼ばれて作業を中断している。"}
+  ],
+  timeline:[
+    ["15:12","チヒロが『地域寄贈台帳 第六冊』をB棚へ戻した記録写真"],
+    ["15:27","臨時閲覧パスT-02で閉架書庫が開く"],
+    ["15:31","資料番号YN-DON-06の1ページがスキャンされる"],
+    ["15:36","T-02利用者が閉架書庫を退出"],
+    ["15:42","整理ワゴンを押すリコが館内記録写真に写る"],
+    ["15:44","リコが受付応援へ呼ばれる"],
+    ["16:05","台帳が定位置にないことが判明"]
+  ],
+  witnesses:{
+    chihiro:{icon:"🏛️",name:"瀬尾チヒロ",role:"郷土資料館・学芸員",statements:[
+      {text:"『15時20分ごろに書庫を確認してから、台帳が消えるまで誰も閉架書庫には入っていません。鍵も管理できていました。』",press:"チヒロは常用鍵を持っていた。ただし研究者向けの臨時閲覧パスがあることを思い出し、『今日は使っていないと思う』と付け加える。",contradiction:"accessLog"},
+      {text:"『第六冊は寄贈者名と資料の出所を記録した台帳です。写真や地図そのものより、由来を確かめる時に使います。』",press:"星待館周辺の古い資料も含まれるが、今回の企画展では一部しか使わない予定だったという。"},
+      {text:"『盗難なら困ります。でも、資料館の外へ持ち出された記録はありません。』",press:"正面・職員口とも、15時以降に大型冊子を持って出た人物は確認されていない。"}
+    ]},
+    kazuki:{icon:"📝",name:"有馬カズキ",role:"地域史研究者",statements:[
+      {text:"『15時半ごろ書庫には入りました。でも見たのは古地図だけです。寄贈台帳 第六冊には触れていません。』",press:"カズキは旧町名の読み方を確認していたという。資料スキャナも一度使ったと認めるが、『地図の一部だった』と話す。",contradiction:"scanHistory",requires:["chihiro_access"]},
+      {text:"『調べていたのは、昔の通り名の表記です。台帳を盗む理由なんてありません。』",press:"記事や出版物に使う予定はなく、個人研究のための確認だったという。"},
+      {text:"『15時36分には書庫を出ました。使った資料は閲覧ワゴンへ戻しています。』",press:"棚へ直接戻すのではなく、職員が確認してから戻す決まりなのでワゴンへ置いたという。"}
+    ]},
+    riko:{icon:"📦",name:"三枝リコ",role:"整理ボランティア",statements:[
+      {text:"『15時35分を過ぎてから私が運んだのは、青い写真箱だけです。茶色い台帳には触ってません。』",press:"リコは書庫前の閲覧ワゴンから写真箱を整理室へ運んでいた。『台帳が載っていたかは覚えてない』という。",contradiction:"wagonPhoto",requires:["kazuki_scan"]},
+      {text:"『大型地図の引き出しも、今日は開けてないと思います。ずっと写真箱の整理でした。』",press:"15:44に受付へ呼ばれたため、整理途中のまま作業を離れた。"},
+      {text:"『……古い資料って、少しでも傷めたら大変だから。勝手に動かしたって言ったら怒られると思って……。』",press:"何かを気にしているようだが、まだはっきりとは話さない。"}
+    ]}
+  },
+  multiClear:[
+    {witness:"chihiro",evidence:"accessLog",statement:0,flag:"chihiro_access"},
+    {witness:"kazuki",evidence:"scanHistory",statement:0,flag:"kazuki_scan",requires:["chihiro_access"]},
+    {witness:"riko",evidence:"wagonPhoto",statement:0,flag:"riko_wagon",requires:["kazuki_scan"]}
+  ],
+  finalReady:["chihiro_access","kazuki_scan","riko_wagon"],
+  deduction:{
+    culpritLabel:"台帳を移動させたのは？",
+    culpritOptions:[["riko","三枝リコ"],["kazuki","有馬カズキ"],["chihiro","瀬尾チヒロ"]],
+    placeLabel:"台帳が見つかった場所は？",
+    placeOptions:[["drawer","大型地図A-3の引き出し"],["scanner","資料スキャナの下"],["office","学芸員室の保管庫"]],
+    motiveLabel:"なぜ台帳を移動させた？",
+    motiveOptions:[["protect","挟まっていた古い封筒を落とさないよう一緒に退避した"],["hide","寄贈者名を隠したかった"],["steal","台帳をあとで持ち帰るため"]],
+    answer:{culprit:"riko",place:"drawer",motive:"protect"},
+    hints:{
+      culprit:"15:42の館内記録写真で、閲覧ワゴンを押している人物を見よう。",
+      place:"大型資料を一時退避できる場所と、リコが作業を中断した時刻を確認しよう。",
+      motive:"リコが古い資料を傷めることを怖がっていた理由を思い出そう。"
+    }
+  },
+  deductionIntro:"今回は盗難事件ではないかもしれない。三つの矛盾から、台帳が誰の手を経て、どこへ移されたのかを確定しよう。",
+  ending:"消えた『地域寄贈台帳 第六冊』は、資料館の外へ持ち出されていなかった。<br><br>15:31、有馬カズキは台帳の一ページを確認・スキャンしたあと、規則どおり閲覧ワゴンへ戻した。<br><br>その後、三枝リコが写真箱を運ぶ際、ワゴン上の台帳から古い封筒が半分抜け落ちていることに気づいた。封筒だけを別にすると紛失しそうだったため、台帳ごと大型地図A-3へ一時退避した。<br><br>ところが15:44に急きょ受付へ呼ばれ、そのまま戻すのを忘れてしまった。勝手に資料を動かしたことを叱られるのが怖く、最初は『触っていない』と話していた。<br><br>台帳はA-3の奥から無傷で回収された。",
+  culpritComment:{name:"三枝リコ",line:"ごめんなさい。封筒が落ちそうで、とりあえず安全なところに置こうと思ったんです。戻す前に呼ばれて……言い出せなくなっちゃって。"},
+  postscript:"台帳を棚へ戻す前、チヒロが中に挟まっていた古い封筒を確認した。<br><br>中にあったのは、数十年前の<strong>『地域記録保存会』名簿の抜粋</strong>。<br><br><strong>黒瀬 惣一。<br>黒瀬 澄江。<br>黒瀬 俊臣。</strong><br><br>年代の違う記録に、同じ名字が何度も現れる。<br><br><span class='quiet'>ねも「……黒瀬。直人さんと同じ名字だね。」</span><br><br>チヒロによれば、黒瀬家の名前は現在の星待館より前、前身の『星待荘』や地域の記録保存活動にも繰り返し残っているという。<br><br>そして名簿の欄外には、資料館の印ではない小さな記号。<br><br><strong>欠けた円に、三本線。</strong><br><br>主人公はその印を見つめた。<br><br><span class='quiet'>『黒瀬』という名前は、星待館だけの話ではなかった。</span>"
 }
 
 
@@ -2838,7 +2934,7 @@ const cases={
 
 const SAVE_KEY="nemoMysteryDaysSeason2Progress_v1";
 const LEGACY_SAVE_KEY=null;
-const CASE_COUNT=3; // Season 2は現在CASE 03まで。
+const CASE_COUNT=4; // Season 2は現在CASE 04まで。
 const SEASON1_TOTAL_CASES=1;
 function loadGameProgress(){
   try{
@@ -3328,6 +3424,22 @@ function getNemoInsight(id){
       deathRecord:{kind:"時刻",note:"朔の死亡確認は20:10。18:49の発信試行より後。",speech:"昨日の18時台なら、朔さんはまだ生きてた。"},
       relayManual:{kind:"推理",note:"発信失敗時の音声を保留し、回線復旧時に自動再発信する旧式機能がある。",speech:"これなら、翌朝に誰かが送らなくても届くね。"},
       bufferLog:{kind:"観察",note:"18:49保留→09:08再発信完了。機械の履歴が一本の時系列になっている。",speech:"18:49の声が、09:08に出ていったんだ。"}
+    };
+    const v=common[id];
+    if(v) return {...v,stat:selected.obs>=selected.rea&&selected.obs>=selected.talk&&selected.obs>=selected.luck?`観察 ${selected.obs}`:selected.rea>=selected.talk&&selected.rea>=selected.luck?`推理 ${selected.rea}`:selected.talk>=selected.luck?`会話 ${selected.talk}`:`勘 ${selected.luck}`};
+  }
+
+
+  if(currentCaseId===4){
+    const common={
+      shelfPhoto:{kind:"観察",note:"15:12には第六冊が定位置にある。消えたのはそれ以降。",speech:"15:12までは、ちゃんと棚にあるね。"},
+      accessLog:{kind:"時刻",note:"15:27、臨時閲覧パスT-02で書庫が開いている。『誰も入っていない』とは両立しない。",speech:"15:27。誰も入ってないなら、この記録は変だね。"},
+      scanHistory:{kind:"推理",note:"YN-DON-06は第六冊の資料番号。15:31にはカズキが台帳を開いている。",speech:"この番号、第六冊そのものだね。"},
+      wagonPhoto:{kind:"観察",note:"15:42のワゴンに、青い箱とは別の茶色い大型冊子が見える。",speech:"青い箱だけじゃない。茶色い本も載ってる。"},
+      drawerGuide:{kind:"推理",note:"A-3は一時退避にも使える空きのある大型引き出し。冊子を隠さず安全に置くには自然な場所。",speech:"急いで置くなら、A-3はちょうどよさそう。"},
+      callMemo:{kind:"時刻",note:"15:44に作業が中断されている。『あとで戻す』つもりの物が残る条件になる。",speech:"ここで急に呼ばれたんだ。戻し忘れ、ありそう。"},
+      recoveredLedger:{kind:"観察",note:"台帳に破損はなく、封筒も一緒に残っている。持ち去る目的ではなさそう。",speech:"盗むなら、台帳ごとここに残さないよね。"},
+      kuroseRoster:{kind:"観察",note:"年代の違う記録に黒瀬姓が繰り返され、欄外には例の印がある。",speech:"……黒瀬。しかも、この印もある。"}
     };
     const v=common[id];
     if(v) return {...v,stat:selected.obs>=selected.rea&&selected.obs>=selected.talk&&selected.obs>=selected.luck?`観察 ${selected.obs}`:selected.rea>=selected.talk&&selected.rea>=selected.luck?`推理 ${selected.rea}`:selected.talk>=selected.luck?`会話 ${selected.talk}`:`勘 ${selected.luck}`};
@@ -3841,6 +3953,19 @@ function nemoPressReaction(witnessId, statementIndex){
     const line=c3[key];
     if(line) return `<div class="partnerEvent"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
   }
+
+  if(currentCaseId===4 && selected){
+    const c4={
+      "chihiro:1":"寄贈台帳は『誰が何を残したか』を見る資料なんだね。",
+      "chihiro:2":"外には出てない。まだ資料館の中にある可能性が高そう。",
+      "kazuki:1":"盗む目的じゃなく、表記を確認したかっただけみたい。",
+      "kazuki:2":"棚じゃなくてワゴンへ戻した。ここから次の人に渡ってるね。",
+      "riko:1":"大型地図の引き出し……『開けてないと思う』って少し曖昧だね。",
+      "riko:2":"怒られるのが怖くて言えないこと、ありそう。"
+    };
+    const line=c4[key];
+    if(line) return `<div class="partnerEvent"><strong>${selected.icon} ${selected.name}</strong><br>${line}</div>`;
+  }
   if(!selected){
     if(currentCase?.origin && originNemoMet){
       const originReactions={
@@ -4095,6 +4220,25 @@ function contradictionMeta(flag){
       evidence:"コピー機に残った『青いノクターン』の紙片",
       summary:"18:21にユズのIDで8枚コピーされ、紙詰まりには消えた原本と同じ手書きの星印・小節番号が残っていた。"
     },
+
+    chihiro_access:{
+      title:"『誰も書庫に入っていない』と入室ログが食い違う",
+      statement:"チヒロ『15時20分ごろから、誰も閉架書庫には入っていません』",
+      evidence:"15:27 臨時閲覧パスT-02の入室ログ",
+      summary:"常用鍵とは別に臨時閲覧パスが使われていた。15:27〜15:36、有馬カズキが閉架書庫へ入っている。"
+    },
+    kazuki_scan:{
+      title:"『寄贈台帳には触れていない』とスキャン履歴が食い違う",
+      statement:"カズキ『見たのは古地図だけ。寄贈台帳 第六冊には触れていません』",
+      evidence:"15:31『YN-DON-06 / p.113』のスキャン履歴",
+      summary:"YN-DON-06は第六冊の資料番号。カズキは少なくとも15:31に台帳を開き、一ページをスキャンしている。"
+    },
+    riko_wagon:{
+      title:"『青い写真箱だけ運んだ』と館内写真が食い違う",
+      statement:"リコ『運んだのは青い写真箱だけ。茶色い台帳には触ってません』",
+      evidence:"15:42の館内記録写真",
+      summary:"リコが押す整理ワゴンには、青い写真箱と一緒に茶色い大型冊子が写っている。第六冊はカズキ退出後もワゴン上にあり、リコの手元へ渡っていた。"
+    },
     kana_misaki:{
       title:"カナの居場所が証言同士で食い違う",
       statement:"カナ『トイレのあと入口付近にいた』",
@@ -4283,7 +4427,9 @@ function nextMoveHtml(){
         ? "密室の前提が崩れ、コピーの記録もつながった。最後に、誰が・なぜ楽譜を動かしたのか確定しよう。"
         : currentCaseId===3
           ? "声が作られた時刻、回線復旧、残っていた機械。最後に、09:08の留守電が届いた流れを確定しよう。"
-          : "集めた矛盾をもとに、最後の推理へ進もう。";
+          : currentCaseId===4
+            ? "誰が台帳に触れ、最後にどこへ動かしたのか。三つの記録をつないで確定しよう。"
+            : "集めた矛盾をもとに、最後の推理へ進もう。";
     return `<div class="nextMove">
       <div class="nextMoveTitle">🔎 三つの矛盾がそろった</div>
       <div>${finalLine}</div>
@@ -4451,6 +4597,40 @@ function presentEvidence(clueId){
       <div class="newEvidenceGain"><strong>💾 バッファ記録</strong><br>
       <strong>昨日18:49 保留 → 今日09:08 再発信完了</strong></div><br>
       <strong>『死後に誰かが声を送った』という前提が崩れた。</strong>`;
+
+    } else if(rule.flag==="chihiro_access"){
+      msg.innerHTML=`<strong>一つ目の矛盾を発見！</strong><br><br>
+      チヒロは『15時20分ごろから、誰も閉架書庫には入っていない』と話した。<br>
+      しかし <strong>入室ログ</strong> には、15:27に臨時閲覧パスT-02で開錠した記録がある。<br><br>
+      チヒロ「……臨時パス。そうだ、有馬さんに渡していました。受付が立て込んで、返却だけ確認して忘れてた……」<br><br>
+      <strong>台帳が消えた時間帯に、カズキは書庫へ入っていた。</strong>`;
+    } else if(rule.flag==="kazuki_scan"){
+      msg.innerHTML=`<strong>二つ目の矛盾を発見！</strong><br><br>
+      カズキは『見たのは古地図だけ。寄贈台帳には触れていない』と証言した。<br>
+      しかし <strong>資料スキャナ履歴</strong> には15:31、『YN-DON-06 / p.113』。これは第六冊の資料番号だ。<br><br>
+      カズキ「……見ました。旧町名の漢字を確認したかったんです。一ページだけスキャンして、台帳は閲覧ワゴンへ戻しました」<br><br>
+      <strong>15:31の時点では、第六冊はまだ資料館内にあり、カズキのあとワゴンへ戻されていた。</strong>`;
+    } else if(rule.flag==="riko_wagon"){
+      if(!evidence.has("recoveredLedger")){
+        evidence.add("recoveredLedger");
+        const insight=getNemoInsight("recoveredLedger");
+        if(insight) nemoInsights.recoveredLedger=insight;
+      }
+      if(!evidence.has("kuroseRoster")){
+        evidence.add("kuroseRoster");
+        const insight=getNemoInsight("kuroseRoster");
+        if(insight) nemoInsights.kuroseRoster=insight;
+      }
+      renderFile();
+      msg.innerHTML=`<strong>三つ目の矛盾を発見！</strong><br><br>
+      リコは『運んだのは青い写真箱だけ。茶色い台帳には触っていない』と話した。<br>
+      しかし <strong>15:42の館内記録写真</strong> には、リコのワゴン上に茶色い大型冊子が写っている。<br><br>
+      リコ「……私です。台帳から古い封筒が落ちかけてて。別々にしたらなくしそうだったから、台帳ごと大型地図の引き出しに入れました。すぐ戻すつもりだったんです」<br><br>
+      15:44、リコは受付へ呼ばれ、そのまま戻すのを忘れていた。<br><br>
+      <div class="newEvidenceGain"><strong>📕 台帳を回収した</strong><br>
+      <strong>大型地図A-3の奥から『地域寄贈台帳 第六冊』を発見。</strong><br>破損はなく、古い封筒も一緒に残っている。</div><br>
+      <div class="newEvidenceGain"><strong>📜 封筒から古い名簿を確認</strong><br>
+      年代の違う記録に、<strong>『黒瀬』という名字が何度も現れる。</strong></div>`;
     } else if(rule.flag==="kana_misaki"){
       msg.innerHTML=`<strong>矛盾を発見！</strong><br><br>
       カナは「トイレのあと、入口付近にいた」と話した。<br>
@@ -5206,7 +5386,9 @@ function finalReveal(){
       ? "密室の前提をほどいた探偵"
       : currentCaseId===3
         ? "昨日の声を届けた探偵"
-        : "真相へたどり着いた探偵";
+        : currentCaseId===4
+          ? "名前の奥に残る記録を見つけた探偵"
+          : "真相へたどり着いた探偵";
 
   if(currentCase?.origin){
     document.getElementById("endingText").innerHTML=`${currentCase.ending}<br><br>${currentCase.originEpilogue}<br><br>🏅 称号：<strong>${titleName}</strong>`;
@@ -5237,7 +5419,9 @@ function finalReveal(){
       }else if(currentCaseId===2){
         notice.innerHTML=`🔓 <strong>SEASON 2 · CASE 03 解放</strong><br>新しい事件が探偵局に届きました。<br><br><span class="muted">CASE 03「届いたのは昨日の声」が捜査可能になりました。</span>`;
       }else if(currentCaseId===3){
-        notice.innerHTML=`🔓 <strong>SEASON 2 · CASE 03 CLEAR</strong><br>三つ目の事件を解決しました。<br><br><span class="muted">CASE 04「黒瀬という名前」は未更新です。解決済みの事件はいつでも再捜査できます。</span>`;
+        notice.innerHTML=`🔓 <strong>SEASON 2 · CASE 04 解放</strong><br>新しい事件が探偵局に届きました。<br><br><span class="muted">CASE 04「黒瀬という名前」が捜査可能になりました。</span>`;
+      }else if(currentCaseId===4){
+        notice.innerHTML=`🔓 <strong>SEASON 2 · CASE 04 CLEAR</strong><br>四つ目の事件を解決しました。<br><br><span class="muted">CASE 05「写っていない一人」は未更新です。解決済みの事件はいつでも再捜査できます。</span>`;
       }else{
         notice.innerHTML=`✅ <strong>CASE CLEAR</strong>`;
       }
@@ -5408,8 +5592,10 @@ if(gameMainCol && "ResizeObserver" in window){
 
 
 renderCaseProgress();
-if(isCaseCleared(3)){
-  setProgressHint("CASE 01〜03 解決済み。CASE 04「黒瀬という名前」は未更新です。解決済みの事件はいつでも再捜査できます。");
+if(isCaseCleared(4)){
+  setProgressHint("CASE 01〜04 解決済み。CASE 05「写っていない一人」は未更新です。解決済みの事件はいつでも再捜査できます。");
+}else if(isCaseCleared(3)){
+  setProgressHint("✨ CASE 04「黒瀬という名前」が捜査可能です。");
 }else if(isCaseCleared(2)){
   setProgressHint("✨ CASE 03「届いたのは昨日の声」が捜査可能です。");
 }else if(isCaseCleared(1)){

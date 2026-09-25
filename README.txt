@@ -1,4 +1,4 @@
-NEMO Mystery Days v0.71
+NEMO Mystery Days v0.72
 
 GitHub Pages structure:
 - index.html          : Season select portal
@@ -12,3 +12,6 @@ Important:
 - Season 1 save key: nemoMysteryDaysSeason1Progress_v1
 - Season 2 save key: nemoMysteryDaysSeason2Progress_v1
 - Season 2 unlocks when Season 1 save contains CASE 08 as cleared.
+
+
+SEASON 2 CASE 04「黒瀬という名前 ― 消えた寄贈台帳 ―」追加。
