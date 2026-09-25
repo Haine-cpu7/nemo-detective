@@ -1,4 +1,4 @@
-NEMO Mystery Days v0.75
+NEMO Mystery Days v0.76
 
 GitHub Pages structure:
 - index.html          : Season select portal
@@ -15,3 +15,6 @@ Important:
 
 
 SEASON 2 CASE 06「日記を書いた人 ― 八日間の記録 ―」追加。
+
+
+v0.76: SEASON 2 CASE 07「記録者からの依頼 ― 白い保管箱 ―」追加。通常の矛盾提示型。
