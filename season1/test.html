@@ -2270,7 +2270,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.88</span>
+    <span class="badge">v0.90</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2533,7 +2533,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 1 v0.88 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 1 v0.90 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3540,7 +3540,7 @@ const cases={
   },
   intro:"依頼人はいない。今回追うのは、ずっと目の前にあった『一枚の写真』そのもの。誰がシャッターを切ったのかを、記録から逆算する。",
   evidence:{
-    familiarPhoto:{icon:"📷",name:"見慣れた肉まんの写真",image:"../assets/nemos/66.png",desc:"ねもが星待館の旅の最終日に公開した写真。探偵局では、かんさつねもちゃんの相棒写真としても使っている。両手には肉まん。自撮り棒や鏡越しの撮影には見えず、少し離れた位置から撮られている。"},
+    familiarPhoto:{icon:"📷",name:"見慣れた肉まんの写真",image:"../assets/nemos/66.png",desc:"ねもが星待館の旅の最終日に公開した、見慣れた肉まんの写真。探偵局でも何度も見てきた一枚。両手には肉まん。自撮り棒や鏡越しの撮影には見えず、少し離れた位置から誰かに撮ってもらったように見える。"},
     day8Record:{icon:"📖",name:"ねもの日記・8日目の公開記録",desc:"公開された日記にはこの写真が掲載されているが、撮影者についての記述はない。公開版は写真の端がわずかにトリミングされている。"},
     photoMeta:{icon:"🕒",name:"写真データの撮影時刻",desc:"古い端末バックアップに残っていた撮影情報。星待駅前で10:46に撮影。公開記録より前の時刻で、元データは投稿版よりわずかに横幅が広い。"},
     naotoDeparture:{icon:"🎫",name:"黒瀬直人の移動記録",desc:"直人は星待館を出たあと10:18発の便で町を離れている。交通ICの利用記録と乗車券控えが一致。写真が撮られた10:46には星待駅にいなかった。"},
@@ -3596,8 +3596,8 @@ const cases={
     {witness:"mayu",evidence:"concourseStill",statement:0,flag:"mayu_third",requires:["okami_naoto"]}
   ],
   finalReady:["okami_naoto","mayu_third"],
-  ending:"写真が撮られたのは10:46。<br>黒瀬直人はその28分前に星待の町を離れており、駅員も窓口を離れていなかった。<br><br>駅舎記録には、ねもの正面――写真を撮れる位置に、名前の分からない第三者が立っていた。<br><br>さらに月影館の古いファイルには、公開版ではなく『元画像』と一致する照合記録が、日記公開より前の時刻で残されていた。<br><br>復元した元画像の右端。<br>ガラスには、カメラを構える人物が映っている。肩掛けバッグには、CASE 01から何度も現れていた『欠けた円に三本線』の印。<br><br>撮影者の名前は、まだ分からない。<br>けれど、その人物が後から日記を読んだだけではないことは分かった。星待館の旅の最終日、ねものすぐ近くに実際にいた。<br><br>そして、もう一つの違和感が残る。<br>写真のねもは、まっすぐカメラを見て笑っている。<br>撮影者を知っていたのか。声をかけられただけなのか。それとも――。<br><br>さらに根本的な疑問がある。<br>私たちはずっと『ねもの日記』と呼んできた。<br>でも、あの8日間の文章を書き、写真を選び、公開したのは、本当に誰だったのだろう。<br><br>あなたは、ねもを見る。<br>『この写真を撮った人……本当に覚えてない？』<br><br>Season 1はここで一区切りになる。<br>けれど、答えの出ていない記録は、まだ残っている。",
-  culpritComment:{name:"ねも",line:"………………。"}
+  ending:"写真が撮られたのは10:46。<br>黒瀬直人はその28分前に星待の町を離れており、駅員も窓口を離れていなかった。<br><br>駅舎記録には、ねもの正面――写真を撮れる位置に、名前の分からない第三者が立っていた。<br><br>さらに月影館の古いファイルには、公開版ではなく『元画像』と一致する照合記録が、日記公開より前の時刻で残されていた。<br><br>復元した元画像の右端。<br>ガラスには、カメラを構える人物が映っている。肩掛けバッグには、CASE 01から何度も現れていた『欠けた円に三本線』の印。<br><br>撮影者の名前は、まだ分からない。<br>けれど、その人物が後から日記を読んだだけではないことは分かった。星待館の旅の最終日、ねものすぐ近くに実際にいた。<br><br>写真のねもは、まっすぐ撮影者のほうを見て笑っている。<br>隠し撮りではない。ねも自身も、撮られていたことは知っていたはずだ。<br><br>それなのに――誰に撮ってもらったのかだけが、記憶からうまく出てこない。<br><br>そして、もう一つ。<br>私たちはずっと『ねもの日記』と呼んできた。<br>1日目から7日目までは、ねも自身が旅を残してきた記録に見える。<br>でも、第三者が撮った8日目の写真だけは、少し違う。<br><br>あなたは、ねもを見る。<br>『この写真、誰に撮ってもらったの？』<br><br>そして、もう一つ尋ねた。<br>『8日目の日記……本当にねもが書いた？』<br><br>Season 1はここで一区切りになる。<br>写真を撮ったのは誰か。<br>8日目を書いたのは、本当にねもなのか。<br>二つの問いだけが、事件ファイルに残った。",
+  culpritComment:{name:"ねも",line:""}
 }
 
 };
@@ -5101,7 +5101,15 @@ function presentEvidence(clueId){
     }else if(rule.flag==="okami_naoto"){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「直人さんじゃない。まず一人、候補が消えたね。」</div>`;
     }else if(rule.flag==="mayu_third"){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「誰もいなかったんじゃなくて、見えない場所にいたんだね。……でも、写真のねもはカメラを見てる。」</div>`;
+      let case8Line="……これ、ねもだね。ちゃんと撮ってる人のほうを見てる。なのに、誰だったか思い出せない。";
+      if(selected?.id===96){
+        case8Line="……これ、ねもだね。撮られたことは分かる。でも、誰が撮ったのかだけが、うまくつながらない。";
+      }else if(selected?.id===31){
+        case8Line="……誰かに撮ってもらったんだよね。でも、その人のことを思い出そうとすると、ぼんやりするの。";
+      }else if(selected?.id===12){
+        case8Line="……これ、ねも。撮ってもらった……はず。なのに、その人だけ思い出せない。";
+      }
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「${case8Line}」</div>`;
     }else if(rule.flag==="sae_return" && nemoInsights.returnLog){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「返送されてない。二十年間、ここで止まってたんだね。」</div>`;
     }else if(rule.flag==="haru_farewell" && nemoInsights.teacherLog){
@@ -5592,7 +5600,18 @@ function finalReveal(){
 
   const culpritBox=document.getElementById("culpritComment");
   if(culpritBox){
-    const c=currentCase.culpritComment;
+    let c=currentCase.culpritComment;
+    if(currentCase===cases[8] && selected){
+      let line="……撮ってもらったのは覚えてる。でも、誰だったかが出てこない。日記も、ねもが書いたはずなんだけど……この日だけ、なんか変。";
+      if(selected.id===96){
+        line="……撮ってもらったことは覚えてる。でも、誰だったか思い出せない。8日目も、ねもが書いたはず。……ただ、『はず』って言ってるのが、ちょっと気になる。";
+      }else if(selected.id===31){
+        line="……ねもが書いたと思ってたよ。でも、誰に撮ってもらったかも、その日の文章も、思い出そうとするとぼんやりするの。";
+      }else if(selected.id===12){
+        line="……撮ってもらった。書いた……はず。……この日だけ、記憶がぼやけてる。";
+      }
+      c={name:selected.name,line};
+    }
     culpritBox.classList.toggle("hidden",!c);
     culpritBox.innerHTML=c ? `<span class="culpritName">${c.name}</span><div class="culpritLine">「${c.line}」</div>` : "";
   }
@@ -5605,7 +5624,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`<div class="seasonCompleteMark">🔓 <strong>SEASON 1 COMPLETE</strong><br>CASE 08を解決しました。<span class="seasonPara"><strong>SEASON 2「新たな事件簿」が解放されました。</strong></span><span class="seasonPara muted">撮影者の名前は、まだ分からない。<br>ねもが撮影者を知っているのかも、分からない。<br><br>そして――<br>『ねもの日記』を書いたのは、本当に誰だったのか。<br><br>次の事件簿は、この謎を抱えたまま始まります。</span></div>`;
+      notice.innerHTML=`<div class="seasonCompleteMark">🔓 <strong>SEASON 1 COMPLETE</strong><br>CASE 08を解決しました。<span class="seasonPara"><strong>SEASON 2「新たな事件簿」が解放されました。</strong></span><span class="seasonPara muted">撮影者の名前は、まだ分からない。<br>ねも自身も、誰に撮ってもらったのか思い出せない。<br><br>そして――<br>8日目の『ねもの日記』を書いたのは、本当にねもだったのか。<br><br>次の事件簿は、この謎を抱えたまま始まります。</span></div>`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
