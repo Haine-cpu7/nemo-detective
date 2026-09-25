@@ -167,7 +167,7 @@ button,select{font:inherit} button{cursor:pointer}
 .clueSectionTitle{grid-column:1/-1;color:var(--accent2);font-weight:1000;font-size:13px;margin-top:4px}
 .testimonyPick{border-color:#5e5879;background:#28283d}.testimonyPick>div{margin-top:5px;color:#d8d8e4;line-height:1.55}
 .bigReveal{text-align:center;padding:30px 12px}.bigReveal .word{font-size:clamp(36px,9vw,88px);font-weight:1000;letter-spacing:.06em;color:var(--accent2);text-shadow:0 5px 0 #493c18}
-.bigReveal p{color:var(--muted);line-height:1.8}
+.bigReveal p{color:var(--muted);line-height:1.9}#endingText{text-align:left;max-width:720px;margin:18px auto 0;line-height:2.05}.seasonCompleteMark{line-height:1.9}.seasonCompleteMark .seasonPara{display:block;margin-top:14px}
 .culpritComment{max-width:620px;margin:18px auto 20px;padding:15px 18px;border:1px solid #78649f;border-radius:16px;background:linear-gradient(135deg,#2c2546,#252b3d);text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
 .culpritComment .culpritName{display:block;margin-bottom:7px;color:#f4c96b;font-weight:1000;font-size:13px;letter-spacing:.03em}
 .culpritComment .culpritLine{color:#f5f1ff;font-size:16px;line-height:1.8;font-weight:800}
@@ -2033,7 +2033,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.64 CASE 05 staged clue reveal */
+/* v0.66 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2072,7 +2072,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.64 separate how-to manual */
+/* v0.66 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2091,7 +2091,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.64 CASE 07 truth reconstruction */
+/* v0.66 CASE 07 truth reconstruction */
 .reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
 .reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
 .reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
@@ -2104,7 +2104,7 @@ body:not(.case-active) .topFileBtn{
 .reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
 @media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
 
-/* v0.64 cross-case archive mystery */
+/* v0.66 cross-case archive mystery */
 .archiveLead{padding:15px 16px;border:1px solid #65568d;border-radius:16px;background:linear-gradient(135deg,#2c2941,#202638);margin-bottom:14px;line-height:1.75}
 .archiveLead strong{color:#f3d47c}.archiveFile{border:1px solid #4f566f;background:#171b28;border-radius:18px;padding:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
 .archiveFileTop{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px dashed #505872}.archiveFileTop h3{margin:0 0 3px;font-size:18px}.archiveFileTop p{margin:0;color:var(--muted);font-size:13px}
@@ -2114,7 +2114,7 @@ body:not(.case-active) .topFileBtn{
 .archiveResult{margin-top:13px}.archiveReveal{margin-top:15px;border:1px solid #7865b2;border-radius:16px;background:linear-gradient(145deg,#2b2442,#1a2130);padding:16px}.archiveReveal h3{margin:0 0 8px;color:#f2d178}.archiveLocations{display:grid;gap:5px;margin:12px 0;padding:12px;border-left:3px solid #7565ad;background:#171b28;border-radius:0 10px 10px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}.archiveCase08{margin-top:12px;padding:12px;border:1px dashed #7f719f;border-radius:12px;color:#e7e0ff;background:#262138}.archiveNemo{margin-top:12px;color:#e8e2ff}.archiveContinue{margin-top:14px;width:100%}
 @media(max-width:640px){.archiveCaseGrid{grid-template-columns:1fr}.archiveFile{padding:13px}.archiveFileTop{align-items:flex-start}.arcSigil{width:50px;height:50px;min-width:50px}.arcSigil:after{left:34px;top:13px;width:34px}.archiveCaseCard{padding:10px}}
 
-/* v0.64 星待館 / ねもの日記 crossover */
+/* v0.66 星待館 / ねもの日記 crossover */
 .externalArchiveGate{margin-top:14px;padding:14px;border:1px dashed #7b6a9d;border-radius:14px;background:#211d31}
 .externalArchiveGate p{margin:0 0 10px;line-height:1.7}
 .externalArchive{margin-top:14px;border:1px solid #8a6f78;border-radius:17px;background:linear-gradient(145deg,#30252d,#1c202d);padding:16px;box-shadow:0 12px 28px rgba(0,0,0,.18)}
@@ -2130,10 +2130,10 @@ body:not(.case-active) .topFileBtn{
 
 
 
-/* v0.64 CASE 08 photo trace */
+/* v0.66 CASE 08 photo trace */
 .evidencePhoto{margin:11px 0 3px;border:1px solid #56617f;border-radius:14px;overflow:hidden;background:#111722;max-width:360px}.evidencePhoto img{display:block;width:100%;height:auto}.photoTraceTag{display:inline-block;margin-top:8px;padding:5px 8px;border:1px solid #7567a8;border-radius:999px;background:#26203a;color:#dcd4ff;font-size:10px;font-weight:900;letter-spacing:.06em}.seasonCompleteMark{margin-top:14px;padding:14px 15px;border:1px solid #8c78e1;border-radius:15px;background:linear-gradient(135deg,#2b2550,#1a2435);color:#eee9ff}.seasonCompleteMark strong{color:#f3d37b}
 
-/* v0.64 season architecture */
+/* v0.66 season architecture */
 .seasonNavRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 0;padding:10px 12px;border:1px solid #3c465f;border-radius:12px;background:#171c2a;color:#9da7bd;font-size:12px;font-weight:800}.seasonHomeLink{color:#d7dcef;text-decoration:none}.seasonHomeLink:hover{color:#fff}.seasonFinaleTeaser{border-style:dashed!important}.seasonFinaleTeaser .caseDesc{max-width:720px}@media(max-width:640px){.seasonNavRow{align-items:flex-start;flex-direction:column;gap:5px}}
 </style>
 </head>
@@ -2148,7 +2148,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.64</span>
+    <span class="badge">v0.66</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2411,7 +2411,7 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 1 v0.64 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 1 v0.66 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3397,7 +3397,7 @@ const cases={
       motive:"20:55の声も21:00の停電と効果音も、久世が生きて操作する必要はなかった。"
     }
   },
-  ending:"久世玲司が死亡したのは21時ではなく、20時40分から50分の間だった。20:55の声は昼に録音されたもの。21:00の停電と効果音も、久世自身がUSBに設定した自動演出だった。クロベは20:45ごろ書斎へ向かい、長年自分の案が久世の作品として扱われてきたことを巡って久世と口論になった。衝動的に机上の重いブックエンドで久世を殴り、久世は倒れた。その時の衝撃で腕時計が20:46で止まった。直後、クロベは進行表を見て気づく。何もしなくても21時になれば『久世玲司が殺される演出』が始まる。そこで現場を大きく変えずに離れ、全員が21時を死亡時刻だと思うことに賭けた。だが録音、映像、証言、そして自動演出の設定を並べ直すと、本物の事件だけが21時より前へ浮かび上がった。クロベが『あいつの最後のトリックに隠れることになるとはな』と呟くと、あなたは答えた。『違う。そのトリックを解いたから、あなたに辿り着いた。』事件のあと、ねもは小さく言った。『……探偵って、見つけたくない答えも見つけないといけないんだね。でも、ひとりじゃなくてよかった。』",
+  ending:"久世玲司が死亡したのは21時ではなく、20時40分から50分の間だった。20:55の声は昼に録音されたもの。21:00の停電と効果音も、久世自身がUSBに設定した自動演出だった。<br><br>クロベは20:45ごろ書斎へ向かい、長年自分の案が久世の作品として扱われてきたことを巡って久世と口論になった。衝動的に机上の重いブックエンドで久世を殴り、久世は倒れた。その時の衝撃で腕時計が20:46で止まった。<br><br>直後、クロベは進行表を見て気づく。何もしなくても21時になれば『久世玲司が殺される演出』が始まる。そこで現場を大きく変えずに離れ、全員が21時を死亡時刻だと思うことに賭けた。<br><br>だが録音、映像、証言、そして自動演出の設定を並べ直すと、本物の事件だけが21時より前へ浮かび上がった。<br><br>クロベが『あいつの最後のトリックに隠れることになるとはな』と呟くと、あなたは答えた。<br><br>『違う。そのトリックを解いたから、あなたに辿り着いた。』<br><br>事件のあと、ねもは小さく言った。<br><br>『……探偵って、見つけたくない答えも見つけないといけないんだね。でも、ひとりじゃなくてよかった。』",
   culpritComment:{name:"クロベ",line:"……皮肉だな。あいつが作った最後のトリックに、俺が隠れることになるとは。"}
 },
 8:{
@@ -3436,7 +3436,7 @@ const cases={
     ["case08Card","◌ CASE 08カード","auto","auto","38%","8%"]
   ],
   people:[
-    {name:"ねも",role:"星待館の旅を記録した本人",note:"最終日の写真を誰かに撮ってもらったことは覚えているが、相手の顔や名前は曖昧。"},
+    {name:"星待館の女将",role:"最終日の朝を知る人",note:"ねもと直人が朝に話していたため、公開された写真も直人が撮ったものだと思い込んでいた。撮影場面そのものは見ていない。"},
     {name:"黒瀬直人",role:"星待館で出会った人物",note:"星待館を出たあと、写真の撮影時刻より前に町を離れた記録がある。"},
     {name:"マユ",role:"当時の星待駅員",note:"当日の駅勤務記録を確認。ねもを見かけた記憶はあるが、撮影者までは覚えていない。"}
   ],
@@ -3451,29 +3451,27 @@ const cases={
     ["現在","探偵局に『CASE 08』のカードが届く"]
   ],
   witnesses:{
-    nemo:{icon:"🐱",name:"ねも",role:"旅の記録者",statements:[
-      {text:"『撮ってくれた人……直人さんだった気もする。帰る前に、駅で会ったような……。』",press:"ねも自身も自信はなく、『ずっと前のことだから混ざってるかも』と首をかしげる。",contradiction:"naotoDeparture"},
-      {text:"『顔は、ぜんぜん覚えてない。濃い色の上着だったような気はする。』",press:"相手が『撮ろうか』と声をかけたことだけは、ぼんやり覚えているという。"},
-      {text:"『誰かがこの写真を持ってるなら、日記を見て保存しただけじゃないのかな。』",press:"公開した写真は誰でも見られる。ねもは、月影館の記録者も公開後に画像を拾っただけだと考えている。",contradiction:"archiveCopy",requires:["mayu_third"]}
+    okami:{icon:"♨️",name:"星待館の女将",role:"最終日の朝を知る人",statements:[
+      {text:"『あの写真を初めて見た時は、直人が撮ったんだと思っていました。朝、二人が話していたのを見ていたので。』",press:"女将は撮影場面そのものを見ていない。『二人が話していた』という記憶から、直人が撮影者だと思い込んでいたという。",contradiction:"naotoDeparture"},
+      {text:"『ねもちゃんはそのあと、一人で駅の方へ向かったはずです。私は玄関から見送っただけですよ。』",press:"宿を出た後のねもの行動までは、女将にも分からない。"}
     ]},
     naoto:{icon:"🧳",name:"黒瀬直人",role:"星待館で出会った人物",statements:[
       {text:"『僕は10時18分の便で町を出ています。あの写真を撮ったのは僕じゃない。』",press:"交通ICの記録とも一致している。写真の撮影は10:46なので、直人はすでに星待を離れていた。"},
       {text:"『あの写真を初めて見たのは、日記が公開されたあとです。』",press:"直人は写真の構図にも心当たりがないと話す。"}
     ]},
     mayu:{icon:"🚉",name:"マユ",role:"当時の星待駅員",statements:[
-      {text:"『10時46分ごろなら、ねもさんの近くに写真を撮れる人はいなかったと思います。駅前は静かでしたから。』",press:"窓口越しに駅前を見ていたが、忙しい時間帯ではなく、目立つ人影は記憶にないという。",contradiction:"concourseStill",requires:["nemo_naoto"]},
+      {text:"『10時46分ごろなら、ねもさんの近くに写真を撮れる人はいなかったと思います。駅前は静かでしたから。』",press:"窓口越しに駅前を見ていたが、忙しい時間帯ではなく、目立つ人影は記憶にないという。",contradiction:"concourseStill",requires:["okami_naoto"]},
       {text:"『駅員が撮った可能性はありません。私はその時間、窓口を離れていませんでした。』",press:"勤務記録にも10:40〜11:00の連続対応が残っている。"},
       {text:"『防犯記録の人……こんな位置に誰かいたんですね。柱とガラスで、窓口からは見えにくい場所です。』",press:"濃い上着の人物は、ちょうどねもへカメラを向けられる位置に立っていた。"}
     ]}
   },
   multiClear:[
-    {witness:"nemo",evidence:"naotoDeparture",statement:0,flag:"nemo_naoto"},
-    {witness:"mayu",evidence:"concourseStill",statement:0,flag:"mayu_third",requires:["nemo_naoto"]},
-    {witness:"nemo",evidence:"archiveCopy",statement:2,flag:"nemo_archive",requires:["mayu_third"]}
+    {witness:"okami",evidence:"naotoDeparture",statement:0,flag:"okami_naoto"},
+    {witness:"mayu",evidence:"concourseStill",statement:0,flag:"mayu_third",requires:["okami_naoto"]}
   ],
-  finalReady:["nemo_naoto","mayu_third","nemo_archive"],
-  ending:"写真が撮られたのは10:46。黒瀬直人はその28分前に星待の町を離れており、駅員も窓口を離れていない。駅舎記録には、ねもの正面――写真を撮れる位置に、名前の分からない第三者が立っていた。そして月影館の古いファイルには、公開版ではなく『元画像』と一致する照合記録が、日記公開より前の時刻で残されていた。復元した元画像の右端には、ガラスに映る撮影者の姿。肩掛けバッグには、CASE 01から何度も現れていた『欠けた円に三本線』の印があった。撮影者の名前までは分からない。けれど一つだけ確定した。記録者は、後から日記を読んだ誰かではない。星待館の旅の最終日、ねものすぐ近くに実際にいた。そして、探偵局で何度も見てきたこの写真そのものが、ずっと伏線として残っていた。Season 1はここで一区切りになる。謎の人物が誰なのか――その答えは、まだ事件ファイルの外にある。",
-  culpritComment:{name:"ねも",line:"……この写真、ずっと見てたのにね。"}
+  finalReady:["okami_naoto","mayu_third"],
+  ending:"写真が撮られたのは10:46。<br>黒瀬直人はその28分前に星待の町を離れており、駅員も窓口を離れていなかった。<br><br>駅舎記録には、ねもの正面――写真を撮れる位置に、名前の分からない第三者が立っていた。<br><br>さらに月影館の古いファイルには、公開版ではなく『元画像』と一致する照合記録が、日記公開より前の時刻で残されていた。<br><br>復元した元画像の右端。<br>ガラスには、カメラを構える人物が映っている。肩掛けバッグには、CASE 01から何度も現れていた『欠けた円に三本線』の印。<br><br>撮影者の名前は、まだ分からない。<br>けれど、その人物が後から日記を読んだだけではないことは分かった。星待館の旅の最終日、ねものすぐ近くに実際にいた。<br><br>そして、もう一つの違和感が残る。<br>写真のねもは、まっすぐカメラを見て笑っている。<br>撮影者を知っていたのか。声をかけられただけなのか。それとも――。<br><br>さらに根本的な疑問がある。<br>私たちはずっと『ねもの日記』と呼んできた。<br>でも、あの8日間の文章を書き、写真を選び、公開したのは、本当に誰だったのだろう。<br><br>あなたは、ねもを見る。<br>『この写真を撮った人……本当に覚えてない？』<br><br>Season 1はここで一区切りになる。<br>けれど、答えの出ていない記録は、まだ残っている。",
+  culpritComment:{name:"ねも",line:"………………。"}
 }
 
 };
@@ -4664,23 +4662,17 @@ function contradictionMeta(flag){
       evidence:"ガク『20:45ごろ、クロベさんに書斎はどっちだと聞かれた』",
       summary:"クロベは20:45ごろ食堂ではなく書斎へ向かう廊下にいた。さらに、共同制作に関わっていたクロベが書斎の場所を知らないふりをした理由も不自然に残る。"
     },
-    nemo_naoto:{
-      title:"『直人が撮った』という記憶が時刻と合わない",
-      statement:"ねも『撮ってくれた人……直人さんだった気もする』",
+    okami_naoto:{
+      title:"『直人が撮ったと思っていた』という推測が時刻と合わない",
+      statement:"星待館の女将『あの写真は直人が撮ったんだと思っていました』",
       evidence:"黒瀬直人は10:18に星待の町を離れている",
-      summary:"写真の撮影時刻は10:46。直人は28分前に町を離れており、撮影者ではあり得ない。ねもの記憶は別の場面と混ざっていた。"
+      summary:"写真の撮影時刻は10:46。女将が撮影者だと思っていた直人は、その28分前に町を離れていた。撮影場面を見たわけではなく、朝の印象からの推測だった。"
     },
     mayu_third:{
       title:"『近くに誰もいなかった』と駅舎記録が食い違う",
       statement:"マユ『ねもさんの近くに写真を撮れる人はいなかったと思います』",
       evidence:"10:45〜10:47の駅舎記録に、ねもの正面へ立つ人影",
       summary:"柱とガラスの死角に、カメラを向けられる位置の第三者がいた。窓口から見えなかっただけだった。"
-    },
-    nemo_archive:{
-      title:"『公開後に保存しただけ』では説明できない",
-      statement:"ねも『日記を見て保存しただけじゃないのかな』",
-      evidence:"月影館ファイルの元画像照合記録は日記公開より前",
-      summary:"記録者は公開画像を後から拾ったのではない。公開前の元画像へアクセスしていた。"
     },
     hina_memory:{
       title:"ヒナの記憶と、封筒が見つかった場所が食い違う",
@@ -4906,34 +4898,32 @@ function presentEvidence(clueId){
       20:55の声は録音。21:00の事件は自動演出。<br>
       そして20:45、クロベは書斎へ向かっていた。<br><br>
       <strong>本物の事件だけが、21時より前へ浮かび上がった。</strong>`;
-    } else if(rule.flag==="nemo_naoto"){
+    } else if(rule.flag==="okami_naoto"){
       msg.innerHTML=`<strong>一つ目の食い違いを発見！</strong><br><br>
-      ねもは『直人さんに撮ってもらった気もする』と記憶していた。<br>
+      女将は、朝にねもと直人が話していたため『あの写真は直人が撮った』と思っていた。<br>
       しかし <strong>直人は10:18に町を離れ、写真は10:46に撮影</strong> されている。<br><br>
-      ねも「……そっか。直人さんじゃない。じゃあ、誰だったんだろ。」`;
+      女将「……じゃあ、私がそう思い込んでいただけなのね。撮るところを見たわけじゃないもの」<br><br>
+      <strong>黒瀬直人は撮影者候補から外れた。</strong>`;
     } else if(rule.flag==="mayu_third"){
-      msg.innerHTML=`<strong>二つ目の食い違いを発見！</strong><br><br>
-      マユは『写真を撮れる位置には誰もいなかったと思う』と話した。<br>
-      けれど <strong>10:45〜10:47の駅舎記録</strong> には、柱とガラスの死角に濃い上着の人物が立っている。<br><br>
-      マユ「……窓口から見えにくい場所です。こんな人がいたんですね」<br><br>
-      <strong>撮影時、ねものすぐ近くには正体不明の第三者がいた。</strong>`;
-    } else if(rule.flag==="nemo_archive"){
       if(!evidence.has("fullFrame")){
         evidence.add("fullFrame");
         const receivedInsight=getNemoInsight("fullFrame");
         if(receivedInsight) nemoInsights.fullFrame=receivedInsight;
       }
       renderFile();
-      msg.innerHTML=`<strong>三つ目の食い違いを発見！</strong><br><br>
-      ねもは『日記を見て保存しただけでは』と考えた。<br>
-      しかし月影館の記録には、<strong>日記公開より前の時刻で元画像と一致する照合データ</strong> が残っている。<br><br>
-      つまり、記録者は公開された写真を見ただけではない。<br><br>
-      画像断片を組み合わせると、投稿版では切れていた右端が復元できた。<br><br>
+      msg.innerHTML=`<strong>二つ目の食い違いを発見！</strong><br><br>
+      マユは『写真を撮れる位置には誰もいなかったと思う』と話した。<br>
+      けれど <strong>10:45〜10:47の駅舎記録</strong> には、柱とガラスの死角に濃い上着の人物が立っている。<br><br>
+      マユ「……窓口から見えにくい場所です。こんな人がいたんですね」<br><br>
+      <strong>撮影時、ねものすぐ近くには正体不明の第三者がいた。</strong><br><br>
+      ここで、月影館の画像照合記録と投稿前バックアップを重ねて確認する。<br>
+      照合記録は <strong>日記公開より前</strong>。つまり、後から公開写真を保存しただけでは説明できない。<br><br>
+      さらに画像断片を復元すると、投稿版では切れていた右端が戻った。<br><br>
       <div class="newEvidenceGain"><strong>🔍 新しい証拠を復元した</strong><br>
       <strong>『元画像の右端』</strong><br>
       ガラスの反射に、カメラを構える人物。<br>
       その肩掛けバッグには――<strong>欠けた円に三本線</strong>。</div><br>
-      <strong>ずっと見慣れていた一枚の外側に、シリーズをまたぐ痕跡が残っていた。</strong>`;
+      <strong>ここからは証言ではなく、記録そのものを組み直す。</strong>`;
     } else if(rule.flag==="hina_memory"){
       msg.innerHTML=`<strong>食い違いを発見！</strong><br><br>
       ヒナは「パン屋さんに着くまでは、手紙はバッグに入っていたと思う」と話した。<br>
@@ -4973,12 +4963,10 @@ function presentEvidence(clueId){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「21時の前にも、みんな動いてた。時間を最初から見直した方がいいね。」</div>`;
     }else if(rule.flag==="kurobe_alibi"){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「20:45。クロベさん、食堂じゃなくて書斎の方にいたんだね。」</div>`;
-    }else if(rule.flag==="nemo_naoto"){
+    }else if(rule.flag==="okami_naoto"){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「直人さんじゃない。まず一人、候補が消えたね。」</div>`;
     }else if(rule.flag==="mayu_third"){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「誰もいなかったんじゃなくて、見えない場所にいたんだね。」</div>`;
-    }else if(rule.flag==="nemo_archive"){
-      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「公開前から持ってた。……あの人、ほんとにそこにいたのかも。」</div>`;
+      linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「誰もいなかったんじゃなくて、見えない場所にいたんだね。……でも、写真のねもはカメラを見てる。」</div>`;
     }else if(rule.flag==="sae_return" && nemoInsights.returnLog){
       linkedInsight=`<div class="nemoInsight"><strong>🐱 ${selected.name}</strong><br>「返送されてない。二十年間、ここで止まってたんだね。」</div>`;
     }else if(rule.flag==="haru_farewell" && nemoInsights.teacherLog){
@@ -5119,7 +5107,7 @@ function renderReconstruction(){
       <div class="reconLead"><strong>📷 PHOTO TRACE · 真相再構築</strong><br>見慣れた一枚を「時刻・人物・公開前後・印」の順にほどいて、写真の向こう側にいた人物を追おう。<br><span class="muted">名前を当てるのではなく、何が確定できるかを証拠で組み立てます。</span></div>
       <div class="reconstructionBoard">
         <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">1</div><div><div class="reconStepTitle">写真の時刻を固定する</div><div class="reconStepSub">まず「いつ撮られた一枚か」を確定する</div></div></div><div class="reconLogic">${reconSlotHtml("captureTime")}<div class="reconArrow">⇐</div>${reconSlotHtml("captureProof")}</div></section>
-        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">2</div><div><div class="reconStepTitle">撮影者候補を外す</div><div class="reconStepSub">ねもの曖昧な記憶と移動記録を比べる</div></div></div><div class="reconLogic">${reconSlotHtml("photographerClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("photographerProof")}</div></section>
+        <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">2</div><div><div class="reconStepTitle">撮影者候補を外す</div><div class="reconStepSub">撮影時刻と直人の移動記録を比べる</div></div></div><div class="reconLogic">${reconSlotHtml("photographerClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("photographerProof")}</div></section>
         <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">3</div><div><div class="reconStepTitle">第三者の存在を確定する</div><div class="reconStepSub">「誰もいなかった」という記憶を記録で検証する</div></div></div><div class="reconLogic">${reconSlotHtml("thirdClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("thirdProof")}</div></section>
         <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">4</div><div><div class="reconStepTitle">公開後に拾っただけ？</div><div class="reconStepSub">月影館のファイルと日記公開の前後を比べる</div></div></div><div class="reconLogic">${reconSlotHtml("publishClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("publishProof")}</div></section>
         <section class="reconStep"><div class="reconStepHead"><div class="reconStepNo">5</div><div><div class="reconStepTitle">写真をシリーズの謎へつなぐ</div><div class="reconStepSub">投稿版では見えなかった右端を確認する</div></div></div><div class="reconLogic">${reconSlotHtml("markClaim")}<div class="reconArrow">⇐</div>${reconSlotHtml("markProof")}</div></section>
@@ -5481,7 +5469,7 @@ function finalReveal(){
       notice.innerHTML=`🔓 <strong>新しい事件が届きました。</strong><br>CASE ${String(currentCaseId+1).padStart(2,"0")}「${next.title.replace(/^CASE \\d+　/,"") }」が解放されました。<br><span class="muted">解決済みの事件も、事件一覧からいつでも再捜査できます。</span>`;
     }else if(wasFirstClear && currentCaseId===CASE_COUNT){
       notice.classList.remove("hidden");
-      notice.innerHTML=`<div class="seasonCompleteMark">🔓 <strong>SEASON 1 COMPLETE</strong><br>CASE 08を解決しました。<br><br><strong>SEASON 2「新たな事件簿」が解放されました。</strong><br><span class="muted">撮影者の名前はまだ分からない。けれど、『記録者は実際にねもの近くにいた』ことは証明された。次の事件簿は、この謎を抱えたまま始まります。</span></div>`;
+      notice.innerHTML=`<div class="seasonCompleteMark">🔓 <strong>SEASON 1 COMPLETE</strong><br>CASE 08を解決しました。<span class="seasonPara"><strong>SEASON 2「新たな事件簿」が解放されました。</strong></span><span class="seasonPara muted">撮影者の名前は、まだ分からない。<br>ねもが撮影者を知っているのかも、分からない。<br><br>そして――<br>『ねもの日記』を書いたのは、本当に誰だったのか。<br><br>次の事件簿は、この謎を抱えたまま始まります。</span></div>`;
     }else{
       notice.classList.add("hidden");
       notice.innerHTML="";
