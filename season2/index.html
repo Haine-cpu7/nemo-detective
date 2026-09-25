@@ -2296,7 +2296,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.79</span>
+    <span class="badge">v0.85</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2613,7 +2613,7 @@ body:not(.case-active) .topFileBtn{
       <button class="ghost" type="button" onclick="location.href='../'">シリーズ玄関へ</button>
     </div>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 2 v0.79 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 2 v0.85 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -3554,9 +3554,42 @@ function personalizePartnerSpeech(line,context="general",key=""){
   return raw;
 }
 
+const SPARSE_INSIGHT_TARGETS={
+  1:{66:["orangeSticker","receptionLedger"],96:["receptionLedger","clientForm"],31:["holdEnvelope","oldClientRecord"],12:["symbolSlip","officeCamera"]},
+  2:{66:["doorPanel","jammedPage"],96:["repairTag","copyLog"],31:["rehearsalNote","returnFile"],12:["outsideStill","doorPanel"]},
+  3:{66:["inventoryCard","bufferLog"],96:["lineFailure","restoreLog"],31:["voiceMeta","deathRecord"],12:["boothLog","relayManual"]},
+  4:{66:["wagonPhoto","recoveredLedger"],96:["accessLog","drawerGuide"],31:["callMemo","kuroseRoster"],12:["drawerGuide","kuroseRoster"]},
+  5:{66:["contactSheet","yuuSnapshot"],96:["clubRoster","repairSlip"],31:["groupPhoto","farewellNote"],12:["olderGroupPhoto","returnLog"]},
+  6:{66:["day8Photo","captureMeta"],96:["publishCache","archiveOriginal"],31:["nemoDraft","day8Photo"],12:["nextContact","archiveOriginal"]},
+  7:{66:["cartStill","cartWheel"],96:["humidityAlert","accessCopy"],31:["anonymousLetter","curatedNote"],12:["personnelFile","sealCheck"]},
+  8:{66:["case04Record","candidateList"],96:["case04Record","parkPlan"],31:["case04Record","threeRules"],12:["case04Record","missingOrigin"]}
+};
+
+function sparseInsightAllowed(id){
+  if(!selected) return false;
+  return (SPARSE_INSIGHT_TARGETS[currentCaseId]?.[selected.id]||[]).includes(id);
+}
+
+function partnerInsightLabel(){
+  if(!selected) return "ねもの気づき";
+  if(selected.id===66) return "かんさつねもの気づき";
+  if(selected.id===96) return "すいさつねもの整理";
+  if(selected.id===31) return "おはなしねもの気づき";
+  if(selected.id===12) return "ちょっかんねもの違和感";
+  return "ねもの気づき";
+}
+
 function personalizeCommonInsight(v,id){
   if(!v) return v;
-  return {...v, speech:personalizePartnerSpeech(v.speech,"insight",id), stat:partnerStatLabel()};
+  const speech=personalizePartnerSpeech(v.speech,"insight",id);
+  return {
+    ...v,
+    speech,
+    // 事件ファイルには結論ではなく、相棒がその場で感じたことだけを残す。
+    note:speech,
+    label:v.label || partnerInsightLabel(),
+    stat:partnerStatLabel()
+  };
 }
 
 
@@ -4080,6 +4113,22 @@ function investigationPartnerReaction(id){
 
 function getNemoInsight(id){
   if(!selected) return null;
+
+  if(currentCaseId===1){
+    const common={
+      orangeSticker:{kind:"観察",note:"",speech:"このシール、スリーブの内側にある。閉じたままだと届かない場所だね。"},
+      receptionLedger:{kind:"記録",note:"",speech:"13コマなのに、渡したのは12枚。ここ、覚えておきたい。"},
+      clientForm:{kind:"記録",note:"",speech:"電話も住所も確かめられない。でも、依頼人は実際に来てるんだよね。"},
+      holdEnvelope:{kind:"会話",note:"",speech:"『本人が来るまで』って、誰かをずっと待ってた言葉みたい。"},
+      oldClientRecord:{kind:"会話",note:"",speech:"昔の記録にも『水城』。同じ名字なの、ちょっと気になるね。"},
+      symbolSlip:{kind:"勘",note:"",speech:"……この印。またどこかで会いそう。"},
+      officeCamera:{kind:"勘",note:"",speech:"……ちゃんと来てる。なのに、名前だけつかめない感じ。"}
+    };
+    const v=common[id];
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
+  }
+
   if(currentCaseId===2){
     const common={
       doorPanel:{kind:"観察",note:"表示の凡例は赤＝扉閉、青＝施錠。事件時刻に青は点灯していない。",speech:"赤いだけなら、鍵はかかってないね。"},
@@ -4091,7 +4140,8 @@ function getNemoInsight(id){
       outsideStill:{kind:"観察",note:"18:24、道の向かいに白いコートの女性。顔は見えないが、水城アヤと似た後ろ姿。",speech:"……この人。前の依頼人に、ちょっと似てる。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
   if(currentCaseId===3){
@@ -4106,7 +4156,8 @@ function getNemoInsight(id){
       bufferLog:{kind:"観察",note:"18:49保留→09:08再発信完了。機械の履歴が一本の時系列になっている。",speech:"18:49の声が、09:08に出ていったんだ。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
 
@@ -4122,7 +4173,8 @@ function getNemoInsight(id){
       kuroseRoster:{kind:"観察",note:"年代の違う記録に黒瀬姓が繰り返され、欄外には例の印がある。",speech:"……黒瀬。しかも、この印もある。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
 
@@ -4138,7 +4190,8 @@ function getNemoInsight(id){
       olderGroupPhoto:{kind:"観察",note:"さらに古い『八名』の写真も七人しか写らず、八人目の名前だけが削られている。例の印もある。",speech:"……また、ひとり足りない。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
 
@@ -4154,7 +4207,8 @@ function getNemoInsight(id){
       nextContact:{kind:"記録",note:"『春風公園』『NEMO』『NEW DETECTIVE』。ねもと探偵が出会う前から、接触地点が記録されている。",speech:"…………。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
   if(currentCaseId===7){
@@ -4170,7 +4224,8 @@ function getNemoInsight(id){
       personnelFile:{kind:"記録",note:"出会う前のあなたを評価し、春風公園とNEMOを結びつけている。",speech:"…………。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
   if(currentCaseId===8){
@@ -4185,7 +4240,8 @@ function getNemoInsight(id){
       missingOrigin:{kind:"記録",note:"一番知りたい『なぜ始めたか』だけが欠けている。RECORD CYCLE:08とMIZUKIの意味も未解決。",speech:"最後まで、全部は教えてくれないんだね。"}
     };
     const v=common[id];
-    if(v) return personalizeCommonInsight(v,id);
+    if(v && sparseInsightAllowed(id)) return personalizeCommonInsight(v,id);
+    return null;
   }
 
   if(selected.obs>=90){
@@ -4450,15 +4506,13 @@ function collectEvidence(id,btn){
     nemoInsights[id]=insight;
   }
 
-  // 高能力で専用の気づきが出た時は、それを主役にする。
-  // それ以外の時だけ通常のNemo反応を表示。
+  // 相棒固有の気づきは各CASEでごく少数だけ。
+  // それ以外の証拠は、ねもが答えを先回りせず静かに見守る。
   const nemoPart=insight
     ? insightHtml(insight)
     : investigationPartnerReaction(id);
-  const perspectiveMoment=partnerCaseMoment(id);
-
   document.getElementById("investigationMsg").innerHTML=
-    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${evidenceMedia(e)}${nemoPart}${perspectiveMoment}${originEncounter?originNemoEncounterHtml():""}`;
+    `<strong>${e.icon} ${e.name}</strong><br>${e.desc}${evidenceMedia(e)}${nemoPart}${originEncounter?originNemoEncounterHtml():""}`;
   if(originEncounter){renderActiveCompanionBanner("investigationPartner","なんとなく、ついてきた");}
 
   const sceneTotal=currentCase.sceneEvidenceTotal || currentCase.hotspots.length;
