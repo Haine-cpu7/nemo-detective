@@ -1,10 +1,10 @@
-NEMO Mystery Days v0.72
+NEMO Mystery Days v0.73
 
 GitHub Pages structure:
 - index.html          : Season select portal
 - manual.html         : How to play
 - season1/index.html  : Season 1 (CASE 01-08 playable)
-- season2/index.html  : Season 2 (CASE 01-03 playable; planned CASE 01-08)
+- season2/index.html  : Season 2 (CASE 01-05 playable; planned CASE 01-08)
 
 Important:
 - Keep the existing root assets/ folder in the GitHub repository.
@@ -14,4 +14,4 @@ Important:
 - Season 2 unlocks when Season 1 save contains CASE 08 as cleared.
 
 
-SEASON 2 CASE 04「黒瀬という名前 ― 消えた寄贈台帳 ―」追加。
+SEASON 2 CASE 05「写っていない一人 ― 八人目のシャッター ―」追加。
