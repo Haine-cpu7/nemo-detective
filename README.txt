@@ -1,10 +1,10 @@
-NEMO Mystery Days v0.76
+NEMO Mystery Days v0.77
 
 GitHub Pages structure:
 - index.html          : Season select portal
 - manual.html         : How to play
 - season1/index.html  : Season 1 (CASE 01-08 playable)
-- season2/index.html  : Season 2 (CASE 01-06 playable; planned CASE 01-08)
+- season2/index.html   : Season 2 (CASE 01-08 playable; EXTRA RECORD DAY 09 after completion)
 
 Important:
 - Keep the existing root assets/ folder in the GitHub repository.
@@ -18,3 +18,6 @@ SEASON 2 CASE 06「日記を書いた人 ― 八日間の記録 ―」追加。
 
 
 v0.76: SEASON 2 CASE 07「記録者からの依頼 ― 白い保管箱 ―」追加。通常の矛盾提示型。
+
+
+v0.77: SEASON 2 CASE 08「選ばれた場所 ― 春風公園の記録 ―」追加。SEASON 2完結。CASE 08クリア後にEXTRA RECORD「DAY 09」が解放される。
