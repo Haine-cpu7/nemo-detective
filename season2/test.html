@@ -2296,7 +2296,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.87</span>
+    <span class="badge">v0.88</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2623,7 +2623,7 @@ body:not(.case-active) .topFileBtn{
       <button class="ghost" type="button" onclick="location.href='../'">シリーズ玄関へ</button>
     </div>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 2 v0.87 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 2 v0.88 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
@@ -2716,7 +2716,7 @@ function buildDetective(id){
     return {
       id,
       ...override,
-      name:override.name || `Nemo #${id}`,
+      name:override.name || "ねもちゃん",
       image:`../assets/nemos/${id}.png`
     };
   }
@@ -2748,7 +2748,7 @@ function buildDetective(id){
   return {
     id,
     icon:NEMO_ICONS[id % NEMO_ICONS.length],
-    name:`Nemo #${id}`,
+    name:"ねもちゃん",
     trait:traitMap[best],
     type:typeMap[best],
     quirk:quirkMap[best],
@@ -3488,7 +3488,6 @@ detectives.forEach(d=>{
       <div class="nftTag">NEMO PARTNER</div>
     </div>
     <div class="dname">${d.name}</div>
-    <div class="nftNo">Nemo #${d.id}</div>
     <div class="trait">タイプ：${d.type} / 特性：${d.trait}</div>
     ${stat("観察",d.obs)}${stat("推理",d.rea)}${stat("会話",d.talk)}${stat("勘",d.luck)}`;
   el.onclick=()=>{selected=d;document.querySelectorAll(".detective").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");document.getElementById("startBtn").disabled=false;document.getElementById("selectedText").textContent=`${d.name} を選択中`;renderPartnerPreview();};
