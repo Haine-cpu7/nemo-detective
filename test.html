@@ -16,7 +16,7 @@ a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:3
 <body>
 <main class="wrap">
 <section class="brand">
-<div class="eyebrow">NEMO MYSTERY SERIES · v0.66</div>
+<div class="eyebrow">NEMO MYSTERY SERIES · v0.67</div>
 <h1>NEMO Mystery Days</h1>
 <div class="portalCue">ARCHIVE CONNECTED · CASE FILES READY</div>
 <p class="portalLead"><span class="openingLine">事件は、ひとつでは終わらなかった。</span>あなたとねもが解いてきた、小さな事件たち。<br>その記録をたどると、やがて同じ痕跡が見え始める。<br><br>まだ、すべての答えは見つかっていない。<br><strong>さあ、事件簿を開こう。</strong></p>
@@ -35,15 +35,15 @@ a{color:inherit}.wrap{width:min(980px,calc(100% - 28px));margin:0 auto;padding:3
 <div class="seasonNo">SEASON 2</div>
 <h2>新たな事件簿</h2>
 <div class="subtitle" id="season2Subtitle">LOCKED</div>
-<div class="desc">Season 1のその先へ。事件そのものを追いながら、ねもの記録と、誰かが残した痕跡の正体へ少しずつ近づいていきます。</div>
-<div class="meta"><span class="chip">CASE 01–</span><span class="chip">新シーズン</span><span class="chip">未更新</span></div>
+<div class="desc">Season 1のその先へ。最初に届いた依頼は、古い写真館から消えた「十三枚目」。けれど依頼そのものにも、説明できない違和感が残ります。</div>
+<div class="meta"><span class="chip">CASE 01</span><span class="chip">新シーズン</span><span class="chip">事件到着</span></div>
 <div class="go" id="season2Go"><span>🔒 SEASON 1 · CASE 08クリアで解放</span><span>—</span></div>
 <div class="lockedReason" id="season2Reason">現在はSeason 1のCASE 08までが物語の入口です。</div>
 </div>
 </section>
 <div class="seriesStatus" id="seriesStatus"><strong>進行状況</strong><br>同じブラウザでは、Season 1のクリア状況を引き継ぎます。Season 2はSeason 1 CASE 08クリア後に解放される設計です。</div>
 <div class="links"><a href="manual.html" target="_blank" rel="noopener">📖 遊び方・取扱説明書</a><a href="https://note.com/nemocollection/n/n1b8d72ea299a" target="_blank" rel="noopener noreferrer">📖 ねもの日記「星待館」</a></div>
-<div class="footer">NEMO Mystery Days · Series Portal v0.66</div>
+<div class="footer">NEMO Mystery Days · Series Portal v0.67</div>
 </main>
 <script>
 const S1_KEY="nemoMysteryDaysSeason1Progress_v1";
@@ -61,9 +61,9 @@ status.innerHTML=`<strong>進行状況</strong><br>SEASON 1：${cleared.filter(n
 if(s1Complete){
   const card=document.getElementById("season2Card");
   card.classList.remove("locked");card.classList.add("available");card.setAttribute("aria-disabled","false");card.setAttribute("role","link");card.tabIndex=0;
-  document.getElementById("season2Subtitle").textContent="UNLOCKED · 未更新";
+  document.getElementById("season2Subtitle").textContent="UNLOCKED · CASE 01 AVAILABLE";
   document.getElementById("season2Go").innerHTML='<span>SEASON 2へ</span><span>→</span>';
-  document.getElementById("season2Reason").textContent="Season 2の事件はこれから追加されます。";
+  document.getElementById("season2Reason").textContent="CASE 01「存在しない依頼人」が届いています。";
   const go=()=>location.href="season2/";card.addEventListener("click",go);card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
 }
 </script>
