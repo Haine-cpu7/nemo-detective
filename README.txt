@@ -1,10 +1,10 @@
-NEMO Mystery Days v0.70
+NEMO Mystery Days v0.71
 
 GitHub Pages structure:
 - index.html          : Season select portal
 - manual.html         : How to play
 - season1/index.html  : Season 1 (CASE 01-08 playable)
-- season2/index.html  : Season 2 (CASE 01-02 playable; planned CASE 01-08)
+- season2/index.html  : Season 2 (CASE 01-03 playable; planned CASE 01-08)
 
 Important:
 - Keep the existing root assets/ folder in the GitHub repository.
