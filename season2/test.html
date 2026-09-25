@@ -164,6 +164,28 @@ button,select{font:inherit} button{cursor:pointer}
 .modal{position:fixed;inset:0;background:rgba(5,7,11,.82);display:grid;place-items:center;padding:18px;z-index:50}
 .modalCard{width:min(760px,100%);max-height:86vh;overflow:auto;background:#202537;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
 .evidencePick{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
+/* Evidence presentation modal: roomy on desktop, stable scroll position, sticky title. */
+.evidenceModalCard{
+  width:min(980px,100%);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+}
+.evidenceModalCard>h2{
+  position:sticky;
+  top:0;
+  z-index:6;
+  margin:-18px -18px 14px;
+  padding:18px 18px 14px;
+  background:linear-gradient(180deg,#202537 78%,rgba(32,37,55,.97));
+  border-bottom:1px solid #3a4056;
+}
+.evidenceModalCard .evidencePick{
+  grid-template-columns:repeat(auto-fit,minmax(255px,1fr));
+  gap:12px;
+  align-items:stretch;
+}
+.evidenceModalCard .pick{min-width:0;height:100%;line-height:1.55}
 .pick{background:#2b3042;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left}.pick:hover{border-color:var(--accent2)}
 .clueSectionTitle{grid-column:1/-1;color:var(--accent2);font-weight:1000;font-size:13px;margin-top:4px}
 .testimonyPick{border-color:#5e5879;background:#28283d}.testimonyPick>div{margin-top:5px;color:#d8d8e4;line-height:1.55}
@@ -302,6 +324,12 @@ body.file-open{overflow:hidden}
     padding:14px
   }
   .evidencePick{grid-template-columns:1fr}
+  .evidenceModalCard .evidencePick{grid-template-columns:1fr}
+  .evidenceModalCard>h2{
+    top:0;
+    margin:-14px -14px 12px;
+    padding:14px 14px 12px
+  }
   .pick{min-height:72px}
 }
 
@@ -2035,7 +2063,7 @@ body:not(.case-active) .topFileBtn{
   }
 }
 
-/* v0.68 CASE 05 staged clue reveal */
+/* v0.69 CASE 05 staged clue reveal */
 .caseCard{position:relative;overflow:hidden}
 .caseCard.locked{opacity:.52;filter:saturate(.55);cursor:not-allowed;transform:none!important}
 .caseCard.locked:hover{transform:none}
@@ -2074,7 +2102,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.68 separate how-to manual */
+/* v0.69 separate how-to manual */
 .manualLaunch{
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   margin-top:18px;padding:14px 16px;border:1px solid #5d6687;border-radius:15px;
@@ -2093,7 +2121,7 @@ body:not(.case-active) .topFileBtn{
 }
 
 
-/* v0.68 CASE 07 truth reconstruction */
+/* v0.69 CASE 07 truth reconstruction */
 .reconstructionBoard{display:grid;gap:13px;margin:15px 0 12px}
 .reconLead{padding:13px 14px;border:1px solid #685d91;border-radius:14px;background:linear-gradient(145deg,#2a2641,#212638);color:#ddd7f5;font-size:13px}
 .reconStep{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#252a3d,#202536);padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.13)}
@@ -2106,7 +2134,7 @@ body:not(.case-active) .topFileBtn{
 .reconModalTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.reconModalTop h2{margin:5px 0 0}.reconCardGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.reconCard{border:1px solid var(--line);border-radius:14px;padding:12px;background:#282d40;color:var(--text);text-align:left;cursor:pointer;min-height:88px}.reconCard:hover{border-color:#9f8cff;background:#312d49}.reconCardKind{font-size:10px;color:#aeb4ca;font-weight:1000;letter-spacing:.06em;margin-bottom:5px}.reconCardText{font-size:13px;font-weight:900;line-height:1.45}.reconCard.current{border-color:#7dd8a4;background:#1c3428}
 @media(max-width:640px){.reconLogic,.reconLogic.multiProof{grid-template-columns:1fr}.reconArrow{transform:rotate(90deg);height:24px}.reconCardGrid{grid-template-columns:1fr}.reconStep{padding:12px}.reconSlot{min-height:62px}.reconstructionModalCard{max-height:92vh}}
 
-/* v0.68 cross-case archive mystery */
+/* v0.69 cross-case archive mystery */
 .archiveLead{padding:15px 16px;border:1px solid #65568d;border-radius:16px;background:linear-gradient(135deg,#2c2941,#202638);margin-bottom:14px;line-height:1.75}
 .archiveLead strong{color:#f3d47c}.archiveFile{border:1px solid #4f566f;background:#171b28;border-radius:18px;padding:17px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
 .archiveFileTop{display:flex;gap:14px;align-items:center;padding-bottom:14px;border-bottom:1px dashed #505872}.archiveFileTop h3{margin:0 0 3px;font-size:18px}.archiveFileTop p{margin:0;color:var(--muted);font-size:13px}
@@ -2116,7 +2144,7 @@ body:not(.case-active) .topFileBtn{
 .archiveResult{margin-top:13px}.archiveReveal{margin-top:15px;border:1px solid #7865b2;border-radius:16px;background:linear-gradient(145deg,#2b2442,#1a2130);padding:16px}.archiveReveal h3{margin:0 0 8px;color:#f2d178}.archiveLocations{display:grid;gap:5px;margin:12px 0;padding:12px;border-left:3px solid #7565ad;background:#171b28;border-radius:0 10px 10px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}.archiveCase08{margin-top:12px;padding:12px;border:1px dashed #7f719f;border-radius:12px;color:#e7e0ff;background:#262138}.archiveNemo{margin-top:12px;color:#e8e2ff}.archiveContinue{margin-top:14px;width:100%}
 @media(max-width:640px){.archiveCaseGrid{grid-template-columns:1fr}.archiveFile{padding:13px}.archiveFileTop{align-items:flex-start}.arcSigil{width:50px;height:50px;min-width:50px}.arcSigil:after{left:34px;top:13px;width:34px}.archiveCaseCard{padding:10px}}
 
-/* v0.68 星待館 / ねもの日記 crossover */
+/* v0.69 星待館 / ねもの日記 crossover */
 .externalArchiveGate{margin-top:14px;padding:14px;border:1px dashed #7b6a9d;border-radius:14px;background:#211d31}
 .externalArchiveGate p{margin:0 0 10px;line-height:1.7}
 .externalArchive{margin-top:14px;border:1px solid #8a6f78;border-radius:17px;background:linear-gradient(145deg,#30252d,#1c202d);padding:16px;box-shadow:0 12px 28px rgba(0,0,0,.18)}
@@ -2132,16 +2160,16 @@ body:not(.case-active) .topFileBtn{
 
 
 
-/* v0.68 CASE 08 photo trace */
+/* v0.69 CASE 08 photo trace */
 .evidencePhoto{margin:11px 0 3px;border:1px solid #56617f;border-radius:14px;overflow:hidden;background:#111722;max-width:360px}.evidencePhoto img{display:block;width:100%;height:auto}.photoTraceTag{display:inline-block;margin-top:8px;padding:5px 8px;border:1px solid #7567a8;border-radius:999px;background:#26203a;color:#dcd4ff;font-size:10px;font-weight:900;letter-spacing:.06em}.seasonCompleteMark{margin-top:14px;padding:14px 15px;border:1px solid #8c78e1;border-radius:15px;background:linear-gradient(135deg,#2b2550,#1a2435);color:#eee9ff}.seasonCompleteMark strong{color:#f3d37b}
 
-/* v0.68 season architecture */
+/* v0.69 season architecture */
 .seasonNavRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 0;padding:10px 12px;border:1px solid #3c465f;border-radius:12px;background:#171c2a;color:#9da7bd;font-size:12px;font-weight:800}.seasonHomeLink{color:#d7dcef;text-decoration:none}.seasonHomeLink:hover{color:#fff}.seasonFinaleTeaser{border-style:dashed!important}.seasonFinaleTeaser .caseDesc{max-width:720px}@media(max-width:640px){.seasonNavRow{align-items:flex-start;flex-direction:column;gap:5px}}
 
 
 .caseComingCard{border:1px dashed var(--line);border-radius:16px;background:var(--panel2);padding:14px;color:var(--text);text-align:left;opacity:.52;filter:saturate(.55)}
 
-/* v0.68 Season 2 / post-report twist */
+/* v0.69 Season 2 / post-report twist */
 .afterCaseLead{padding:15px 16px;border:1px solid #62598c;border-radius:16px;background:linear-gradient(135deg,#2a2640,#1d2434);line-height:1.85;margin-bottom:14px}
 .afterCaseCard{margin-top:12px;padding:15px 16px;border:1px solid #48536d;border-radius:15px;background:#181e2d;line-height:1.85}.afterCaseCard strong{color:#f3d17b}
 .afterCaseEvidence{margin-top:12px;padding:12px 13px;border-left:3px solid #8171d4;background:#201d34;border-radius:0 12px 12px 0;line-height:1.75}.afterCaseEvidence b{color:#f4d47c}
@@ -2160,7 +2188,7 @@ body:not(.case-active) .topFileBtn{
   </div>
 
   <section class="hero hidden" id="hero">
-    <span class="badge">v0.68</span>
+    <span class="badge">v0.69</span>
     <h1>NEMO Mystery Days</h1>
   </section>
 
@@ -2400,11 +2428,11 @@ body:not(.case-active) .topFileBtn{
       <div class="caseFileBody" id="caseFileBody"><div id="fileContent"></div></div>
     </aside>
   </section>
-  <div class="footer">NEMO Mystery Days · SEASON 2 v0.68 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
+  <div class="footer">NEMO Mystery Days · SEASON 2 v0.69 — browser mystery game · <a class="footerManual" href="../manual.html" target="_blank" rel="noopener">遊び方</a></div>
 </div>
 
 <div class="modal hidden" id="evidenceModal">
-  <div class="modalCard">
+  <div class="modalCard evidenceModalCard" id="evidenceModalCard">
     <h2>どの手がかりを出す？</h2>
     <div class="evidencePick" id="evidencePick"></div>
     <div class="row" style="margin-top:14px"><button class="ghost" id="closeModal">閉じる</button></div>
@@ -3836,9 +3864,19 @@ document.getElementById("presentBtn").onclick=()=>{
     });
   }
 
-  document.getElementById("evidenceModal").classList.remove("hidden");
+  const evidenceModal=document.getElementById("evidenceModal");
+  const evidenceModalCard=document.getElementById("evidenceModalCard");
+  evidenceModalCard.scrollTop=0;
+  evidenceModal.classList.remove("hidden");
+  // Hidden scroll containers can retain their old position. Force the next open to start at the title.
+  requestAnimationFrame(()=>{ evidenceModalCard.scrollTop=0; });
 };
-document.getElementById("closeModal").onclick=()=>document.getElementById("evidenceModal").classList.add("hidden");
+document.getElementById("closeModal").onclick=()=>{
+  const evidenceModal=document.getElementById("evidenceModal");
+  const evidenceModalCard=document.getElementById("evidenceModalCard");
+  evidenceModal.classList.add("hidden");
+  evidenceModalCard.scrollTop=0;
+};
 
 
 function contradictionMeta(flag){
